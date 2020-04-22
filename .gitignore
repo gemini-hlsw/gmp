@@ -2018,3 +2018,5 @@ releases.properties
 /src/main/config/services/target
 
 .idea
+.metals/
+.pax/
