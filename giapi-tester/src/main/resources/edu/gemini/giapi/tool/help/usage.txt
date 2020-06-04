@@ -19,7 +19,7 @@ DESCRIPTION
         Specifies a sequence command to send to the GMP
         Available sequence command options are TEST, REBOOT, INIT, DATUM,
         PARK, VERIFY, END_VERIFY, GUIDE, END_GUIDE, APPLY, OBSERVE,
-        END_OBSERVE, PAUSE, CONTINUE, STOP, ABORT
+        END_OBSERVE, PAUSE, CONTINUE, STOP, STOP_CYCLE, ABORT
         A Sequence command must be specified along with an activity, using
         the -activity option.
 
