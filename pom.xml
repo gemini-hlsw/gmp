@@ -49,6 +49,7 @@
         <scala-plugin.version>3.3.2</scala-plugin.version>
         <junit.version>4.10</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
+        <scala.xml.version>2.0.0-M2</scala.xml.version>
 
         <gmp.version>${project.version}</gmp.version>
         <!-- Global encoding -->
@@ -771,18 +772,6 @@
             </dependency>
 
             <dependency>
-                <groupId>com.typesafe.akka</groupId>
-                <artifactId>akka-actor_2.12</artifactId>
-                <version>2.5.11</version>
-            </dependency>
-            <dependency>
-                <groupId>com.typesafe.akka</groupId>
-                <artifactId>akka-testkit_2.12</artifactId>
-                <version>2.5.11</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-library</artifactId>
                 <version>${scala-lang.version}</version>
@@ -791,6 +780,11 @@
                 <groupId>org.scala-lang.modules</groupId>
                 <artifactId>scala-parser-combinators_2.12</artifactId>
                 <version>1.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang.modules</groupId>
+                <artifactId>scala-xml_2.12</artifactId>
+                <version>${scala.xml.version}</version>
             </dependency>
 
             <dependency>
