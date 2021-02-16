@@ -47,7 +47,7 @@
         <scala-lang.version>2.12.4</scala-lang.version>
         <scalatest.version>3.0.5</scalatest.version>
         <scala-plugin.version>3.3.2</scala-plugin.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.13.1</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
 
