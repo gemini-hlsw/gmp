@@ -10,7 +10,7 @@ import edu.gemini.aspen.gds.api.{CollectedValue, CollectionError}
 import edu.gemini.aspen.gds.observationstate.{ObservationInfo, _}
 import edu.gemini.aspen.giapi.data.DataLabel
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection.concurrent._
 import scala.collection.mutable
 import scala.collection.mutable.{HashSet, Set, SynchronizedSet}
@@ -34,7 +34,7 @@ class ObservationStateImpl(obsStatePubl: ObservationStatePublisher) extends Obse
     .expireAfterWrite(expirationMillis, MILLISECONDS)
     .build[DataLabel, ObservationState]().asMap()
 
-  override def registerMissingKeyword(label: DataLabel, keywords: Traversable[FitsKeyword]) {
+  override def registerMissingKeyword(label: DataLabel, keywords: Traversable[FitsKeyword]):Unit = {
     obsInfoMap.getOrElseUpdate(label, new ObservationState).missingKeywords ++= keywords
     if (keywords.nonEmpty) {
       obsInfoMap.getOrElseUpdate(label, new ObservationState).inError = true
@@ -42,28 +42,28 @@ class ObservationStateImpl(obsStatePubl: ObservationStatePublisher) extends Obse
   }
 
   //todo: use cause for something
-  override def registerError(label: DataLabel, cause: String) {
+  override def registerError(label: DataLabel, cause: String):Unit = {
     obsInfoMap.getOrElseUpdate(label, new ObservationState).failed = true
     obsStatePubl.publishObservationError(ObservationInfo(label, ObservationError, errorMsg = Option(cause)))
   }
 
-  override def registerCollectionError(label: DataLabel, errors: Traversable[(FitsKeyword, CollectionError.CollectionError)]) {
+  override def registerCollectionError(label: DataLabel, errors: Traversable[(FitsKeyword, CollectionError.CollectionError)]):Unit = {
     obsInfoMap.getOrElseUpdate(label, new ObservationState).errorKeywords ++= errors
     if (errors.nonEmpty) {
       obsInfoMap.getOrElseUpdate(label, new ObservationState).inError = true
     }
   }
 
-  override def registerTimes(label: DataLabel, times: Traversable[(AnyRef, Option[Duration])]) {
+  override def registerTimes(label: DataLabel, times: Traversable[(AnyRef, Option[Duration])]):Unit = {
     obsInfoMap.getOrElseUpdate(label, new ObservationState).times ++= times
   }
 
-  override def endObservation(label: DataLabel, writeTime:Long, collectedValues: Traversable[CollectedValue[_]]) {
+  override def endObservation(label: DataLabel, writeTime:Long, collectedValues: Traversable[CollectedValue[_]]):Unit = {
     obsInfoMap.getOrElseUpdate(label, new ObservationState).ended = true
     obsStatePubl.publishEndObservation(ObservationInfo(label, Successful, writeTime = Some(writeTime), collectedValues = collectedValues))
   }
 
-  override def startObservation(label: DataLabel) {
+  override def startObservation(label: DataLabel):Unit = {
     obsInfoMap.getOrElseUpdate(label, new ObservationState).started = true
     obsStatePubl.publishStartObservation(label)
   }

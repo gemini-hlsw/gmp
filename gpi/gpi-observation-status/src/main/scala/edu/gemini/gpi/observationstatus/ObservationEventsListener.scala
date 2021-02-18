@@ -45,11 +45,11 @@ class ObservationEventsListener(gmpTop: Top, statusSetter: StatusSetter, statusD
 
   val timer = new Timer()
 
-  def invalidate() {
+  def invalidate():Unit = {
     cache.invalidateAll()
   }
 
-  def gdsEvent(event: GDSNotification) {
+  def gdsEvent(event: GDSNotification):Unit = {
     event match {
       case GDSStartObservation(dataLabel)     =>
         val coAdds = Option(statusDB.getStatusItem[Int](coAddsStatus)).map(_.getValue)
@@ -125,7 +125,7 @@ class ObservationEventsListener(gmpTop: Top, statusSetter: StatusSetter, statusD
   }
 
   case object TimerRemoval extends RemovalListener[DataLabel, ObsTimerTask] {
-    override def onRemoval(removalNotification: RemovalNotification[DataLabel, ObsTimerTask]) {
+    override def onRemoval(removalNotification: RemovalNotification[DataLabel, ObsTimerTask]):Unit = {
       if (removalNotification.getValue.isRunning) {
         removalNotification.getValue.endObservation()
       }

@@ -8,7 +8,7 @@ import edu.gemini.aspen.gds.api.Conversions._
 import edu.gemini.aspen.gds.api._
 import edu.gemini.epics.api.ReadOnlyChannel
 import fits.FitsKeyword
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 
 class EpicsValuesActorTest extends Mockito {
   val dataLabel = new DataLabel("GS-2011")
@@ -22,7 +22,7 @@ class EpicsValuesActorTest extends Mockito {
     GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS", 0, "STRING", mandatory, "NONE", "EPICS", channelName, arrayIndex, "", "Mean airmass for the observation")
 
   @Test
-  def testReplyToCollect() {
+  def testReplyToCollect():Unit = {
     val configuration = buildConfiguration(true, 0)
     // mock return value
     val ch = mock[ReadOnlyChannel[String]]
@@ -47,7 +47,7 @@ class EpicsValuesActorTest extends Mockito {
   }
 
   @Test
-  def testAccessArrayElement() {
+  def testAccessArrayElement():Unit = {
     val configuration = buildConfiguration(true, 1)
     // mock return value
     val ch = mock[ReadOnlyChannel[String]]
@@ -75,7 +75,7 @@ class EpicsValuesActorTest extends Mockito {
   // should not return anything if the value cannot be read. The default will be added by an PostProcessingPolicy
   // it doesn't matter at this point if the item is mandatory or not
   @Test
-  def testCollectingADefaultValue {
+  def testCollectingADefaultValue:Unit = {
     val configuration = buildConfiguration(false, 0)
     // mock return value cannot be read
     val ch = mock[ReadOnlyChannel[String]]
@@ -100,7 +100,7 @@ class EpicsValuesActorTest extends Mockito {
   // should not return anything if the value cannot be read. The default will be added by an PostProcessingPolicy
   // it doesn't matter at this point if the item is mandatory or not
   @Test
-  def testCollectError {
+  def testCollectError:Unit = {
     val configuration = buildConfiguration(true, 0)
     // mock return value cannot be read
     val ch = mock[ReadOnlyChannel[String]]
@@ -123,7 +123,7 @@ class EpicsValuesActorTest extends Mockito {
   }
 
   @Test
-  def testExceptionOnCollect {
+  def testExceptionOnCollect:Unit = {
     val configuration = buildConfiguration(true, 0)
     // mock return value cannot be read
     val ch = mock[ReadOnlyChannel[String]]
@@ -149,7 +149,7 @@ class EpicsValuesActorTest extends Mockito {
   }
 
   @Test
-  def testCollectTypeMismatch {
+  def testCollectTypeMismatch:Unit = {
     val configuration = GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS", 0, "DOUBLE", true, "NONE", "EPICS", channelName, 0, "", "Mean airmass for the observation")
     val ch = mock[ReadOnlyChannel[String]]
     ch.getFirst returns "a string"
@@ -175,7 +175,7 @@ class EpicsValuesActorTest extends Mockito {
   }
 
   @Test
-  def testCollectTypeMismatchFromDoubleToInt {
+  def testCollectTypeMismatchFromDoubleToInt:Unit = {
     val configuration = GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS", 0, "INT", true, "NONE", "EPICS", channelName, 0, "", "Mean airmass for the observation")
 
     val ch = mock[ReadOnlyChannel[java.lang.Double]]
@@ -204,7 +204,7 @@ class EpicsValuesActorTest extends Mockito {
   }
 
   @Test
-  def testArrayIndexOutOfBounds {
+  def testArrayIndexOutOfBounds:Unit = {
     val configuration = buildConfiguration(true, 2)
 
     val ch = mock[ReadOnlyChannel[String]]

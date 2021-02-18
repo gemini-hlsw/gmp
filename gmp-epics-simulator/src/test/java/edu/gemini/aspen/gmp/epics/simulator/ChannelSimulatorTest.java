@@ -4,12 +4,12 @@ import edu.gemini.aspen.gmp.epics.EpicsRegistrar;
 import edu.gemini.aspen.gmp.epics.EpicsUpdate;
 import edu.gemini.aspen.gmp.epics.simulator.channels.SimulatedEpicsChannel;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,6 +34,6 @@ public class ChannelSimulatorTest {
 
         TimeUnit.MILLISECONDS.sleep(PASSES * updateRate);
 
-        verify(registrar, atLeast(PASSES - 2)).processEpicsUpdate(Matchers.<EpicsUpdate<?>>anyObject());
+        verify(registrar, atLeast(PASSES - 2)).processEpicsUpdate(any(EpicsUpdate.class));
     }
 }

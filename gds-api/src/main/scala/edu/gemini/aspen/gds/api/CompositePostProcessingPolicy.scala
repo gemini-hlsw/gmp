@@ -30,18 +30,18 @@ class CompositePostProcessingPolicyImpl extends DefaultPostProcessingPolicy with
     }
   }
 
-  override def fileReady(originalFile: File, processedFile: File) {
+  override def fileReady(originalFile: File, processedFile: File):Unit = {
     val sortedPolicies = policies.sortWith((a, b) => a.priority < b.priority)
     for {
       p <- sortedPolicies
     } yield p.fileReady(originalFile, processedFile)
   }
 
-  def addPolicy(ep: PostProcessingPolicy) {
+  def addPolicy(ep: PostProcessingPolicy):Unit = {
     policies = ep :: policies
   }
 
-  def removePolicy(ep: PostProcessingPolicy) {
+  def removePolicy(ep: PostProcessingPolicy):Unit = {
     policies = policies.filter(_ != ep)
   }
 

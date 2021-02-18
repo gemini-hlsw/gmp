@@ -46,8 +46,8 @@ class EpicsToStatusFactory(val context: BundleContext, reader: EpicsReader, prov
   }
 
   def stopServices(): Unit = {
-    import scala.collection.JavaConversions._
-    for (pid <- existingServices.keySet) {
+    import scala.jdk.CollectionConverters._
+    for (pid <- existingServices.keySet.asScala) {
       deleted(pid)
     }
   }

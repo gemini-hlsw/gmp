@@ -21,7 +21,8 @@ import javax.jms.*;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,13 +44,15 @@ public class EpicsGetRequestConsumerTest {
 
         Queue destination = mock(Queue.class);
         when(session.createQueue(anyString())).thenReturn(destination);
+        Topic topic = mock(Topic.class);
+        when(session.createTopic(anyString())).thenReturn(topic);
         producer = mock(MessageProducer.class);
-        when(session.createProducer(any(Destination.class))).thenReturn(producer);
+        when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
 
         BytesMessage mapMessage = mock(BytesMessage.class);
         when(session.createBytesMessage()).thenReturn(mapMessage);
         MessageConsumer messageConsumer = mock(MessageConsumer.class);
-        when(session.createConsumer(destination)).thenReturn(messageConsumer);
+        when(session.createConsumer(any(Destination.class))).thenReturn(messageConsumer);
     }
 
     @Test

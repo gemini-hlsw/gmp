@@ -8,7 +8,7 @@ import org.apache.xmlrpc.webserver.XmlRpcServlet
 import org.ops4j.pax.web.service.WebContainer
 import org.osgi.service.event.EventAdmin
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection._
 
 trait HeaderReceiver

@@ -21,7 +21,7 @@ class CompositeActorsFactoryImpl(configService: GDSConfigurationService) extends
   //this had to be added for the epics factory. Channels take time to connect, so we want them early
   configure(actorsConfiguration)
 
-  override def configure(configuration: immutable.List[GDSConfiguration]) {
+  override def configure(configuration: immutable.List[GDSConfiguration]):Unit = {
     // Configure each factory in the composite
     factories foreach {
       _.configure(configuration)

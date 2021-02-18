@@ -23,13 +23,13 @@ class InspectPolicy(configService: GDSConfigurationService, obsState: Observatio
     headers
   }
 
-  private def checkErrors(label: DataLabel, headers: List[CollectedValue[_]]) {
+  private def checkErrors(label: DataLabel, headers: List[CollectedValue[_]]):Unit = {
     obsState.registerCollectionError(label, headers collect {
       case c: ErrorCollectedValue => (c.keyword, c.error)
     })
   }
 
-  private def checkMissing(label: DataLabel, headers: List[CollectedValue[_]]) {
+  private def checkMissing(label: DataLabel, headers: List[CollectedValue[_]]):Unit = {
     val configList = configService.getConfiguration filterNot {
       _.subsystem.name == KeywordSource.INSTRUMENT //IFS keywords are not written by us, they are already in the file
     }

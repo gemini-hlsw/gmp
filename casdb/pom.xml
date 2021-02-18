@@ -61,7 +61,7 @@
         </dependency>
         <dependency>
             <groupId>org.scala-lang.modules</groupId>
-            <artifactId>scala-xml_2.12</artifactId>
+            <artifactId>scala-xml_2.13</artifactId>
         </dependency>
     </dependencies>
 

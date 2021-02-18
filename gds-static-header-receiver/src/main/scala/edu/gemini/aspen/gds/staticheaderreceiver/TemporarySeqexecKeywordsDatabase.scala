@@ -8,7 +8,7 @@ import edu.gemini.aspen.gds.staticheaderreceiver.TemporarySeqexecKeywordsDatabas
 import edu.gemini.aspen.giapi.data.DataLabel
 
 import scala.actors.Actor
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection.concurrent._
 
 /**
@@ -46,7 +46,7 @@ class TemporarySeqexecKeywordsDatabaseImpl extends TemporarySeqexecKeywordsDatab
 
   start()
 
-  def act() {
+  def act():Unit = {
     loop {
       react {
         case Store(dataLabel, key, value) => store(dataLabel, key, value)
@@ -63,11 +63,11 @@ class TemporarySeqexecKeywordsDatabaseImpl extends TemporarySeqexecKeywordsDatab
     .expireAfterWrite(expirationMillis, MILLISECONDS)
     .build[DataLabel, ValuesCollection]().asMap()
 
-  private def cleanAll() {
+  private def cleanAll():Unit = {
     map.clear()
   }
 
-  private def clean(dataLabel: DataLabel) {
+  private def clean(dataLabel: DataLabel):Unit = {
     map -= dataLabel
   }
 
@@ -84,7 +84,7 @@ class TemporarySeqexecKeywordsDatabaseImpl extends TemporarySeqexecKeywordsDatab
   }
 
 
-  private def store(dataLabel: DataLabel, keyword: FitsKeyword, value: AnyRef) {
+  private def store(dataLabel: DataLabel, keyword: FitsKeyword, value: AnyRef):Unit = {
     if (!map.contains(dataLabel)) {
       map += (dataLabel -> collection.mutable.Map.empty[FitsKeyword, AnyRef])
     }

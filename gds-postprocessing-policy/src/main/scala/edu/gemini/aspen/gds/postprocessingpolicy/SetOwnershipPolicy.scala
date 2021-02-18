@@ -15,12 +15,12 @@ class SetOwnershipPolicy(owner: String, sudo: String) extends DefaultPostProcess
 
   override val priority = 13
 
-  override def fileReady(originalFile: File, processedFile: File) {
+  override def fileReady(originalFile: File, processedFile: File):Unit = {
     LOG.info(s"Set file $processedFile ownership to $owner")
 
     val cmd = s"${if (useSudo) "sudo " else ""}chown $owner $processedFile"
     LOG.info(cmd)
-    
+
     val result = cmd.!
     if (result != 0) {
       LOG.severe(s"Failed command $cmd")

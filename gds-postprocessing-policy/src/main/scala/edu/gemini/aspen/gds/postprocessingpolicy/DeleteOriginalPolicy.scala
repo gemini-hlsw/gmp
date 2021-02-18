@@ -13,7 +13,7 @@ class DeleteOriginalPolicy extends DefaultPostProcessingPolicy {
 
   override def toString = this.getClass.getSimpleName
 
-  override def fileReady(originalFile: File, processedFile: File) {
+  override def fileReady(originalFile: File, processedFile: File):Unit = {
     LOG.info(s"Delete original file $originalFile")
     if (!originalFile.delete()) {
       LOG.warning(s"Could not delete original file $originalFile")

@@ -5,10 +5,10 @@ import org.junit.Assert._
 
 class ChannelBuilderTest {
   @Test
-  def testParser() {
+  def testParser():Unit = {
     val testFile = classOf[ChannelBuilder].getResource("channels.xml").toURI.toURL.getFile
     val channels = new ChannelBuilder(testFile).channels
-    
+
     assertNotNull(channels)
     assertEquals(5, channels.size)
     assertEquals("gpi:E1", channels(0).getName)

@@ -1,6 +1,6 @@
 package edu.gemini.aspen.gds.obsevent.handler
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection.concurrent._
 import com.google.common.cache.CacheBuilder
 import edu.gemini.aspen.giapi.data.DataLabel
@@ -16,7 +16,7 @@ class ObservationTransactionsStore {
     .expireAfterWrite(expirationMillis, TimeUnit.MILLISECONDS)
     .build[DataLabel, String]().asMap()
 
-  def startTransaction(dataLabel: DataLabel) {
+  def startTransaction(dataLabel: DataLabel):Unit = {
     observationTransactions.put(dataLabel, "")
   }
 

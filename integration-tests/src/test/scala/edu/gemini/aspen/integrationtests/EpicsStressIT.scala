@@ -17,7 +17,7 @@ class EpicsStressIT {
   var reader: EpicsReader = _
 
   @Before
-  def setup() {
+  def setup():Unit = {
     System.setProperty("com.cosylab.epics.caj.CAJContext.addr_list", "127.0.0.1")
     System.setProperty("com.cosylab.epics.caj.CAJContext.auto_addr_list", "false")
 
@@ -27,7 +27,7 @@ class EpicsStressIT {
   }
 
   @Test
-  def testConcurrentRead() {
+  def testConcurrentRead():Unit = {
     val testFile = this.getClass.getResource("cas501channels.xml").toURI.toURL.getFile
     val channels = new ChannelBuilder(testFile).channels
     val Nactors = 10
@@ -54,7 +54,7 @@ class EpicsStressIT {
   }
 
   @Test
-  def testConcurrentReadWithEpicsReader() {
+  def testConcurrentReadWithEpicsReader():Unit = {
     val testFile = this.getClass.getResource("cas501channels.xml").toURI.toURL.getFile
     val channels = new ChannelBuilder(testFile).channels
 

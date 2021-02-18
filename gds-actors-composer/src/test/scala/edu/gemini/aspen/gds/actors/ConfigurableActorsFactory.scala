@@ -14,7 +14,7 @@ class ConfigurableActorsFactory extends AbstractKeywordActorsFactory {
     }
   }
 
-  override def configure(configuration: List[GDSConfiguration]) {
+  override def configure(configuration: List[GDSConfiguration]):Unit = {
     actorsConfiguration = configuration
   }
 }

@@ -36,7 +36,7 @@ class ReplyHandler(actorsFactory: CompositeActorsFactory,
     publisher.postEvent(event)
   }
 
-  def act() {
+  def act():Unit = {
     loop {
       react {
         case AcquisitionRequest(obsEvent, dataLabel) => acqRequest(obsEvent, dataLabel)
@@ -46,7 +46,7 @@ class ReplyHandler(actorsFactory: CompositeActorsFactory,
     }
   }
 
-  private def acqRequest(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  private def acqRequest(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     LOG.info("ObservationEvent " + obsEvent + " for " + dataLabel)
     obsEvent match {
       case OBS_PREP =>
@@ -68,9 +68,9 @@ class ReplyHandler(actorsFactory: CompositeActorsFactory,
     new KeywordSetComposer(actorsFactory, keywordsDatabase) ! AcquisitionRequest(obsEvent, dataLabel)
   }
 
-  def writeFinalFile(dataLabel: DataLabel, obsEvent: ObservationEvent) {
+  def writeFinalFile(dataLabel: DataLabel, obsEvent: ObservationEvent):Unit = {
 
-    def retry(retries: Int, sleep: Long) {
+    def retry(retries: Int, sleep: Long):Unit = {
       Thread.sleep(sleep)
       if (bookKeeper.allRepliesArrived(dataLabel)) {
         //OK, can continue
@@ -98,7 +98,7 @@ class ReplyHandler(actorsFactory: CompositeActorsFactory,
     }
   }
 
-  private def acqRequestReply(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  private def acqRequestReply(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     //check that this obsevent collection reply hasn't already arrived but that the obsevent has.
     if (bookKeeper.replyArrived(obsEvent, dataLabel)) {
       LOG.severe("Received data collection reply for observation event " + obsEvent + " for datalabel " + dataLabel + " twice")
@@ -118,7 +118,7 @@ class ReplyHandler(actorsFactory: CompositeActorsFactory,
 
   }
 
-  private def endAcqRequestReply(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  private def endAcqRequestReply(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     eventLogger.end(dataLabel, obsEvent)
     eventLogger.enforceTimeConstraints(obsEvent, dataLabel)
 
@@ -132,7 +132,7 @@ class ReplyHandler(actorsFactory: CompositeActorsFactory,
     }
   }
 
-  private def completeFile(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  private def completeFile(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     bookKeeper.clean(dataLabel)
 
     try {

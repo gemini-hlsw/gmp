@@ -44,7 +44,7 @@ class FitsUpdater(fromDirectory: File, toDirectory: File, dataLabel: DataLabel, 
   })
   start()
 
-  def act() {
+  def act():Unit = {
     loop {
       react {
         case Update(namingFunction) => {

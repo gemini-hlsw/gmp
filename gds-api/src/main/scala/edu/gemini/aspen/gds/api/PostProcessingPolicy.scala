@@ -41,5 +41,5 @@ class DefaultPostProcessingPolicy extends PostProcessingPolicy {
   // Let all the original headers to be applied
   override def applyPolicy(dataLabel: DataLabel, headers: immutable.List[CollectedValue[_]]): immutable.List[CollectedValue[_]] = headers
 
-  override def fileReady(originalFile: File, processedFile: File) {}
+  override def fileReady(originalFile: File, processedFile: File):Unit = {}
 }

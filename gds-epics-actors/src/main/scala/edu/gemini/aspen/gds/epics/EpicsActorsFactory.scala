@@ -35,7 +35,7 @@ class EpicsActorsFactory(epicsReader: EpicsReader) extends AbstractKeywordActors
     (singleActors ++ arrayActors).toList
   }
 
-  override def configure(configuration: immutable.List[GDSConfiguration]) {
+  override def configure(configuration: immutable.List[GDSConfiguration]):Unit = {
     val oldConfig=actorsConfiguration.toSet
     super.configure(configuration)
     val newConfig = actorsConfiguration.toSet
@@ -70,7 +70,7 @@ class EpicsActorsFactory(epicsReader: EpicsReader) extends AbstractKeywordActors
 
   override def getSource = KeywordSource.EPICS
 
-  def unbindAllChannels() {
+  def unbindAllChannels():Unit = {
     channels.values.foreach {
       _.destroy()
     }

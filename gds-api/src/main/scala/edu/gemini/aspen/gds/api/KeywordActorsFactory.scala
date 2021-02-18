@@ -19,7 +19,7 @@ trait KeywordActorsFactory {
   /**
    * Passes the global GDS configuration along
    */
-  def configure(configuration: immutable.List[GDSConfiguration]) {
+  def configure(configuration: immutable.List[GDSConfiguration]):Unit = {
     actorsConfiguration = configuration filter {
       _.subsystem.name == getSource
     }

@@ -22,11 +22,11 @@ class GDSConfigurationServiceTest extends FunSuite {
   val NEW_CONFIG = "gds-keywords.conf.test"
   val TEST_DIR = "/tmp/"
 
-  protected def copyFile(fromResource: String, toAbsolute: String) {
+  protected def copyFile(fromResource: String, toAbsolute: String):Unit = {
     copy(new File(this.getClass.getResource(fromResource).toURI), new File(toAbsolute))
   }
 
-  protected def checkOriginalContent(config: List[GDSConfiguration]) {
+  protected def checkOriginalContent(config: List[GDSConfiguration]):Unit = {
     assertTrue(config.contains(GDSConfiguration("GPI", "OBS_END_ACQ", "AIRMASS", 0, "DOUBLE", false, "NONE", "EPICS", "ws:massAirmass", 0, "", "Mean airmass for the observation")))
     //todo: check for the rest of the items
   }

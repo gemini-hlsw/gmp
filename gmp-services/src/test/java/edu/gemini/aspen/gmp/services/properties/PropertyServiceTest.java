@@ -24,6 +24,7 @@ public class PropertyServiceTest extends MockedJmsArtifactsTestBase {
     public void setUp() throws Exception {
         propertyHolder = mock(PropertyHolder.class);
         requestedProperty = "GMP_HOST_NAME";
+        when(propertyHolder.getProperty(requestedProperty)).thenReturn("");
     }
 
     @Test
@@ -72,7 +73,7 @@ public class PropertyServiceTest extends MockedJmsArtifactsTestBase {
         propertyService.startJms(provider);
         propertyService.process(request);
 
-        verifyZeroInteractions(session);
+        verifyNoInteractions(session);
     }
 
     @Test

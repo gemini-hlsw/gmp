@@ -11,7 +11,7 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 public class TcsContextRequestListenerTest {
@@ -49,7 +49,7 @@ public class TcsContextRequestListenerTest {
 
         listener.onMessage(message);
 
-        verifyZeroInteractions(contextDispatcher);
+        verifyNoInteractions(contextDispatcher);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TcsContextRequestListenerTest {
 
         listener.onMessage(message);
 
-        verifyZeroInteractions(contextDispatcher);
+        verifyNoInteractions(contextDispatcher);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class TcsContextRequestListenerTest {
 
         listener.onMessage(message);
 
-        verifyZeroInteractions(contextDispatcher);
+        verifyNoInteractions(contextDispatcher);
     }
 
     @Test(expected = IllegalArgumentException.class)

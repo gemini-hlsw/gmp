@@ -16,15 +16,15 @@ class EventLogger[A, B] {
   //map: eventSet -> (event -> (startTime, endTime))
   private val map = new mutable.HashMap[A, collection.mutable.Map[B, (Option[LocalDateTime], Option[LocalDateTime])]] with mutable.SynchronizedMap[A, collection.mutable.Map[B, (Option[LocalDateTime], Option[LocalDateTime])]]
 
-  def addEventSet(set: A) {
+  def addEventSet(set: A):Unit = {
     map += set -> new mutable.HashMap[B, (Option[LocalDateTime], Option[LocalDateTime])] with mutable.SynchronizedMap[B, (Option[LocalDateTime], Option[LocalDateTime])]
   }
 
-  def start(set: A, evt: B) {
+  def start(set: A, evt: B):Unit = {
     map.getOrElseUpdate(set, new mutable.HashMap[B, (Option[LocalDateTime], Option[LocalDateTime])] with mutable.SynchronizedMap[B, (Option[LocalDateTime], Option[LocalDateTime])]) += evt ->(Some(LocalDateTime.now), map(set).getOrElse(evt, (None, None))._2)
   }
 
-  def end(set: A, evt: B) {
+  def end(set: A, evt: B):Unit = {
     map.getOrElseUpdate(set, new mutable.HashMap[B, (Option[LocalDateTime], Option[LocalDateTime])] with mutable.SynchronizedMap[B, (Option[LocalDateTime], Option[LocalDateTime])]) += evt ->(map(set).getOrElse(evt, (None, None))._1, Some(LocalDateTime.now))
   }
 

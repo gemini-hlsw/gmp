@@ -15,7 +15,7 @@ class ObservationEventLogger(val collectDeadline: Long = 5000L)(implicit LOG: Lo
 
   /**
    * Checks whether the timing for a given event and dataLabel is within constraints and writes to log */
-  def checkTimeWithinLimits(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  def checkTimeWithinLimits(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     // Function with side effects
     // check if the keyword recollection was performed on time
     if (!check(dataLabel, obsEvent, collectDeadline)) {
@@ -25,7 +25,7 @@ class ObservationEventLogger(val collectDeadline: Long = 5000L)(implicit LOG: Lo
 
   /**
    * Logs the timing of an ObservationEvent of a datalabel */
-  def logTiming(evt: ObservationEvent, label: DataLabel) {
+  def logTiming(evt: ObservationEvent, label: DataLabel):Unit = {
     val avgTime = average(evt) map {
       x => x.toMillis
     } getOrElse {
@@ -42,7 +42,7 @@ class ObservationEventLogger(val collectDeadline: Long = 5000L)(implicit LOG: Lo
 
   /**
    * Verifies that the time constraints requested for certain events are fulfilled */
-  def enforceTimeConstraints(evt: ObservationEvent, label: DataLabel) {
+  def enforceTimeConstraints(evt: ObservationEvent, label: DataLabel):Unit = {
     evt match {
       case OBS_START_ACQ => checkTimeWithinLimits(evt, label)
       case OBS_END_ACQ => checkTimeWithinLimits(evt, label)

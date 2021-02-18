@@ -1,7 +1,7 @@
 package edu.gemini.aspen.gds.obsevent.handler
 
 import org.mockito.Mockito._
-import org.mockito.Matchers._
+import org.mockito.ArgumentMatchers._
 import edu.gemini.aspen.giapi.data.{DataLabel, ObservationEvent}
 import edu.gemini.aspen.gds.keywords.database.impl.KeywordsDatabaseImpl
 import edu.gemini.aspen.gds.actors.factory.CompositeActorsFactory
@@ -171,7 +171,7 @@ class GDSObseventHandlerImplTest extends FunSuite with OneInstancePerTest with B
     new Event(GDSObseventHandler.ObsEventTopic, properties)
   }
 
-  private def sleep(time: Long) {
+  private def sleep(time: Long):Unit = {
     TimeUnit.MILLISECONDS.sleep(time)
   }
 

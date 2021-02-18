@@ -13,6 +13,6 @@ class DummyActorsFactory extends AbstractKeywordActorsFactory {
     immutable.List(dummyActor)
   }
 
-  override def configure(configuration: List[GDSConfiguration]) {}
+  override def configure(configuration: List[GDSConfiguration]):Unit = {}
 }
 

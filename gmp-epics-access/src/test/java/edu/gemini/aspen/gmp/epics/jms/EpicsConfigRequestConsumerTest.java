@@ -11,9 +11,9 @@ import javax.jms.*;
 import java.util.Set;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class EpicsConfigRequestConsumerTest {
@@ -69,7 +69,7 @@ public class EpicsConfigRequestConsumerTest {
 
 
         consumer.onMessage(message);
-        
+
         verify(replyMessage).setBoolean(channelName, true);
         verify(messageProducer).send(destination,replyMessage);
     }

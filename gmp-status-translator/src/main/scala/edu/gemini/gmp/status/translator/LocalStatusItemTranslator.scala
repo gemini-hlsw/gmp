@@ -16,13 +16,13 @@ import java.util.logging.Logger
 class LocalStatusItemTranslator(top: Top, aggregate: StatusHandlerAggregate, xmlFileName: String) extends AbstractStatusItemTranslator(top, xmlFileName) with JmsArtifact with StatusItemTranslator {
   private final val LOG: Logger = Logger.getLogger(classOf[LocalStatusItemTranslator].getName)
 
-   def start {
+   def start:Unit = {
     LOG.finer("Start validate")
     //initItems
     LOG.finer("End validate")
   }
 
-  def update[T](item: StatusItem[T]) {
+  def update[T](item: StatusItem[T]):Unit = {
     for (newItem <- translate(item)) {
       LOG.fine(s"Publishing translated status item: $newItem")
       aggregate.update(newItem)

@@ -20,9 +20,9 @@ import java.util.logging.Logger
 case class JmsStatusItemTranslatorImpl(to: Top, xmlFileNam: String) extends AbstractStatusItemTranslator(to, xmlFileNam) with JmsArtifact with StatusItemTranslator {
   private final val LOG: Logger = Logger.getLogger(classOf[JmsStatusItemTranslatorImpl].getName)
 
-   def start {
+   def start:Unit = {
     //super.start
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
     for (status <- config.statuses) {
       setters.put(to.buildStatusItemName(status.getOriginalName), new StatusSetterImpl(this.getName + status.getOriginalName, to.buildStatusItemName(status.getOriginalName)))
     }
@@ -33,12 +33,12 @@ case class JmsStatusItemTranslatorImpl(to: Top, xmlFileNam: String) extends Abst
   /**
    * Connect JMS on the StatusSetters
    */
-  private def initSetters {
+  private def initSetters:Unit = {
     /*val executor: ScheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1)
     executor.execute(new Runnable {
-      def run {
+      def run:Unit = {
         waitFor(validateDone)
-        import scala.collection.JavaConversions._
+        import scala.jdk.CollectionConverters._
         for (ss <- setters.values) {
           try {
             ss.startJms(provider)
@@ -54,28 +54,28 @@ case class JmsStatusItemTranslatorImpl(to: Top, xmlFileNam: String) extends Abst
     })*/
   }
 
-  def stop {
+  def stop:Unit = {
     validateDone.set(false)
     //super.stop
   }
 
-  override def startJms(provider: JmsProvider) {
+  override def startJms(provider: JmsProvider):Unit = {
     getter.startJms(provider)
     this.provider = provider
     initSetters
   }
 
-  override def stopJms {
+  override def stopJms:Unit = {
     //jmsStarted.set(false)
     getter.stopJms
-    import scala.collection.JavaConversions._
-    for (ss <- setters.values) {
+    import scala.jdk.CollectionConverters._
+    for (ss <- setters.values.asScala) {
       ss.stopJms
     }
   }
 
-  def update[T](item: StatusItem[T]) {
-    import scala.collection.JavaConversions._
+  def update[T](item: StatusItem[T]):Unit = {
+    import scala.jdk.CollectionConverters._
     for (newItem <- translate(item)) {
       try {
         setters.get(item.getName).setStatusItem(newItem)

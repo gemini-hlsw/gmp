@@ -15,7 +15,7 @@ class SetPermissionsPolicy(permissions: String, sudo: String) extends DefaultPos
 
   override val priority = 12
 
-  override def fileReady(originalFile: File, processedFile: File) {
+  override def fileReady(originalFile: File, processedFile: File):Unit = {
     LOG.info(s"Set file $processedFile permissions to $permissions")
 
     val cmd = s"${if (useSudo) "sudo " else ""}chmod $permissions $processedFile"

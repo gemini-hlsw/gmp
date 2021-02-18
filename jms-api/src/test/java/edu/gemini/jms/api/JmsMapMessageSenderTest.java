@@ -3,7 +3,6 @@ package edu.gemini.jms.api;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -13,7 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -63,7 +62,7 @@ public class JmsMapMessageSenderTest extends JmsArtifactTestBase {
 
         // Verify the message has been sent
         assertNotNull(sentMessage);
-        verify(producer).send(Matchers.<Topic>anyObject(), eq(mapMessage));
+        verify(producer).send(any(Topic.class), eq(mapMessage));
         assertTrue(called.get());
 
         sender.stopJms();

@@ -7,11 +7,11 @@ import edu.gemini.giapi.tool.arguments.ConfigArgument;
 import edu.gemini.giapi.tool.arguments.SequenceCommandArgument;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Matchers;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
 
 public class CommandOperationTest {
     @Test
@@ -64,7 +64,7 @@ public class CommandOperationTest {
 
         buildApplyCommand(commandOperation);
 
-        when(senderClient.sendCommand(Matchers.<Command>anyObject(), Matchers.<CompletionListener>anyObject())).thenReturn(HandlerResponse.createError("Error"));
+        when(senderClient.sendCommand(any(Command.class), any(CompletionListener.class))).thenReturn(HandlerResponse.createError("Error"));
 
         assertEquals(1, commandOperation.execute());
     }
@@ -92,7 +92,7 @@ public class CommandOperationTest {
         commandOperation.setArgument(secondConfigArgument);
 
         ArgumentCaptor<Command> argument = ArgumentCaptor.forClass(Command.class);
-        when(senderClient.sendCommand(argument.capture(), Matchers.<CompletionListener>anyObject())).thenReturn(HandlerResponse.createError("Error"));
+        when(senderClient.sendCommand(argument.capture(), any(CompletionListener.class))).thenReturn(HandlerResponse.createError("Error"));
 
         assertEquals(1, commandOperation.execute());
 
@@ -108,7 +108,7 @@ public class CommandOperationTest {
 
         buildApplyCommand(commandOperation);
 
-        when(senderClient.sendCommand(Matchers.<Command>anyObject(), Matchers.<CompletionListener>anyObject())).thenReturn(HandlerResponse.get(HandlerResponse.Response.NOANSWER));
+        when(senderClient.sendCommand(any(Command.class), any(CompletionListener.class))).thenReturn(HandlerResponse.get(HandlerResponse.Response.NOANSWER));
 
         assertEquals(1, commandOperation.execute());
     }

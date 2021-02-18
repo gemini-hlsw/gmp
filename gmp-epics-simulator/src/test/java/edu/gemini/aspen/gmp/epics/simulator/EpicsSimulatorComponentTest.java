@@ -4,7 +4,6 @@ import edu.gemini.aspen.gmp.epics.EpicsRegistrar;
 import edu.gemini.aspen.gmp.epics.EpicsUpdate;
 import org.junit.After;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +24,7 @@ public class EpicsSimulatorComponentTest {
         // Wait for one update
         TimeUnit.MILLISECONDS.sleep(1100L);
 
-        verify(registrar, atLeastOnce()).processEpicsUpdate(Matchers.<EpicsUpdate<?>>anyObject());
+        verify(registrar, atLeastOnce()).processEpicsUpdate(any(EpicsUpdate.class));
     }
 
     @Test
@@ -38,7 +37,7 @@ public class EpicsSimulatorComponentTest {
         // Wait for one update
         TimeUnit.MILLISECONDS.sleep(1100L);
 
-        verifyZeroInteractions(registrar);
+        verifyNoInteractions(registrar);
     }
 
     @After

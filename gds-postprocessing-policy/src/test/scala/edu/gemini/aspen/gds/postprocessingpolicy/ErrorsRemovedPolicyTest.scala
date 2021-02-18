@@ -10,7 +10,7 @@ class ErrorsRemovedPolicyTest {
     val dataLabel = new DataLabel("some key")
 
     @Test
-    def testNonErrors() {
+    def testNonErrors():Unit = {
         val ep = new ErrorsRemovedPolicy()
         val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: Nil
 
@@ -18,7 +18,7 @@ class ErrorsRemovedPolicyTest {
     }
 
     @Test
-    def testWithOneError() {
+    def testWithOneError():Unit = {
         val ep = new ErrorsRemovedPolicy()
         val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
         val filteredValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: Nil
@@ -27,7 +27,7 @@ class ErrorsRemovedPolicyTest {
     }
 
     @Test
-    def testCompositeErrorRemoved() {
+    def testCompositeErrorRemoved():Unit = {
         val ep = new CompositePostProcessingPolicyImpl()
         val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
         val filteredValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: Nil
@@ -37,7 +37,7 @@ class ErrorsRemovedPolicyTest {
     }
 
     @Test
-    def testCompositeDefaultErrorRemoved() {
+    def testCompositeDefaultErrorRemoved():Unit = {
         val ep = new CompositePostProcessingPolicyImpl()
         val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
         val filteredValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: Nil
@@ -49,7 +49,7 @@ class ErrorsRemovedPolicyTest {
     }
 
     @Test
-    def testCompositeErrorRemovedDefault() {
+    def testCompositeErrorRemovedDefault():Unit = {
         val ep = new CompositePostProcessingPolicyImpl()
         val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
         val filteredValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: Nil

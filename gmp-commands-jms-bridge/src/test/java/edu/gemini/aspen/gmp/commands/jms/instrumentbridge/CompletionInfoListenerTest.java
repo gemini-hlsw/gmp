@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 public class CompletionInfoListenerTest extends MockedJmsArtifactsTestBase {
@@ -62,7 +62,7 @@ public class CompletionInfoListenerTest extends MockedJmsArtifactsTestBase {
 
         listener.onMessage(message);
 
-        verifyZeroInteractions(commandUpdater);
+        verifyNoInteractions(commandUpdater);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class CompletionInfoListenerTest extends MockedJmsArtifactsTestBase {
 
         listener.onMessage(message);
 
-        verifyZeroInteractions(commandUpdater);
+        verifyNoInteractions(commandUpdater);
     }
 
     @Test

@@ -3,12 +3,12 @@ package edu.gemini.aspen.gmp.tcs.jms;
 import edu.gemini.aspen.gmp.tcs.jms.JmsTcsContextDispatcher;
 import edu.gemini.jms.api.JmsProvider;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.jms.*;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.*;
 
 public class JmsTcsContextDispatcherTest {
@@ -27,7 +27,7 @@ public class JmsTcsContextDispatcherTest {
         BytesMessage bytesMessage = mock(BytesMessage.class);
         when(session.createBytesMessage()).thenReturn(bytesMessage);
         MessageProducer producer = mock(MessageProducer.class);
-        when(session.createProducer(Matchers.<Destination>anyObject())).thenReturn(producer);
+        when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
 
         tcsContextDispatcher.startJms(provider);
 
@@ -44,6 +44,6 @@ public class JmsTcsContextDispatcherTest {
         Destination destination = mock(Destination.class);
         tcsContextDispatcher.send(context, destination);
 
-        verifyZeroInteractions(destination);
+        verifyNoInteractions(destination);
     }
 }

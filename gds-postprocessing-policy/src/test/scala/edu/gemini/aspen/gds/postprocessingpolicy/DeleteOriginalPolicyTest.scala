@@ -6,7 +6,7 @@ import com.google.common.io.Files
 
 class DeleteOriginalPolicyTest {
   @Test
-  def testNonErrors() {
+  def testNonErrors():Unit = {
     val file1 = Files.createTempDir()
     val deleteOriginal = new DeleteOriginalPolicy()
     deleteOriginal.fileReady(file1, file1)

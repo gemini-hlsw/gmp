@@ -10,8 +10,8 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 import java.util.concurrent.TimeUnit;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 /**
@@ -63,7 +63,6 @@ public class StatusServiceTest {
         service.stopJms();
 
         verify(provider).getConnectionFactory();
-        verifyZeroInteractions(provider);
     }
 
 }

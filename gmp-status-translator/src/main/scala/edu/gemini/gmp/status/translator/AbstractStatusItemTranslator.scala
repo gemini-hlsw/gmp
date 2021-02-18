@@ -1,4 +1,3 @@
-
 package edu.gemini.gmp.status.translator
 
 import edu.gemini.aspen.giapi.status.Health
@@ -12,7 +11,7 @@ import edu.gemini.gmp.status.translator.generated.{StatusType, DataType}
 import java.io.{FileInputStream, File}
 import edu.gemini.jms.api.{JmsProvider, JmsArtifact}
 
-import scala.collection._
+import scala.jdk.CollectionConverters._
 import scala.concurrent.Future
 
 case class ItemTranslation[A, +B](destinationName: String, default: Option[B], translations: Map[A, B], destinationType: DataType) {
@@ -39,6 +38,11 @@ object TranslationType {
     override def toStatusItem(name: String)(value: String) = new BasicStatus[Int](name, toValue(value))
     override val defaultValue = 0
   }
+  implicit object FloatTranslationType extends TranslationType[Float] {
+    override def toValue(value: String):Float = value.toFloat
+    override def toStatusItem(name: String)(value: String) = new BasicStatus[Float](name, toValue(value))
+    override val defaultValue = 0.0f
+  }
   implicit object DoubleTranslationType extends TranslationType[Double] {
     override def toValue(value: String):Double = value.toDouble
     override def toStatusItem(name: String)(value: String) = new BasicStatus[Double](name, toValue(value))
@@ -59,6 +63,7 @@ object TranslationType {
 
   def defaultTranslationType(statusType: DataType):TranslationType[_] = statusType match {
     case DataType.INT    => IntTranslationType
+    case DataType.FLOAT  => FloatTranslationType
     case DataType.DOUBLE => DoubleTranslationType
     case DataType.HEALTH => HealthTranslationType
     case DataType.STRING => StringTranslationType
@@ -78,7 +83,6 @@ abstract class AbstractStatusItemTranslator(top: Top, xmlFileName: String) exten
   } yield new StatusItemTranslatorConfiguration(new FileInputStream(x))
 
   def translationMap(config: StatusType) = {
-    import scala.collection.JavaConverters._
     import TranslationType._
 
     val fromTranslator = defaultTranslationType(config.getOriginalType)
@@ -102,19 +106,18 @@ abstract class AbstractStatusItemTranslator(top: Top, xmlFileName: String) exten
 
   val translations = fileExistence.map(extract).map(_.groupBy(a => a._1)).getOrElse(Map.empty)  //val translations = fileExistence.map(extract).map(_.toMap).getOrElse(Map.empty)
 
-  override def startJms(provider: JmsProvider) {
+  override def startJms(provider: JmsProvider): Unit = {
     getter.startJms(provider)
-    import scala.collection.JavaConversions._
     Future.apply {
       for {
-        si <- getter.getAllStatusItems
+        si <- getter.getAllStatusItems.asScala
       } update(si)
     }
   }
 
-  override def stopJms {}
+  override def stopJms: Unit = {}
 
-  def getName = name
+  def getName: String = name
 
   /**
    * Translate a StatusItem according to translations specified in the config file.

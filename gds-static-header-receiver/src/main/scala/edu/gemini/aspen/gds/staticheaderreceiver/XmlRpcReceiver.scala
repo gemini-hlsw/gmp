@@ -25,7 +25,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param programId The ID of the program in the ODB that specifies this observation
    * @param dataLabel The name of the FITS file to be written
    */
-  def openObservation(programId: String, dataLabel: String) {
+  def openObservation(programId: String, dataLabel: String):Unit = {
     LOG.info(s"Opened Observation, Program ID: $programId Data label: $dataLabel")
     programIdDB ! StoreProgramId(dataLabel, programId)
     sendData(ObservationEvent.EXT_START_OBS, new DataLabel(dataLabel))
@@ -38,7 +38,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param dataLabel The name of the FITS file to be written, and to which keywords must be associated
    * @param keywords An array of Strings, each of which contains three parts, separated by a comma: the keyword name, the data type and the value
    */
-  def openObservation(programId: String, dataLabel: String, keywords: Array[Object]) {
+  def openObservation(programId: String, dataLabel: String, keywords: Array[Object]):Unit = {
     openObservation(programId, dataLabel)
     storeKeywords(dataLabel, keywords)
   }
@@ -48,7 +48,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    *
    * @param dataLabel The name of the FITS file to be written
    */
-  def closeObservation(dataLabel: String) {
+  def closeObservation(dataLabel: String):Unit = {
     LOG.info(s"Closed Observation, Data label: $dataLabel")
     sendData(ObservationEvent.EXT_END_OBS, new DataLabel(dataLabel))
   }
@@ -59,7 +59,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param dataLabel The name of the FITS file to be written, and to which keywords must be associated
    * @param keywords An array of Strings, each of which contains three parts, separated by a comma: the keyword name, the data type and the value
    */
-  def closeObservation(dataLabel: String, keywords: Array[Object]) {
+  def closeObservation(dataLabel: String, keywords: Array[Object]):Unit = {
     storeKeywords(dataLabel, keywords)
     closeObservation(dataLabel)
   }
@@ -71,7 +71,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param keyword The FITS keyword name
    * @param value The FITS keyword value
    */
-  def storeKeyword(dataLabel: String, keyword: String, value: String) {
+  def storeKeyword(dataLabel: String, keyword: String, value: String):Unit = {
     LOG.info(s"Data label: $dataLabel Keyword: $keyword Value: $value")
     keywordsDatabase ! Store(dataLabel, keyword, value)
   }
@@ -83,7 +83,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param keyword The FITS keyword name
    * @param value The FITS keyword value
    */
-  def storeKeyword(dataLabel: String, keyword: String, value: Double) {
+  def storeKeyword(dataLabel: String, keyword: String, value: Double):Unit = {
     LOG.info(s"Data label: $dataLabel Keyword: $keyword Value: $value")
     keywordsDatabase ! Store(dataLabel, keyword, value.asInstanceOf[AnyRef])
   }
@@ -95,7 +95,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param keyword The FITS keyword name
    * @param value The FITS keyword value
    */
-  def storeKeyword(dataLabel: String, keyword: String, value: Int) {
+  def storeKeyword(dataLabel: String, keyword: String, value: Int):Unit = {
     LOG.info(s"Data label: $dataLabel Keyword: $keyword Value: $value")
     keywordsDatabase ! Store(dataLabel, keyword, value.asInstanceOf[AnyRef])
   }
@@ -107,7 +107,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param keyword The FITS keyword name
    * @param value The FITS keyword value
    */
-  def storeKeyword(dataLabel: String, keyword: String, value: Boolean) {
+  def storeKeyword(dataLabel: String, keyword: String, value: Boolean):Unit = {
     LOG.info(s"Data label: $dataLabel Keyword: $keyword Value: $value")
     keywordsDatabase ! Store(dataLabel, keyword, value.asInstanceOf[AnyRef])
   }
@@ -118,7 +118,7 @@ class XmlRpcReceiver(keywordsDatabase: TemporarySeqexecKeywordsDatabase, program
    * @param dataLabel The name of the FITS file to be written, and to which keywords must be associated
    * @param keywords An array of Strings, each of which contains three parts, separated by a comma: the keyword name, the data type and the value
    */
-  def storeKeywords(dataLabel: String, keywords: Array[Object]) {
+  def storeKeywords(dataLabel: String, keywords: Array[Object]):Unit = {
     val regex = """(\w*),(\w*),(.*)""".r
     for {
       keyword <- keywords

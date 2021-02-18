@@ -6,7 +6,7 @@ import com.google.common.cache.CacheBuilder
 import edu.gemini.aspen.gds.keywords.database.{ProgramIdDatabase, RetrieveProgramId, StoreProgramId}
 import edu.gemini.aspen.giapi.data.DataLabel
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection.concurrent
 
 /**
@@ -17,7 +17,7 @@ class ProgramIdDatabaseImpl extends ProgramIdDatabase {
 
   start()
 
-  def act() {
+  def act():Unit = {
     loop {
       react {
         case StoreProgramId(dataLabel, programId) => internalStore(dataLabel, programId)
@@ -31,11 +31,11 @@ class ProgramIdDatabaseImpl extends ProgramIdDatabase {
     .expireAfterWrite(expirationMillis, MILLISECONDS)
     .build[DataLabel, String]().asMap()
 
-  override def store(dataLabel: DataLabel, programId: String) {
+  override def store(dataLabel: DataLabel, programId: String):Unit = {
     this ! StoreProgramId(dataLabel, programId)
   }
 
-  private def internalStore(dataLabel: DataLabel, programId: String) {
+  private def internalStore(dataLabel: DataLabel, programId: String):Unit = {
     map += dataLabel -> programId
   }
 

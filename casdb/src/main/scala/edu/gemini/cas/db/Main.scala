@@ -5,7 +5,7 @@ package edu.gemini.cas.db
  * Loans the code for options processing from gds-config-validator
  */
 object Main {
-  def main(args: Array[String]) {
+  def main(args: Array[String]):Unit = {
     val usage = """Usage: ./casdb.sh [-f|--file filename]
 """
     if (args.length == 0) {
@@ -21,10 +21,10 @@ object Main {
       list match {
         case Nil => map
         case "--file" :: value :: tail => {
-          nextOption(map ++ Map('file -> value), tail)
+          nextOption(map ++ Map(Symbol("file") -> value), tail)
         }
         case "-f" :: value :: tail => {
-          nextOption(map ++ Map('file -> value), tail)
+          nextOption(map ++ Map(Symbol("file") -> value), tail)
         }
         case option :: tail if isSwitch(option) => {
           println("Unknown option: " + option);
@@ -41,10 +41,10 @@ object Main {
     }
     val options = nextOption(Map(), arglist)
 
-    if (options.getOrElse('help, false) == true) {
+    if (options.getOrElse(Symbol("help"), false) == true) {
       println(usage)
     } else {
-      options.get('file) map {
+      options.get(Symbol("file")) map {
         case x: String => new ChannelBuilder(x)
         case _ =>
       }

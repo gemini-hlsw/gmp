@@ -15,7 +15,7 @@ class FitsReaderTest extends FunSuite with FitsSamplesDownloader with FitsSample
     downloadFile("test1546.fits", "527b8899b9eb65fec92350626d2232ee")
   }
 
-  def verifyKeysInHeader(header: Header, names: List[String]) {
+  def verifyKeysInHeader(header: Header, names: List[String]):Unit = {
     val keyNames = header.keywords map {
       _.keywordName.key
     }

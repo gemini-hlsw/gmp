@@ -20,16 +20,12 @@ import gov.aps.jca.event.MonitorListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Matchers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 public class EpicsObserverImplTest {
     private static final ImmutableList<String> CHANNELS_TO_READ = ImmutableList.of("tst:tst2");
@@ -54,7 +50,7 @@ public class EpicsObserverImplTest {
         when(contextController.getJCAContext()).thenReturn(jcaContext);
 
         channel = mock(CAJChannel.class);
-        when(jcaContext.createChannel(Matchers.<String>any(), Matchers.<ConnectionListener>anyObject())).thenReturn(channel);
+        when(jcaContext.createChannel(anyString(), any(ConnectionListener.class))).thenReturn(channel);
         when(channel.getContext()).thenReturn(jcaContext);
     }
 
@@ -69,7 +65,7 @@ public class EpicsObserverImplTest {
 
     private void verifyChannelsAreRegisteredToClient(EpicsClientMock epicsClient) throws CAException {
         assertTrue(epicsClient.wasConnectedCalled());
-        verify(jcaContext).createChannel(eq("tst:tst2"), Matchers.<ConnectionListener>anyObject());
+        verify(jcaContext).createChannel(eq("tst:tst2"), any(ConnectionListener.class));
     }
 
     @Test
@@ -133,7 +129,7 @@ public class EpicsObserverImplTest {
 
     private void verifyNoInteractionsWithClient(EpicsClientMock epicsClient) {
         assertFalse(epicsClient.wasConnectedCalled());
-        verifyZeroInteractions(jcaContext);
+        verifyNoInteractions(jcaContext);
     }
 
     @Test
@@ -189,7 +185,7 @@ public class EpicsObserverImplTest {
         EpicsClient epicsClient = mock(EpicsClient.class);
         epicsObserver.unregisterEpicsClient(epicsClient);
 
-        verifyZeroInteractions(epicsClient);
+        verifyNoInteractions(epicsClient);
     }
 
 }

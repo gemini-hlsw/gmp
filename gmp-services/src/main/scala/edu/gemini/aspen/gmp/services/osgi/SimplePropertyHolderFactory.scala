@@ -33,8 +33,8 @@ class SimplePropertyHolderFactory(val context: BundleContext) extends ManagedSer
   }
 
   def stopServices(): Unit = {
-    import scala.collection.JavaConversions._
-    for (pid <- existingServices.keySet) {
+    import scala.jdk.CollectionConverters._
+    for (pid <- existingServices.keySet.asScala) {
       deleted(pid)
     }
   }

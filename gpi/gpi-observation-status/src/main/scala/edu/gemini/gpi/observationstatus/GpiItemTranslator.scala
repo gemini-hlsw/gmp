@@ -53,13 +53,13 @@ class GpiItemTranslator(top: Top, statusSetter: StatusSetter) extends StatusHand
     }
   }
 
-  private def updateStatus() {
+  private def updateStatus():Unit = {
     statusSetter.setStatusItem(new BasicStatus[Int](lightOnStatus, current.isOn))
   }
 
-  override def startJms(provider: JmsProvider) {
+  override def startJms(provider: JmsProvider):Unit = {
     getter.startJms(provider)
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
     Future.apply {
       for {
         si <- getter.getAllStatusItems
@@ -68,5 +68,5 @@ class GpiItemTranslator(top: Top, statusSetter: StatusSetter) extends StatusHand
   }
 
 
-  override def stopJms() {}
+  override def stopJms():Unit = {}
 }

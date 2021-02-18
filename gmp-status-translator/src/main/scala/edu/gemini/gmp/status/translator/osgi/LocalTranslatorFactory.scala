@@ -39,7 +39,7 @@ case class LocalTranslatorFactory(top: Top, aggregate: StatusHandlerAggregate, c
     }
   }
 
-  override def deleted(pid: String) {
+  override def deleted(pid: String):Unit = {
     for {
       s <- existingServices.remove(pid)
     } yield s.unregister()

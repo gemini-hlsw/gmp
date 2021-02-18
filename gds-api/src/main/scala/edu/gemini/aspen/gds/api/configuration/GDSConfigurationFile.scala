@@ -45,7 +45,7 @@ object GDSConfigurationFile {
     }
   }
 
-  def saveConfiguration(configurationFile: String, contents: List[ConfigItem[_]]) {
+  def saveConfiguration(configurationFile: String, contents: List[ConfigItem[_]]):Unit = {
     val newFile = new File(configurationFile)
     use(new BufferedWriter(new FileWriter(newFile))) {
       writer: BufferedWriter => for (configLine <- contents) {

@@ -15,7 +15,7 @@ class SeqexecActorsTest {
    * Test for the common case of a value found in the local DB
    */
   @Test
-  def testActor() {
+  def testActor():Unit = {
     db ! Store("labelint", "KEY", 1.asInstanceOf[AnyRef])
     db ! Store("labelstring", "KEY", "1".asInstanceOf[AnyRef])
     db ! Store("labeldouble", "KEY", 1.0.asInstanceOf[AnyRef])
@@ -31,7 +31,7 @@ class SeqexecActorsTest {
   }
 
   @Test
-  def testWrongType() {
+  def testWrongType():Unit = {
     val db = new TemporarySeqexecKeywordsDatabaseImpl
     db ! Store("label", "KEY", "1.1")
 
@@ -40,7 +40,7 @@ class SeqexecActorsTest {
   }
 
   @Test
-  def testActorInt() {
+  def testActorInt():Unit = {
     db ! Store("label", "KEY", 1.asInstanceOf[AnyRef])
 
     val seqActor = new SeqexecActor(db, "label", GDSConfiguration("GPI", "OBS_START_ACQ", "KEY", 0, "INT", true, "null", "SEQEXEC", "KEY", 0, "", "my comment") :: Nil)
@@ -52,7 +52,7 @@ class SeqexecActorsTest {
    * Test for a non mandatory value not found in the local DB
    */
   @Test
-  def testNotMandatoryNotFoundValue() {
+  def testNotMandatoryNotFoundValue():Unit = {
     val seqActor = new SeqexecActor(db, "label", GDSConfiguration("GPI", "OBS_START_ACQ", "KEY", 0, "INT", false, "DEFAULT", "SEQEXEC", "KEY", 0, "", "my comment") :: Nil)
 
     // should not return anything if the value cannot be read. The default will be added by an PostProcessingPolicy
@@ -64,7 +64,7 @@ class SeqexecActorsTest {
    * Test for a mandatory value not found in the local DB
    */
   @Test
-  def testMandatoryNotFoundValue() {
+  def testMandatoryNotFoundValue():Unit = {
     val seqActor = new SeqexecActor(db, "label", GDSConfiguration("GPI", "OBS_START_ACQ", "KEY", 0, "INT", true, "DEFAULT", "SEQEXEC", "KEY", 0, "", "my comment") :: Nil)
 
     // should not return anything if the value cannot be read. The default will be added by an PostProcessingPolicy
@@ -73,7 +73,7 @@ class SeqexecActorsTest {
   }
 
   @Test
-  def testActorFactory() {
+  def testActorFactory():Unit = {
     db ! Store("label", "TEST", (1.0).asInstanceOf[AnyRef])
 
     val factory = new SeqexecActorsFactory(db)

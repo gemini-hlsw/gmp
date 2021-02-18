@@ -29,49 +29,49 @@ class GdsHealth(top: Top, setter: StatusSetter) extends JmsArtifact {
   private val stateActor = new StateActor()
   stateActor.start()
 
-  private def updateHealth() {
+  private def updateHealth():Unit = {
     LOG.info(s"Updating Health to ${healthState.getHealth} on $healthName")
     stateActor ! UpdateHealth
   }
 
-  def stopJms() {}
+  def stopJms():Unit = {}
 
-  def startJms(provider: JmsProvider) {
+  def startJms(provider: JmsProvider):Unit = {
     LOG.info("Start GDS Health")
     stateActor ! Connected
   }
 
-  def bindHeaderReceiver() {
+  def bindHeaderReceiver():Unit = {
     LOG.fine("Binding HeaderReceiver")
     healthState.registerHeaderReceiver()
     updateHealth()
   }
 
-  def unbindHeaderReceiver() {
+  def unbindHeaderReceiver():Unit = {
     LOG.fine("Unbinding HeaderReceiver")
     healthState.unregisterHeaderReceiver()
     updateHealth()
   }
 
-  def bindGDSObseventHandler(evtHndlr: GDSObseventHandler) {
+  def bindGDSObseventHandler(evtHndlr: GDSObseventHandler):Unit = {
     LOG.fine("Binding GDSObseventHandlerImpl")
     healthState.registerGDSObseventHandler()
     updateHealth()
   }
 
-  def unbindGDSObseventHandler(evtHndlr: GDSObseventHandler) {
+  def unbindGDSObseventHandler(evtHndlr: GDSObseventHandler):Unit = {
     LOG.fine("Unbinding GDSObseventHandlerImpl")
     healthState.unregisterGDSObseventHandler()
     updateHealth()
   }
 
-  def bindActorFactory(fact: KeywordActorsFactory) {
+  def bindActorFactory(fact: KeywordActorsFactory):Unit = {
     LOG.fine("Binding ActorsFactory: " + fact.getClass.getName)
     healthState.registerActorFactory(fact.getSource)
     updateHealth()
   }
 
-  def unbindActorFactory(fact: KeywordActorsFactory) {
+  def unbindActorFactory(fact: KeywordActorsFactory):Unit = {
     LOG.fine("Unbinding ActorsFactory: " + fact.getClass.getName)
     healthState.unregisterActorFactory(fact.getSource)
     updateHealth()
@@ -80,7 +80,7 @@ class GdsHealth(top: Top, setter: StatusSetter) extends JmsArtifact {
   class StateActor extends Actor {
     var connected = false
 
-    override def act() {
+    override def act():Unit = {
       loop {
         react {
           case Connected                 =>
@@ -95,7 +95,7 @@ class GdsHealth(top: Top, setter: StatusSetter) extends JmsArtifact {
       }
     }
 
-    def updateHealthValues() {
+    def updateHealthValues():Unit = {
       setter.setStatusItem(new HealthStatus(healthName, healthState.getHealth))
       setter.setStatusItem(new BasicStatus[String](healthMessageName, healthState.getMessage))
       LOG.info("GDS health SET " + healthState)
@@ -109,30 +109,30 @@ class GdsHealth(top: Top, setter: StatusSetter) extends JmsArtifact {
     private var obsEvtHndl = false
     private var headerRec = false
 
-    def registerHeaderReceiver() {
+    def registerHeaderReceiver():Unit = {
       headerRec = true
     }
 
-    def unregisterHeaderReceiver() {
+    def unregisterHeaderReceiver():Unit = {
       headerRec = false
     }
 
-    def registerGDSObseventHandler() {
+    def registerGDSObseventHandler():Unit = {
       obsEvtHndl = true
     }
 
-    def unregisterGDSObseventHandler() {
+    def unregisterGDSObseventHandler():Unit = {
       obsEvtHndl = false
     }
 
-    def registerActorFactory(source: KeywordSource.Value) {
+    def registerActorFactory(source: KeywordSource.Value):Unit = {
       source match {
         case KeywordSource.NONE => LOG.fine(s"Registered KeywordActorsFactory of unknown type: $source")
         case x => actors(x.id) = true
       }
     }
 
-    def unregisterActorFactory(source: KeywordSource.Value) {
+    def unregisterActorFactory(source: KeywordSource.Value):Unit = {
       source match {
         case KeywordSource.NONE => LOG.fine(s"Unregistered KeywordActorsFactory of unknown type: $source")
         case x => actors(x.id) = false

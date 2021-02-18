@@ -10,17 +10,17 @@ import edu.gemini.jms.api.DestinationData;
 import edu.gemini.jms.api.DestinationType;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
+import static org.mockito.ArgumentMatchers.*;
 
 import static edu.gemini.aspen.giapi.commands.ConfigPath.configPath;
 import static edu.gemini.aspen.giapi.commands.DefaultConfiguration.configurationBuilder;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -50,7 +50,7 @@ public class JmsForwardingCompletionListenerTest extends MockedJmsArtifactsTestB
         Command referenceCommand = new Command(SequenceCommand.APPLY, Activity.PRESET, referenceConfiguration);
         completionListener.onHandlerResponse(HandlerResponse.ACCEPTED, referenceCommand);
 
-        verify(producer).send(Matchers.<Destination>anyObject(), any(MapMessage.class));
+        verify(producer).send(any(Destination.class), any(MapMessage.class));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class JmsForwardingCompletionListenerTest extends MockedJmsArtifactsTestB
         Command referenceCommand = new Command(SequenceCommand.APPLY, Activity.PRESET, referenceConfiguration);
         completionListener.onHandlerResponse(HandlerResponse.createError("Error Message"), referenceCommand);
 
-       verify(producer).send(Matchers.<Destination>anyObject(), any(MapMessage.class));
+       verify(producer).send(any(Destination.class), any(MapMessage.class));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class JmsForwardingCompletionListenerTest extends MockedJmsArtifactsTestB
         HandlerResponse response = HandlerResponse.get(HandlerResponse.Response.COMPLETED);
         completionListener.sendInitialResponseToClient(response);
 
-        verify(producer).send(Matchers.<Destination>anyObject(), any(MapMessage.class));
+        verify(producer).send(any(Destination.class), any(MapMessage.class));
         // Verify that 1 string has been set in the reply message
         verify(mapMessage, times(1)).setString(anyString(), anyString());
 
@@ -102,7 +102,7 @@ public class JmsForwardingCompletionListenerTest extends MockedJmsArtifactsTestB
         HandlerResponse response = HandlerResponse.createError("Error Message");
         completionListener.sendInitialResponseToClient(response);
 
-        verify(producer).send(Matchers.<Destination>anyObject(), any(MapMessage.class));
+        verify(producer).send(any(Destination.class), any(MapMessage.class));
         // Verify that 2 strings has been set in the reply message, including response and error message
         verify(mapMessage, times(2)).setString(anyString(), anyString());
 

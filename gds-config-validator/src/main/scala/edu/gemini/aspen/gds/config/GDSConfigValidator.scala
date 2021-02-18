@@ -10,7 +10,7 @@ class GDSConfigValidator extends GDSConfigurationParser {
 
 //options: -h, -f file, -p (print)
 object GDSConfigValidator {
-  def main(args: Array[String]) {
+  def main(args: Array[String]):Unit = {
 
     val usage = """
     Usage: ./gds-validator.sh [-h|--help] [-p|--print] [-f|--file filename]

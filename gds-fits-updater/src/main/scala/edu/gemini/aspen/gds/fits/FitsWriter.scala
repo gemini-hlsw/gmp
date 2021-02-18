@@ -2,7 +2,7 @@ package edu.gemini.aspen.gds.fits
 
 import edu.gemini.aspen.gds.api.fits.Header
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import edu.gemini.aspen.gds.api.Conversions._
 import com.google.common.base.Stopwatch
 import nom.tam.util.BufferedFile
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 class FitsWriter(file: File) extends FitsReader(file) {
   traverseHeaders(0)
 
-  private def addNewKeywords(hdu: BasicHDU, header: Header) {
+  private def addNewKeywords(hdu: BasicHDU, header: Header):Unit = {
     val hduHeader = hdu.getHeader
     val existingKeywords = hduHeader.iterator().collect {
       case k: HeaderCard if k.isKeyValuePair => k
@@ -117,7 +117,7 @@ class FitsWriter(file: File) extends FitsReader(file) {
     }
   }
 
-  private def validateValue(value: String) {
+  private def validateValue(value: String):Unit = {
     if (value.length() > HeaderCard.MAX_VALUE_LENGTH) {
       throw new IllegalArgumentException()
     } else if (value.startsWith("'") && !value.endsWith("'")) {
@@ -125,7 +125,7 @@ class FitsWriter(file: File) extends FitsReader(file) {
     }
   }
 
-  private def commitChanges(destinationFile: File) {
+  private def commitChanges(destinationFile: File):Unit = {
     val stopwatch = Stopwatch.createStarted()
 
     Files.createParentDirs(destinationFile)
@@ -139,7 +139,7 @@ class FitsWriter(file: File) extends FitsReader(file) {
    * Updates the FITS file with new keywords add to the header
    * In case the header does not exist the operation is ignored
    * Existing keywords are not updated */
-  def updateHeader(header: Header, destinationFile: File) {
+  def updateHeader(header: Header, destinationFile: File):Unit = {
     Option(fitsFile.getHDU(header.index)) foreach {
       hdu =>
         addNewKeywords(hdu, header)
@@ -151,7 +151,7 @@ class FitsWriter(file: File) extends FitsReader(file) {
    * Updates the FITS file with new keywords added to several headers at a time
    * In case the header does not exist the operation is ignored
    * Existing keywords are not updated */
-  def updateHeaders(headers: Traversable[Header], destinationFile: File) {
+  def updateHeaders(headers: Traversable[Header], destinationFile: File):Unit = {
     headers foreach {
       h => if (fitsFile.getHDU(h.index) != null) addNewKeywords(fitsFile.getHDU(h.index), h)
     }
@@ -159,7 +159,7 @@ class FitsWriter(file: File) extends FitsReader(file) {
   }
 
   @tailrec
-  private def traverseHeaders(index: Int) {
+  private def traverseHeaders(index: Int):Unit = {
     if (fitsFile.getHDU(index) != null) {
       traverseHeaders(index + 1)
     }

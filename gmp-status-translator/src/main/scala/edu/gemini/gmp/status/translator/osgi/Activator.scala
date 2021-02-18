@@ -9,7 +9,7 @@ import org.osgi.framework.{BundleActivator, BundleContext, ServiceRegistration}
 import org.osgi.service.cm.ManagedServiceFactory
 import org.osgi.util.tracker.ServiceTracker
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 
 class Activator extends BundleActivator {
   var serviceRegistration: Option[ServiceRegistration[ManagedServiceFactory]] = None
@@ -26,7 +26,15 @@ class Activator extends BundleActivator {
       }
       topTracker = Some(track[Top, Top](context) { top =>
         val f = LocalTranslatorFactory(top, aggregate, context)
-        serviceRegistration = Some(context.registerService(classOf[ManagedServiceFactory], f, new java.util.Hashtable[String, Any](Map("service.pid" -> classOf[LocalStatusItemTranslator].getName))))
+        serviceRegistration = Some(
+          context.registerService(
+            classOf[ManagedServiceFactory],
+            f,
+            new java.util.Hashtable[String, Any](
+              Map("service.pid" -> classOf[LocalStatusItemTranslator].getName).asJava
+            )
+          )
+        )
         top
       } { _ =>
         serviceRegistration.foreach(_.unregister())

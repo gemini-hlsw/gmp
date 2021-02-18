@@ -10,7 +10,7 @@ import edu.gemini.aspen.gds.api.fits.FitsKeyword
 class CollectedValueTest {
 
   @Test
-  def testBuilding() {
+  def testBuilding():Unit = {
     // Build with string
     assertNotNull(CollectedValue("KEYWORD", "strValue", "comment", 0, None))
     // Build with int
@@ -22,7 +22,7 @@ class CollectedValueTest {
   }
 
   @Test
-  def testPatternMatchingString() {
+  def testPatternMatchingString():Unit = {
     // Build with string
     val cv = CollectedValue("KEYWORD", "strValue", "comment", 0, None)
     cv match {
@@ -37,7 +37,7 @@ class CollectedValueTest {
   }
 
   @Test
-  def testPatternMatchingInteger() {
+  def testPatternMatchingInteger():Unit = {
     // Build with string
     val cv = CollectedValue("KEYWORD", 99, "comment", 0, None)
     cv match {
@@ -52,7 +52,7 @@ class CollectedValueTest {
   }
 
   @Test
-  def testPatternMatchingDouble() {
+  def testPatternMatchingDouble():Unit = {
     // Build with string
     val cv = CollectedValue("KEYWORD", 1.1, "comment", 0, None)
     cv match {
@@ -67,7 +67,7 @@ class CollectedValueTest {
   }
 
   @Test
-  def testPatternMatchingBoolean() {
+  def testPatternMatchingBoolean():Unit = {
     // Build with string
     val cv = CollectedValue("KEYWORD", false, "comment", 0, None)
     cv match {
@@ -82,7 +82,7 @@ class CollectedValueTest {
   }
 
   @Test
-  def testPatternMatchingInList() {
+  def testPatternMatchingInList():Unit = {
     // Build with string
     val cv = CollectedValue("KEYWORD", 1.1, "comment", 0, None)
     val list = immutable.List(cv)
@@ -98,7 +98,7 @@ class CollectedValueTest {
   }
 
   @Test
-  def testPatternMatchingError() {
+  def testPatternMatchingError():Unit = {
     // Build with string
     val ev = ErrorCollectedValue("KEYWORD", CollectionError.MandatoryRequired, "comment", 0)
     assertTrue(ev.isError)

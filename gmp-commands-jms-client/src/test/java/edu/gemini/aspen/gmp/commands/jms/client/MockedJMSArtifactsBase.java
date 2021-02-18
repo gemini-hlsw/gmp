@@ -2,7 +2,6 @@ package edu.gemini.aspen.gmp.commands.jms.client;
 
 import edu.gemini.aspen.giapi.util.jms.test.MapMessageMock;
 import edu.gemini.jms.api.JmsProvider;
-import org.mockito.Matchers;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -15,7 +14,8 @@ import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
 
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,15 +37,15 @@ public class MockedJMSArtifactsBase {
         session = mockSessionCreation();
 
         producer = mock(MessageProducer.class);
-        when(session.createProducer(Matchers.<Destination>anyObject())).thenReturn(producer);
+        when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
         consumer = mock(MessageConsumer.class);
-        when(session.createConsumer(Matchers.<Destination>anyObject(), Matchers.anyString())).thenReturn(consumer);
+        when(session.createConsumer(any(Destination.class), anyString())).thenReturn(consumer);
 
         Queue queue = mock(Queue.class);
-        when(session.createQueue(Matchers.anyString())).thenReturn(queue);
+        when(session.createQueue(anyString())).thenReturn(queue);
 
         Topic topic = mock(Topic.class);
-        when(session.createTopic(Matchers.anyString())).thenReturn(topic);
+        when(session.createTopic(anyString())).thenReturn(topic);
 
         mapMessage = new MapMessageMock();
         when(session.createMapMessage()).thenReturn(mapMessage);
@@ -61,7 +61,7 @@ public class MockedJMSArtifactsBase {
         when(connectionFactory.createConnection()).thenReturn(connection);
 
         // Mock session
-        when(connection.createSession(Matchers.anyBoolean(), Matchers.anyInt())).thenReturn(session);
+        when(connection.createSession(anyBoolean(), anyInt())).thenReturn(session);
         return session;
     }
 

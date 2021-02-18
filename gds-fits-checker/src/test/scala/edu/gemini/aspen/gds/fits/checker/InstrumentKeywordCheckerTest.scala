@@ -3,7 +3,7 @@ package edu.gemini.aspen.gds.fits.checker
 import java.io.File
 import edu.gemini.aspen.gds.api.GDSConfiguration
 import org.mockito.Mockito._
-import org.mockito.Matchers._
+import org.mockito.ArgumentMatchers._
 import edu.gemini.aspen.gds.observationstate.ObservationStateRegistrar
 import edu.gemini.aspen.gds.api.Conversions._
 import collection.immutable.Set
@@ -47,7 +47,7 @@ class InstrumentKeywordCheckerTest extends FunSuite with BeforeAndAfter with Moc
 
     checker.onObservationEvent(ObservationEvent.OBS_END_DSET_WRITE, "sample.fits")
     TimeUnit.MILLISECONDS.sleep(200)
-    verifyZeroInteractions(obsState)
+    verifyNoInteractions(obsState)
   }
 
   test("check without extension, bug GIAPI-932"){
@@ -59,7 +59,7 @@ class InstrumentKeywordCheckerTest extends FunSuite with BeforeAndAfter with Moc
 
     checker.onObservationEvent(ObservationEvent.OBS_END_DSET_WRITE, "sample")
     TimeUnit.MILLISECONDS.sleep(200)
-    verifyZeroInteractions(obsState)
+    verifyNoInteractions(obsState)
   }
 
   after {

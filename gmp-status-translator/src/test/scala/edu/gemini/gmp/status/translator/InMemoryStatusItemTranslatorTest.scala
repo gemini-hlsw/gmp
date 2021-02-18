@@ -10,24 +10,24 @@ import edu.gemini.gmp.top.TopImpl
 import org.junit.Test
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.mockito.Matchers.any
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito._
 
 /**
  * Class InMemoryStatusItemTranslatorTest
  */
 class InMemoryStatusItemTranslatorTest {
-  @Test def testSimpleConfiguration() {
+  @Test def testSimpleConfiguration():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
     val aggregate = mock(classOf[StatusHandlerAggregate])
     val translator = new InMemoryStatusItemTranslator(top, aggregate, db, file)
     translator.start
-    verifyZeroInteractions(aggregate)
+    verifyNoInteractions(aggregate)
   }
 
-  @Test def testTranslations() {
+  @Test def testTranslations():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -41,7 +41,7 @@ class InMemoryStatusItemTranslatorTest {
     assertEquals(good.getValue, translated(0).getValue)
   }
 
-  @Test def testMultipleTranslationsSameOrigin() {
+  @Test def testMultipleTranslationsSameOrigin():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -58,7 +58,7 @@ class InMemoryStatusItemTranslatorTest {
     assertEquals(second.getValue, translated(0).getValue)
   }
 
-  @Test def testMultipleOriginsSameTranslation() {
+  @Test def testMultipleOriginsSameTranslation():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -75,7 +75,7 @@ class InMemoryStatusItemTranslatorTest {
     assertEquals(second.getValue, translated(1).getValue)
   }
 
-  @Test def testTranslationUpdate() {
+  @Test def testTranslationUpdate():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -87,7 +87,7 @@ class InMemoryStatusItemTranslatorTest {
     verify(aggregate).update(any(classOf[StatusItem[_]]))
   }
 
-  @Test def testTranslationTwiceUpdate() {
+  @Test def testTranslationTwiceUpdate():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -98,7 +98,7 @@ class InMemoryStatusItemTranslatorTest {
     verify(aggregate, times(2)).update(any(classOf[StatusItem[_]]))
   }
 
-  @Test def testTranslateOnStart() {
+  @Test def testTranslateOnStart():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -112,7 +112,7 @@ class InMemoryStatusItemTranslatorTest {
     verify(aggregate, times(1)).update(any(classOf[StatusItem[_]]))
   }
 
-  @Test def testTranslateString() {
+  @Test def testTranslateString():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase
@@ -131,7 +131,7 @@ class InMemoryStatusItemTranslatorTest {
     verify(aggregate, times(1)).update(any(classOf[StatusItem[_]]))
   }
 
-  @Test def testTranslateStringDefault() {
+  @Test def testTranslateStringDefault():Unit = {
     val top = new TopImpl("gpi", "gpi")
     val file = getClass.getResource("status-translator.xml").getFile
     val db = new StatusDatabase

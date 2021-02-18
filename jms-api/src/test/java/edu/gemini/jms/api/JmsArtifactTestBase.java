@@ -1,7 +1,6 @@
 package edu.gemini.jms.api;
 
 import org.junit.Before;
-import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 import javax.jms.Connection;
@@ -15,7 +14,8 @@ import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -44,9 +44,9 @@ public class JmsArtifactTestBase {
         session = mockSessionCreation();
 
         producer = Mockito.mock(MessageProducer.class);
-        Mockito.when(session.createProducer(Matchers.<Destination>anyObject())).thenReturn(producer);
+        Mockito.when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
         MessageConsumer consumer = Mockito.mock(MessageConsumer.class);
-        Mockito.when(session.createConsumer(Matchers.<Destination>anyObject())).thenReturn(consumer);
+        Mockito.when(session.createConsumer(any(Destination.class))).thenReturn(consumer);
 
         Queue queue = mock(Queue.class);
         when(session.createQueue(anyString())).thenReturn(queue);
@@ -55,6 +55,8 @@ public class JmsArtifactTestBase {
         when(session.createTopic(anyString())).thenReturn(topic);
 
         mapMessage = Mockito.mock(MapMessage.class);
+        Destination destination = mock(Destination.class);
+        when(mapMessage.getJMSReplyTo()).thenReturn(destination);
         when(session.createMapMessage()).thenReturn(mapMessage);
     }
 
@@ -70,7 +72,7 @@ public class JmsArtifactTestBase {
         Mockito.when(connectionFactory.createConnection()).thenReturn(connection);
 
         // Mock session
-        Mockito.when(connection.createSession(Matchers.anyBoolean(), Matchers.anyInt())).thenReturn(session);
+        Mockito.when(connection.createSession(anyBoolean(), anyInt())).thenReturn(session);
         return session;
     }
 }

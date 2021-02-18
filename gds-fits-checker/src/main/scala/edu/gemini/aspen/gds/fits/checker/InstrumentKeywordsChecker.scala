@@ -18,7 +18,7 @@ import scala.actors.Actor._
 class InstrumentKeywordsChecker(configService: GDSConfigurationService, obsState: ObservationStateRegistrar, propertyHolder: PropertyHolder) extends ObservationEventHandler {
   protected val LOG: Logger = Logger.getLogger(this.getClass.getName)
 
-  override def onObservationEvent(event: ObservationEvent, dataLabel: DataLabel) {
+  override def onObservationEvent(event: ObservationEvent, dataLabel: DataLabel):Unit = {
     event match {
       case ObservationEvent.OBS_END_DSET_WRITE => actor {
         checkMissing(dataLabel, configService.getConfiguration)
@@ -27,9 +27,9 @@ class InstrumentKeywordsChecker(configService: GDSConfigurationService, obsState
     }
   }
 
-  private[checker] def checkMissing(label: DataLabel, config: List[GDSConfiguration]) {
+  private[checker] def checkMissing(label: DataLabel, config: List[GDSConfiguration]):Unit = {
     val file = new File(propertyHolder.getProperty("DHS_SCIENCE_DATA_PATH"), label.toString)
-    
+
     LOG.info("Verifying original keywords of " + file)
     val readerOpt: Option[FitsReader] = try {
       Some(new FitsReader(file))

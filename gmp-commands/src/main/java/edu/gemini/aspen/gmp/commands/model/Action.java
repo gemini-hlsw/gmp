@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * of sequence command progress.
  *
  * The Action's ID must grow monotonically with each new action,
- * and there rules are defined to accept responses
+ * and there rules are sdefined to accept responses
  * to Actions only on certain allowed order.
  *
  * ActionManagerImpl takes care of handling that logic

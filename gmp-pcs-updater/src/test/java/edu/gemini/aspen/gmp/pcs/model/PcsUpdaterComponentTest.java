@@ -13,7 +13,7 @@ import org.junit.Test;
 import java.util.Hashtable;
 import java.util.List;
 
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 public class PcsUpdaterComponentTest {
@@ -44,7 +44,7 @@ public class PcsUpdaterComponentTest {
         PcsUpdaterComponent component = buildComponentInSimulation();
 
         component.startComponent();
-        verifyZeroInteractions(epicsWriter);
+        verifyNoInteractions(epicsWriter);
     }
 
     private PcsUpdaterComponent buildComponentInSimulation() {
@@ -57,7 +57,7 @@ public class PcsUpdaterComponentTest {
         doThrow(new EpicsException("Test exception", new RuntimeException())).when(epicsWriter).getDoubleChannel(anyString());
 
         component.startComponent();
-        verifyZeroInteractions(epicsWriter);
+        verifyNoInteractions(epicsWriter);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class PcsUpdaterComponentTest {
         component.startComponent();
 
         component.stopComponent();
-        verifyZeroInteractions(epicsWriter);
+        verifyNoInteractions(epicsWriter);
     }
 
     @Test

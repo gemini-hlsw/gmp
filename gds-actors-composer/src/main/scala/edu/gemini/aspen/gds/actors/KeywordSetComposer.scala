@@ -29,14 +29,14 @@ class KeywordSetComposer(actorsFactory: KeywordActorsFactory, keywordsDatabase: 
   // Start automatically
   start()
 
-  def act() {
+  def act():Unit = {
     react {
       case AcquisitionRequest(obsEvent, dataLabel) => doCollection(sender, obsEvent, dataLabel)
       case _ => sys.error("Unknown request type ")
     }
   }
 
-  private def doCollection(sender: OutputChannel[Any], obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  private def doCollection(sender: OutputChannel[Any], obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     LOG.info(s"Starting keyword collection on dataset $dataLabel for event ${obsEvent.name}")
 
     val s = System.currentTimeMillis()
@@ -70,7 +70,7 @@ class KeywordSetComposer(actorsFactory: KeywordActorsFactory, keywordsDatabase: 
     dataFutures
   }
 
-  private def waitForDataAndReply(dataLabel: DataLabel, dataFutures: immutable.List[Future[Any]])(postAction: => Unit) {
+  private def waitForDataAndReply(dataLabel: DataLabel, dataFutures: immutable.List[Future[Any]])(postAction: => Unit):Unit = {
     measureDuration("Waiting for " + dataFutures.size + " data items ") {
       // Wait for response
       val v = Futures.awaitAll(5000, dataFutures: _*).collect {

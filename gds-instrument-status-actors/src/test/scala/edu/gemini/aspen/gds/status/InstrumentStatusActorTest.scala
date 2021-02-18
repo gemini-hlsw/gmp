@@ -18,7 +18,7 @@ class InstrumentStatusActorTest extends Mockito {
   val statusItemName = "gpi:status1"
 
   @Test
-  def testReplyToCollect {
+  def testReplyToCollect:Unit = {
     val configuration = buildConfiguration(statusItemName, false)
 
     val referenceValue = "ok"
@@ -48,7 +48,7 @@ class InstrumentStatusActorTest extends Mockito {
   // should not return anything if the value cannot be read. The default will be added by an PostProcessingPolicy
   // it doesn't matter at this point if the item is mandatory or not
   @Test
-  def testReplyToCollectIfStatusUnknown {
+  def testReplyToCollectIfStatusUnknown:Unit = {
     val configuration = buildConfiguration(statusItemName, false)
 
     // mock return value
@@ -71,7 +71,7 @@ class InstrumentStatusActorTest extends Mockito {
   // should not return anything if the value cannot be read. The default will be added by an PostProcessingPolicy
   // it doesn't matter at this point if the item is mandatory or not
   @Test
-  def testErrorMandatoryItemAndStatusUnknown {
+  def testErrorMandatoryItemAndStatusUnknown:Unit = {
     val configuration = buildConfiguration(statusItemName, true)
 
     // mock return value
@@ -92,7 +92,7 @@ class InstrumentStatusActorTest extends Mockito {
   }
 
   @Test
-  def testTypeMismatchError {
+  def testTypeMismatchError:Unit = {
     val configuration = GDSConfiguration("GPI",
       "OBS_START_ACQ",
       fitsKeyword,

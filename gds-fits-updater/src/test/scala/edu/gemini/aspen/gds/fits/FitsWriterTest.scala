@@ -19,7 +19,7 @@ class FitsWriterTest extends FunSuite with FitsSamplesDownloader with FitsSample
 
   val destFile = File.createTempFile("test", ".fits")
 
-  override def afterEach() {
+  override def afterEach():Unit = {
     if (destFile.exists()) destFile.delete()
   }
 
@@ -27,7 +27,7 @@ class FitsWriterTest extends FunSuite with FitsSamplesDownloader with FitsSample
   def createHeadersWithAirMass(headerIndex: Int): Header = Header(headerIndex, List(HeaderItem("AIRMASS", 1.0, "Mass of airmass", None)))
 
   // Verifies that a header contains all the original keywords plus new keywords
-  def verifyKeysInHeader(header: Header, names: List[String], newKeywords: List[String]) {
+  def verifyKeysInHeader(header: Header, names: List[String], newKeywords: List[String]):Unit = {
     val keyNames = header.keywords map {
       _.keywordName.key
     }

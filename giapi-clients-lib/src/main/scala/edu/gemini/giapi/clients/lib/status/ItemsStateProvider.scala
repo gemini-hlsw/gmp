@@ -4,7 +4,7 @@ import edu.gemini.aspen.giapi.status.StatusItem
 import edu.gemini.aspen.giapi.util.jms.status.StatusGetter
 import edu.gemini.jms.api.JmsProvider
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 

@@ -1,7 +1,7 @@
 package edu.gemini.aspen.gds.fits
 
 import java.io.File
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import java.util.logging.Logger
 import nom.tam.fits.{HeaderCard, Fits}
 import edu.gemini.aspen.gds.api.fits.{HeaderItem, FitsKeyword, Header}

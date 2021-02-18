@@ -4,7 +4,7 @@ import org.junit.Assert._
 import edu.gemini.jms.activemq.provider.ActiveMQJmsProvider
 import edu.gemini.aspen.giapi.statusservice.{StatusHandlerAggregate, StatusService}
 import org.mockito.Mockito._
-import org.mockito.Matchers._
+import org.mockito.ArgumentMatchers._
 import edu.gemini.aspen.giapi.status.{Health, StatusHandler, StatusItem}
 import edu.gemini.aspen.gds.api.{GDSObseventHandler, KeywordActorsFactory, KeywordSource}
 import java.util.concurrent.{CountDownLatch, TimeUnit}
@@ -42,7 +42,7 @@ class GdsHealthTest extends FunSuite with MockitoSugar with BeforeAndAfter {
     val latch = new CountDownLatch(retries)
     var lastHealthStatusItem: StatusItem[_] = _
 
-    override def update[T](item: StatusItem[T]) {
+    override def update[T](item: StatusItem[T]):Unit = {
       if (item.getName.equals(healthName)) {
         lastHealthStatusItem = item
 
@@ -51,7 +51,7 @@ class GdsHealthTest extends FunSuite with MockitoSugar with BeforeAndAfter {
       }
     }
 
-    def waitForCompletion() {
+    def waitForCompletion():Unit = {
       assertTrue(latch.await(5, TimeUnit.SECONDS))
     }
 
@@ -103,7 +103,7 @@ class GdsHealthTest extends FunSuite with MockitoSugar with BeforeAndAfter {
     agg.unbindStatusHandler(handler)
   }
 
-  def bindAllHealthSources(gdsHealth: GdsHealth) {
+  def bindAllHealthSources(gdsHealth: GdsHealth):Unit = {
     gdsHealth.bindGDSObseventHandler(mock[GDSObseventHandler])
     val fact = mock[KeywordActorsFactory]
     for (source <- KeywordSource.values - KeywordSource.NONE - KeywordSource.INSTRUMENT - KeywordSource.ODB) {

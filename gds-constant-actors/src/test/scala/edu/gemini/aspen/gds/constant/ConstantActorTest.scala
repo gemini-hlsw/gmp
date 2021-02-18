@@ -10,13 +10,13 @@ import scala.collection._
 class ConstantActorTest {
 
   @Test
-  def testActor() {
+  def testActor():Unit = {
     val constActor = new ConstantActor(buildConfiguration("KEY1", "val1") :: buildConfiguration("KEY2", "val2") :: Nil)
     assertEquals(CollectedValue("KEY1", "val1", "COMMENT", 0, None) :: CollectedValue("KEY2", "val2", "COMMENT", 0, None) :: Nil, constActor.collectValues())
   }
 
   @Test
-  def testQuoteRemoval() {
+  def testQuoteRemoval():Unit = {
     val constActor = new ConstantActor(GDSConfiguration("GPI",
         "OBS_START_ACQ",
         "KEY1",
@@ -45,7 +45,7 @@ class ConstantActorTest {
   }
 
   @Test
-  def testActorWrongType() {
+  def testActorWrongType():Unit = {
     val constActor = new ConstantActor(GDSConfiguration("GPI",
       "OBS_START_ACQ",
       "KEY1",
@@ -62,7 +62,7 @@ class ConstantActorTest {
   }
 
   @Test
-  def testActorOfBooleanType() {
+  def testActorOfBooleanType():Unit = {
     val constActor = new ConstantActor(GDSConfiguration("GPI",
       "OBS_START_ACQ",
       "KEY1",
@@ -79,7 +79,7 @@ class ConstantActorTest {
   }
 
   @Test
-  def testActorFactory() {
+  def testActorFactory():Unit = {
     val factory = new ConstantActorsFactory
     factory.configure(immutable.List(GDSConfiguration("GPI", "OBS_PREP", "TEST", 0, "DOUBLE", false, "1.0", "CONSTANT", "ws:massAirmass", 0, "", "my comment")))
 

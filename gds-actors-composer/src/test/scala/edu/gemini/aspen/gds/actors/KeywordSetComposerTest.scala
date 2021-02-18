@@ -10,7 +10,7 @@ import org.junit.Test
 
 class KeywordSetComposerTest {
   @Test
-  def startAcqMessage() {
+  def startAcqMessage():Unit = {
     val (dataLabel, composer) = createFixture
 
     // Send an init message
@@ -26,7 +26,7 @@ class KeywordSetComposerTest {
   }
 
   @Test
-  def endAcqMessage() {
+  def endAcqMessage():Unit = {
     val (dataLabel, composer) = createFixture
 
     // Send an init message
@@ -42,7 +42,7 @@ class KeywordSetComposerTest {
   }
 
   @Test
-  def testNoActors() {
+  def testNoActors():Unit = {
     // Generate datalabel
     val dataLabel = new DataLabel("GS-2011")
 
@@ -66,7 +66,7 @@ class KeywordSetComposerTest {
   }
 
   @Test
-  def testExceptionActor() {
+  def testExceptionActor():Unit = {
     // Generate dataset
     val dataLabel = new DataLabel("GS-2011")
 
@@ -96,7 +96,7 @@ class KeywordSetComposerTest {
   }
 
   @Test
-  def testExceptionActorFactory() {
+  def testExceptionActorFactory():Unit = {
     // Generate dataset
     val dataLabel = new DataLabel("GS-2011")
 

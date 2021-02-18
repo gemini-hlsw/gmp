@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.ops4j.pax.exam.CoreOptions.*;
-import static scala.collection.JavaConversions.seqAsJavaList;
+import static scala.jdk.CollectionConverters.seqAsJavaList;
 
 /**
  * Base class for the integration tests related to the GDS

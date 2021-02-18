@@ -13,7 +13,7 @@ import org.osgi.framework.{BundleActivator, BundleContext, ServiceRegistration}
 import org.osgi.service.event.{EventConstants, EventHandler}
 import org.osgi.util.tracker.ServiceTracker
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.collection.mutable
 
 class Activator extends BundleActivator {

@@ -15,25 +15,25 @@ import java.util.logging.Logger
 class InMemoryStatusItemTranslator(top: Top, aggregate: StatusHandlerAggregate, statusDatabase: StatusDatabaseService, xmlFileName: String) extends AbstractStatusItemTranslator(top, xmlFileName) with StatusItemTranslator {
   private final val LOG: Logger = Logger.getLogger(classOf[InMemoryStatusItemTranslator].getName)
 
-   def start {
+   def start:Unit = {
     //super.start()
     initItems
   }
 
-  protected def initItems {
-    import scala.collection.JavaConversions._
-    for (item <- statusDatabase.getAll) {
+  protected def initItems: Unit = {
+    import scala.jdk.CollectionConverters._
+    for (item <- statusDatabase.getAll.asScala) {
       update(item)
     }
   }
 
-  def stop {
+  def stop:Unit = {
     LOG.info("Start stop")
     //super.stop
     LOG.info("End stop")
   }
 
-  def update[T](item: StatusItem[T]) {
+  def update[T](item: StatusItem[T]): Unit = {
     for (newItem <- translate(item)) {
       LOG.finer(s"Publishing translated status item: ${newItem.getName}")
       aggregate.update(newItem)

@@ -13,7 +13,7 @@ import edu.gemini.aspen.gds.api.FitsType
 class FitsWriterDataTypesTest extends FunSuite with BeforeAndAfterEach {
   val destFile = File.createTempFile("test", ".fits")
 
-  override def afterEach() {
+  override def afterEach():Unit = {
     if (destFile.exists()) destFile.delete()
   }
 

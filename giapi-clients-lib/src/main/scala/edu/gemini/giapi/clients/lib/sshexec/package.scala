@@ -14,8 +14,8 @@ import scala.util.{Failure, Success}
 package object sshexec {
 
   trait MessageListener {
-    def newLine(line: String)
-    def newErrorLine(line: String)
+    def newLine(line: String): Unit
+    def newErrorLine(line: String): Unit
   }
 
   def sshexec(command: String, listener: MessageListener, username: String, host: String, key: InputStream, knownHosts: InputStream): CommandOperationResult = {

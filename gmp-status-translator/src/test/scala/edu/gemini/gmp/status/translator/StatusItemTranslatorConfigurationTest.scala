@@ -12,7 +12,7 @@ import org.junit.Assert.assertEquals
  *         Date: 4/9/12
  */
 class StatusItemTranslatorConfigurationTest {
-  @Test def testSimpleConfiguration() {
+  @Test def testSimpleConfiguration():Unit = {
     val configuration: StatusItemTranslatorConfiguration = new StatusItemTranslatorConfiguration(getClass.getResourceAsStream("status-translator.xml"))
     val statuses = configuration.statuses
     assertEquals(7, statuses.size)

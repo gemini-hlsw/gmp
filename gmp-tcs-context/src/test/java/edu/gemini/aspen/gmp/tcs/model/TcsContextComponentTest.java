@@ -4,11 +4,11 @@ import edu.gemini.epics.EpicsReader;
 import edu.gemini.jms.api.JmsProvider;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.jms.*;
 
 import static edu.gemini.aspen.gmp.tcs.model.EpicsTcsContextFetcher.TCS_CONTEXT_CHANNEL;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.*;
 
 public class TcsContextComponentTest {
@@ -29,7 +29,7 @@ public class TcsContextComponentTest {
         BytesMessage bytesMessage = mock(BytesMessage.class);
         when(session.createBytesMessage()).thenReturn(bytesMessage);
         MessageProducer producer = mock(MessageProducer.class);
-        when(session.createProducer(Matchers.<Destination>anyObject())).thenReturn(producer);
+        when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
 
         reader = mock(EpicsReader.class);
     }
@@ -40,7 +40,7 @@ public class TcsContextComponentTest {
         component.startJms(provider);
 
         verify(provider, times(2)).getConnectionFactory();
-        verifyZeroInteractions(reader);
+        verifyNoInteractions(reader);
     }
 
     @Test

@@ -21,11 +21,11 @@ class KeywordsDatabaseTest extends AssertionsForJUnit {
   val dataLabel2 = "GS-2011A"
 
   @Before
-  def setup() {
+  def setup():Unit = {
     db = new KeywordsDatabaseImpl
   }
 
-  def check(label: DataLabel, item: CollectedValue[_]) {
+  def check(label: DataLabel, item: CollectedValue[_]):Unit = {
     val ret = db !?(1000, Retrieve(label))
     assertFalse(ret.isEmpty) //we didn't get a timeout
     ret foreach {
@@ -37,7 +37,7 @@ class KeywordsDatabaseTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testMethods() {
+  def testMethods():Unit = {
     db.store(dataLabel, colVal)
     val ret = db.retrieve(dataLabel)
     assertEquals(1, ret.size)
@@ -45,13 +45,13 @@ class KeywordsDatabaseTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testRetrieveAll() {
+  def testRetrieveAll():Unit = {
     db ! Store(dataLabel, colVal)
     check(dataLabel, colVal)
   }
 
 
-  def checkEmpty(ret: Option[Any]) {
+  def checkEmpty(ret: Option[Any]):Unit = {
     assertFalse(ret.isEmpty)
     ret map {
       case c: List[_] => assertTrue(c.isEmpty)
@@ -60,20 +60,20 @@ class KeywordsDatabaseTest extends AssertionsForJUnit {
   }
 
   @Test
-  def retrieveEmpty() {
+  def retrieveEmpty():Unit = {
     val ret = db !?(1000, Retrieve(dataLabel))
     checkEmpty(ret)
   }
 
   @Test
-  def retrieveWrongDataLabel() {
+  def retrieveWrongDataLabel():Unit = {
     db ! Store(dataLabel, colVal)
     val ret = db !?(1000, Retrieve("wrong"))
     checkEmpty(ret)
   }
 
   @Test
-  def multipleDatasets() {
+  def multipleDatasets():Unit = {
     db ! Store(dataLabel, colVal)
     db ! Store(dataLabel2, colVal2)
 
@@ -83,7 +83,7 @@ class KeywordsDatabaseTest extends AssertionsForJUnit {
   }
 
   @Test
-  def multipleDatasetsInList() {
+  def multipleDatasetsInList():Unit = {
     db ! StoreList(dataLabel, List(colVal, colVal2))
 
     check(dataLabel, colVal)
@@ -92,14 +92,14 @@ class KeywordsDatabaseTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testClean() {
+  def testClean():Unit = {
     db !?(1000, Retrieve(dataLabel))
     db ! Clean(dataLabel)
     retrieveEmpty()
   }
 
   @Test
-  def testExpiration() {
+  def testExpiration():Unit = {
     val db = new KeywordsDatabaseImpl {
       override def expirationMillis = 5
     }

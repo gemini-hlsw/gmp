@@ -19,15 +19,15 @@ trait FitsBaseTest extends FunSuite with BeforeAndAfterEach {
     fitsUpdater.updateFitsHeaders(outputNamingFunction = label => destinationFile.getName)
   }
 
-  def verifyKeywordInHeader(header: Header, keyword: String) {
+  def verifyKeywordInHeader(header: Header, keyword: String):Unit = {
     assertTrue(header.containsKey(keyword))
   }
 
-  def verifyKeywordNotInHeader(header: Header, keyword: String) {
+  def verifyKeywordNotInHeader(header: Header, keyword: String):Unit = {
     assertFalse(header.containsKey(keyword))
   }
 
-  override def afterEach() = if (destinationFile.exists) {
+  override def afterEach(): Unit = if (destinationFile.exists):Unit = {
     destinationFile.delete
   }
 }

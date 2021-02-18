@@ -12,18 +12,16 @@ import edu.gemini.aspen.gmp.commands.jms.MockedJmsArtifactsTestBase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
 
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
-import javax.jms.Topic;
+import javax.jms.Queue;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
 
 public class CommandMessagesBridgeImplTest extends MockedJmsArtifactsTestBase {
     protected CommandSender commandsSender;
@@ -61,7 +59,7 @@ public class CommandMessagesBridgeImplTest extends MockedJmsArtifactsTestBase {
     }
 
     private void verifyReplyToClientSent(int times) throws JMSException {
-        verify(producer, times(times)).send(Matchers.<Topic>anyObject(), Matchers.<MapMessage>anyObject());
+        verify(producer, times(times)).send(any(Queue.class), any(MapMessage.class));
     }
 
     /**

@@ -37,7 +37,7 @@ class SetPermissionsPolicyFactory(context: BundleContext) extends ManagedService
   }
 
   def stopServices(): Unit = {
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
     for (pid <- existingServices.keySet) {
       deleted(pid)
     }

@@ -2,14 +2,13 @@ package edu.gemini.jms.api;
 
 import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 
 import java.util.Map;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class AbstractMapMessageBuilderTest {
@@ -30,7 +29,7 @@ public class AbstractMapMessageBuilderTest {
 
     @Test
     public void testFillStringBasedMessage() throws JMSException {
-        doThrow(new JMSException("Exception")).when(message).setObject(anyString(), Matchers.<Object>anyObject());
+        doThrow(new JMSException("Exception")).when(message).setObject(anyString(), any());
         messageBuilder.setStringBasedMessageBody(message, stringMessageContent);
 
         verify(message, times(messageContent.size())).setString(anyString(), anyString());
@@ -60,12 +59,12 @@ public class AbstractMapMessageBuilderTest {
     public void testSetMessageProperties() throws JMSException {
         messageBuilder.setMessageProperties(message, messageProperties);
 
-        verify(message, times(messageProperties.size())).setObjectProperty(anyString(), Matchers.<Object>anyObject());
+        verify(message, times(messageProperties.size())).setObjectProperty(anyString(), any());
     }
 
     @Test(expected = MessagingException.class)
     public void testSetMessagePropertiesWithException() throws JMSException {
-        doThrow(new JMSException("Exception")).when(message).setObjectProperty(anyString(), Matchers.<Object>anyObject());
+        doThrow(new JMSException("Exception")).when(message).setObjectProperty(anyString(), any());
 
         messageBuilder.setMessageProperties(message, messageProperties);
     }
@@ -74,12 +73,12 @@ public class AbstractMapMessageBuilderTest {
     public void testBuildMessage() throws JMSException {
         messageBuilder.setMessageBody(message, messageContent);
 
-        verify(message, times(messageContent.size())).setObject(anyString(), Matchers.<Object>anyObject());
+        verify(message, times(messageContent.size())).setObject(anyString(), any());
     }
 
     @Test(expected = MessagingException.class)
     public void testBuildMessageWithException() throws JMSException {
-        doThrow(new JMSException("Exception")).when(message).setObject(anyString(), Matchers.<Object>anyObject());
+        doThrow(new JMSException("Exception")).when(message).setObject(anyString(), any());
 
         messageBuilder.setMessageBody(message, messageContent);
     }

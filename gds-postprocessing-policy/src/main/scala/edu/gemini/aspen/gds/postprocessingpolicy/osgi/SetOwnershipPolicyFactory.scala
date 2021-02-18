@@ -37,7 +37,7 @@ class SetOwnershipPolicyFactory(context: BundleContext) extends ManagedServiceFa
   }
 
   def stopServices(): Unit = {
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
     for (pid <- existingServices.keySet) {
       deleted(pid)
     }

@@ -14,7 +14,7 @@ import edu.gemini.aspen.gds.api.fits.FitsKeyword
 class ObservationStateImplTest {
 
   @Test
-  def testObsInProgress() {
+  def testObsInProgress():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     assertTrue(obsState.getObservationsInProgress.isEmpty)
 
@@ -29,7 +29,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testLastDataLabel() {
+  def testLastDataLabel():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     obsState.startObservation("label1")
     obsState.startObservation("label2")
@@ -41,7 +41,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testLastDataLabels() {
+  def testLastDataLabels():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     obsState.startObservation("label1")
     obsState.startObservation("label2")
@@ -57,7 +57,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testMissing() {
+  def testMissing():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     obsState.startObservation("label1")
     obsState.registerMissingKeyword("label1", FitsKeyword("A") :: Nil)
@@ -66,7 +66,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testError() {
+  def testError():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     obsState.startObservation("label1")
     obsState.registerCollectionError("label1", List((FitsKeyword("A"), CollectionError.GenericError)))
@@ -75,7 +75,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testInError() {
+  def testInError():Unit = {
     val obsState = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     assertEquals(obsState.isInError("label1"), None)
     obsState.startObservation("label1")
@@ -85,7 +85,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testFailed() {
+  def testFailed():Unit = {
     val obsState = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     assertEquals(obsState.isFailed("label1"), None)
     obsState.startObservation("label1")
@@ -97,7 +97,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testExpiration() {
+  def testExpiration():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher])) {
       override def expirationMillis = 5
     }
@@ -115,7 +115,7 @@ class ObservationStateImplTest {
   }
 
   @Test
-  def testTimestamp() {
+  def testTimestamp():Unit = {
     val obsState: ObservationStateImpl = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
     obsState.startObservation("label1")
     obsState.registerMissingKeyword("label1", FitsKeyword("A") :: Nil)

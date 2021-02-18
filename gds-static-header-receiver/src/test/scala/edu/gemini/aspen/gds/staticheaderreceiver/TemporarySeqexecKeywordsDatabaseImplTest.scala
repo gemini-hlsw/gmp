@@ -13,7 +13,7 @@ class TemporarySeqexecKeywordsDatabaseImplTest {
   val originalValue = "VAL"
 
   @Test
-  def testStoreAndRetrieve() {
+  def testStoreAndRetrieve():Unit = {
     // Verify we can store and retrieve
     val db = new TemporarySeqexecKeywordsDatabaseImpl
     db ! Store(dataLabel, keyword, originalValue)
@@ -33,7 +33,7 @@ class TemporarySeqexecKeywordsDatabaseImplTest {
   }
 
   @Test
-  def testStoreAndRetrieveUnknown() {
+  def testStoreAndRetrieveUnknown():Unit = {
     // Verify we can store and retrieve
     val db = new TemporarySeqexecKeywordsDatabaseImpl
     db ! Store(dataLabel, keyword, originalValue)
@@ -46,7 +46,7 @@ class TemporarySeqexecKeywordsDatabaseImplTest {
   }
 
   @Test
-  def testStoreAndRetrieveAll() {
+  def testStoreAndRetrieveAll():Unit = {
     val db = new TemporarySeqexecKeywordsDatabaseImpl
     db ! Store(dataLabel, keyword, originalValue)
 
@@ -60,7 +60,7 @@ class TemporarySeqexecKeywordsDatabaseImplTest {
   }
 
   @Test
-  def testExpiration() {
+  def testExpiration():Unit = {
     val db = new TemporarySeqexecKeywordsDatabaseImpl {
       override def expirationMillis = 1
     }

@@ -6,6 +6,7 @@ import org.junit.Test;
 import javax.jms.*;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.*;
 
 public class StatusGetterTest {
@@ -22,10 +23,17 @@ public class StatusGetterTest {
         Session session = mock(Session.class);
         when(connection.createSession(anyBoolean(), anyInt())).thenReturn(session);
 
+        Queue queue = mock(Queue.class);
+        when(session.createQueue(anyString())).thenReturn(queue);
+        TemporaryQueue tempQueue = mock(TemporaryQueue.class);
+        when(session.createTemporaryQueue()).thenReturn(tempQueue);
+        Topic topic = mock(Topic.class);
+        when(session.createTopic(anyString())).thenReturn(topic);
+
         Message message = mock(Message.class);
         when(session.createMessage()).thenReturn(message);
         MessageProducer producer = mock(MessageProducer.class);
-        when(session.createProducer(any(Destination.class))).thenReturn(producer);
+        when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
         MessageConsumer consumer = mock(MessageConsumer.class);
         when(session.createConsumer(any(Destination.class))).thenReturn(consumer);
 

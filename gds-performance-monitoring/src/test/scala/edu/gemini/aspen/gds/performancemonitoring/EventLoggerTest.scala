@@ -24,7 +24,7 @@ class EventLoggerTest extends AssertionsForJUnit {
   var holaInterval: Duration = _
 
   @Before
-  def setup() {
+  def setup():Unit = {
     el = new EventLogger
 
     el.addEventSet("set")
@@ -49,7 +49,7 @@ class EventLoggerTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testRetrieve() {
+  def testRetrieve():Unit = {
 
     val x = el.retrieve("set")
     assert(check(x("hola").get, holaInterval, precision), "Time is: " + x("hola").get)
@@ -58,7 +58,7 @@ class EventLoggerTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testRetrieveEvent() {
+  def testRetrieveEvent():Unit = {
     el.retrieve("set", "hola") match {
       case Some(x: Duration) => assert(check(x, holaInterval, precision), "Time is: " + x)
       case _ => fail()
@@ -66,7 +66,7 @@ class EventLoggerTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testRetrieveEventEmpty() {
+  def testRetrieveEventEmpty():Unit = {
     el.retrieve("set", "chao") match {
       case None =>
       case _ => fail()
@@ -74,7 +74,7 @@ class EventLoggerTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testRetrieveEventAverage() {
+  def testRetrieveEventAverage():Unit = {
     el.average("hola") match {
       case Some(x: Duration) => assert(check(x, delay, precision), "Time is: " + x)
       case _ => fail()
@@ -82,7 +82,7 @@ class EventLoggerTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testRetrieveEventAverageEmpty() {
+  def testRetrieveEventAverageEmpty():Unit = {
     el.average("chao") match {
       case None =>
       case _ => fail()
@@ -90,12 +90,12 @@ class EventLoggerTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testCheck() {
+  def testCheck():Unit = {
     assert(el.check("set", "hola", 600))
   }
 
   @Test
-  def testCheckEmpty() {
+  def testCheckEmpty():Unit = {
     assert(!el.check("set", "chao", 600))
   }
 

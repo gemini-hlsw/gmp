@@ -17,7 +17,7 @@ case object Collect
 trait KeywordValueActor extends ActWithStash {
   ActorDSL.actor(this)
 
-  override def act() {
+  override def act():Unit = {
     react {
       case Collect => reply(collectValues())
     }

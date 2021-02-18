@@ -3,7 +3,7 @@ package edu.gemini.aspen.gds.obsevent.handler
 import java.util.EnumSet
 import edu.gemini.aspen.giapi.data.{DataLabel, ObservationEvent}
 import collection.mutable.{SynchronizedMap, HashMap}
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 
 /**
  * Keep track of which observation events have arrived and which data collection are done
@@ -43,7 +43,7 @@ class ObsEventBookKeeping {
   /**
    * Indicate that data collection for a given obs event is done
    */
-  def addReply(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  def addReply(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     val repliesSet = repliesMap.getOrElseUpdate(dataLabel, EnumSet.noneOf(classOf[ObservationEvent]))
     repliesSet.add(obsEvent)
   }
@@ -51,7 +51,7 @@ class ObsEventBookKeeping {
   /**
    * Indicate that an obs event has arrived
    */
-  def addObs(obsEvent: ObservationEvent, dataLabel: DataLabel) {
+  def addObs(obsEvent: ObservationEvent, dataLabel: DataLabel):Unit = {
     val obsSet = obsEventsMap.getOrElseUpdate(dataLabel, EnumSet.noneOf(classOf[ObservationEvent]))
     obsSet.add(obsEvent)
   }
@@ -59,7 +59,7 @@ class ObsEventBookKeeping {
   /**
    * Delete all data for a given DataLabel
    */
-  def clean(dataLabel: DataLabel) {
+  def clean(dataLabel: DataLabel):Unit = {
     repliesMap -= dataLabel
     obsEventsMap -= dataLabel
   }

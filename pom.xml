@@ -44,10 +44,13 @@
         <pax-web.version>6.1.2</pax-web.version>
         <pax-logging.version>1.10.1</pax-logging.version>
         <pax-runner.version>1.9.0</pax-runner.version>
-        <scala-lang.version>2.12.4</scala-lang.version>
-        <scalatest.version>3.0.5</scalatest.version>
+        <scala-lang.version>2.13.4</scala-lang.version>
+        <scalatest.version>3.2.2</scalatest.version>
+        <scalatestplus-junit.version>3.2.4.0-M1</scalatestplus-junit.version>
+        <scalatestplus-mockito.version>3.2.2.0</scalatestplus-mockito.version>
         <scala-plugin.version>3.3.2</scala-plugin.version>
-        <junit.version>4.10</junit.version>
+        <mockito.version>3.4.6</mockito.version>
+        <junit.version>4.13.2</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
 
@@ -641,8 +644,20 @@
             <!-- Testing dependencies -->
             <dependency>
                 <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_2.12</artifactId>
+                <artifactId>scalatest_2.13</artifactId>
                 <version>${scalatest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.scalatestplus</groupId>
+                <artifactId>junit-4-13_2.13</artifactId>
+                <version>${scalatestplus-junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.scalatestplus</groupId>
+                <artifactId>mockito-3-4_2.13</artifactId>
+                <version>${scalatestplus-mockito.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -653,8 +668,8 @@
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.9.5</version>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -778,12 +793,12 @@
             </dependency>
             <dependency>
                 <groupId>org.scala-lang.modules</groupId>
-                <artifactId>scala-parser-combinators_2.12</artifactId>
+                <artifactId>scala-parser-combinators_2.13</artifactId>
                 <version>1.1.0</version>
             </dependency>
             <dependency>
                 <groupId>org.scala-lang.modules</groupId>
-                <artifactId>scala-xml_2.12</artifactId>
+                <artifactId>scala-xml_2.13</artifactId>
                 <version>${scala.xml.version}</version>
             </dependency>
 
@@ -828,11 +843,19 @@
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.12</artifactId>
+            <artifactId>scalatest_2.13</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatestplus</groupId>
+            <artifactId>junit-4-13_2.13</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatestplus</groupId>
+            <artifactId>mockito-3-4_2.13</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
         </dependency>
         <dependency>
             <groupId>gsbase</groupId>

@@ -32,8 +32,8 @@ class StatusSimulatorFactory(context: BundleContext, top: Top) extends ManagedSe
   }
 
   def stopServices(): Unit = {
-    import scala.collection.JavaConversions._
-    for (pid <- existingServices.keySet) {
+    import scala.jdk.CollectionConverters._
+    for (pid <- existingServices.keySet.asScala) {
       deleted(pid)
     }
   }

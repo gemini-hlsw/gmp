@@ -7,7 +7,7 @@ import com.google.common.io.{Closer, Closeables, ByteStreams, Files}
 
 trait FitsSamplesDownloader {
   // Check if file is available and md5 hashes matches
-  def downloadFile(fileName: String, fileHash: String) {
+  def downloadFile(fileName: String, fileHash: String):Unit = {
     val sampleFile = new File(fileName)
     val hashingFunction = Hashing.md5()
     val available = sampleFile.exists() && hashingFunction.hashBytes(Files.toByteArray(sampleFile)).toString == fileHash

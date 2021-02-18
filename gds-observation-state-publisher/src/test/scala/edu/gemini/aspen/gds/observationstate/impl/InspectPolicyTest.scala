@@ -11,7 +11,7 @@ import fits.FitsKeyword
 
 class InspectPolicyTest {
     @Test
-    def testMissing() {
+    def testMissing():Unit = {
         val config = mock(classOf[GDSConfigurationService])
         when(config.getConfiguration).thenReturn(GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS", 0, "DOUBLE", true, "NONE", "EPICS", "gpi:value", 0, "", "Mean airmass for the observation") :: GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS2", 0, "DOUBLE", true, "NONE", "EPICS", "gpi:value", 0, "", "Mean airmass for the observation") :: Nil)
         val obsState = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))
@@ -22,7 +22,7 @@ class InspectPolicyTest {
     }
 
     @Test
-    def testError() {
+    def testError():Unit = {
         val config = mock(classOf[GDSConfigurationService])
         when(config.getConfiguration).thenReturn(GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS", 0, "DOUBLE", true, "NONE", "EPICS", "gpi:value", 0, "", "Mean airmass for the observation") :: GDSConfiguration("GPI", "OBS_START_ACQ", "AIRMASS2", 0, "DOUBLE", true, "NONE", "EPICS", "gpi:value", 0, "", "Mean airmass for the observation") :: Nil)
         val obsState = new ObservationStateImpl(mock(classOf[ObservationStatePublisher]))

@@ -7,9 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.*;
 
 /**
  * Simple tests for the class StatusHandlerAggregate
@@ -51,9 +49,11 @@ public class StatusHandlerAggregateTest {
         manager.bindStatusHandler(handler);
         verifyStatusPassedAlong(handler, item);
 
+        reset(handler);
         manager.unbindStatusHandler(handler);
         verifyNoInteraction(handler, item);
     }
+
 
     private <T> void verifyStatusPassedAlong(StatusHandler handler, StatusItem<T> item) {
         // Now pass the handler and verify interaction
@@ -64,6 +64,6 @@ public class StatusHandlerAggregateTest {
     private <T> void verifyNoInteraction(StatusHandler handler, StatusItem<T> item) {
         // Verify that a call doesn't apply to handler yet
         manager.update(item);
-        verifyZeroInteractions(handler);
+        verifyNoInteractions(handler);
     }
 }

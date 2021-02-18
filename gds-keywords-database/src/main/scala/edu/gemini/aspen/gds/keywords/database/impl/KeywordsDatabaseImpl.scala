@@ -8,7 +8,7 @@ import edu.gemini.aspen.gds.api.CollectedValue
 import edu.gemini.aspen.gds.keywords.database._
 import edu.gemini.aspen.giapi.data.DataLabel
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection.concurrent
 
 /**
@@ -20,7 +20,7 @@ class KeywordsDatabaseImpl extends KeywordsDatabase {
 
   start()
 
-  def act() {
+  def act():Unit = {
     loop {
       react {
         case Store(dataLabel: DataLabel, value: CollectedValue[_])           => _store(dataLabel, List[CollectedValue[_]](value))
@@ -32,11 +32,11 @@ class KeywordsDatabaseImpl extends KeywordsDatabase {
     }
   }
 
-  def store(dataLabel: DataLabel, value: CollectedValue[_]) {
+  def store(dataLabel: DataLabel, value: CollectedValue[_]):Unit = {
     this ! Store(dataLabel, value)
   }
 
-  def storeList[T](dataLabel: DataLabel, value: List[CollectedValue[T]]) {
+  def storeList[T](dataLabel: DataLabel, value: List[CollectedValue[T]]):Unit = {
     this ! StoreList(dataLabel, value)
   }
 
@@ -45,7 +45,7 @@ class KeywordsDatabaseImpl extends KeywordsDatabase {
     ret.asInstanceOf[Option[List[CollectedValue[_]]]] getOrElse Nil
   }
 
-  def clean(dataLabel: DataLabel) {
+  def clean(dataLabel: DataLabel):Unit = {
     this ! Clean(dataLabel)
   }
 

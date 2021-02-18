@@ -4,7 +4,6 @@ import edu.gemini.gmp.top.Top;
 import edu.gemini.jms.api.JmsProvider;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 import javax.jms.*;
@@ -13,7 +12,8 @@ import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.Mockito.*;
 
 public class StatusSimulatorTest {
@@ -52,7 +52,7 @@ public class StatusSimulatorTest {
 
         TimeUnit.MILLISECONDS.sleep(300);
 
-        verify(session, times(3)).createProducer(any(Destination.class));
+        verify(session, times(3)).createProducer(or(any(Destination.class), isNull()));
     }
 
     @Test
@@ -74,9 +74,9 @@ public class StatusSimulatorTest {
         session = mockSessionCreation();
 
         producer = mock(MessageProducer.class);
-        when(session.createProducer(Matchers.<Destination>anyObject())).thenReturn(producer);
+        when(session.createProducer(or(any(Destination.class), isNull()))).thenReturn(producer);
         consumer = mock(MessageConsumer.class);
-        when(session.createConsumer(Matchers.<Destination>anyObject())).thenReturn(consumer);
+        when(session.createConsumer(any(Destination.class))).thenReturn(consumer);
 
         Queue queue = mock(Queue.class);
         when(session.createQueue(anyString())).thenReturn(queue);
@@ -100,7 +100,7 @@ public class StatusSimulatorTest {
         when(connectionFactory.createConnection()).thenReturn(connection);
 
         // Mock session
-        when(connection.createSession(Matchers.anyBoolean(), Matchers.anyInt())).thenReturn(session);
+        when(connection.createSession(anyBoolean(), anyInt())).thenReturn(session);
         return session;
     }
 

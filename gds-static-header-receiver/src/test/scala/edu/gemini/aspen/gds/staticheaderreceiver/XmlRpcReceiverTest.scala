@@ -19,7 +19,7 @@ class XmlRpcReceiverTest extends AssertionsForJUnit with MockitoSugar {
 
 
   @Test
-  def testDB() {
+  def testDB():Unit = {
     db ! Store("label", "KEY", 1.asInstanceOf[AnyRef])
     db !?(1000, Retrieve("label", "KEY")) match {
       case Some(Some(1)) =>
@@ -42,7 +42,7 @@ class XmlRpcReceiverTest extends AssertionsForJUnit with MockitoSugar {
   }
 
   @Test
-  def testXmlRpcReceiver() {
+  def testXmlRpcReceiver():Unit = {
     xmlRpcReceiver.openObservation("id", "label")
     xmlRpcReceiver.storeKeyword("label", "KEY", 1)
     xmlRpcReceiver.storeKeywords("label2", ("KEY,INT,1" :: "KEY2,DOUBLE,1.0" :: "KEY3,STRING,uno" :: Nil).toArray)

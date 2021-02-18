@@ -8,7 +8,7 @@ import edu.gemini.aspen.gds.api.Conversions._
 import edu.gemini.aspen.gds.api._
 import edu.gemini.epics.api.ReadOnlyChannel
 import fits.FitsKeyword
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 
 class EpicsArrayValuesActorTest extends Mockito {
   val dataLabel = new DataLabel("GS-2011")
@@ -20,7 +20,7 @@ class EpicsArrayValuesActorTest extends Mockito {
 
 
   @Test
-  def testRight() {
+  def testRight():Unit = {
     // mock return value
     val ch = mock[ReadOnlyChannel[String]]
     ch.getAll returns referenceValue
@@ -49,7 +49,7 @@ class EpicsArrayValuesActorTest extends Mockito {
   }
 
   @Test(expected = classOf[IllegalArgumentException])
-  def testWrongDatatype() {
+  def testWrongDatatype():Unit = {
     // mock return value
     val ch = mock[ReadOnlyChannel[String]]
 
@@ -61,7 +61,7 @@ class EpicsArrayValuesActorTest extends Mockito {
   }
 
   @Test(expected = classOf[IllegalArgumentException])
-  def testWrongSource() {
+  def testWrongSource():Unit = {
     // mock return value
     val ch = mock[ReadOnlyChannel[String]]
 
@@ -73,7 +73,7 @@ class EpicsArrayValuesActorTest extends Mockito {
   }
 
   @Test
-  def testExceptionOnCollect() {
+  def testExceptionOnCollect():Unit = {
     // mock return value cannot be read
     val ch = mock[ReadOnlyChannel[String]]
     ch.getAll throws new RuntimeException
@@ -104,7 +104,7 @@ class EpicsArrayValuesActorTest extends Mockito {
   }
 
   @Test
-  def testOneCollectError() {
+  def testOneCollectError():Unit = {
     // mock return value
     val ch = mock[ReadOnlyChannel[String]]
     ch.getAll returns referenceValue

@@ -26,7 +26,7 @@ class Activator extends BundleActivator {
   var senderTracker: Option[ServiceTracker[ActionSender, _]] = None
   var actionManager: Option[ActionManagerImpl] = None
 
-  def start(context: BundleContext) {
+  def start(context: BundleContext):Unit = {
     val am = new ActionManagerImpl
     am.start()
     actionManager = Some(am)
@@ -55,7 +55,7 @@ class Activator extends BundleActivator {
     senderTracker.foreach(_.open())
   }
 
-  def stop(context: BundleContext) {
+  def stop(context: BundleContext):Unit = {
     (cuRegistration :: amRegistration :: csRegistration :: Nil).foreach(_.foreach(_.unregister))
     cuRegistration = None
     amRegistration = None
@@ -93,7 +93,7 @@ case class SequenceCommandExecutorFactory(builder: ActionMessageBuilder, manager
     }
   }
 
-  override def deleted(pid: String) {
+  override def deleted(pid: String):Unit = {
     for {
       s <- existingServices.remove(pid)
     } yield s.unregister()

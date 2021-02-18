@@ -5,13 +5,13 @@ import org.junit.Assert._
 import edu.gemini.aspen.gds.api.Conversions._
 import edu.gemini.aspen.giapi.data.DataLabel
 import org.mockito.Mockito._
-import org.mockito.Matchers._
+import org.mockito.ArgumentMatchers._
 
 class PostProcessingPolicyTest {
   val dataLabel = new DataLabel("some key")
 
   @Test
-  def testDefault() {
+  def testDefault():Unit = {
     val ep = new DefaultPostProcessingPolicy()
     val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: Nil
 
@@ -19,7 +19,7 @@ class PostProcessingPolicyTest {
   }
 
   @Test
-  def testComposite() {
+  def testComposite():Unit = {
     val ep = new CompositePostProcessingPolicyImpl()
     val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
 
@@ -27,7 +27,7 @@ class PostProcessingPolicyTest {
   }
 
   @Test
-  def testCompositeDefault() {
+  def testCompositeDefault():Unit = {
     val ep = new CompositePostProcessingPolicyImpl()
     val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
 
@@ -36,7 +36,7 @@ class PostProcessingPolicyTest {
   }
 
   @Test
-  def testCompositeDefaultTwice() {
+  def testCompositeDefaultTwice():Unit = {
     val ep = new CompositePostProcessingPolicyImpl()
     val collectedValues = CollectedValue[Double]("KEY1", 1.0, "comment", 0, None) :: ErrorCollectedValue("KEY2", CollectionError.GenericError, "comment", 0) :: Nil
 
@@ -46,7 +46,7 @@ class PostProcessingPolicyTest {
   }
 
   @Test
-  def testOrder() {
+  def testOrder():Unit = {
     val errPol1 = mock(classOf[PostProcessingPolicy])
     when(errPol1.priority).thenReturn(7)
 

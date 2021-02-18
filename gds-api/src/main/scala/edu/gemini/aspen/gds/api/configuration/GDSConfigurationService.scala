@@ -65,7 +65,7 @@ class GDSConfigurationServiceImpl(configurationFile: String) extends GDSConfigur
     GDSConfigurationFile.getConfiguration(configurationFile)
   }
 
-  def replaceConfiguration(config: List[GDSConfiguration]) {
+  def replaceConfiguration(config: List[GDSConfiguration]):Unit = {
     val newFile = new File(configurationFile)
     use(new BufferedWriter(new FileWriter(newFile))) {
       writer: BufferedWriter => for (configLine <- config) {
@@ -88,11 +88,11 @@ class GDSConfigurationServiceImpl(configurationFile: String) extends GDSConfigur
     GDSConfigurationFile.getFullConfiguration(configurationFile)
   }
 
-  def updateConfiguration(config: List[ConfigItem[_]]) {
+  def updateConfiguration(config: List[ConfigItem[_]]):Unit = {
     GDSConfigurationFile.saveConfiguration(configurationFile, config)
   }
 
-  def addConfiguration(config: List[GDSConfiguration]) {
+  def addConfiguration(config: List[GDSConfiguration]):Unit = {
     val newFile = new File(configurationFile)
     use(new BufferedWriter(new FileWriter(newFile, true))) {
       writer: BufferedWriter => for (configLine <- config) {

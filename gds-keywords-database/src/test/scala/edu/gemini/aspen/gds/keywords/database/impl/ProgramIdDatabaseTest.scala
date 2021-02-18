@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class ProgramIdDatabaseTest extends AssertionsForJUnit {
   @Test
-  def testBasic() {
+  def testBasic():Unit = {
     val db = new ProgramIdDatabaseImpl
     db ! StoreProgramId("label", "id")
 
@@ -20,7 +20,7 @@ class ProgramIdDatabaseTest extends AssertionsForJUnit {
   }
 
   @Test
-  def testExpiration() {
+  def testExpiration():Unit = {
     val db = new ProgramIdDatabaseImpl {
       override def expirationMillis = 5
     }
