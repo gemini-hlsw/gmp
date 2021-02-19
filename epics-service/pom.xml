@@ -40,12 +40,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>edu.gemini.external.osgi.gov.aps.jca</groupId>
+            <groupId>edu.gemini.external.osgi.org.epics</groupId>
             <artifactId>jca</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.external.osgi.com.cosylab.epics.caj</groupId>
-            <artifactId>caj</artifactId>
         </dependency>
         <dependency>
             <groupId>edu.gemini.epics</groupId>

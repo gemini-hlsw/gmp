@@ -186,14 +186,9 @@
                 <version>1.6.4-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>edu.gemini.external.osgi.com.cosylab.epics.caj</groupId>
-                <artifactId>caj</artifactId>
-                <version>1.1.15</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.external.osgi.gov.aps.jca</groupId>
+                <groupId>edu.gemini.external.osgi.org.epics</groupId>
                 <artifactId>jca</artifactId>
-                <version>2.4.1</version>
+                <version>2.4.6</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.epics</groupId>

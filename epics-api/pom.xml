@@ -25,7 +25,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>edu.gemini.external.osgi.gov.aps.jca</groupId>
+            <groupId>edu.gemini.external.osgi.org.epics</groupId>
             <artifactId>jca</artifactId>
         </dependency>
     </dependencies>
