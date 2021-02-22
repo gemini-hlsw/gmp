@@ -33,6 +33,7 @@ class EpicsChannelFactory {
     private static final Logger LOG = Logger.getLogger(EpicsChannelFactory.class.getName());
     private final CAJContext _ctx;
     private double timeout;
+    private int readRetries;
 //    private final ReferenceQueue<ReadWriteEpicsChannelImpl<?>> refQueue = new ReferenceQueue<ReadWriteEpicsChannelImpl<?>>();
 //    private final IdentityHashMap<PhantomReference<ReadWriteEpicsChannelImpl<?>>, CAJChannel> ch2Ref = new IdentityHashMap<PhantomReference<ReadWriteEpicsChannelImpl<?>>, CAJChannel>();
 
@@ -41,6 +42,7 @@ class EpicsChannelFactory {
         Preconditions.checkArgument(epicsService.getJCAContext() != null, "Passed JCA Context cannot be null");
         this._ctx = epicsService.getJCAContext();
         this.timeout = epicsService.timeout();
+        this.timeout = epicsService.readRetries();
 
         try {
             addJCAContextListeners();
@@ -106,7 +108,7 @@ class EpicsChannelFactory {
             }
             throw new IllegalArgumentException("Channel " + channelName + " can be connected to, but is of incorrect type.");
         } else {
-            ch = new ReadWriteEpicsChannelImpl<Double>(cajChannel, timeout);
+            ch = new ReadWriteEpicsChannelImpl<Double>(cajChannel, timeout, readRetries);
         }
 
         return ch;
@@ -124,7 +126,7 @@ class EpicsChannelFactory {
             }
             throw new IllegalArgumentException("Channel " + channelName + " can be connected to, but is of incorrect type.");
         } else {
-            ch = new ReadWriteEpicsChannelImpl<Integer>(cajChannel, timeout);
+            ch = new ReadWriteEpicsChannelImpl<Integer>(cajChannel, timeout, readRetries);
         }
 
         return ch;
@@ -142,7 +144,7 @@ class EpicsChannelFactory {
             }
             throw new IllegalArgumentException("Channel " + channelName + " can be connected to, but is of incorrect type.");
         } else {
-            ch = new ReadWriteEpicsChannelImpl<Short>(cajChannel, timeout);
+            ch = new ReadWriteEpicsChannelImpl<Short>(cajChannel, timeout, readRetries);
         }
 
         return ch;
@@ -160,7 +162,7 @@ class EpicsChannelFactory {
             }
             throw new IllegalArgumentException("Channel " + channelName + " can be connected to, but is of incorrect type.");
         } else {
-            ch = new ReadWriteEpicsChannelImpl<Float>(cajChannel, timeout);
+            ch = new ReadWriteEpicsChannelImpl<Float>(cajChannel, timeout, readRetries);
         }
 
         return ch;
@@ -178,7 +180,7 @@ class EpicsChannelFactory {
             }
             throw new IllegalArgumentException("Channel " + channelName + " can be connected to, but is of incorrect type.");
         } else {
-            ch = new ReadWriteEpicsChannelImpl<String>(cajChannel, timeout);
+            ch = new ReadWriteEpicsChannelImpl<String>(cajChannel, timeout, readRetries);
         }
 
         return ch;
@@ -222,7 +224,7 @@ class EpicsChannelFactory {
                 throw new EpicsException("Enum type provided for " + channelName + " doesn't correspond with Epics enum", null );
             }
 
-            ch = new ReadWriteEpicsEnumChannel<T>(cajChannel, enumClass, timeout);
+            ch = new ReadWriteEpicsEnumChannel<T>(cajChannel, enumClass, timeout, readRetries);
         }
 
         return ch;
@@ -230,7 +232,7 @@ class EpicsChannelFactory {
 
     protected ReadWriteEpicsChannelImpl<?> _getChannelAsync(String channelName) {
         CAJChannel cajChannel = bindChannelAsync(channelName, null);
-        ReadWriteEpicsChannelImpl<?> ch = new ReadWriteEpicsChannelImpl(cajChannel, timeout);
+        ReadWriteEpicsChannelImpl<?> ch = new ReadWriteEpicsChannelImpl(cajChannel, timeout, readRetries);
         return ch;
 
     }

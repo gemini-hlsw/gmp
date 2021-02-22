@@ -14,8 +14,8 @@ import java.util.List;
 public class ReadWriteEpicsEnumChannel<T extends Enum<T>> extends ReadOnlyEpicsEnumChannel<T>
         implements ReadWriteClientEpicsChannel<T> {
 
-    public ReadWriteEpicsEnumChannel(CAJChannel channel, Class<T> enumType, double timeout) {
-        super(channel, enumType, timeout);
+    public ReadWriteEpicsEnumChannel(CAJChannel channel, Class<T> enumType, double timeout, int readRetries) {
+        super(channel, enumType, timeout, readRetries);
     }
 
     @Override

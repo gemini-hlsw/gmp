@@ -13,7 +13,7 @@ public class EpicsServiceTest {
 
     @Before
     public void setUp() {
-        epicsService = new EpicsService("127.0.0.1", 1.0);
+        epicsService = new EpicsService("127.0.0.1", 1.0, 0);
     }
 
     @Test
@@ -78,7 +78,8 @@ public class EpicsServiceTest {
      */
     @Test
     public void testSupportForMultipleIPs() {
-        assertNotNull(new EpicsService("127.0.0.1 0.0.0.0", 1.0));
+        assertNotNull(new EpicsService("127.0.0.1 0.0.0.0", 1.0, 0));
     }
+
 
 }

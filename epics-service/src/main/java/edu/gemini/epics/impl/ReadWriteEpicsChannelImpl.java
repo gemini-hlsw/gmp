@@ -16,8 +16,8 @@ import java.util.List;
  *         Date: 11/9/11
  */
 public class ReadWriteEpicsChannelImpl<T> extends ReadOnlyEpicsChannelImpl<T> implements ReadWriteClientEpicsChannel<T> {
-    public ReadWriteEpicsChannelImpl(CAJChannel channel, double timeout) {
-        super(channel, timeout);
+    public ReadWriteEpicsChannelImpl(CAJChannel channel, double timeout, int retries) {
+        super(channel, timeout, retries);
     }
 
     @Override

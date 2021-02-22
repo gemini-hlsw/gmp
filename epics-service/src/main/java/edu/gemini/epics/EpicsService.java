@@ -27,17 +27,21 @@ public class EpicsService implements JCAContextController {
                     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
     private String _addressList;
-    
+
     // Timeout in seconds
     private double ioTimeout = 1.0;
 
+    // Number of read retries
+    private int readRetries = 0;
+
     private CAJContext _ctx;
 
-    public EpicsService(String addressList, double ioTimeout) {
+    public EpicsService(String addressList, double ioTimeout, int readRetries) {
         LOG.info("EpicsService created with " + addressList + ", IO timeout is " + ioTimeout + "[s]");
         validateAddressToConnect(addressList);
         this._addressList = addressList;
         this.ioTimeout = ioTimeout;
+        this.readRetries = readRetries;
     }
 
     public EpicsService(CAJContext context) {
@@ -76,6 +80,11 @@ public class EpicsService implements JCAContextController {
     public void setTimeout(double ioTimeout) {
         this.ioTimeout = ioTimeout;
         LOG.fine("Default IO timeout changed to " + this.ioTimeout);
+    }
+
+    public void setReadRetries(int retries) {
+        this.readRetries = retries;
+        LOG.fine("Default read retries changed to " + this.readRetries);
     }
 
     /**
@@ -133,6 +142,11 @@ public class EpicsService implements JCAContextController {
     @Override
     public double timeout() {
         return ioTimeout;
+    }
+
+    @Override
+    public int readRetries() {
+        return readRetries;
     }
 
 }

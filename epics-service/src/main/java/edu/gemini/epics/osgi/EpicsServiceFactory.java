@@ -25,8 +25,10 @@ public class EpicsServiceFactory implements ManagedServiceFactory {
     private static final Logger LOG = Logger.getLogger(EpicsServiceFactory.class.getName());
     private static final String PROPERTY_ADDRESS_LIST = "addressList";
     private static final String PROPERTY_IO_TIMEOUT = "ioTimeout";
+    private static final String PROPERTY_READ_RETRIES = "readRetries";
     private static final double DEFAULT_TIMEOUT = 1.0;
-    
+    private static final int DEFAULT_READ_RETRIES = 0;
+
     private final Map<String, EpicsServices> existingServices = Maps.newHashMap();
     private final BundleContext context;
 
@@ -55,7 +57,7 @@ public class EpicsServiceFactory implements ManagedServiceFactory {
             this.clientServiceTracker = clientServiceTracker;
         }
     }
-    
+
     private void changedAddress(EpicsService epicsService, Dictionary<String, ?> properties) {
         epicsService.setAddress(properties.get(PROPERTY_ADDRESS_LIST).toString());
     }
@@ -64,6 +66,15 @@ public class EpicsServiceFactory implements ManagedServiceFactory {
         if (properties.get(PROPERTY_IO_TIMEOUT) != null) {
             try {
                 epicsService.setTimeout(Double.parseDouble(properties.get(PROPERTY_IO_TIMEOUT).toString()));
+            } catch (NumberFormatException e) {
+            }
+        }
+    }
+
+    private void changedReadRetries(EpicsService epicsService, Dictionary<String, ?> properties) {
+        if (properties.get(PROPERTY_READ_RETRIES) != null) {
+            try {
+                epicsService.setReadRetries(Integer.parseInt(properties.get(PROPERTY_READ_RETRIES).toString()));
             } catch (NumberFormatException e) {
             }
         }
@@ -83,6 +94,7 @@ public class EpicsServiceFactory implements ManagedServiceFactory {
             EpicsService epicsService = existingServices.get(pid).epicsService.service;
             changedAddress(epicsService, properties);
             changedTimeout(epicsService, properties);
+            changedReadRetries(epicsService, properties);
         } else {
             if (checkProperties(properties)) {
                 EpicsService epicsService = createService(properties);
@@ -140,7 +152,13 @@ public class EpicsServiceFactory implements ManagedServiceFactory {
         } catch (NumberFormatException e) {
             timeout = DEFAULT_TIMEOUT;
         }
-        return new EpicsService(addressList, timeout);
+        int readRetries;
+        try {
+            readRetries = Integer.parseInt(properties.get(PROPERTY_READ_RETRIES).toString());
+        } catch (NumberFormatException e) {
+            readRetries = DEFAULT_READ_RETRIES;
+        }
+        return new EpicsService(addressList, timeout, readRetries);
     }
 
     private boolean checkProperties(Dictionary<String, ?> properties) {
@@ -176,5 +194,5 @@ public class EpicsServiceFactory implements ManagedServiceFactory {
             deleted(pid);
         }
     }
-    
+
 }

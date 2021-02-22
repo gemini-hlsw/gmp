@@ -17,6 +17,7 @@ import gov.aps.jca.event.MonitorListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Class ReadOnlyEpicsChannelImpl
@@ -25,21 +26,38 @@ import java.util.Map;
  *         Date: 11/7/11
  */
 public class ReadOnlyEpicsChannelImpl<T> implements ReadOnlyClientEpicsChannel<T> {
+    private static final Logger LOG = Logger.getLogger(ReadOnlyEpicsChannelImpl.class.getName());
     protected final CAJChannel channel;
     protected double timeout;
+    protected int retries;
     private final Map<EpicsListener<?>, MonitorListenerPair> listeners = new HashMap<EpicsListener<?>, MonitorListenerPair>();
 
-    public ReadOnlyEpicsChannelImpl(CAJChannel channel, double timeout) {
+    public ReadOnlyEpicsChannelImpl(CAJChannel channel, double timeout, int retries) {
         this.channel = channel;
         this.timeout =  timeout;
+        this.retries = retries;
     }
 
     @Override
     public DBR getDBR() throws CAException, TimeoutException {
-        DBR dbr;
-        synchronized (channel.getContext()) {
-            dbr = channel.get();
-            channel.getContext().pendIO(timeout);
+        DBR dbr = null;
+        boolean success = false;
+        for(int i = 0; !success && i<=retries; i++) {
+            try {
+                synchronized (channel.getContext()) {
+                    dbr = channel.get();
+                    channel.getContext().pendIO(timeout);
+                }
+                success = true;
+            } catch(CAException e) {
+                if (i == retries) {
+                    LOG.warning("Channel " + channel.getName() + " read failed, pendIO timeout");
+                    throw e;
+                }
+                else Thread.yield();
+            }
+            if(success && i > 0)
+                LOG.warning("Channel " + channel.getName() + " read after " + i + " retries");
         }
         return dbr;
     }

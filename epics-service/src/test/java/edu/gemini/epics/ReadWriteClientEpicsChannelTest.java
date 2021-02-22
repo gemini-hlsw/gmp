@@ -27,7 +27,7 @@ public class ReadWriteClientEpicsChannelTest {
         giapicas = new ChannelAccessServerImpl();
         giapicas.start();
 
-        epicsService = new EpicsService("127.0.0.1", 10.0);
+        epicsService = new EpicsService("127.0.0.1", 10.0, 0);
         epicsService.startService();
         epicsWriter = new EpicsWriterImpl(epicsService);
     }
@@ -61,9 +61,9 @@ public class ReadWriteClientEpicsChannelTest {
     public void testWriteShort() throws CAException, TimeoutException {
         short testValue = 1;
         Channel ch = giapicas.createChannel(CHANNEL_NAME + "_s", (short)0);
-        
+
         ReadWriteClientEpicsChannel<Short> rwChannel = epicsWriter.getShortChannel(CHANNEL_NAME + "_s");
-        
+
         rwChannel.setValue(testValue);
 
         short readValue = rwChannel.getFirst();

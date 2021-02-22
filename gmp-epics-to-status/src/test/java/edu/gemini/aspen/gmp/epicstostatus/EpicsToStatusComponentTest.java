@@ -78,7 +78,7 @@ public class EpicsToStatusComponentTest {
 
         //Create EPICS reader and writer
         JmsProvider provider = new ActiveMQJmsProvider("vm://EpicsToStatusComponentTestBroker");
-        EpicsService epicsServ = new EpicsService("127.0.0.1", 1.0);
+        EpicsService epicsServ = new EpicsService("127.0.0.1", 1.0, 0);
         epicsServ.startService();
         EpicsReader reader = new EpicsReaderImpl(epicsServ);
         EpicsWriter writer = new EpicsWriterImpl(epicsServ);
