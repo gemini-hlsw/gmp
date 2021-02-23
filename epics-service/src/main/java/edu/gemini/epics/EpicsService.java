@@ -44,6 +44,10 @@ public class EpicsService implements JCAContextController {
         this.readRetries = readRetries;
     }
 
+    public EpicsService(String addressList, double ioTimeout) {
+        this(addressList, ioTimeout, 0);
+    }
+
     public EpicsService(CAJContext context) {
         Preconditions.checkArgument(context != null, "JCAContext cannot be null");
         _ctx = context;
