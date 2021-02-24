@@ -5,7 +5,7 @@
         <relativePath>../poms/compiled/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
-        <version>15.0.4-SNAPSHOT</version>
+        <version>15.0.4</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.jms</groupId>
     <artifactId>jms-activemq-provider</artifactId>
-    <version>1.6.4-SNAPSHOT</version>
+    <version>1.6.4</version>
 
     <name>ActiveMQ JMS Service Provider</name>
     <description>A JMS Service Provider based on the Apache ActiveMQ</description>

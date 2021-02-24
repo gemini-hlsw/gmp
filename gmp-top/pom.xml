@@ -4,7 +4,7 @@
         <relativePath>../poms/compiled/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
-        <version>15.0.4-SNAPSHOT</version>
+        <version>15.0.4</version>
     </parent>
 
     <properties>
@@ -15,7 +15,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.gmp</groupId>
     <artifactId>gmp-top</artifactId>
-    <version>0.2.4-SNAPSHOT</version>
+    <version>0.2.4</version>
 
     <name>GMP Top</name>
     <description>GMP Top</description>

@@ -5,12 +5,12 @@
         <relativePath>../compiled/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
-        <version>15.0.4-SNAPSHOT</version>
+        <version>15.0.4</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>scala-compiled-bundle-settings</artifactId>
-    <version>15.0.4-SNAPSHOT</version>
+    <version>15.0.4</version>
 
     <name>giapi-osgi - scala bundle instructions</name>
 

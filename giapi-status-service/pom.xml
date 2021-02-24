@@ -5,7 +5,7 @@
         <relativePath>../poms/compiled/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
-        <version>15.0.4-SNAPSHOT</version>
+        <version>15.0.4</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen</groupId>
     <artifactId>giapi-status-service</artifactId>
-    <version>0.6.4-SNAPSHOT</version>
+    <version>0.6.4</version>
 
     <name>GIAPI Status Service</name>
     <description>The Status Service listen for Status Items via JMS and notifies registered Status Handlers
