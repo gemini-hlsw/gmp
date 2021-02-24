@@ -34,7 +34,7 @@ public class ReadOnlyEpicsChannelImpl<T> implements ReadOnlyClientEpicsChannel<T
 
     public ReadOnlyEpicsChannelImpl(CAJChannel channel, double timeout, int retries) {
         this.channel = channel;
-        this.timeout =  timeout;
+        this.timeout = timeout;
         this.retries = retries;
     }
 

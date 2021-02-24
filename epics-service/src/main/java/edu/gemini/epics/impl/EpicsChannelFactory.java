@@ -42,7 +42,7 @@ class EpicsChannelFactory {
         Preconditions.checkArgument(epicsService.getJCAContext() != null, "Passed JCA Context cannot be null");
         this._ctx = epicsService.getJCAContext();
         this.timeout = epicsService.timeout();
-        this.timeout = epicsService.readRetries();
+        this.readRetries = epicsService.readRetries();
 
         try {
             addJCAContextListeners();
