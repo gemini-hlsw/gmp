@@ -142,11 +142,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.1</version>
+                <version>3.0.0-M1</version>
                 <configuration>
                     <tagNameFormat>GMP-R@{project.version}</tagNameFormat>
                     <remoteTagging>false</remoteTagging>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.11.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>
@@ -987,13 +994,13 @@
         <!-- releases repo -->
         <repository>
             <id>edu.gemini.releases</id>
-            <name>sbfosxdev01.cl.gemini.edu-releases</name>
-            <url>http://sbfswgosxdev-mp1.cl.gemini.edu:8081/artifactory/libs-releases-local</url>
+            <name>Gemini HLSW Maven Repo</name>
+            <url>https://github.com/gemini-hlsw/maven-repo/releases</url>
         </repository>
         <snapshotRepository>
             <id>edu.gemini.releases</id>
-            <name>sbfosxdev01.cl.gemini.edu-snapshots</name>
-            <url>http://sbfswgosxdev-mp1.cl.gemini.edu:8081/artifactory/libs-releases-local</url>
+            <name>Gemini HLSW Maven Repo</name>
+            <url>https://github.com/gemini-hlsw/maven-repo/releases</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -1005,9 +1012,7 @@
     </repositories>
 
     <scm>
-        <connection>scm:svn:http://source.gemini.edu/software/giapi/giapi-osgi/tags/GMP-R15.0.1</connection>
-        <developerConnection>scm:svn:http://source.gemini.edu/software/giapi/giapi-osgi/tags/GMP-R15.0.1</developerConnection>
-        <url>http://source.gemini.edu:8060/Software/giapi/giapi-osgi/tags/GMP-R15.0.1</url>
+        <developerConnection>scm:git:git@github:gemini-hlsw/gmp.git</developerConnection>
     </scm>
 
 </project>
