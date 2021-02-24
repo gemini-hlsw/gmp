@@ -1012,7 +1012,7 @@
     </repositories>
 
     <scm>
-        <developerConnection>scm:git:git@github:gemini-hlsw/gmp.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:gemini-hlsw/gmp.git</developerConnection>
     </scm>
 
 </project>
