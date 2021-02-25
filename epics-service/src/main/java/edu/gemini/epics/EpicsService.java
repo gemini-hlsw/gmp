@@ -37,7 +37,8 @@ public class EpicsService implements JCAContextController {
     private CAJContext _ctx;
 
     public EpicsService(String addressList, double ioTimeout, int readRetries) {
-        LOG.info("EpicsService created with " + addressList + ", IO timeout is " + ioTimeout + "[s]");
+        LOG.info("EpicsService created with " + addressList + ", IO timeout is " + ioTimeout +
+                "[s], readRetries is " + readRetries);
         validateAddressToConnect(addressList);
         this._addressList = addressList;
         this.ioTimeout = ioTimeout;

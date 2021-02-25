@@ -12,8 +12,8 @@ At the top level run
    mvn install
 
 This command will go through all the modules and install them in the local
-maven repository (at ~/.m2/repository). The install process will download
-any required dependencies, compile the code (under src/main/java), compile 
+Maven repository (at ~/.m2/repository). The install process will download
+any required dependencies, compile the code (under src/main/java), compile
 and run the tests (under src/test/java), and package the jar file with
 the necessary OSGi headers.
 
@@ -30,7 +30,7 @@ in a single module
 4. How to skip the tests
 ------------------------
 
-During development we often don't want to run the tests all the time 
+During development we often don't want to run the tests all the time
 You can skip them by issuing:
    mvn -Dmaven.test.skip=true install
 
@@ -38,7 +38,7 @@ This can be done at the top level or module level
 
 5. Launching gmp-server
 -----------------------
-To launch gmp-server you can use the maven pax plugin issuing:
+To launch gmp-server you can use the Maven pax plugin issuing:
    mvn pax:provision
 
 This will launch felix with all the required modules
@@ -77,7 +77,7 @@ Idea works best by just importing the pom.xml as a project file definition
 8. Generate application
 -----------------------
 Applications are just other modules that define a list of bundles to
-deploy and configuration. They use the assembly plugin and will produce 
+deploy and configuration. They use the assembly plugin and will produce
 a zip file with all the required bundles and configurations.
 
 As an example go to distribution and check the pom file which defines a generic gmp-server
@@ -111,7 +111,7 @@ The produced tarball and rpm will then include the documentation
 11. Instance specific distribution files
 ----------------------------------------
 The GMP can be built using configuration specific to different instruments.
-This is done using maven profiles, defined in the distribution module.
+This is done using Maven profiles, defined in the distribution module.
 
 profiles have names like gpi, graces, etc which correspond to directories at
 instances/<profile-name>/src/main/config
@@ -127,10 +127,17 @@ using the command
 12. Release
 -----------
 
-You can use maven to do releases by using the maven plugin. First you need to
-ensure all your dependencies are not SNAPSHOTS and that everything is commited
+You can use Maven to do releases by using the Maven release plugin.
 
-Then you can call
+Prerequisites:
+* You must have set your system for automatic login to Github through SSH.
+* You must have a local working copy of gmp. It must have git@github.com:gemini-hlsw/gmp.git as a
+  remote repository. Your master branch must be up to date with the master branch on the gemini-hlsw
+  repository.
+* You also must fork gemini-hlsw/maven-repo.git in Github, and have an updated local working copy.
+
+You can start doing an initial test. In the root of your local working copy of gmp, run the following
+command:
 
 mvn release:clean release:prepare -DdryRun=true
 
@@ -138,8 +145,23 @@ If that works fine you can do the actual release preparation as
 
 mvn release:prepare
 
-Once that is ready the command
+That command will:
+  1. Update all the SNAPSHOT version to final versions.
+  2. Commit the changes to the versions.
+  3. Tag the repository with the new version for GMP (GMP-R<version>)
+  4. Increment all the version numbers and add the SNAPSHOT prefix to them, in preparation for the next
+     development cycle.
+  5. Commit the changes to the versions.
+  6. Push all the changes and the new tag to the gemini-hlsw repository in Github.
 
-mvn release:perform
+Once that is ready you can actually perform the release with the command (you must use the location of your
+local maven-repo working copy):
 
-will build everything and release the rpm/tar files and the documentation
+mvn release:stage -DstagingRepository="edu.gemini.releases::default::file:///<local-maven-repo-location>/releases"
+
+That command will deploy all the artifacts to your local copy of maven-repo and update the indexes.
+
+The final steps are:
+  1. Commit the changes in yoor local maven-repo copy with a proper commit message (like
+  "New release GMP-RX.Y.Z").
+  2. Push them to your fork in Github, and create a pull request to gemini-hlsw/maven-repo.
