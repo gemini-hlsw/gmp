@@ -5,7 +5,7 @@
         <relativePath>../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>15.0.5-SNAPSHOT</version>
+        <version>15.0.5</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.cas</groupId>
     <artifactId>casdb</artifactId>
-    <version>0.2.5-SNAPSHOT</version>
+    <version>0.2.5</version>
 
     <name>Channel Access Server Database</name>
     <description>Channel Access Server Database Standalone</description>
