@@ -49,7 +49,7 @@ public class ReadOnlyEpicsChannelImpl<T> implements ReadOnlyClientEpicsChannel<T
                     channel.getContext().pendIO(timeout);
                 }
                 success = true;
-            } catch(CAException e) {
+            } catch(TimeoutException e) {
                 if (i == retries) {
                     LOG.warning("Channel " + channel.getName() + " read failed, pendIO timeout");
                     throw e;
@@ -146,5 +146,9 @@ public class ReadOnlyEpicsChannelImpl<T> implements ReadOnlyClientEpicsChannel<T
 
     protected List<T> mapValues(List<?> vals) {
         return (List<T>) vals;
+    }
+
+    public int getReadRetries() {
+        return retries;
     }
 }

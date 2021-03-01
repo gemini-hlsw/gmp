@@ -5,6 +5,7 @@ import edu.gemini.cas.impl.ChannelAccessServerImpl;
 import edu.gemini.epics.api.Channel;
 import edu.gemini.epics.api.ChannelListener;
 import edu.gemini.epics.impl.EpicsReaderImpl;
+import edu.gemini.epics.impl.ReadOnlyEpicsChannelImpl;
 import gov.aps.jca.CAException;
 import gov.aps.jca.TimeoutException;
 import org.junit.After;
@@ -154,5 +155,22 @@ public class ReadOnlyClientEpicsChannelTest {
 
     }
 
+    @Test
+    @Ignore
+    public void testSetReadRetries() throws CAException, TimeoutException {
+        int testValue = 1;
+        int readRetries = 3;
+        giapicas.createChannel(CHANNEL_NAME, testValue);
+
+        epicsService.setReadRetries(readRetries);
+        EpicsReader reader = new EpicsReaderImpl(epicsService);
+
+        ReadOnlyEpicsChannelImpl<Integer> roChannel =  (ReadOnlyEpicsChannelImpl<Integer>)reader.getIntegerChannel(CHANNEL_NAME);
+
+        int rr = roChannel.getReadRetries();
+
+        assertTrue("Failed to set number of read retries.", readRetries==rr);
+
+    }
 
 }
