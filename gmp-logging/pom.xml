@@ -5,7 +5,7 @@
         <relativePath>../poms/compiled/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
-        <version>15.0.5</version>
+        <version>15.0.6-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gmp</groupId>
     <artifactId>gmp-logging</artifactId>
-    <version>0.3.5</version>
+    <version>0.3.6-SNAPSHOT</version>
 
     <name>GMP Logging Service</name>
     <description>GMP Logging Service</description>
