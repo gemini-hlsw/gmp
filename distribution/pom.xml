@@ -5,11 +5,11 @@
     <parent>
         <groupId>edu.gemini.aspen</groupId>
         <artifactId>giapi-osgi</artifactId>
-        <version>15.0.6-SNAPSHOT</version>
+        <version>15.0.6</version>
     </parent>
 
     <artifactId>gmp-server</artifactId>
-    <version>15.0.6-SNAPSHOT</version>
+    <version>15.0.6</version>
 
     <packaging>pom</packaging>
 
