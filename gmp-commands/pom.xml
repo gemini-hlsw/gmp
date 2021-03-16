@@ -5,7 +5,7 @@
         <relativePath>../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>15.0.6</version>
+        <version>15.0.7-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gmp</groupId>
     <artifactId>gmp-commands</artifactId>
-    <version>1.2.6</version>
+    <version>1.2.7-SNAPSHOT</version>
 
     <name>GMP Sequence Commands Service</name>
     <description>Sequence Command Processor service</description>
