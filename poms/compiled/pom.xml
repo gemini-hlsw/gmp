@@ -4,12 +4,12 @@
     <parent>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>shared-plugin-settings</artifactId>
-        <version>15.0.7-SNAPSHOT</version>
+        <version>15.0.7</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>compiled-bundle-settings</artifactId>
-    <version>15.0.7-SNAPSHOT</version>
+    <version>15.0.7</version>
 
     <name>giapi-osgi - bundle instructions</name>
 
