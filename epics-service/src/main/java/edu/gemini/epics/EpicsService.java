@@ -28,6 +28,8 @@ public class EpicsService implements JCAContextController {
 
     private String _addressList;
 
+    private EventDispatcherSelector eventDispatcherSelector = new DirectEventDispatcherSelector();
+
     // Timeout in seconds
     private double ioTimeout = 1.0;
 
@@ -84,12 +86,17 @@ public class EpicsService implements JCAContextController {
 
     public void setTimeout(double ioTimeout) {
         this.ioTimeout = ioTimeout;
-        LOG.fine("Default IO timeout changed to " + this.ioTimeout);
+        LOG.fine("IO timeout changed to " + this.ioTimeout);
     }
 
     public void setReadRetries(int retries) {
         this.readRetries = retries;
-        LOG.fine("Default read retries changed to " + this.readRetries);
+        LOG.fine("Read retries changed to " + this.readRetries);
+    }
+
+    public void setEventDispatcherSelector(EventDispatcherSelector eventDispatcherSelector) {
+        this.eventDispatcherSelector = eventDispatcherSelector;
+        LOG.fine("Event dispatcher changed to " + this.eventDispatcherSelector.getClass().getSimpleName());
     }
 
     /**
@@ -117,6 +124,8 @@ public class EpicsService implements JCAContextController {
 
         System.setProperty("com.cosylab.epics.caj.CAJContext.addr_list", _addressList);
         System.setProperty("com.cosylab.epics.caj.CAJContext.auto_addr_list", "false");
+
+        eventDispatcherSelector.prepareForBuild();
 
         try {
             _ctx = (CAJContext)JCALibrary.getInstance().createContext(JCALibrary.CHANNEL_ACCESS_JAVA);
