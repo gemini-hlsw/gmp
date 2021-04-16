@@ -46,8 +46,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.gemini.util.osgi</groupId>
-            <artifactId>osgi</artifactId>
+            <groupId>edu.gemini.ocs</groupId>
+            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
         </dependency>
     </dependencies>
 
