@@ -40,6 +40,10 @@
             <artifactId>giapi-test-support</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>edu.gemini.ocs</groupId>
+            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -805,9 +805,9 @@
             </dependency>
 
             <dependency>
-                <groupId>edu.gemini.util.osgi</groupId>
-                <artifactId>osgi</artifactId>
-                <version>0.0.1</version>
+                <groupId>edu.gemini.ocs</groupId>
+                <artifactId>edu-gemini-util-osgi_2.13</artifactId>
+                <version>2021101.1.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.felix</groupId>
