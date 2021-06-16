@@ -7,11 +7,7 @@ import fs2.Stream
 import scala.concurrent.duration._
 
 import edu.gemini.aspen.gds.configuration.KeywordConfiguration
-import edu.gemini.aspen.gds.keywords.{
-  EpicsKeywordCollector,
-  KeywordManager,
-  StatusKeywordCollector
-}
+import edu.gemini.aspen.gds.keywords._
 import edu.gemini.aspen.gds.observations.{ ObservationManager, ObservationStateEvent }
 import edu.gemini.aspen.gds.seqexec.SeqexecServer
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
@@ -31,8 +27,11 @@ object Main {
     seqexecPort:    Integer
   ): IO[Unit] =
     for {
-      kwMgr        <- KeywordManager[IO](EpicsKeywordCollector(epicsReaderRef, keywordConfig),
-                                         StatusKeywordCollector(statusDbRef, keywordConfig)
+      kwMgr        <- KeywordManager[IO](
+                        EpicsKeywordCollector(epicsReaderRef, keywordConfig),
+                        StatusKeywordCollector(statusDbRef, keywordConfig),
+                        PropertyKeywordCollector(keywordConfig),
+                        ConstantKeywordCollector(keywordConfig)
                       )
       obsMgr       <- ObservationManager(kwMgr, obsStateQ)
       seqexecServer = SeqexecServer(obsStateQ, seqexecPort)

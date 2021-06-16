@@ -3,6 +3,7 @@ package edu.gemini.aspen.gds.fits
 import cats.effect.Sync
 import cats.syntax.all._
 import edu.gemini.aspen.gds.fits.FitsType._
+import edu.gemini.aspen.gds.model.GdsError
 import edu.gemini.aspen.gds.syntax.all._
 import scala.util.{ Failure, Success, Try }
 
@@ -66,9 +67,15 @@ object FitsValue {
   }
 
   object BooleanValue {
-    // Will we need to accept T and F strings, like is output in the file?
-    def parse(s: String): Either[String, FitsValue] =
-      s.toBooleanOption.map(BooleanValue(_)).toRight(s"Invalid FITS Boolean Value: $s")
+    // accept some non-standard strings for true
+    def parse(s: String): Either[String, FitsValue] = {
+      s match {
+        case "T" => true.some
+        case "t" => true.some
+        case "1" => true.some
+        case _   => s.toBooleanOption
+      }
+    }.map(BooleanValue(_)).toRight(s"Invalid FITS Boolean Value: $s")
   }
 
   def parse(valueType: FitsType, s: String): Either[String, FitsValue] = valueType match {
@@ -153,5 +160,5 @@ object FitsValue {
   }
 
   def misMatchError[F[_]](value: Any)(implicit F: Sync[F]): F[FitsValue] =
-    F.raiseError(new Throwable(s"Unable to convert value from Epics: $value"))
+    F.raiseError(GdsError(s"Unable to convert value from Epics: $value"))
 }

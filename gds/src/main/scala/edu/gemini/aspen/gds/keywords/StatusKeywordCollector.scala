@@ -4,7 +4,7 @@ import cats.effect.{ Async, Ref }
 import cats.syntax.all._
 import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationItem }
 import edu.gemini.aspen.gds.fits.FitsValue
-import edu.gemini.aspen.gds.model.KeywordSource
+import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 
 object StatusKeywordCollector {
@@ -14,7 +14,7 @@ object StatusKeywordCollector {
     def retriever(item: KeywordConfigurationItem): F[FitsValue] =
       statusDbRef.get.flatMap {
         case None           =>
-          F.raiseError(new Exception("StatusDatabaseService not available."))
+          F.raiseError(GdsError("StatusDatabaseService not available."))
         case Some(statusDb) => getStatus(statusDb, item)
       }
 
@@ -23,7 +23,7 @@ object StatusKeywordCollector {
       F.blocking(Option(statusDb.getStatusItem[Any](item.channel.name)))
         .flatMap {
           case None     =>
-            F.raiseError(new Exception("No value in StatusDatabaseService (returned null)"))
+            F.raiseError(GdsError("No value in StatusDatabaseService (returned null)"))
           case Some(si) => FitsValue.fromAny(item.dataType, si.getValue)
         }
 
