@@ -33,6 +33,7 @@ object KeywordCollector {
         adder: CollectedKeyword => F[Unit]
       ): F[Unit] =
         // If we decide to support cancellation, need to worry about decrementing count.
+        // This is probably not cancellation safe because of the `start`.
         configForSource
           .forEvent(event)
           .items
@@ -46,7 +47,7 @@ object KeywordCollector {
       ): F[Unit] = for {
         _  <-
           logger.infoF(
-            s"Collecting keyword ${configItem.keyword} for keyword source $keywordSource, event ${configItem.event}"
+            s"Collecting $keywordSource keyword ${configItem.keyword.key} for event ${configItem.event}"
           )
         kw <- safeRetrieve(configItem)
         _  <- logger.infoF(s"Collected $kw")

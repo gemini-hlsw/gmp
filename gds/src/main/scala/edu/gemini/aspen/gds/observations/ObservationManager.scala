@@ -66,7 +66,7 @@ object ObservationManager {
             withObsItem(dataLabel, e) { _ =>
               for {
                 kws <- keywordManager.get(dataLabel)
-                _   <- logger.infoF(s"Got these keywords for $dataLabel: ${kws.mkString(", ")}")
+                _   <- logger.infoF(s"Got these keywords for $dataLabel:\n\t${kws.mkString("\n\t")}")
                 _   <- logger.infoF(
                          "Here is where we would deal with the keywords and transfer the fits file."
                        )

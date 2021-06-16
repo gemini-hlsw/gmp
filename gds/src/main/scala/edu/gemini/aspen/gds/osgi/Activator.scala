@@ -16,7 +16,6 @@ import org.osgi.framework.{ BundleActivator, BundleContext, ServiceRegistration 
 import org.osgi.util.tracker.ServiceTracker
 import org.osgi.service.event.{ EventConstants, EventHandler }
 
-// TODO: Collection of Property and Constant keywords.
 // TODO: FITS file updating, validation and transfer.
 // TODO: I think I'll need a service for reporting health status.
 // TODO: What about the ObservationEventLogger? And the time measurement in KeywordSetComposer?

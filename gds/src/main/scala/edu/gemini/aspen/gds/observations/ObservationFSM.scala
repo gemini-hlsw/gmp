@@ -20,7 +20,7 @@ object ObservationFSM {
 
   // TODO: make these configurable
   val numAttempts = 3
-  val sleepTime   = 10.seconds
+  val sleepTime   = 5.seconds
 
   def apply[F[_]: Async](
     dataLabel: DataLabel,
@@ -83,7 +83,7 @@ object ObservationFSM {
               ) >> qComplete)
             else if (remaining > 0)
               WaitingForEvents(events, remaining - 1) -> (logger.warningF(
-                s"Observation $dataLabel waiting for keywords: ${required.mkString(",")}. $remaining attempts left"
+                s"Observation $dataLabel waiting for events: ${required.mkString(",")}. $remaining attempts left"
               ) >> sleepAndRecheck)
             else
               Completed                               ->
