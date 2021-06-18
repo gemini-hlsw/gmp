@@ -3,7 +3,7 @@ package edu.gemini.aspen.gds.observations
 import cats.effect.{ Async, Clock }
 import cats.effect.std.QueueSink
 import cats.syntax.all._
-import edu.gemini.aspen.gds.keywords.KeywordManager
+import edu.gemini.aspen.gds.keywords.{ CollectedKeyword, KeywordManager }
 import edu.gemini.aspen.gds.observations.ObservationStateEvent._
 import edu.gemini.aspen.gds.syntax.all._
 import edu.gemini.aspen.giapi.data.DataLabel
@@ -24,7 +24,8 @@ object ObservationManager {
 
   def apply[F[_]: Async](
     keywordManager: KeywordManager[F],
-    obsStateQ:      QueueSink[F, ObservationStateEvent]
+    obsStateQ:      QueueSink[F, ObservationStateEvent],
+    fitsQ:          QueueSink[F, (DataLabel, List[CollectedKeyword])]
   ): F[ObservationManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, ObservationItem[F]]().map { mapref =>
       new ObservationManager[F] {
@@ -35,7 +36,7 @@ object ObservationManager {
               now <- Clock[F].realTime
               fsm <-
                 ObservationFSM(dataLabel, obsStateQ)
-              // check to be sure it doesn't already exist? Or, should we just start over, anyway. Maybe a warning, at least.
+              // TODO: If it already exists, log an error and keep going. Should never happen.
               _   <- mapref.setKeyValue(dataLabel, ObservationItem(programId, fsm, now + lifetime))
               _   <- keywordManager.initialize(dataLabel)
             } yield ()
@@ -67,9 +68,7 @@ object ObservationManager {
               for {
                 kws <- keywordManager.get(dataLabel)
                 _   <- logger.infoF(s"Got these keywords for $dataLabel:\n\t${kws.mkString("\n\t")}")
-                _   <- logger.infoF(
-                         "Here is where we would deal with the keywords and transfer the fits file."
-                       )
+                _   <- fitsQ.offer((dataLabel, kws))
                 _   <- obsStateQ.offer(Delete(dataLabel))
               } yield ()
             }

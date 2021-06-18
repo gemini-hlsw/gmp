@@ -83,7 +83,7 @@ class KeywordConfigurationParser extends RegexParsers {
     case "t" => Mandatory(true)
   }
 
-  // Default value can be anything that does not contain spaces or is is quotes
+  // Default value can be anything that does not contain spaces or is in quotes
   def defaultValue = defaultValueInQuotes | defaultValueNonQuotes
 
   def defaultValueNonQuotes = """[^'"\s]+""".r ^^ { x: String =>
@@ -110,15 +110,11 @@ class KeywordConfigurationParser extends RegexParsers {
   }
 
   def fitscomment = "\"" ~> internalComment <~ "\"" ^^ { x =>
-    FitsComment(x)
+    if (x.isEmpty) FitsComment(None) else FitsComment(Some(x))
   }
 
   def format = "\"" ~> GdsConfigurationParser.internalFormat <~ "\"" ^^ { x =>
-    if (x.isEmpty) {
-      Format(None)
-    } else {
-      Format(Some(x))
-    }
+    if (x.isEmpty) Format(None) else Format(Some(x))
   }
 
   def internalComment = """[^"]*""".r

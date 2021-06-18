@@ -1,7 +1,7 @@
 package edu.gemini.aspen.gds.syntax
 
 import cats.effect.Sync
-import java.util.logging.Logger
+import java.util.logging.{ Level, Logger }
 
 // TODO: At least in the pax console, the logging config is using the file and line number
 //       instead of the logger name. This Ops class results in all of the log messages showing
@@ -15,6 +15,8 @@ class LoggerFOps(val logger: Logger) extends AnyVal {
   def infoF[F[_]](m:    String)(implicit sync: Sync[F]): F[Unit] = sync.delay(logger.info(m))
   def warningF[F[_]](m: String)(implicit sync: Sync[F]): F[Unit] = sync.delay(logger.warning(m))
   def severeF[F[_]](m:  String)(implicit sync: Sync[F]): F[Unit] = sync.delay(logger.severe(m))
+  def severeF[F[_]](m:  String, e:             Throwable)(implicit sync: Sync[F]): F[Unit] =
+    sync.delay(logger.log(Level.SEVERE, m, e))
 }
 
 trait ToLoggerFOps {

@@ -1,6 +1,6 @@
 package edu.gemini.aspen.gds.observations
 
-import cats.effect._
+import cats.effect.{ Async, Ref }
 import cats.effect.std.QueueSink
 import cats.effect.syntax.all._
 import cats.syntax.all._
@@ -22,10 +22,10 @@ object ObservationFSM {
   val numAttempts = 3
   val sleepTime   = 5.seconds
 
-  def apply[F[_]: Async](
-    dataLabel: DataLabel,
-    obsStateQ: QueueSink[F, ObservationStateEvent]
-  ): F[ObservationFSM[F]] =
+  def apply[F[_]](
+    dataLabel:  DataLabel,
+    obsStateQ:  QueueSink[F, ObservationStateEvent]
+  )(implicit F: Async[F]): F[ObservationFSM[F]] =
     Ref.of[F, State](Running(Set.empty)).map { state =>
       new ObservationFSM[F] {
         val allEvents: Set[ObservationEvent] = ObservationEvent.values.toSet
@@ -66,12 +66,12 @@ object ObservationFSM {
             WaitingForEvents(events, numAttempts) -> (logger.infoF(
               s"Observation $dataLabel stopped by Seqexeq"
             ) >> qStep)
-          case st @ _          => st -> Sync[F].unit
+          case st @ _          => st -> F.unit
         }.flatten
 
         def step: F[Unit] = state.modify {
           case st @ WaitingForEvents(_, _) => st -> waitForEvents
-          case st @ _                      => st -> Sync[F].unit
+          case st @ _                      => st -> F.unit
         }.flatten
 
         def waitForEvents: F[Unit] = state.modify {
@@ -90,7 +90,7 @@ object ObservationFSM {
                 (logger.warningF(
                   s"Observation $dataLabel missing these events: ${required.mkString(",")}. Finishing without them."
                 ) >> qComplete)
-          case st @ _                              => st -> Sync[F].unit
+          case st @ _                              => st -> F.unit
         }.flatten
 
         def qKeywordCollection(obsEvent: ObservationEvent): F[Unit] =

@@ -32,7 +32,7 @@ object KeywordManager {
       new KeywordManager[F] {
 
         def initialize(dataLabel: DataLabel): F[Unit] =
-          // check to make sure it doesn't already exist?
+          // TODO: If it already exists, log an error and keep going. Should never happen.
           logger.infoF(s"Initializing keyword manager for observation $dataLabel") >>
             mapref.setKeyValue(dataLabel, KeywordItem(0, List.empty))
 
@@ -58,7 +58,7 @@ object KeywordManager {
         }
 
         def delete(dataLabel: DataLabel): F[Unit] = logger.infoF(
-          s"Removing observation $dataLabel"
+          s"Removing keywords for observation $dataLabel"
         ) >> mapref.unsetKey(dataLabel)
 
         private def updateCount(dataLabel: DataLabel, incr: Int): F[Unit] =

@@ -19,7 +19,6 @@ import org.osgi.service.event.{ EventConstants, EventHandler }
 // TODO: FITS file updating, validation and transfer.
 // TODO: I think I'll need a service for reporting health status.
 // TODO: What about the ObservationEventLogger? And the time measurement in KeywordSetComposer?
-// TODO: DO PROPERTY keywords need to be collected at the time of events? Or can they all be done at the end (or beginning)?
 // TODO: Clean up logging.
 
 class Activator extends BundleActivator {
