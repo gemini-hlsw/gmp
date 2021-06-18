@@ -72,7 +72,7 @@ object FitsFileProcessor {
         keywords: List[CollectedKeyword]
       ): F[Option[FitsHeaderCard]] =
         keywords.find(ckw =>
-          ckw.keyword == item.keyword && ckw.keywordSource == item.keywordSource && eventMatches(
+          ckw.keyword === item.keyword && ckw.keywordSource === item.keywordSource && eventMatches(
             ckw,
             item
           )
@@ -83,7 +83,7 @@ object FitsFileProcessor {
 
       def eventMatches(keyword: CollectedKeyword, item: KeywordConfigurationItem): Boolean =
         keyword.event match {
-          case Some(event) => event == item.event
+          case Some(event) => event === item.event
           case None        => true // only happens for Seqexec
         }
 
@@ -109,7 +109,7 @@ object FitsFileProcessor {
           case CollectedKeyword.Error(_, _, _, message) =>
             if (item.isMandatory)
               logError(item, s"Collection error for manadatory keyword: $message") >> none.pure
-            else if (item.keywordSource == KeywordSource.Constant)
+            else if (item.keywordSource === KeywordSource.Constant)
               logError(item, s"The constant value is bad: $message") >> none.pure
             else
               logWarning(item, s"Collection error, using default: $message") >>

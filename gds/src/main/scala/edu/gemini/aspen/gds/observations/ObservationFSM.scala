@@ -36,7 +36,7 @@ object ObservationFSM {
               st -> logger.warningF(
                 s"Duplicate event $obsEvent received for running observation $dataLabel"
               )
-            else if (obsEvent == ObservationEvent.OBS_END_DSET_WRITE)
+            else if (obsEvent === ObservationEvent.OBS_END_DSET_WRITE)
               WaitingForEvents(events + obsEvent, numAttempts) -> (logger.infoF(
                 s"Received $obsEvent for observation $dataLabel"
               ) >> qKeywordCollection(obsEvent) >> qStep)

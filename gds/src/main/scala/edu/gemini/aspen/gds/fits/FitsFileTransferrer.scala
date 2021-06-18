@@ -37,7 +37,7 @@ object FitsFileTransferrer {
 
   private def matchesArray(chunk: Chunk[Byte], ray: Array[Byte]): Boolean =
     chunk.size >= ray.length &&
-      ray.zipWithIndex.forall { case (b, idx) => b == chunk(idx) }
+      ray.zipWithIndex.forall { case (b, idx) => b === chunk(idx) }
 
   private def isHeader(chunk:     Chunk[Byte]): Boolean =
     matchesArray(chunk, simpleHeader) || matchesArray(chunk, extensionHeader)
@@ -61,7 +61,7 @@ object FitsFileTransferrer {
         val keyword     = extractKeyword(c)
         val (hdr, rest) = c.splitAt(HeaderLength)
         val newHs       = hs :+ HeaderRow(keyword, hdr.toChain)
-        if (keyword == "END") (newHs, true)
+        if (keyword === "END") (newHs, true)
         else {
           loop(rest, newHs)
         }
@@ -148,7 +148,7 @@ object FitsFileTransferrer {
                 )
               else go(tl, state.copy(currentHeader = allHeaders.some))
             } else { // not in a header
-              if (state.headerCount == 0)
+              if (state.headerCount === 0)
                 Pull.eval(
                   logger.severeF(s"Invalid FITS file - no initial header. $abandoned")
                 ) >> Pull.output(hd) >> go(tl, state.copy(invalidFile = true))

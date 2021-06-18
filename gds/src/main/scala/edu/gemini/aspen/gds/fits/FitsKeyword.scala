@@ -1,5 +1,6 @@
 package edu.gemini.aspen.gds.fits
 
+import cats.Eq
 import cats.syntax.all._
 
 sealed abstract case class FitsKeyword private (key: String)
@@ -13,4 +14,6 @@ object FitsKeyword {
     else s"Invalid FITS keyword $key".asLeft
 
   def unsafeFromString(key: String): FitsKeyword = apply(key).fold[FitsKeyword](sys.error, identity)
+
+  implicit val EqFitsKeyword: Eq[FitsKeyword] = Eq.by(_.key)
 }
