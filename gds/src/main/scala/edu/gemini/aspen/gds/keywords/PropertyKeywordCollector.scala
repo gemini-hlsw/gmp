@@ -9,7 +9,7 @@ import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
 object PropertyKeywordCollector {
   def apply[F[_]](config: KeywordConfiguration)(implicit F: Async[F]): KeywordCollector[F] = {
     def retriever(item: KeywordConfigurationItem): F[FitsValue] =
-      Option(System.getProperty(item.channel.name)) match {
+      F.delay(Option(System.getProperty(item.channel.name))).flatMap {
         case None    => F.raiseError(GdsError(s"Property ${item.channel.name} not found."))
         case Some(p) =>
           FitsValue.parse(item.dataType, p) match {

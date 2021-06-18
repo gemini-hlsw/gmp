@@ -25,7 +25,7 @@ case class ArrayIndex(value: Int) {
   require(value >= 0)
 }
 
-case class FitsComment(value: String)
+case class FitsComment(value: Option[String])
 
 case class Format(value: Option[String]) {
   def getAsString =
@@ -50,4 +50,13 @@ case class KeywordConfigurationItem(
   fitsComment:   FitsComment
 ) {
   def isMandatory = mandatory.mandatory
+
+  def defaultValue: Either[String, FitsValue] = dataType match {
+    // Anything can be converted to a string but we remove start and end quotes
+    case FitsType.StringType =>
+      FitsValue.StringValue.parse(
+        nullValue.value.replaceAll("""(^')|(^")|('$)|("$)""", "")
+      )
+    case _                   => FitsValue.parse(dataType, nullValue.value)
+  }
 }

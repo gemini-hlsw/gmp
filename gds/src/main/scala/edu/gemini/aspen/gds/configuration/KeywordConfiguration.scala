@@ -5,8 +5,12 @@ import edu.gemini.aspen.giapi.data.ObservationEvent
 
 final case class KeywordConfiguration(items: List[KeywordConfigurationItem]) {
   def forKeywordSource(source: KeywordSource): KeywordConfiguration =
-    copy(items = items.filter(_.keywordSource == source))
+    KeywordConfiguration(items.filter(_.keywordSource == source))
 
   def forEvent(event: ObservationEvent): KeywordConfiguration =
-    copy(items = items.filter(_.event == event))
+    KeywordConfiguration(items.filter(_.event == event))
+
+  def nonInstrument: KeywordConfiguration = KeywordConfiguration(
+    items.filterNot(_.keywordSource == KeywordSource.Instrument)
+  )
 }
