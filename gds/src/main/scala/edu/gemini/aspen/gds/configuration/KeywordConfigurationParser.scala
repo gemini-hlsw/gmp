@@ -130,11 +130,6 @@ class KeywordConfigurationParser extends RegexParsers {
 
   def EOF = "\\z".r
 
-  def parseFile(fileName: String) =
-    parseFileRawResult(fileName).get.collect { case Some(x) =>
-      x
-    }
-
   def parseFileRawResult(fileName: String) = {
     val file = Source.fromFile(fileName, "UTF8")
     parseAll(lines, file.bufferedReader())

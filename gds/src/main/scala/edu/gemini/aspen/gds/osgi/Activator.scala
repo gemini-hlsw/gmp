@@ -5,7 +5,7 @@ import cats.effect.{ FiberIO, IO, Ref, Resource }
 import cats.effect.std.Queue
 import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
-import edu.gemini.aspen.gds.configuration.KeywordConfigurationFile
+import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationFile }
 import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
 import edu.gemini.epics.EpicsReader
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
@@ -16,7 +16,6 @@ import org.osgi.framework.{ BundleActivator, BundleContext, ServiceRegistration 
 import org.osgi.util.tracker.ServiceTracker
 import org.osgi.service.event.{ EventConstants, EventHandler }
 
-// TODO: FITS file updating, validation and transfer.
 // TODO: I think I'll need a service for reporting health status.
 // TODO: What about the ObservationEventLogger? And the time measurement in KeywordSetComposer?
 // TODO: Clean up logging.
@@ -51,7 +50,8 @@ class Activator extends BundleActivator {
     val seqexecPort = context.getProperty("gds.seqexec.server.port").toInt
     val configFile  = context.getProperty("gds.keywordsConfiguration")
 
-    val config = KeywordConfigurationFile.loadConfiguration(configFile)
+    // NOTE: This does a sys.error on errors
+    val keywordConfig = loadKeywordConfig(configFile)
 
     val makeIOVars = for {
       obsStateQ <- Queue.unbounded[IO, ObservationStateEvent]
@@ -91,7 +91,9 @@ class Activator extends BundleActivator {
 
     val resource =
       Resource.make(
-        Main.run(config, epicsReaderRef, statusDbRef, observationStateEventQ, seqexecPort).start
+        Main
+          .run(keywordConfig, epicsReaderRef, statusDbRef, observationStateEventQ, seqexecPort)
+          .start
       )(
         IO.println("Cleanup") >> _.cancel
       )
@@ -111,4 +113,20 @@ class Activator extends BundleActivator {
     obsEventSvc.foreach(_.unregister())
     obsEventSvc = None
   }
+
+  private def loadKeywordConfig(filename: String): KeywordConfiguration =
+    KeywordConfigurationFile.loadConfiguration(filename) match {
+      case Right(config) => config
+      case Left(es)      =>
+        val message =
+          if (es.length === 1)
+            s"GDS keyword configuration file error: ${es.head}"
+          else {
+            val eString =
+              es.zipWithIndex.map { case (msg, idx) => s"${idx + 1}: $msg" }.mkString_("\n\t")
+            s"GDS Keyword Configuration file has ${es.length} error(s):\n\t$eString"
+          }
+        logger.severe(message)
+        sys.error(message)
+    }
 }

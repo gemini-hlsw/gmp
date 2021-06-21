@@ -67,12 +67,15 @@ object FitsValue {
   }
 
   object BooleanValue {
-    // accept some non-standard strings for true
+    // accept some non-standard strings for booleans
     def parse(s: String): Either[String, FitsValue] = {
       s match {
         case "T" => true.some
         case "t" => true.some
         case "1" => true.some
+        case "F" => false.some
+        case "f" => false.some
+        case "0" => false.some
         case _   => s.toBooleanOption
       }
     }.map(BooleanValue(_)).toRight(s"Invalid FITS Boolean Value: $s")
