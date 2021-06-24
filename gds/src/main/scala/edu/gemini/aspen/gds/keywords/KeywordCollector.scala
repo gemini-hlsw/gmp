@@ -3,7 +3,7 @@ package edu.gemini.aspen.gds.keywords
 import cats.effect._
 import cats.effect.syntax.all._
 import cats.syntax.all._
-import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationItem }
+import edu.gemini.aspen.gds.configuration.KeywordConfigurationItem
 import edu.gemini.aspen.gds.fits.FitsValue
 import edu.gemini.aspen.gds.model.KeywordSource
 import edu.gemini.aspen.gds.syntax.all._
@@ -21,11 +21,11 @@ object KeywordCollector {
 
   def apply[F[_]: Async](
     keywordSource: KeywordSource,
-    config:        KeywordConfiguration,
+    config:        List[KeywordConfigurationItem],
     retriever:     KeywordConfigurationItem => F[FitsValue]
   ): KeywordCollector[F] =
     new KeywordCollector[F] {
-      val configForSource = config.forKeywordSource(keywordSource)
+      val configForSource = config.forSource(keywordSource)
 
       def collect(
         event: ObservationEvent,
@@ -36,7 +36,6 @@ object KeywordCollector {
         // This is probably not cancellation safe because of the `start`.
         configForSource
           .forEvent(event)
-          .items
           .parTraverseN(10)(ci => count.incr >> retrieveOne(ci, count, adder).start)
           .void
 

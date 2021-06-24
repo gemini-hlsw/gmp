@@ -1,10 +1,10 @@
 package edu.gemini.aspen.gds.keywords
 
-import cats.effect.{ Async, Ref }
+import cats.effect.kernel.{ Async, RefSource }
 import cats.effect.syntax.all._
 import cats.syntax.all._
 import edu.gemini.epics.EpicsReader
-import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationItem }
+import edu.gemini.aspen.gds.configuration.KeywordConfigurationItem
 import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
 import edu.gemini.aspen.gds.syntax.all._
 import edu.gemini.aspen.giapi.data.ObservationEvent
@@ -15,15 +15,15 @@ object EpicsKeywordCollector {
   private val logger = Logger.getLogger(this.getClass.getName)
 
   def apply[F[_]](
-    readerRef:  Ref[F, Option[EpicsReader]],
-    config:     KeywordConfiguration
+    readerRef:  RefSource[F, Option[EpicsReader]],
+    config:     List[KeywordConfigurationItem]
   )(implicit F: Async[F]): KeywordCollector[F] = {
 
     def processConfig(
-      config: KeywordConfiguration
+      config: List[KeywordConfigurationItem]
     ): Map[ObservationEvent, Map[String, List[KeywordConfigurationItem]]] = {
-      val forEpics = config.forKeywordSource(KeywordSource.Epics)
-      val byEvent  = forEpics.items.groupBy(_.event)
+      val forEpics = config.forSource(KeywordSource.Epics)
+      val byEvent  = forEpics.groupBy(_.event)
       byEvent.map { case (k, v) => (k, v.groupBy(_.channel.name)) }
     }
 

@@ -3,12 +3,14 @@ package edu.gemini.aspen.gds.keywords
 import cats.ApplicativeError
 import cats.effect.Async
 import cats.syntax.all._
-import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationItem }
+import edu.gemini.aspen.gds.configuration.KeywordConfigurationItem
 import edu.gemini.aspen.gds.fits.FitsValue
 import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
 
 object ConstantKeywordCollector {
-  def apply[F[_]](config: KeywordConfiguration)(implicit F: Async[F]): KeywordCollector[F] =
+  def apply[F[_]](config: List[KeywordConfigurationItem])(implicit
+    F:                    Async[F]
+  ): KeywordCollector[F] =
     KeywordCollector(KeywordSource.Constant, config, retriever[F])
 
   private def retriever[G[_]](

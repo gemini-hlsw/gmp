@@ -2,7 +2,7 @@ package edu.gemini.aspen.gds.fits
 
 import cats.effect.Async
 import cats.syntax.all._
-import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationItem }
+import edu.gemini.aspen.gds.configuration.{ FitsConfig, KeywordConfigurationItem }
 import edu.gemini.aspen.gds.keywords.CollectedKeyword
 import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
 import edu.gemini.aspen.gds.syntax.all._
@@ -18,44 +18,47 @@ sealed trait FitsFileProcessor[F[_]] {
 object FitsFileProcessor {
   private val logger = Logger.getLogger(this.getClass.getName)
 
-  // TODO: Add to configuration and implement change owner and permissions policies
-  // TODO: Add config item for addition of ".fits" to data label for file name.
-  val sourceDir = "../src/main/config/fits/src"
-  val destDir   = "../src/main/config/fits/dest"
+  // TODO: Implement change owner and permissions and other postprocessing policies if needed
+  // TODO: Validate input file and add suffix to output file if needed (see FitsUpdater.safeDestinationFile())
 
-  def apply[F[_]](keywordConfig: KeywordConfiguration)(implicit F: Async[F]): FitsFileProcessor[F] =
+  def apply[F[_]](
+    fitsConfig:     FitsConfig,
+    keywordConfigs: List[KeywordConfigurationItem]
+  )(implicit F:     Async[F]): FitsFileProcessor[F] =
     new FitsFileProcessor[F] {
       val requiredKeywords: Map[Int, List[String]] =
-        keywordConfig
-          .forKeywordSource(KeywordSource.Instrument)
-          .items
+        keywordConfigs
+          .forSource(KeywordSource.Instrument)
           .groupMap(_.index.index)(_.keyword.key)
 
       def processFile(dataLabel: DataLabel, keywords: List[CollectedKeyword]): F[Unit] = {
-        val fileName = dataLabel.getName()
+        val inFileName  = dataLabel.getName
+        val outFileName =
+          if (fitsConfig.addSuffix && !dataLabel.getName.endsWith(".fits"))
+            s"${dataLabel.getName}.fits"
+          else dataLabel.getName
 
         val result = for {
-          _      <- logger.infoF(s"Preparing to transfer FITS file $fileName")
-          source <- F.delay(Paths.get(sourceDir, fileName))
+          _      <- logger.infoF(s"Preparing to transfer FITS file $outFileName")
+          source <- F.delay(Paths.get(fitsConfig.sourceDir, inFileName))
           dest   <-
-            F.delay(Paths.get(destDir, fileName))
+            F.delay(Paths.get(fitsConfig.destDir, outFileName))
               .handleErrorWith(e => F.raiseError(GdsError(s"Error creating output path: ${e}")))
           cards  <- processKeywordsToCards(keywords)
           _      <- FitsFileTransferrer.transfer(source, dest, requiredKeywords, cards)
-          _      <- logger.infoF(s"FITS file $fileName transfer completed.")
+          _      <- logger.infoF(s"FITS file $outFileName transfer completed.")
         } yield ()
         result.handleErrorWith(e =>
-          logger.severeF(s"Error transferring fits file $fileName: ${e.getMessage}", e)
+          logger.severeF(s"Error transferring fits file $outFileName: ${e.getMessage}", e)
         )
       }
 
       def processKeywordsToCards(
         keywords: List[CollectedKeyword]
       ): F[Map[Int, List[FitsHeaderCard]]] =
-        keywordConfig.nonInstrument.items.traverse(item => processItem(item, keywords)).map {
-          otuples =>
-            val tuples = otuples.collect { case Some(tuple) => tuple }
-            tuples.groupMap(_._1)(_._2)
+        keywordConfigs.nonInstrument.traverse(item => processItem(item, keywords)).map { otuples =>
+          val tuples = otuples.collect { case Some(tuple) => tuple }
+          tuples.groupMap(_._1)(_._2)
         }
 
       def processItem(

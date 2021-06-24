@@ -3,12 +3,12 @@ package edu.gemini.aspen.gds.keywords
 import cats.effect.kernel._
 import cats.effect.syntax.all._
 import cats.syntax.all._
+import edu.gemini.aspen.gds.configuration.RetryConfig
 import edu.gemini.aspen.gds.syntax.all._
 import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
 import io.chrisdavenport.mapref.MapRef
 import io.chrisdavenport.mapref.implicits._
 import java.util.logging.Logger
-import scala.concurrent.duration._
 
 sealed trait KeywordManager[F[_]] {
   def initialize(dataLabel: DataLabel): F[Unit]
@@ -21,22 +21,20 @@ sealed trait KeywordManager[F[_]] {
 object KeywordManager {
   private val logger = Logger.getLogger(this.getClass.getName)
 
-  // TODO: Make sleep time and number of attempts configuration values.
-  val numAttempts = 5
-  val sleeptTime  = 5.seconds
-
-  def apply[F[_]: Async](
-    collectors: KeywordCollector[F]*
-  ): F[KeywordManager[F]] =
+  def apply[F[_]](
+    retryConfig: RetryConfig,
+    collectors:  KeywordCollector[F]*
+  )(implicit F:  Async[F]): F[KeywordManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, KeywordItem]().map { mapref =>
       new KeywordManager[F] {
 
         def initialize(dataLabel: DataLabel): F[Unit] =
-          // TODO: If it already exists, log an error and keep going. Should never happen.
           logger.infoF(s"Initializing keyword manager for observation $dataLabel") >>
+            logIfExists(dataLabel) >>
             mapref.setKeyValue(dataLabel, KeywordItem(0, List.empty))
 
-        def get(dataLabel: DataLabel): F[List[CollectedKeyword]] = tryGet(dataLabel, 3)
+        def get(dataLabel: DataLabel): F[List[CollectedKeyword]] =
+          tryGet(dataLabel, retryConfig.retries)
 
         def add(dataLabel: DataLabel, keyword: CollectedKeyword): F[Unit] =
           mapref
@@ -83,7 +81,7 @@ object KeywordManager {
             case Some(ki) if ki.waitingCount > 0 && remaining > 0 =>
               logger.infoF(
                 s"Waiting for ${ki.waitingCount} keywords for observation $dataLabel, $remaining attempts left"
-              ) >> Async[F].sleep(5.seconds) >> tryGet(dataLabel, remaining - 1)
+              ) >> Async[F].sleep(retryConfig.sleep) >> tryGet(dataLabel, remaining - 1)
             case Some(ki) if ki.waitingCount > 0                  =>
               logger.warningF(
                 s"Waiting for ${ki.waitingCount} keywords for observation $dataLabel, no attempts left. Returning what we have"
@@ -91,6 +89,17 @@ object KeywordManager {
             case Some(ki)                                         =>
               logger.infoF(s"Returning keywords for observation $dataLabel") >> ki.keywords
                 .pure[F]
+          }
+
+        def logIfExists(dataLabel: DataLabel): F[Unit] =
+          mapref(dataLabel).get.flatMap {
+            case None       => F.unit
+            case Some(item) =>
+              if (item.keywords.isEmpty) F.unit
+              else
+                logger.severeF(
+                  s"A new keyword manager is being initialized for observation $dataLabel, which already exists. Overwriting old keywords."
+                )
           }
       }
     }

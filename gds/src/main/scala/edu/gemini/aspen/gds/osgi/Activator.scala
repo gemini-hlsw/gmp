@@ -1,22 +1,24 @@
 package edu.gemini.aspen.gds.osgi
 
 import cats.syntax.all._
-import cats.effect.{ FiberIO, IO, Ref, Resource }
+import cats.effect.{ Deferred, FiberIO, IO, Ref, Resource }
 import cats.effect.std.Queue
 import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
-import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationFile }
+import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsConfiguration }
 import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
 import edu.gemini.epics.EpicsReader
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 import java.util
 import java.util.logging.Logger
 import edu.gemini.util.osgi.Tracker
-import org.osgi.framework.{ BundleActivator, BundleContext, ServiceRegistration }
+import org.osgi.framework.{ BundleActivator, BundleContext, Constants, ServiceRegistration }
 import org.osgi.util.tracker.ServiceTracker
+import org.osgi.service.cm.ManagedServiceFactory
 import org.osgi.service.event.{ EventConstants, EventHandler }
+import scala.concurrent.duration._
 
-// TODO: I think I'll need a service for reporting health status.
+// TODO: Do we need to implement a health service? If not, maybe remove GDS from the health monitor
 // TODO: What about the ObservationEventLogger? And the time measurement in KeywordSetComposer?
 // TODO: Clean up logging.
 
@@ -27,55 +29,49 @@ class Activator extends BundleActivator {
   private var observationStateEventQ: Queue[IO, ObservationStateEvent] = null
   private var epicsReaderRef: Ref[IO, Option[EpicsReader]]             = null
   private var statusDbRef: Ref[IO, Option[StatusDatabaseService]]      = null
+  private var configDeferred: Deferred[IO, GdsConfiguration]           = null
 
   // The option bit for the trackers is odd...Does tracking fail at times?
   var epicsTracker: Option[ServiceTracker[EpicsReader, Unit]]            = None
   var statusTracker: Option[ServiceTracker[StatusDatabaseService, Unit]] = None
   var obsEventSvc: Option[ServiceRegistration[_]]                        = None
+  var configSvc: Option[ServiceRegistration[_]]                          = None
 
   private def setIOVars(
     obsStateQ: Queue[IO, ObservationStateEvent],
     epicsRef:  Ref[IO, Option[EpicsReader]],
-    statusRef: Ref[IO, Option[StatusDatabaseService]]
+    statusRef: Ref[IO, Option[StatusDatabaseService]],
+    configDef: Deferred[IO, GdsConfiguration]
   ): Unit = {
     observationStateEventQ = obsStateQ
     epicsReaderRef = epicsRef
     statusDbRef = statusRef
+    configDeferred = configDef
   }
 
   override def start(context: BundleContext): Unit = {
-    logger.info("Starting GDS")
-
-    // TODO: Put these into a config file. Could also register an OSGI service to use the OSGI config mechanism
-    val seqexecPort = context.getProperty("gds.seqexec.server.port").toInt
-    val configFile  = context.getProperty("gds.keywordsConfiguration")
-
-    // NOTE: This does a sys.error on errors
-    val keywordConfig = loadKeywordConfig(configFile)
+    logger.info("GDS Starting")
 
     val makeIOVars = for {
       obsStateQ <- Queue.unbounded[IO, ObservationStateEvent]
       epicsRef  <- Ref.of[IO, Option[EpicsReader]](none[EpicsReader])
       statusRef <- Ref.of[IO, Option[StatusDatabaseService]](none)
-      _          = setIOVars(obsStateQ, epicsRef, statusRef)
+      configDef <- Deferred[IO, GdsConfiguration]
+      _          = setIOVars(obsStateQ, epicsRef, statusRef, configDef)
     } yield ()
 
     makeIOVars.unsafeRunSync()
 
     epicsTracker = Option(Tracker.track[EpicsReader, Unit](context) { eread =>
-      logger.info("EpicsReader service arriving")
       epicsReaderRef.set(eread.some).unsafeRunSync()
     } { _ =>
-      logger.info("EpicsReader service going away")
       epicsReaderRef.set(none).unsafeRunSync()
     })
     epicsTracker.foreach(_.open(true))
 
     statusTracker = Option(Tracker.track[StatusDatabaseService, Unit](context) { sds =>
-      logger.info("StatusDBService arriving")
       statusDbRef.set(sds.some).unsafeRunSync()
     } { _ =>
-      logger.info("StatusDBService going away")
       epicsReaderRef.set(none).unsafeRunSync()
     })
     statusTracker.foreach(_.open(true))
@@ -89,14 +85,31 @@ class Activator extends BundleActivator {
       )
       .some
 
-    val resource =
-      Resource.make(
-        Main
-          .run(keywordConfig, epicsReaderRef, statusDbRef, observationStateEventQ, seqexecPort)
-          .start
-      )(
-        IO.println("Cleanup") >> _.cancel
+    val configProps = new util.Hashtable[String, String]()
+    configProps.put(Constants.SERVICE_PID, "edu.gemini.aspen.gds.GdsConfiguration")
+    configSvc = context
+      .registerService(
+        classOf[ManagedServiceFactory].getName,
+        new GDSConfigurationServiceFactory(configDeferred, () => context.getBundle().stop()),
+        configProps
       )
+      .some
+
+    // wait for config and start running if we receive it. Otherwise timeout and stop GDS
+    val run = configDeferred.get.timeout(5.seconds).attempt.flatMap {
+      case Left(_)       =>
+        IO {
+          logger.severe("GDS timed out waiting for configuration. Shutting down.")
+          // Trying to cancel the fiber in stop() will result in stop() never completing.
+          // The fiber is stopping on it's own, anyway.
+          fiber = none
+          context.getBundle().stop()
+        }.void
+      case Right(config) =>
+        Main.run(config, epicsReaderRef, statusDbRef, observationStateEventQ)
+    }
+
+    val resource = Resource.make(run.start)(IO.println("Cleanup") >> _.cancel)
     val io       = resource.use { f =>
       fiber = f.some
       f.join.void
@@ -105,28 +118,14 @@ class Activator extends BundleActivator {
   }
 
   override def stop(context: BundleContext): Unit = {
-    logger.info("Stopping GDS")
+    logger.info("GDS Stopping")
     fiber.foreach(_.cancel.unsafeRunSync())
     fiber = None
     epicsTracker.foreach(_.close())
     epicsTracker = None
     obsEventSvc.foreach(_.unregister())
     obsEventSvc = None
+    configSvc.foreach(_.unregister())
+    configSvc = None
   }
-
-  private def loadKeywordConfig(filename: String): KeywordConfiguration =
-    KeywordConfigurationFile.loadConfiguration(filename) match {
-      case Right(config) => config
-      case Left(es)      =>
-        val message =
-          if (es.length === 1)
-            s"GDS keyword configuration file error: ${es.head}"
-          else {
-            val eString =
-              es.zipWithIndex.map { case (msg, idx) => s"${idx + 1}: $msg" }.mkString_("\n\t")
-            s"GDS Keyword Configuration file has ${es.length} error(s):\n\t$eString"
-          }
-        logger.severe(message)
-        sys.error(message)
-    }
 }
