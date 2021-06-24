@@ -7,8 +7,9 @@ import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
 import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsConfiguration }
 import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
-import edu.gemini.epics.EpicsReader
+import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
+import edu.gemini.epics.EpicsReader
 import java.util
 import java.util.logging.Logger
 import edu.gemini.util.osgi.Tracker
@@ -80,7 +81,7 @@ class Activator extends BundleActivator {
     eventAdminProps.put(EventConstants.EVENT_TOPIC, ObservationEventReceiver.ObsEventTopic)
     obsEventSvc = context
       .registerService(classOf[EventHandler].getName,
-                       new ObservationEventReceiver(observationStateEventQ),
+                       new ObservationEventReceiver(handleObsEvent),
                        eventAdminProps
       )
       .some
@@ -90,7 +91,7 @@ class Activator extends BundleActivator {
     configSvc = context
       .registerService(
         classOf[ManagedServiceFactory].getName,
-        new GDSConfigurationServiceFactory(configDeferred, () => context.getBundle().stop()),
+        new GDSConfigurationServiceFactory(handleConfigResult(context)),
         configProps
       )
       .some
@@ -128,4 +129,17 @@ class Activator extends BundleActivator {
     configSvc.foreach(_.unregister())
     configSvc = None
   }
+
+  private def handleObsEvent(dataLabel: DataLabel, event: ObservationEvent): Unit =
+    observationStateEventQ
+      .offer(ObservationStateEvent.AddObservationEvent(dataLabel, event))
+      .unsafeRunSync()
+
+  private def handleConfigResult(context: BundleContext)(result: Option[GdsConfiguration]): Unit =
+    result match {
+      case Some(config) => configDeferred.complete(config).void.unsafeRunSync()
+      case None         =>
+        logger.severe("GDS stopping itself due to bad configuration.")
+        context.getBundle().stop()
+    }
 }

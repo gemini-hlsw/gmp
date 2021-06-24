@@ -2,9 +2,6 @@ package edu.gemini.aspen.gds.configuration
 
 import cats.data.{ NonEmptyChain, ValidatedNec }
 import cats.data.Validated.{ Invalid, Valid }
-import cats.effect.IO
-import cats.effect.kernel.Deferred
-import cats.effect.unsafe.IORuntime
 import cats.syntax.all._
 import java.util.{ Dictionary }
 import java.util.logging.Logger
@@ -13,41 +10,38 @@ import scala.concurrent.duration._
 import scala.jdk.CollectionConverters._
 import scala.util.{ Failure, Success, Try }
 
+// Probably an abuse of a ManagedServiceFactory, since it doesn't create any
+// services. But, it makes it possible to use OSGi configuration.
 class GDSConfigurationServiceFactory(
-  deferred:   Deferred[IO, GdsConfiguration],
-  poisonPill: () => Unit // function to call in case of errors - in production stops the bundle
-)(implicit
-  rt:         IORuntime
+  configHandler: Option[GdsConfiguration] => Unit
 ) extends ManagedServiceFactory {
-  private val logger = Logger.getLogger(this.getClass.getName)
+  private val logger         = Logger.getLogger(this.getClass.getName)
+  private var receivedConfig = false
 
   override def getName = "GDS Configuration Service Factory"
 
   override def updated(pid: String, properties: Dictionary[String, _]): Unit = {
     logger.info(s"GDS Config factory received configuration with pid: $pid")
 
-    deferred.tryGet
-      .flatMap {
-        case Some(_) =>
-          IO(
-            logger.severe(
-              "GDS Received a new configuration. This will have no effect on the running bundle."
-            )
-          )
-        case None    =>
-          Option(properties) match {
-            case Some(props) => processProperties(props.asScala.toMap)
-            case None        =>
-              IO {
-                logger.severe("GdsConfigurationFactory received a null for properties.")
-                stopGds()
-              }
-          }
+    // This check is not completely thread safe, but
+    // 1. It probably won't happen
+    // 2. It would just result in a second config processing that wouldn't affect the first one.
+    if (receivedConfig)
+      logger.severe(
+        "GDS Received a new configuration. This will have no effect on the running bundle."
+      )
+    else {
+      receivedConfig = true
+      Option(properties) match {
+        case Some(props) => processProperties(props.asScala.toMap)
+        case None        =>
+          logger.severe("GdsConfigurationFactory received a null for properties.")
+          configHandler(none)
       }
-      .unsafeRunSync()
+    }
   }
 
-  def processProperties(props: Map[String, _]): IO[Unit] = {
+  def processProperties(props: Map[String, _]): Unit = {
     val keywordConfig: ValidatedNec[String, List[KeywordConfigurationItem]] =
       asString(props, "keywordsConfiguration").andThen(
         KeywordConfigurationFile.loadConfiguration(_)
@@ -84,8 +78,10 @@ class GDSConfigurationServiceFactory(
       )
     }
     configValidated match {
-      case Invalid(e)    => IO { logErrors(e); stopGds() }
-      case Valid(config) => deferred.complete(config).void
+      case Invalid(e)    =>
+        logErrors(e)
+        configHandler(none)
+      case Valid(config) => configHandler(config.some)
     }
   }
 
@@ -128,10 +124,5 @@ class GDSConfigurationServiceFactory(
         s"GDS Configuration file has ${errors.length} errors:\n\t$eString"
       }
     logger.severe(message)
-  }
-
-  private def stopGds(): Unit = {
-    logger.severe("GDS stopping itself due to bad configuration.")
-    poisonPill()
   }
 }
