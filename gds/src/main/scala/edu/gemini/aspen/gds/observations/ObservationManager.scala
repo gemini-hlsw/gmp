@@ -3,6 +3,7 @@ package edu.gemini.aspen.gds.observations
 import cats.effect.{ Async, Clock }
 import cats.effect.std.QueueSink
 import cats.syntax.all._
+import edu.gemini.aspen.gds.configuration.ObservationConfig
 import edu.gemini.aspen.gds.keywords.{ CollectedKeyword, KeywordManager }
 import edu.gemini.aspen.gds.observations.ObservationStateEvent._
 import edu.gemini.aspen.gds.syntax.all._
@@ -19,25 +20,24 @@ trait ObservationManager[F[_]] {
 object ObservationManager {
   private val logger = Logger.getLogger(this.getClass.getName)
 
-  // TODO: Make this a configuration value.
-  val lifetime = 20.minutes
-
-  def apply[F[_]: Async](
+  def apply[F[_]](
+    config:         ObservationConfig,
     keywordManager: KeywordManager[F],
     obsStateQ:      QueueSink[F, ObservationStateEvent],
     fitsQ:          QueueSink[F, (DataLabel, List[CollectedKeyword])]
-  ): F[ObservationManager[F]] =
+  )(implicit F:     Async[F]): F[ObservationManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, ObservationItem[F]]().map { mapref =>
       new ObservationManager[F] {
         def process(stateEvent: ObservationStateEvent): F[Unit] = stateEvent match {
           case Start(dataLabel, programId) =>
             for {
               _   <- logger.infoF(s"Starting observation $dataLabel")
+              _   <- logIfExists(dataLabel)
               now <- Clock[F].realTime
               fsm <-
-                ObservationFSM(dataLabel, obsStateQ)
-              // TODO: If it already exists, log an error and keep going. Should never happen.
-              _   <- mapref.setKeyValue(dataLabel, ObservationItem(programId, fsm, now + lifetime))
+                ObservationFSM(config.eventRetries, dataLabel, obsStateQ)
+              _   <- mapref
+                       .setKeyValue(dataLabel, ObservationItem(programId, fsm, now + config.lifespan))
               _   <- keywordManager.initialize(dataLabel)
             } yield ()
 
@@ -99,10 +99,18 @@ object ObservationManager {
                 )
             case _                                   => Async[F].unit
           }
+
+        def logIfExists(dataLabel: DataLabel): F[Unit] =
+          mapref(dataLabel).get.flatMap {
+            case None    => F.unit
+            case Some(_) =>
+              logger.severeF(
+                s"A new start event has been received for observation $dataLabel, which already exists. Overwriting old observation."
+              )
+          }
       }
     }
 
-  // need to add an expiration
   final case class ObservationItem[F[_]](
     programId:  String,
     fsm:        ObservationFSM[F],

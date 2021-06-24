@@ -1,15 +1,18 @@
 package edu.gemini.aspen.gds.keywords
 
-import cats.effect.{ Async, Ref }
+import cats.effect.kernel.{ Async, RefSource }
 import cats.syntax.all._
-import edu.gemini.aspen.gds.configuration.{ KeywordConfiguration, KeywordConfigurationItem }
+import edu.gemini.aspen.gds.configuration.KeywordConfigurationItem
 import edu.gemini.aspen.gds.fits.FitsValue
 import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 
 object StatusKeywordCollector {
-  def apply[F[_]](statusDbRef: Ref[F, Option[StatusDatabaseService]], config: KeywordConfiguration)(
-    implicit F:                Async[F]
+  def apply[F[_]](
+    statusDbRef: RefSource[F, Option[StatusDatabaseService]],
+    config:      List[KeywordConfigurationItem]
+  )(implicit
+    F:           Async[F]
   ) = {
     def retriever(item: KeywordConfigurationItem): F[FitsValue] =
       statusDbRef.get.flatMap {

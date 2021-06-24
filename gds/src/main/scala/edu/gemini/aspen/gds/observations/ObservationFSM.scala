@@ -4,10 +4,10 @@ import cats.effect.{ Async, Ref }
 import cats.effect.std.QueueSink
 import cats.effect.syntax.all._
 import cats.syntax.all._
+import edu.gemini.aspen.gds.configuration.RetryConfig
 import edu.gemini.aspen.gds.syntax.all._
 import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
 import java.util.logging.Logger
-import scala.concurrent.duration._
 
 trait ObservationFSM[F[_]] {
   def addObservationEvent(obsEvent: ObservationEvent): F[Unit]
@@ -18,14 +18,11 @@ trait ObservationFSM[F[_]] {
 object ObservationFSM {
   private val logger = Logger.getLogger(this.getClass.getName)
 
-  // TODO: make these configurable
-  val numAttempts = 3
-  val sleepTime   = 5.seconds
-
   def apply[F[_]](
-    dataLabel:  DataLabel,
-    obsStateQ:  QueueSink[F, ObservationStateEvent]
-  )(implicit F: Async[F]): F[ObservationFSM[F]] =
+    retryConfig: RetryConfig,
+    dataLabel:   DataLabel,
+    obsStateQ:   QueueSink[F, ObservationStateEvent]
+  )(implicit F:  Async[F]): F[ObservationFSM[F]] =
     Ref.of[F, State](Running(Set.empty)).map { state =>
       new ObservationFSM[F] {
         val allEvents: Set[ObservationEvent] = ObservationEvent.values.toSet
@@ -37,21 +34,21 @@ object ObservationFSM {
                 s"Duplicate event $obsEvent received for running observation $dataLabel"
               )
             else if (obsEvent === ObservationEvent.OBS_END_DSET_WRITE)
-              WaitingForEvents(events + obsEvent, numAttempts) -> (logger.infoF(
+              WaitingForEvents(events + obsEvent, retryConfig.retries) -> (logger.infoF(
                 s"Received $obsEvent for observation $dataLabel"
               ) >> qKeywordCollection(obsEvent) >> qStep)
             else
-              Running(events + obsEvent)                       -> (logger.infoF(
+              Running(events + obsEvent)                               -> (logger.infoF(
                 s"Added $obsEvent to running observation $dataLabel"
               ) >> qKeywordCollection(obsEvent))
 
           case st @ WaitingForEvents(events, _) =>
             if (events.contains(obsEvent))
-              st                                               -> logger.warningF(
+              st                                                       -> logger.warningF(
                 s"Duplicate event $obsEvent received for observation $dataLabel, which was waiting for other events to complete."
               )
             else
-              WaitingForEvents(events + obsEvent, numAttempts) -> (logger.infoF(
+              WaitingForEvents(events + obsEvent, retryConfig.retries) -> (logger.infoF(
                 s"Received $obsEvent for observation $dataLabel, which was waiting for events to complete."
               ) >> qKeywordCollection(obsEvent) >> qStep)
 
@@ -63,7 +60,7 @@ object ObservationFSM {
 
         def stopObservation: F[Unit] = state.modify {
           case Running(events) =>
-            WaitingForEvents(events, numAttempts) -> (logger.infoF(
+            WaitingForEvents(events, retryConfig.retries) -> (logger.infoF(
               s"Observation $dataLabel stopped by Seqexeq"
             ) >> qStep)
           case st @ _          => st -> F.unit
@@ -104,7 +101,8 @@ object ObservationFSM {
         // to see if we've received them all. And, if we have, the state will be Completed and the check will
         // be ignored. The extra checks will litter the logs, but this should only happen if we are missing multiple
         // events - which should be rare.
-        def sleepAndRecheck: F[Unit] = (Async[F].sleep(sleepTime) >> waitForEvents).start.void
+        def sleepAndRecheck: F[Unit] =
+          (Async[F].sleep(retryConfig.sleep) >> waitForEvents).start.void
       }
     }
 

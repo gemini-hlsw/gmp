@@ -4,7 +4,8 @@ import cats.data.{ Chain, NonEmptyChain, ValidatedNec }
 import cats.syntax.all._
 import edu.gemini.aspen.gds.configuration.KeywordConfigurationItem
 import edu.gemini.aspen.gds.model.KeywordSource
-// import util.parsing.input.Position
+import edu.gemini.aspen.gds.syntax.all._
+import scala.util.{ Failure, Success, Try }
 
 /**
  * This object provides utility methods to manipulate a configuration file
@@ -14,47 +15,51 @@ import edu.gemini.aspen.gds.model.KeywordSource
 object KeywordConfigurationFile {
   def loadConfiguration(
     configurationFile: String
-  ): Either[NonEmptyChain[String], KeywordConfiguration] = {
+  ): ValidatedNec[String, List[KeywordConfigurationItem]] = {
     val parser = new KeywordConfigurationParser()
-    (parser.parseFileRawResult(configurationFile) match {
+    Try((parser.parseFileRawResult(configurationFile) match {
       case parser.Error(msg, next)   =>
         s"Error parsing keywords config file: '$msg' at line ${next.pos.line}, column ${next.pos.column}, offset: ${next.offset}".invalidNec
       case parser.Failure(msg, next) =>
         s"Failure parsing keywords config file: '$msg' at line ${next.pos.line}, column ${next.pos.column}, offset: ${next.offset}".invalidNec
       case parser.Success(result, _) =>
         validateConfig(result.collect { case Some(x: KeywordConfigurationItem) => x })
-    }).toEither
+    })) match {
+      case Failure(e)     =>
+        s"Failure loading keywords config file `$configurationFile`: ${e.getMessage}".invalidNec
+      case Success(value) => value
+    }
   }
 
   def validateConfig(
     items: List[KeywordConfigurationItem]
-  ): ValidatedNec[String, KeywordConfiguration] = {
+  ): ValidatedNec[String, List[KeywordConfigurationItem]] = {
     // Non-mandatory and Constant keywords should have valid "defaults"
     val defaultErrors = items
       .filter(item => !item.isMandatory || item.keywordSource === KeywordSource.Constant)
       .foldLeft(Chain.empty[String]) { (errors, item) =>
         item.defaultValue match {
-          case Left(error) => errors :+ s"Keyword `${item.keyword.key}` has invalid default: $error"
+          case Left(error) =>
+            errors :+ s"Keyword config item `${item.keyword.key}` has invalid default: $error"
           case Right(_)    => errors
         }
       }
 
-    val keywordConfig = KeywordConfiguration(items)
-
     // All keywords for the same epics channel should have the same data type.
-    val epicsErrors = keywordConfig
-      .forKeywordSource(KeywordSource.Epics)
-      .items
+    val epicsErrors = items
+      .forSource(KeywordSource.Epics)
       .groupMap(_.channel.name)(_.dataType.repr)
       .foldLeft(Chain.empty[String]) { (errors, kvp) =>
         val types = kvp._2.distinct
         if (types.length > 1)
-          errors :+ s"Epics channel `${kvp._1}` has keywords with differing datatypes: ${types.mkString(", ")}"
+          errors :+ s"Epics channel in keyword config `${kvp._1}` has keywords with differing datatypes: ${types
+            .mkString(", ")}"
         else errors
       }
 
+    // TODO: Should we validate duplicates? It seems Contants, Properties and Seqexec should be unique by keyword. Others by keyword and event
     NonEmptyChain
       .fromChain(defaultErrors ++ epicsErrors)
-      .fold(keywordConfig.validNec[String])(_.invalid)
+      .fold(items.validNec[String])(_.invalid)
   }
 }
