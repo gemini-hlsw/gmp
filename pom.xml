@@ -38,11 +38,6 @@
         <conf.base>../src/main/config</conf.base>
         <felix.fileinstall.dir>${conf.base}/services</felix.fileinstall.dir>
 
-        <!-- gds properties -->
-        <!-- TODO: Remove these and include only the path to the gds config file. May be able to get rid of them entirely. -->
-        <gds.seqexec.server.port>8088</gds.seqexec.server.port>
-        <gds.keywordsConfiguration>${conf.base}/gds-keywords.conf</gds.keywordsConfiguration>
-
         <!-- Component versions -->
         <clover.version>3.1.0</clover.version>
         <org.activemq.core.version>5.5.1</org.activemq.core.version>

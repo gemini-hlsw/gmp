@@ -81,6 +81,10 @@
             <artifactId>epics-service</artifactId>
         </dependency>
         <dependency>
+            <groupId>edu.gemini.aspen.gmp</groupId>
+            <artifactId>gmp-services</artifactId>
+        </dependency>
+        <dependency>
             <groupId>edu.gemini.ocs</groupId>
             <artifactId>edu-gemini-util-osgi_${scala.lib.suffix}</artifactId>
         </dependency>

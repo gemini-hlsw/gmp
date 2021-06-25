@@ -3,6 +3,7 @@ package edu.gemini.aspen.gds.configuration
 import cats.data.{ NonEmptyChain, ValidatedNec }
 import cats.data.Validated.{ Invalid, Valid }
 import cats.syntax.all._
+import edu.gemini.aspen.gmp.services.PropertyHolder
 import java.util.{ Dictionary }
 import java.util.logging.Logger
 import org.osgi.service.cm.ManagedServiceFactory
@@ -13,7 +14,8 @@ import scala.util.{ Failure, Success, Try }
 // Probably an abuse of a ManagedServiceFactory, since it doesn't create any
 // services. But, it makes it possible to use OSGi configuration.
 class GDSConfigurationServiceFactory(
-  configHandler: Option[GdsConfiguration] => Unit
+  propertyHolder: PropertyHolder,
+  configHandler:  Option[GdsConfiguration] => Unit
 ) extends ManagedServiceFactory {
   private val logger         = Logger.getLogger(this.getClass.getName)
   private var receivedConfig = false
@@ -47,17 +49,19 @@ class GDSConfigurationServiceFactory(
         KeywordConfigurationFile.loadConfiguration(_)
       )
 
-    val cleanupRate     = asDuration(props, "observation.cleanupRate")
-    val lifespan        = asDuration(props, "observation.lifespan")
-    val eventRetries    = asPosInt(props, "observation.event.retries")
-    val eventSleep      = asDuration(props, "observation.event.sleep")
-    val keywordRetries  = asPosInt(props, "keyword.collection.retries")
-    val keywordSleep    = asDuration(props, "keyword.collection.sleep")
-    val seqexecPort     = asPosInt(props, "seqexec.server.port")
-    // TODO: Should we validate these paths?
-    val fitsSource      = asString(props, "fits.sourceDir")
-    val fitsDest        = asString(props, "fits.destDir")
-    val fitsSuffix      = asBool(props, "fits.addSuffix")
+    val cleanupRate    = asDuration(props, "observation.cleanupRate")
+    val lifespan       = asDuration(props, "observation.lifespan")
+    val eventRetries   = asPosInt(props, "observation.event.retries")
+    val eventSleep     = asDuration(props, "observation.event.sleep")
+    val keywordRetries = asPosInt(props, "keyword.collection.retries")
+    val keywordSleep   = asDuration(props, "keyword.collection.sleep")
+    val seqexecPort    = asPosInt(props, "seqexec.server.port")
+
+    // TODO: Should we validate these?
+    val fitsSource = propertyHolder.getProperty("DHS_SCIENCE_DATA_PATH")
+    val fitsDest   = propertyHolder.getProperty("DHS_PERMANENT_SCIENCE_DATA_PATH")
+    val fitsSuffix = propertyHolder.getProperty("APPEND_FITS_EXTENSION").equalsIgnoreCase("true")
+
     val configValidated = (keywordConfig,
                            cleanupRate,
                            lifespan,
@@ -65,18 +69,16 @@ class GDSConfigurationServiceFactory(
                            eventSleep,
                            keywordRetries,
                            keywordSleep,
-                           seqexecPort,
-                           fitsSource,
-                           fitsDest,
-                           fitsSuffix
-    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, fsrc, fdest, fsuf) =>
+                           seqexecPort
+    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp) =>
       GdsConfiguration(kc,
                        ObservationConfig(cr, lf, RetryConfig(er, es)),
                        RetryConfig(kr, ks),
                        sp,
-                       FitsConfig(fsrc, fdest, fsuf)
+                       FitsConfig(fitsSource, fitsDest, fitsSuffix)
       )
     }
+
     configValidated match {
       case Invalid(e)    =>
         logErrors(e)
@@ -97,10 +99,10 @@ class GDSConfigurationServiceFactory(
         .toValidNec(s"Invalid positive integer `$s` for `$key`")
     )
 
-  private def asBool(props: Map[String, _], key: String): ValidatedNec[String, Boolean] =
-    asString(props, key).andThen(s =>
-      s.toBooleanOption.toValidNec(s"Invalid boolean `$s` for `$key`")
-    )
+  // private def asBool(props: Map[String, _], key: String): ValidatedNec[String, Boolean] =
+  //   asString(props, key).andThen(s =>
+  //     s.toBooleanOption.toValidNec(s"Invalid boolean `$s` for `$key`")
+  //   )
 
   private def asDuration(props: Map[String, _], key: String): ValidatedNec[String, FiniteDuration] =
     asString(props, key).andThen(s =>
