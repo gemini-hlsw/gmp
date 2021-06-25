@@ -9,6 +9,7 @@ import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsC
 import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
 import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
+import edu.gemini.aspen.gmp.services.PropertyHolder
 import edu.gemini.epics.EpicsReader
 import java.util
 import java.util.logging.Logger
@@ -33,10 +34,10 @@ class Activator extends BundleActivator {
   private var configDeferred: Deferred[IO, GdsConfiguration]           = null
 
   // The option bit for the trackers is odd...Does tracking fail at times?
-  var epicsTracker: Option[ServiceTracker[EpicsReader, Unit]]            = None
-  var statusTracker: Option[ServiceTracker[StatusDatabaseService, Unit]] = None
-  var obsEventSvc: Option[ServiceRegistration[_]]                        = None
-  var configSvc: Option[ServiceRegistration[_]]                          = None
+  var epicsTracker: Option[ServiceTracker[EpicsReader, Unit]]                     = None
+  var statusTracker: Option[ServiceTracker[StatusDatabaseService, Unit]]          = None
+  var propTracker: Option[ServiceTracker[PropertyHolder, ServiceRegistration[_]]] = None
+  var obsEventSvc: Option[ServiceRegistration[_]]                                 = None
 
   private def setIOVars(
     obsStateQ: Queue[IO, ObservationStateEvent],
@@ -77,22 +78,29 @@ class Activator extends BundleActivator {
     })
     statusTracker.foreach(_.open(true))
 
+    // If the property holder goes away and comes back with new config, the GdsConfigurationFactory
+    // will be restarted, but deferred will already have been fulfulled, so GDS will not get any
+    // new properties for PropertyHolder.
+    propTracker = Option(
+      Tracker.track[PropertyHolder, ServiceRegistration[_]](context) { ph =>
+        val configProps = new util.Hashtable[String, String]()
+        configProps.put(Constants.SERVICE_PID, "edu.gemini.aspen.gds.GdsConfiguration")
+        context
+          .registerService(
+            classOf[ManagedServiceFactory].getName,
+            new GDSConfigurationServiceFactory(ph, handleConfigResult(context)),
+            configProps
+          )
+      }(_.unregister())
+    )
+    propTracker.foreach(_.open(true))
+
     val eventAdminProps = new util.Hashtable[String, String]()
     eventAdminProps.put(EventConstants.EVENT_TOPIC, ObservationEventReceiver.ObsEventTopic)
     obsEventSvc = context
       .registerService(classOf[EventHandler].getName,
                        new ObservationEventReceiver(handleObsEvent),
                        eventAdminProps
-      )
-      .some
-
-    val configProps = new util.Hashtable[String, String]()
-    configProps.put(Constants.SERVICE_PID, "edu.gemini.aspen.gds.GdsConfiguration")
-    configSvc = context
-      .registerService(
-        classOf[ManagedServiceFactory].getName,
-        new GDSConfigurationServiceFactory(handleConfigResult(context)),
-        configProps
       )
       .some
 
@@ -124,10 +132,12 @@ class Activator extends BundleActivator {
     fiber = None
     epicsTracker.foreach(_.close())
     epicsTracker = None
+    statusTracker.foreach(_.close())
+    statusTracker = None
+    propTracker.foreach(_.close())
+    propTracker = None
     obsEventSvc.foreach(_.unregister())
     obsEventSvc = None
-    configSvc.foreach(_.unregister())
-    configSvc = None
   }
 
   private def handleObsEvent(dataLabel: DataLabel, event: ObservationEvent): Unit =
