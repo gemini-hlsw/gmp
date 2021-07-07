@@ -4,12 +4,14 @@ import cats.effect.Async
 import cats.syntax.all._
 import edu.gemini.aspen.gds.configuration.{ FitsConfig, KeywordConfigurationItem }
 import edu.gemini.aspen.gds.keywords.CollectedKeyword
-import edu.gemini.aspen.gds.model.{ GdsError, KeywordSource }
+import edu.gemini.aspen.gds.model.KeywordSource
 import edu.gemini.aspen.gds.syntax.all._
-import edu.gemini.aspen.giapi.data.DataLabel
-import java.nio.file.Paths
-import java.util.logging.Logger
 import edu.gemini.aspen.gds.transfer.FitsFileTransferrer
+import edu.gemini.aspen.giapi.data.DataLabel
+import fs2.io.file.{ Files => Fs2Files }
+import java.nio.file.Path
+import java.util.logging.Logger
+import com.google.common.io.{ Files => GFiles }
 
 sealed trait FitsFileProcessor[F[_]] {
   def processFile(dataLabel: DataLabel, keywords: List[CollectedKeyword]): F[Unit]
@@ -19,7 +21,6 @@ object FitsFileProcessor {
   private val logger = Logger.getLogger(this.getClass.getName)
 
   // TODO: Implement change owner and permissions and other postprocessing policies if needed
-  // TODO: Validate input file and add suffix to output file if needed (see FitsUpdater.safeDestinationFile())
 
   def apply[F[_]](
     fitsConfig:     FitsConfig,
@@ -40,17 +41,39 @@ object FitsFileProcessor {
 
         val result = for {
           _      <- logger.infoF(s"Preparing to transfer FITS file $outFileName")
-          source <- F.delay(Paths.get(fitsConfig.sourceDir, inFileName))
-          dest   <-
-            F.delay(Paths.get(fitsConfig.destDir, outFileName))
-              .handleErrorWith(e => F.raiseError(GdsError(s"Error creating output path: ${e}")))
+          source <- F.delay(fitsConfig.sourceDir.resolve(inFileName))
+          dest   <- safeDestinationFile(fitsConfig.destDir, outFileName)
           cards  <- processKeywordsToCards(keywords)
           _      <- FitsFileTransferrer.transfer(source, dest, requiredKeywords, cards)
-          _      <- logger.infoF(s"FITS file $outFileName transfer completed.")
+          _      <- logger.infoF(s"FITS file $dest transfer completed.")
         } yield ()
         result.handleErrorWith(e =>
-          logger.severeF(s"Error transferring fits file $outFileName: ${e.getMessage}", e)
+          logger.severeF(
+            s"Error transferring fits file for observation $dataLabel: ${e.getMessage}",
+            e
+          )
         )
+      }
+
+      def safeDestinationFile(dir: Path, name: String): F[Path] = for {
+        fullPath <- F.delay(dir.resolve(name))
+        exists   <- Fs2Files[F].exists(fullPath)
+        safePath <-
+          if (exists)
+            logger.infoF(
+              s"Output file $fullPath already exists - generating new name."
+            ) >> safeDestinationFile(dir, newDestinationFileName(name))
+          else F.delay(fullPath)
+      } yield safePath
+
+      def newDestinationFileName(fullName: String): String = {
+        val nameRegex = """(\w*)-(\d+)""".r
+        val name      = GFiles.getNameWithoutExtension(fullName)
+        val ext       = GFiles.getFileExtension(fullName)
+        name match {
+          case nameRegex(n, d) => s"$n-${d.toInt + 1}.$ext"
+          case _               => s"$name-1.$ext"
+        }
       }
 
       def processKeywordsToCards(
