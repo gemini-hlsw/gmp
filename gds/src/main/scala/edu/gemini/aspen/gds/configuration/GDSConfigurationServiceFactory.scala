@@ -4,6 +4,7 @@ import cats.data.{ NonEmptyChain, ValidatedNec }
 import cats.data.Validated.{ Invalid, Valid }
 import cats.syntax.all._
 import edu.gemini.aspen.gmp.services.PropertyHolder
+import java.nio.file._
 import java.util.{ Dictionary }
 import java.util.logging.Logger
 import org.osgi.service.cm.ManagedServiceFactory
@@ -19,6 +20,11 @@ class GDSConfigurationServiceFactory(
 ) extends ManagedServiceFactory {
   private val logger         = Logger.getLogger(this.getClass.getName)
   private var receivedConfig = false
+
+  // These values come from the PropertyHolder, not the config file.
+  val appendFitsExtKey = "APPEND_FITS_EXTENSION"
+  val fitsSrcPathKey   = "DHS_SCIENCE_DATA_PATH"
+  val fitsDestPathKey  = "DHS_PERMANENT_SCIENCE_DATA_PATH"
 
   override def getName = "GDS Configuration Service Factory"
 
@@ -57,11 +63,6 @@ class GDSConfigurationServiceFactory(
     val keywordSleep   = asDuration(props, "keyword.collection.sleep")
     val seqexecPort    = asPosInt(props, "seqexec.server.port")
 
-    // TODO: Should we validate these?
-    val fitsSource = propertyHolder.getProperty("DHS_SCIENCE_DATA_PATH")
-    val fitsDest   = propertyHolder.getProperty("DHS_PERMANENT_SCIENCE_DATA_PATH")
-    val fitsSuffix = propertyHolder.getProperty("APPEND_FITS_EXTENSION").equalsIgnoreCase("true")
-
     val configValidated = (keywordConfig,
                            cleanupRate,
                            lifespan,
@@ -69,13 +70,16 @@ class GDSConfigurationServiceFactory(
                            eventSleep,
                            keywordRetries,
                            keywordSleep,
-                           seqexecPort
-    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp) =>
+                           seqexecPort,
+                           fitsSrcDir,
+                           fitsDestDir,
+                           fitsAddSuffix
+    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, fsd, fdd, fas) =>
       GdsConfiguration(kc,
                        ObservationConfig(cr, lf, RetryConfig(er, es)),
                        RetryConfig(kr, ks),
                        sp,
-                       FitsConfig(fitsSource, fitsDest, fitsSuffix)
+                       FitsConfig(fsd, fdd, fas)
       )
     }
 
@@ -99,11 +103,6 @@ class GDSConfigurationServiceFactory(
         .toValidNec(s"Invalid positive integer `$s` for `$key`")
     )
 
-  // private def asBool(props: Map[String, _], key: String): ValidatedNec[String, Boolean] =
-  //   asString(props, key).andThen(s =>
-  //     s.toBooleanOption.toValidNec(s"Invalid boolean `$s` for `$key`")
-  //   )
-
   private def asDuration(props: Map[String, _], key: String): ValidatedNec[String, FiniteDuration] =
     asString(props, key).andThen(s =>
       durationFromString(s).toValidNec(s"Invalid duration `$s` for `$key`")
@@ -114,6 +113,36 @@ class GDSConfigurationServiceFactory(
       case Failure(_)        => none
       case Success(duration) =>
         Option.when(duration.isFinite)(duration.asInstanceOf[FiniteDuration])
+    }
+
+  private def fitsSrcDir: ValidatedNec[String, Path]  = dirFromPropHolder(fitsSrcPathKey)
+  private def fitsDestDir: ValidatedNec[String, Path] = dirFromPropHolder(fitsDestPathKey)
+
+  // PropertyHolder shouldn't return null, but...
+  private def propHolderValue(key: String): ValidatedNec[String, String] =
+    Option(propertyHolder.getProperty(key))
+      .toValidNec(s"Value for PropertyHolder sevice key `$key` cannot be null.")
+
+  private def dirFromPropHolder(key: String): ValidatedNec[String, Path] =
+    propHolderValue(key).andThen { dir =>
+      Try {
+        val path = Paths.get(dir)
+        if (path.toFile().isDirectory()) path.validNec
+        else
+          s"Value `$dir` for PropertyHolder service key `$key` is not a valid directory".invalidNec
+      } match {
+        case Failure(e)     =>
+          s"Error creating Path for PropertyHolder service key `$key`, value `$dir`: ${e.getMessage}".invalidNec
+        case Success(value) => value
+      }
+    }
+
+  private def fitsAddSuffix: ValidatedNec[String, Boolean] =
+    propHolderValue(appendFitsExtKey).andThen { s =>
+      s.toBooleanOption
+        .toValidNec(
+          s"Invalid boolean `$s` for PropertyHolder service key `$appendFitsExtKey`"
+        )
     }
 
   private def logErrors(errors: NonEmptyChain[String]): Unit = {

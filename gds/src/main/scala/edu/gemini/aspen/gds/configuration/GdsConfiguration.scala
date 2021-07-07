@@ -1,5 +1,6 @@
 package edu.gemini.aspen.gds.configuration
 
+import java.nio.file.Path
 import scala.concurrent.duration._
 
 final case class ObservationConfig(
@@ -8,9 +9,8 @@ final case class ObservationConfig(
   eventRetries: RetryConfig
 )
 
-final case class FitsConfig(sourceDir: String, destDir: String, addSuffix: Boolean)
+final case class FitsConfig(sourceDir: Path, destDir: Path, addSuffix: Boolean)
 final case class RetryConfig(retries: Int, sleep: FiniteDuration)
-
 final case class GdsConfiguration(
   keywords:       List[KeywordConfigurationItem],
   observation:    ObservationConfig,
