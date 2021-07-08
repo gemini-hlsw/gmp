@@ -40,12 +40,6 @@ public class ObservationEventTest {
         assertEquals(ObservationEvent.valueOf("OBS_START_READOUT"), ObservationEvent.OBS_START_READOUT);
     }
 
-    @Test
-    public void testExternalEvents() {
-        assertEquals(ObservationEvent.valueOf("EXT_START_OBS"), ObservationEvent.EXT_START_OBS);
-        assertEquals(ObservationEvent.valueOf("EXT_END_OBS"), ObservationEvent.EXT_END_OBS);
-    }
-
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidParsing() {
         ObservationEvent.valueOf("unexistant event");

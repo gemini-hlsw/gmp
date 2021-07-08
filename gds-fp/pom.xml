@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <!-- If a parent pom is specified, it pulls in extra classes, such as the osgi ones. -->
+
+    <properties>
+        <bundle.symbolicName>edu.gemini.aspen.gds.fp</bundle.symbolicName>
+        <bundle.namespace>edu.gemini.aspen.gds.fp</bundle.namespace>
+        <fs2.version>3.0.4</fs2.version>
+        <http4s.version>1.0.0-M21</http4s.version>
+        <mapref.version>0.2.0-M1</mapref.version>
+        <fs2.core>fs2-core_2.13</fs2.core>
+        <fs2.io>fs2-io_2.13</fs2.io>
+        <mapref>mapref_2.13</mapref>
+        <http4s.core>http4s-core_2.13</http4s.core>
+        <http4s.blaze.server>http4s-blaze-server_2.13</http4s.blaze.server>
+        <http4s.dsl>http4s-dsl_2.13</http4s.dsl>
+        <http4s.circe>http4s-circe_2.13</http4s.circe>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.gemini.aspen.gds</groupId>
+    <artifactId>gds-fp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>GDS FP</name>
+    <description>The module contains the typelevel and other non-osgi functional programming dependencies for GDS</description>
+
+    <packaging>bundle</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.5.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <unpackBundle>false</unpackBundle>
+                    <instructions>
+                        <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+                        <!-- jnr.unixsocket is an optional dependency for fs2.io -->
+                        <Import-Package>!jnr.unixsocket; *</Import-Package>
+                        <Private-Package>!*</Private-Package>
+                        <Embed-Dependency>*;scope=compile|runtime;type=!pom;inline=true</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <_exportcontents>*</_exportcontents>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <!-- slf4j needs to be marked as provided because pax logging provides it. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>co.fs2</groupId>
+            <artifactId>${fs2.core}</artifactId>
+            <version>${fs2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>co.fs2</groupId>
+            <artifactId>${fs2.io}</artifactId>
+            <version>${fs2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.chrisdavenport</groupId>
+            <artifactId>${mapref}</artifactId>
+            <version>${mapref.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.log4s</groupId>
+            <artifactId>log4s_2.13</artifactId>
+            <version>1.10.0-M6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>${http4s.blaze.server}</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>${http4s.dsl}</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>${http4s.circe}</artifactId>
+            <version>${http4s.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

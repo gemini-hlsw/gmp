@@ -44,7 +44,7 @@
         <pax-web.version>6.1.2</pax-web.version>
         <pax-logging.version>1.10.1</pax-logging.version>
         <pax-runner.version>1.9.0</pax-runner.version>
-        <scala-lang.version>2.13.4</scala-lang.version>
+        <scala-lang.version>2.13.6</scala-lang.version>
         <scalatest.version>3.2.2</scalatest.version>
         <scalatestplus-junit.version>3.2.4.0-M1</scalatestplus-junit.version>
         <scalatestplus-mockito.version>3.2.2.0</scalatestplus-mockito.version>
@@ -332,7 +332,17 @@
                 <artifactId>gmp-epics-to-status</artifactId>
                 <version>0.2.8-SNAPSHOT</version>
             </dependency>
-            <!--dependency>
+            <dependency>
+                <groupId>edu.gemini.aspen.gds</groupId>
+                <artifactId>gds</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>edu.gemini.aspen.gds</groupId>
+                <artifactId>gds-fp</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <!-- <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-api</artifactId>
                 <version>0.6.13-SNAPSHOT</version>
@@ -421,7 +431,7 @@
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-observation-state-publisher</artifactId>
                 <version>0.4.19-SNAPSHOT</version>
-            </dependency-->
+            </dependency> -->
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-pcs-updater</artifactId>
@@ -796,7 +806,7 @@
             <dependency>
                 <groupId>org.scala-lang.modules</groupId>
                 <artifactId>scala-parser-combinators_2.13</artifactId>
-                <version>1.1.0</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>org.scala-lang.modules</groupId>
@@ -967,26 +977,26 @@
         <module>gmp-webconsole-docs</module>
         <module>gmp-top</module>
         <module>gmp-epics-to-status</module>
-        <!--<module>gds-api</module>-->
-        <!--<module>gds-config-validator</module>-->
-        <!--<module>gds-performance-monitoring</module>-->
-        <!--<module>gds-keywords-database</module>-->
-        <!--<module>gds-actors-composer</module>-->
-        <!--<module>gds-epics-actors</module>-->
-        <!--<module>gds-instrument-status-actors</module>-->
-        <!--<module>gds-properties-actors</module>-->
-        <!--<module>gds-constant-actors</module>-->
-        <!--<module>gds-fits-updater</module>-->
-        <!--<module>gds-obsevent-handler</module>-->
-        <!--<module>gds-datalabel-provider</module>-->
-        <!--<module>gds-static-header-receiver</module>-->
-        <!--<module>gds-seqexec-actors</module>-->
-        <!--<module>gds-postprocessing-policy</module>-->
-        <!--<module>gds-health</module>-->
-        <!--<module>gds-observation-state-publisher</module>-->
-        <!--<module>gds-fits-checker</module>-->
-        <!--<module>gpi</module>-->
-        <!--<module>integration-tests</module>-->
+        <module>gds</module>
+        <module>gds-fp</module>
+        <!-- <module>gds-api</module>
+        <module>gds-config-validator</module>
+        <module>gds-performance-monitoring</module>
+        <module>gds-keywords-database</module>
+        <module>gds-actors-composer</module>
+        <module>gds-epics-actors</module>
+        <module>gds-instrument-status-actors</module>
+        <module>gds-properties-actors</module>
+        <module>gds-obsevent-handler</module>
+        <module>gds-datalabel-provider</module>
+        <module>gds-static-header-receiver</module>
+        <module>gds-seqexec-actors</module>
+        <module>gds-postprocessing-policy</module>
+        <module>gds-health</module>
+        <module>gds-observation-state-publisher</module>
+        <module>gds-fits-checker</module>
+        <module>gpi</module>
+        <module>integration-tests</module> -->
         <module>distribution</module>
     </modules>
 
