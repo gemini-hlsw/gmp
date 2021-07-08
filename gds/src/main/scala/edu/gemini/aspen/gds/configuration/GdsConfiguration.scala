@@ -9,7 +9,17 @@ final case class ObservationConfig(
   eventRetries: RetryConfig
 )
 
-final case class FitsConfig(sourceDir: Path, destDir: Path, addSuffix: Boolean)
+final case class SetOwnerConfig(owner: String, useSudo: Boolean)
+final case class SetPermissionsConfig(permissions: String, useSudo: Boolean)
+final case class FitsConfig(
+  sourceDir:      Path,
+  destDir:        Path,
+  addSuffix:      Boolean,
+  setOwner:       Option[SetOwnerConfig],
+  setPermissions: Option[SetPermissionsConfig],
+  deleteOriginal: Boolean
+)
+
 final case class RetryConfig(retries: Int, sleep: FiniteDuration)
 final case class GdsConfiguration(
   keywords:       List[KeywordConfigurationItem],

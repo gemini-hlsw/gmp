@@ -48,13 +48,6 @@ object Main {
       fitsProcess   = Stream.fromQueueUnterminated(fitsQ).foreach { case (dl, kwl) =>
                         fitsProcessor.processFile(dl, kwl)
                       }
-      tempStream    = // just to show something happening in the console
-        Stream.repeatEval(IO(println(java.time.LocalTime.now))).metered(5.second)
-      app          <- Stream(seqexecServer,
-                             obsPurge,
-                             obsProcess,
-                             fitsProcess,
-                             tempStream
-                      ).parJoinUnbounded.compile.drain
+      app          <- Stream(seqexecServer, obsPurge, obsProcess, fitsProcess).parJoinUnbounded.compile.drain
     } yield app
 }

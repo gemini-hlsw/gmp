@@ -2,7 +2,13 @@ package edu.gemini.aspen.gds.fits
 
 import cats.effect.Async
 import cats.syntax.all._
-import edu.gemini.aspen.gds.configuration.{ FitsConfig, KeywordConfigurationItem }
+import com.google.common.io.{ Files => GFiles }
+import edu.gemini.aspen.gds.configuration.{
+  FitsConfig,
+  KeywordConfigurationItem,
+  SetOwnerConfig,
+  SetPermissionsConfig
+}
 import edu.gemini.aspen.gds.keywords.CollectedKeyword
 import edu.gemini.aspen.gds.model.KeywordSource
 import edu.gemini.aspen.gds.syntax.all._
@@ -11,7 +17,8 @@ import edu.gemini.aspen.giapi.data.DataLabel
 import fs2.io.file.{ Files => Fs2Files }
 import java.nio.file.Path
 import java.util.logging.Logger
-import com.google.common.io.{ Files => GFiles }
+import scala.concurrent.duration._
+import scala.sys.process._
 
 sealed trait FitsFileProcessor[F[_]] {
   def processFile(dataLabel: DataLabel, keywords: List[CollectedKeyword]): F[Unit]
@@ -19,8 +26,6 @@ sealed trait FitsFileProcessor[F[_]] {
 
 object FitsFileProcessor {
   private val logger = Logger.getLogger(this.getClass.getName)
-
-  // TODO: Implement change owner and permissions and other postprocessing policies if needed
 
   def apply[F[_]](
     fitsConfig:     FitsConfig,
@@ -46,6 +51,9 @@ object FitsFileProcessor {
           cards  <- processKeywordsToCards(keywords)
           _      <- FitsFileTransferrer.transfer(source, dest, requiredKeywords, cards)
           _      <- logger.infoF(s"FITS file $dest transfer completed.")
+          _      <- setPermissions(dest, fitsConfig.setPermissions)
+          _      <- setOwner(dest, fitsConfig.setOwner)
+          _      <- deleteOriginal(source, fitsConfig.deleteOriginal)
         } yield ()
         result.handleErrorWith(e =>
           logger.severeF(
@@ -159,6 +167,62 @@ object FitsFileProcessor {
 
       def formatMessage(item: KeywordConfigurationItem, msg: String): String =
         s"Keyword: ${item.keyword.key}: $msg"
-    }
 
+      def setOwner(dest: Path, config: Option[SetOwnerConfig]): F[Unit] = config match {
+        case Some(c) =>
+          val cmd = s"${if (c.useSudo) "sudo " else ""}chown ${c.owner} $dest"
+          for {
+            _ <- logger.infoF(s"Changing ownership of `$dest` to `${c.owner}` with command: $cmd")
+            b <- runCommand(cmd)
+            _ <- if (b) F.unit else logger.severeF(s"Failed to change ownership of `$dest`")
+          } yield ()
+        case None    => F.unit
+      }
+
+      def setPermissions(dest: Path, config: Option[SetPermissionsConfig]): F[Unit] = config match {
+        case Some(c) =>
+          val cmd = s"${if (c.useSudo) "sudo " else ""}chmod ${c.permissions} $dest"
+          for {
+            _ <- logger.infoF(
+                   s"Changing permissions of `$dest` to `${c.permissions}` with command: $cmd"
+                 )
+            b <- runCommand(cmd)
+            _ <- if (b) F.unit else logger.severeF(s"Failed to change permissions of `$dest`")
+          } yield ()
+        case None    => F.unit
+      }
+
+      def deleteOriginal(file: Path, deleteIt: Boolean): F[Unit] =
+        if (deleteIt)
+          logger.infoF(s"Deleting original FITS file: $file") >> Fs2Files[F]
+            .delete(file)
+            .handleErrorWith(e => logger.severeF(s"Failed to delete original file: $file", e))
+        else F.unit
+
+      def runCommand(command: String): F[Boolean] = {
+        val plogger =
+          ProcessLogger(normalLine => logger.info(s"Command output: $normalLine"),
+                        errorLine => logger.severe(s"Command error: $errorLine")
+          )
+        for {
+          process <- F.delay(command.run(plogger))
+          // we need to timeout in case the command hangs. For example, if sudo is used, and a password is required.
+          // Neither of the commands should take long to completed.
+          result  <- waitForResult(process, 10)
+          success <- result match {
+                       case Some(r) =>
+                         if (r == 0) true.pure
+                         else
+                           logger.severeF(s"Command failed with a result of $r: $command").as(false)
+                       case None    => logger.severeF(s"Command timed out: $command").as(false)
+                     }
+        } yield success
+      }
+
+      def waitForResult(process: Process, remaining: Int): F[Option[Int]] =
+        if (process.isAlive())
+          if (remaining > 0) F.sleep(250.milliseconds) >> waitForResult(process, remaining - 1)
+          else F.blocking(process.destroy()).as(none)
+        else F.blocking(process.exitValue().some)
+    }
 }
