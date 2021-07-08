@@ -62,6 +62,7 @@ class GDSConfigurationServiceFactory(
     val keywordRetries = asPosInt(props, "keyword.collection.retries")
     val keywordSleep   = asDuration(props, "keyword.collection.sleep")
     val seqexecPort    = asPosInt(props, "seqexec.server.port")
+    val fitsDelOrig    = asBool(props, "fits.deleteOriginal")
 
     val configValidated = (keywordConfig,
                            cleanupRate,
@@ -73,13 +74,16 @@ class GDSConfigurationServiceFactory(
                            seqexecPort,
                            fitsSrcDir,
                            fitsDestDir,
-                           fitsAddSuffix
-    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, fsd, fdd, fas) =>
+                           fitsAddSuffix,
+                           fitsSetOwner(props),
+                           fitsSetPermissions(props),
+                           fitsDelOrig
+    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, fsd, fdd, fas, fso, fsp, fdo) =>
       GdsConfiguration(kc,
                        ObservationConfig(cr, lf, RetryConfig(er, es)),
                        RetryConfig(kr, ks),
                        sp,
-                       FitsConfig(fsd, fdd, fas)
+                       FitsConfig(fsd, fdd, fas, fso, fsp, fdo)
       )
     }
 
@@ -101,6 +105,11 @@ class GDSConfigurationServiceFactory(
       s.toIntOption
         .flatMap(i => if (i > 0) i.some else none)
         .toValidNec(s"Invalid positive integer `$s` for `$key`")
+    )
+
+  private def asBool(props: Map[String, _], key: String): ValidatedNec[String, Boolean] =
+    asString(props, key).andThen(s =>
+      s.toBooleanOption.toValidNec(s"Invalid boolean `$s` for `$key`")
     )
 
   private def asDuration(props: Map[String, _], key: String): ValidatedNec[String, FiniteDuration] =
@@ -143,6 +152,27 @@ class GDSConfigurationServiceFactory(
         .toValidNec(
           s"Invalid boolean `$s` for PropertyHolder service key `$appendFitsExtKey`"
         )
+    }
+
+  private def fitsSetOwner(props: Map[String, _]): ValidatedNec[String, Option[SetOwnerConfig]] =
+    asBool(props, "fits.setOwner").andThen { b =>
+      if (b) {
+        val owner = asString(props, "fits.setOwner.owner")
+        val sudo  = asBool(props, "fits.setOwner.useSudo")
+        (owner, sudo).mapN { case (o, s) => SetOwnerConfig(o, s).some }
+      } else none.validNec
+    }
+
+  private def fitsSetPermissions(
+    props: Map[String, _]
+  ): ValidatedNec[String, Option[SetPermissionsConfig]] =
+    asBool(props, "fits.setPermissions").andThen { b =>
+      if (b) {
+        // validate the permissions format?
+        val perms = asString(props, "fits.setPermissions.permissions")
+        val sudo  = asBool(props, "fits.setPermissions.useSudo")
+        (perms, sudo).mapN { case (p, s) => SetPermissionsConfig(p, s).some }
+      } else none.validNec
     }
 
   private def logErrors(errors: NonEmptyChain[String]): Unit = {
