@@ -3,7 +3,7 @@
 ---------------
 To build the project you need to install the following:
 
-- Java JDK 1.6 or higher
+- Java JDK 1.8 or higher
 - Maven 3, version 3.0.3 or higher.
 
 2. Build and deploy locally
