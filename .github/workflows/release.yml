@@ -39,6 +39,7 @@ jobs:
           cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-${{ github.ref_name }}.rpm
       - name: Rename tarball
         run: |
+          ls distribution/target
           cp distribution/target/gmp-server-*.tar.gz gmp-server-${{ github.ref_name }}.tar.gz
       - name: Upload rpm
         id: upload-release-rpm
