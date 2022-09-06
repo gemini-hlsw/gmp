@@ -41,7 +41,7 @@ jobs:
         run: |
           cp distribution/target/gmp-server-${{ github.ref_name }}.tar.gz
       - name: Upload rpm
-        id: upload-release-asset
+        id: upload-release-rpm
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
           asset_name: gmp-server-${{ github.ref_name }}.rpm
           asset_content_type: application/x-rpm
       - name: Upload tarball
-        id: upload-release-asset
+        id: upload-release-tarball
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
