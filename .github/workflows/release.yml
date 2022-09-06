@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Set up JDK 1.8
-        uses: olafurpg/setup-scala@v2
+        uses: olafurpg/setup-scala@v12
         with:
-          java-version: 1.8
+          java-version: adopt@1.8
       - uses: actions/cache@v1
         with:
           path: ~/.m2/repository
@@ -34,12 +34,9 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Rename rpm
         run: |
-          cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-${{ steps.get_version.outputs.VERSION }}.rpm
+          cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-${{ github.ref_name }}.rpm
       - name: Upload release assets
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -47,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: gmp-server-${{ steps.get_version.outputs.VERSION }}.rpm
-          asset_name: gmp-server-${{ steps.get_version.outputs.VERSION }}.rpm
+          asset_path: gmp-server-${{ github.ref_name }}.rpm
+          asset_name: gmp-server-${{ github.ref_name }}.rpm
           asset_content_type: application/x-rpm
