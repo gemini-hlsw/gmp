@@ -26,8 +26,10 @@ jobs:
         run: mvn -Pproduction clean install
       - name: Release
         uses: qcastel/github-actions-maven-release@master
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-1.8-openjdk/
         with:
-          release-branch-name: v0.1.2-M7
+          release-branch-name: v0.1.2-M8
           version-minor: true
 
           git-release-bot-name: "bot-idhub"
