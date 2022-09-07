@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>gmp-server</artifactId>
-    <version>15.0.8-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 

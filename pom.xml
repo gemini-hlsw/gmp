@@ -144,7 +144,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>3.0.0-M1</version>
                 <configuration>
-                    <tagNameFormat>GMP-R@{project.version}</tagNameFormat>
+                    <tagNameFormat>${project.version}</tagNameFormat>
                     <remoteTagging>false</remoteTagging>
                 </configuration>
                 <dependencies>
@@ -1012,8 +1012,10 @@
     </repositories>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:gemini-hlsw/gmp.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+            <connection>scm:git:${project.scm.url}</connection>
+            <developerConnection>scm:git:${project.scm.url}</developerConnection>
+            <url>git@github.com:gemini-hlsw/gmp.git</url>
+            <tag>HEAD</tag>
+    </scm>
 
 </project>
