@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v3
         with:
           distribution: 'adopt' # See 'Supported distributions' for available options
@@ -27,7 +29,7 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-1.8-openjdk/
         with:
-          release-branch-name: v0.1.2-M11
+          release-branch-name: v0.1.2-M12
           version-minor: true
 
           git-release-bot-name: "bot-idhub"
