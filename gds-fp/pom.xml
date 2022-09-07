@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gds</groupId>
     <artifactId>gds-fp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <name>GDS FP</name>
     <description>The module contains the typelevel and other non-osgi functional programming dependencies for GDS</description>
