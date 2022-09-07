@@ -53,7 +53,7 @@
         <junit.version>4.13.2</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
 
         <gmp.version>${project.version}</gmp.version>
         <!-- Global encoding -->

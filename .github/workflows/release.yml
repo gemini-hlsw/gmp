@@ -29,7 +29,7 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-1.8-openjdk/
         with:
-          release-branch-name: v0.1.2-M8
+          release-branch-name: v0.1.2-M9
           version-minor: true
 
           git-release-bot-name: "bot-idhub"
