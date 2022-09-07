@@ -53,6 +53,7 @@
         <junit.version>4.13.2</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
+        <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
 
         <gmp.version>${project.version}</gmp.version>
         <!-- Global encoding -->
@@ -142,10 +143,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>${maven-release-plugin.version}</version>
                 <configuration>
-                    <tagNameFormat>GMP-R@{project.version}</tagNameFormat>
-                    <remoteTagging>false</remoteTagging>
+                    <scmCommentPrefix>[ci skip]</scmCommentPrefix>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -1022,8 +1023,10 @@
     </repositories>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:gemini-hlsw/gmp.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>git@github.com:gemini-hlsw/gmp.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>
