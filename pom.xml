@@ -44,7 +44,7 @@
         <pax-web.version>6.1.2</pax-web.version>
         <pax-logging.version>1.10.1</pax-logging.version>
         <pax-runner.version>1.9.0</pax-runner.version>
-        <scala-lang.version>2.13.6</scala-lang.version>
+        <scala-lang.version>2.13.9</scala-lang.version>
         <scalatest.version>3.2.2</scalatest.version>
         <scalatestplus-junit.version>3.2.4.0-M1</scalatestplus-junit.version>
         <scalatestplus-mockito.version>3.2.2.0</scalatestplus-mockito.version>
