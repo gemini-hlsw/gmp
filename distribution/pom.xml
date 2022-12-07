@@ -144,22 +144,22 @@
             <artifactId>gds-fits-checker</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-            <artifactId>gds-web-ui-configuration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-            <artifactId>gds-web-ui-keywords</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-            <artifactId>gds-web-ui-logs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-            <artifactId>gds-web-ui-status</artifactId>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>edu.gemini.aspen.gds.web.ui</groupId> -->
+        <!--     <artifactId>gds-web-ui-configuration</artifactId> -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!--     <groupId>edu.gemini.aspen.gds.web.ui</groupId> -->
+        <!--     <artifactId>gds-web-ui-keywords</artifactId> -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!--     <groupId>edu.gemini.aspen.gds.web.ui</groupId> -->
+        <!--     <artifactId>gds-web-ui-logs</artifactId> -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!--     <groupId>edu.gemini.aspen.gds.web.ui</groupId> -->
+        <!--     <artifactId>gds-web-ui-status</artifactId> -->
+        <!-- </dependency> -->
 
         <dependency>
             <groupId>edu.gemini.aspen.gmp</groupId>

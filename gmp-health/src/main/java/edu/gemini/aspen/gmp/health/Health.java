@@ -5,7 +5,6 @@ import edu.gemini.aspen.giapi.status.setter.StatusSetter;
 import edu.gemini.gmp.top.Top;
 import edu.gemini.jms.api.JmsArtifact;
 import edu.gemini.jms.api.JmsProvider;
-import org.apache.felix.ipojo.annotations.*;
 
 import javax.jms.JMSException;
 import java.util.concurrent.ScheduledFuture;

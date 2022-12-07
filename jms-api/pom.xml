@@ -41,8 +41,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>com.springsource.javax.jms</artifactId>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
         </dependency>
     </dependencies>
 

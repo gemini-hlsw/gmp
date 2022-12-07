@@ -59,7 +59,7 @@
         </dependency>
         <dependency>
             <groupId>edu.gemini.external.osgi.nom.tam</groupId>
-            <artifactId>fits</artifactId>
+            <artifactId>nom-tam-fits</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>

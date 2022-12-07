@@ -73,8 +73,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>com.springsource.javax.jms</artifactId>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
         </dependency>
         <!-- Start dependencies for activemq broker -->
         <dependency>
@@ -165,10 +165,10 @@
             <groupId>edu.gemini.aspen.gds</groupId>
             <artifactId>gds-performance-monitoring</artifactId>
         </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-            <artifactId>gds-web-ui</artifactId>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>edu.gemini.aspen.gds.web.ui</groupId> -->
+        <!--     <artifactId>gds-web-ui</artifactId> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>edu.gemini.external.osgi.gov.aps.jca</groupId>
             <artifactId>jca</artifactId>
@@ -251,7 +251,7 @@
         </dependency>
         <dependency>
             <groupId>edu.gemini.external.osgi.nom.tam</groupId>
-            <artifactId>fits</artifactId>
+            <artifactId>nom-tam-fits</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
