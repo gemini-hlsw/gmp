@@ -53,8 +53,12 @@
         <junit.version>4.13.2</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
+        <slf4j.api.version>1.7.30</slf4j.api.version>
         <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
 
+        <fs2.version>3.0.4</fs2.version>
+        <fs2.core>fs2-core_2.13</fs2.core>
+        <fs2.io>fs2-io_2.13</fs2.io>
         <gmp.version>${project.version}</gmp.version>
         <!-- Global encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -501,14 +505,22 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.5.11</version>
+                <version>${slf4j.api.version}</version>
                 <scope>provided</scope>
+                <optional>true</optional>
             </dependency>
+
+            <!-- <dependency> -->
+            <!--     <groupId>org.slf4j</groupId> -->
+            <!--     <artifactId>slf4j-api</artifactId> -->
+            <!--     <version>${slf4j.api.version}</version> -->
+            <!--     <scope>provided</scope> -->
+            <!-- </dependency> -->
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.5.11</version>
+                <version>${slf4j.api.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -844,6 +856,29 @@
                 <artifactId>jzlib</artifactId>
                 <version>1.0.7</version>
             </dependency>
+            <dependency>
+                <groupId>edu.gemini.gds</groupId>
+                <artifactId>gds-fp</artifactId>
+                <version>0.0.8</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>co.fs2</artifactId>
+                        <groupId>fs2-core_2.13</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>co.fs2</artifactId>
+                        <groupId>fs2-io_2.13</groupId>
+                    </exclusion>
+                    <!-- <exclusion> -->
+                    <!--     <artifactId>org.http4s</artifactId> -->
+                    <!--     <groupId>http4s-blaze-server_2.13</groupId> -->
+                    <!-- </exclusion> -->
+                    <exclusion>
+                        <artifactId>org.http4s</artifactId>
+                        <groupId>http4s-dsl_2.13</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -927,58 +962,82 @@
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.configadmin</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>org.slf4j</groupId> -->
+        <!--     <artifactId>slf4j-log4j12</artifactId> -->
+        <!--     &#60;&#33;&#45;&#45; <scope>provided</scope> &#45;&#45;&#62; -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!--     <groupId>co.fs2</groupId> -->
+        <!--     <artifactId>${fs2.io}</artifactId> -->
+        <!--     <version>${fs2.version}</version> -->
+        <!--     <exclusions> -->
+        <!--         <exclusion> -->
+        <!--             <groupId>com.comcast</groupId> -->
+        <!--             <artifactId>ip4s-core_2.13</artifactId> -->
+        <!--         </exclusion> -->
+        <!--         <exclusion> -->
+        <!--           <groupId>org.scodec</groupId> -->
+        <!--           <artifactId>scodec-bits_2.13</artifactId> -->
+        <!--         </exclusion> -->
+        <!--     </exclusions> -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!--     <groupId>co.fs2</groupId> -->
+        <!--     <artifactId>${fs2.core}</artifactId> -->
+        <!--     <version>${fs2.version}</version> -->
+            <!-- <exclusions> -->
+            <!--     <exclusion> -->
+            <!--       <groupId>org.scodec</groupId> -->
+            <!--       <artifactId>scodec-bits_2.13</artifactId> -->
+            <!--     </exclusion> -->
+            <!-- </exclusions> -->
+        <!-- </dependency> -->
     </dependencies>
 
     <modules>
         <module>poms</module>
-        <module>cas</module>
-        <module>casdb</module>
-        <module>epics-api</module>
-        <module>epics-heartbeat</module>
-        <module>epics-service</module>
-        <module>giapi</module>
-        <module>jms-api</module>
-        <module>giapi-jms-util</module>
-        <module>giapi-fileevent-handler</module>
-        <module>giapi-test-support</module>
-        <module>giapi-obsevents</module>
-        <module>giapi-status-service</module>
-        <module>giapi-status-setter</module>
-        <module>giapi-status-dispatcher</module>
-        <module>giapi-clients-lib</module>
-        <module>gmp-status-translator</module>
-        <module>giapi-fileevents</module>
-        <module>jms-activemq-broker</module>
-        <module>jms-activemq-provider</module>
-        <module>gmp-tcs-context</module>
-        <module>gmp-logging</module>
-        <module>gmp-command-handlers</module>
-        <module>gmp-commands</module>
-        <module>gmp-commands-jms-bridge</module>
-        <module>gmp-commands-jms-client</module>
-        <module>gmp-commands-records</module>
-        <module>gmp-services</module>
-        <module>gmp-pcs-updater</module>
-        <module>gmp-status-gateway</module>
-        <module>gmp-statusdb</module>
-        <module>gmp-epics-access</module>
-        <module>gmp-epics-simulator</module>
-        <module>gmp-status-simulator</module>
-        <module>gmp-epics-status-service</module>
-        <module>gmp-health</module>
-        <module>gmp-heartbeat</module>
-        <module>gmp-heartbeat-distributor-service</module>
-        <module>giapi-tester</module>
-        <module>gmp-webconsole-branding</module>
-        <module>gmp-webconsole-docs</module>
-        <module>gmp-top</module>
-        <module>gmp-epics-to-status</module>
+        <!-- <module>cas</module> -->
+        <!-- <module>casdb</module> -->
+        <!-- <module>epics-api</module> -->
+        <!-- <module>epics-heartbeat</module> -->
+        <!-- <module>epics-service</module> -->
+        <!-- <module>giapi</module> -->
+        <!-- <module>jms-api</module> -->
+        <!-- <module>giapi-jms-util</module> -->
+        <!-- <module>giapi-fileevent-handler</module> -->
+        <!-- <module>giapi-test-support</module> -->
+        <!-- <module>giapi-obsevents</module> -->
+        <!-- <module>giapi-status-service</module> -->
+        <!-- <module>giapi-status-setter</module> -->
+        <!-- <module>giapi-status-dispatcher</module> -->
+        <!-- <module>giapi-clients-lib</module> -->
+        <!-- <module>gmp-status-translator</module> -->
+        <!-- <module>giapi-fileevents</module> -->
+        <!-- <module>jms-activemq-broker</module> -->
+        <!-- <module>jms-activemq-provider</module> -->
+        <!-- <module>gmp-tcs-context</module> -->
+        <!-- <module>gmp-logging</module> -->
+        <!-- <module>gmp-command-handlers</module> -->
+        <!-- <module>gmp-commands</module> -->
+        <!-- <module>gmp-commands-jms-bridge</module> -->
+        <!-- <module>gmp-commands-jms-client</module> -->
+        <!-- <module>gmp-commands-records</module> -->
+        <!-- <module>gmp-services</module> -->
+        <!-- <module>gmp-pcs-updater</module> -->
+        <!-- <module>gmp-status-gateway</module> -->
+        <!-- <module>gmp-statusdb</module> -->
+        <!-- <module>gmp-epics-access</module> -->
+        <!-- <module>gmp-epics-simulator</module> -->
+        <!-- <module>gmp-status-simulator</module> -->
+        <!-- <module>gmp-epics-status-service</module> -->
+        <!-- <module>gmp-health</module> -->
+        <!-- <module>gmp-heartbeat</module> -->
+        <!-- <module>gmp-heartbeat-distributor-service</module> -->
+        <!-- <module>giapi-tester</module> -->
+        <!-- <module>gmp-top</module> -->
+        <!-- <module>gmp-epics-to-status</module> -->
         <module>gds</module>
-        <module>gds-fp</module>
         <!-- <module>gds-api</module>
         <module>gds-config-validator</module>
         <module>gds-performance-monitoring</module>
@@ -997,7 +1056,7 @@
         <module>gds-fits-checker</module>
         <module>gpi</module>
         <module>integration-tests</module> -->
-        <module>distribution</module>
+        <!-- <module>distribution</module> -->
     </modules>
 
     <distributionManagement>
