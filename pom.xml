@@ -492,6 +492,11 @@
                 <version>1.1.1</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-annotation_1.0_spec</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
@@ -908,6 +913,10 @@
             <groupId>gsbase</groupId>
             <artifactId>gsbase</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-annotation_1.0_spec</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.osgi</groupId>
@@ -997,46 +1006,46 @@
 
     <modules>
         <module>poms</module>
-        <!-- <module>cas</module> -->
-        <!-- <module>casdb</module> -->
-        <!-- <module>epics-api</module> -->
-        <!-- <module>epics-heartbeat</module> -->
-        <!-- <module>epics-service</module> -->
-        <!-- <module>giapi</module> -->
-        <!-- <module>jms-api</module> -->
-        <!-- <module>giapi-jms-util</module> -->
-        <!-- <module>giapi-fileevent-handler</module> -->
-        <!-- <module>giapi-test-support</module> -->
-        <!-- <module>giapi-obsevents</module> -->
-        <!-- <module>giapi-status-service</module> -->
-        <!-- <module>giapi-status-setter</module> -->
-        <!-- <module>giapi-status-dispatcher</module> -->
-        <!-- <module>giapi-clients-lib</module> -->
-        <!-- <module>gmp-status-translator</module> -->
-        <!-- <module>giapi-fileevents</module> -->
-        <!-- <module>jms-activemq-broker</module> -->
-        <!-- <module>jms-activemq-provider</module> -->
-        <!-- <module>gmp-tcs-context</module> -->
-        <!-- <module>gmp-logging</module> -->
-        <!-- <module>gmp-command-handlers</module> -->
-        <!-- <module>gmp-commands</module> -->
-        <!-- <module>gmp-commands-jms-bridge</module> -->
-        <!-- <module>gmp-commands-jms-client</module> -->
-        <!-- <module>gmp-commands-records</module> -->
-        <!-- <module>gmp-services</module> -->
-        <!-- <module>gmp-pcs-updater</module> -->
-        <!-- <module>gmp-status-gateway</module> -->
-        <!-- <module>gmp-statusdb</module> -->
-        <!-- <module>gmp-epics-access</module> -->
-        <!-- <module>gmp-epics-simulator</module> -->
-        <!-- <module>gmp-status-simulator</module> -->
-        <!-- <module>gmp-epics-status-service</module> -->
-        <!-- <module>gmp-health</module> -->
-        <!-- <module>gmp-heartbeat</module> -->
-        <!-- <module>gmp-heartbeat-distributor-service</module> -->
-        <!-- <module>giapi-tester</module> -->
-        <!-- <module>gmp-top</module> -->
-        <!-- <module>gmp-epics-to-status</module> -->
+        <module>cas</module>
+        <module>casdb</module>
+        <module>epics-api</module>
+        <module>epics-heartbeat</module>
+        <module>epics-service</module>
+        <module>giapi</module>
+        <module>jms-api</module>
+        <module>giapi-jms-util</module>
+        <module>giapi-fileevent-handler</module>
+        <module>giapi-test-support</module>
+        <module>giapi-obsevents</module>
+        <module>giapi-status-service</module>
+        <module>giapi-status-setter</module>
+        <module>giapi-status-dispatcher</module>
+        <module>giapi-clients-lib</module>
+        <module>gmp-status-translator</module>
+        <module>giapi-fileevents</module>
+        <module>jms-activemq-broker</module>
+        <module>jms-activemq-provider</module>
+        <module>gmp-tcs-context</module>
+        <module>gmp-logging</module>
+        <module>gmp-command-handlers</module>
+        <module>gmp-commands</module>
+        <module>gmp-commands-jms-bridge</module>
+        <module>gmp-commands-jms-client</module>
+        <module>gmp-commands-records</module>
+        <module>gmp-services</module>
+        <module>gmp-pcs-updater</module>
+        <module>gmp-status-gateway</module>
+        <module>gmp-statusdb</module>
+        <module>gmp-epics-access</module>
+        <module>gmp-epics-simulator</module>
+        <module>gmp-status-simulator</module>
+        <module>gmp-epics-status-service</module>
+        <module>gmp-health</module>
+        <module>gmp-heartbeat</module>
+        <module>gmp-heartbeat-distributor-service</module>
+        <module>giapi-tester</module>
+        <module>gmp-top</module>
+        <module>gmp-epics-to-status</module>
         <module>gds</module>
         <!-- <module>gds-api</module>
         <module>gds-config-validator</module>
@@ -1054,9 +1063,9 @@
         <module>gds-health</module>
         <module>gds-observation-state-publisher</module>
         <module>gds-fits-checker</module>
-        <module>gpi</module>
-        <module>integration-tests</module> -->
-        <!-- <module>distribution</module> -->
+        <module>gpi</module-->
+        <module>integration-tests</module>
+        <module>distribution</module>
     </modules>
 
     <distributionManagement>
