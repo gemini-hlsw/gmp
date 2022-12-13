@@ -41,7 +41,7 @@ public class ReadOnlyClientEpicsChannelTest {
     @After
     public void tearDown() throws Exception {
         epicsService.stopService();
-		epicsService = null;
+		    epicsService = null;
 
         Thread.sleep(20);//can't start and stop immediately, and our tests are too short
         giapicas.stop();
