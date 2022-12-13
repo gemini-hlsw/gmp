@@ -341,11 +341,6 @@
                 <artifactId>gds</artifactId>
                 <version>0.0.4-SNAPSHOT</version>
             </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-fp</artifactId>
-                <version>0.0.4-SNAPSHOT</version>
-            </dependency>
             <!-- <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-api</artifactId>

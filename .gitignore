@@ -2021,3 +2021,5 @@ releases.properties
 .direnv/
 .metals/
 .pax/
+
+.bloop/
