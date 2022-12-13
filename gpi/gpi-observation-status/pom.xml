@@ -5,8 +5,7 @@
         <relativePath>../../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>15.0.1-SNAPSHOT</version>
-
+        <version>0.1.6-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -50,8 +49,8 @@
             <artifactId>epics-service</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.gemini.util.osgi</groupId>
-            <artifactId>osgi</artifactId>
+            <groupId>edu.gemini.ocs</groupId>
+            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
         </dependency>
     </dependencies>
 
