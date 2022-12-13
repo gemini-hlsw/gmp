@@ -70,8 +70,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>com.springsource.javax.jms</artifactId>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
         </dependency>
 
         <!-- Start dependencies for activemq broker -->
@@ -145,59 +145,15 @@
         </dependency>
         <dependency>
             <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-api</artifactId>
+            <artifactId>gds</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-actors-composer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-fits-updater</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-epics-actors</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-instrument-status-actors</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-obsevent-handler</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.gmp</groupId>
-            <artifactId>gmp-top</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-postprocessing-policy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-performance-monitoring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.external.osgi.org.epics</groupId>
-            <artifactId>jca</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-observation-state-publisher</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.util.osgi</groupId>
-            <artifactId>osgi</artifactId>
+            <groupId>edu.gemini.ocs</groupId>
+            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.13</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.web</groupId>
