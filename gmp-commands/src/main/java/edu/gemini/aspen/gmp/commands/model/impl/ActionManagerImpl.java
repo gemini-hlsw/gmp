@@ -216,11 +216,13 @@ public class ActionManagerImpl implements ActionManager {
     public void registerAction(Action action) {
         LOG.fine("Start monitoring progress for Action " + action);
         _actionQueue.add(action);
+	_handlerResponseTracker.initiateAction(action);
     }
 
     @Override
     public void unregisterAction(Action action) {
         LOG.fine("Stopped monitoring progress for Action " + action + ". Action Completed Immediately");
+	_handlerResponseTracker.terminateAction(action);
         _actionQueue.remove(action);
     }
 

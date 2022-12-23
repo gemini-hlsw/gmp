@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 
 /**
@@ -37,6 +38,22 @@ class HandlerResponseTracker {
 
         private AtomicInteger pendingResponses = new AtomicInteger(); //how many responses are required to complete the request
 
+	private AtomicBoolean handlingAction = new AtomicBoolean(false); //Set true when starting to handle an action, false when done
+
+
+        /**
+         * Initiates handling of responses for an action
+         */
+        public void initiateResponses() {
+            handlingAction.set(true);
+        }
+
+        /**
+         * Terminates responses for an action
+         */
+        public void terminateResponses() {
+            handlingAction.set(false);
+        }
 
         /**
          * Adds a response to the list.
@@ -46,6 +63,14 @@ class HandlerResponseTracker {
             analyzer.addResponse(response);
             pendingResponses.decrementAndGet();
         }
+
+	/**
+	 * Returns <code>true</code> if handling an action
+         * @return <code>true</code> if handling an action
+	 */
+	public boolean isHandlingAction() {
+	    return handlingAction.get();
+	}
 
         /**
          * Returns <code>true</code> if there are no more pending answers for this
@@ -109,7 +134,8 @@ class HandlerResponseTracker {
      */
     public boolean isComplete(Action action) {
         ResponseHolder responseHolder = _actionResponsesMap.get(action);
-        return responseHolder == null || responseHolder.hasNoPendingResponses();
+        return responseHolder == null || (responseHolder.hasNoPendingResponses() 
+					  && !responseHolder.isHandlingAction());
     }
 
 
@@ -128,6 +154,24 @@ class HandlerResponseTracker {
         }
         LOG.warning("We are not tracking progress for action " + action);
         return null;
+    }
+
+    /**
+     * Initiates response handling for an action
+     * @param a the action for which we initiate response handling
+     */
+    public void initiateAction(Action a) {
+        ResponseHolder responseHolder = getResponseHolder(a);
+        responseHolder.initiateResponses();
+    }
+
+    /**
+     * Terminatess response handling for an action
+     * @param a the action for which we terminate response handling
+     */
+    public void terminateAction(Action a) {
+        ResponseHolder responseHolder = getResponseHolder(a);
+        responseHolder.terminateResponses();
     }
 
     /**
