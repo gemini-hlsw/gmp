@@ -46,7 +46,6 @@
                         <excludes>
                             <exclude>org.apache.activemq:kahadb</exclude>
                             <exclude>edu.gemini.aspen:giapi-test-support</exclude>
-                            <exclude>org.apache.geronimo.specs:geronimo-jms_1.1_spec</exclude>
                             <exclude>org.apache.felix:org.apache.felix.ipojo.metadata</exclude>
                         </excludes>
                     </artifactSet>

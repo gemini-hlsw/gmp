@@ -452,17 +452,6 @@
                 <version>0.3.7</version>
             </dependency>
             <dependency>
-                <groupId>edu.gemini.aspen.gmp</groupId>
-                <artifactId>gmp-webconsole-docs</artifactId>
-                <version>0.1.27</version>
-                <type>war</type>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gmp</groupId>
-                <artifactId>gmp-webconsole-branding</artifactId>
-                <version>0.1.27</version>
-            </dependency>
-            <dependency>
                 <groupId>edu.gemini.aspen.gds.web.ui</groupId>
                 <artifactId>gds-web-ui-keywords</artifactId>
                 <version>0.1.27</version>
@@ -1008,8 +997,6 @@
         <module>gmp-heartbeat</module>
         <module>gmp-heartbeat-distributor-service</module>
         <module>giapi-tester</module>
-        <module>gmp-webconsole-branding</module>
-        <module>gmp-webconsole-docs</module>
         <module>epics-heartbeat</module>
         <module>gmp-tui</module>
         <module>gmp-top</module>
@@ -1032,13 +1019,6 @@
         <module>gds-health</module>
         <module>gds-observation-state-publisher</module>
         <module>gds-fits-checker</module>
-        <!-- <module>giapi-vaadin-common</module> -->
-        <!-- <module>gds-web-ui</module> -->
-        <!-- <module>gds-web-ui-keywords</module> -->
-        <!-- <module>gds-web-ui-configuration</module> -->
-        <!-- <module>gds-web-ui-status</module> -->
-        <!-- <module>gds-web-ui-logs</module> -->
-        <!-- <module>gmp-web-ui-properties</module> -->
         <module>gpi</module>
         <module>integration-tests</module>
         <module>distribution</module>
