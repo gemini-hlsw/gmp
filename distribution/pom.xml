@@ -118,6 +118,58 @@
             <artifactId>gmp-health</artifactId>
         </dependency>
 
+        <!-- GDS health imports all the GDS bundles -->
+        <!--dependency>
+            <groupId>edu.gemini.aspen.gds</groupId>
+            <artifactId>gds-health</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen.gds</groupId>
+            <artifactId>gds-constant-actors</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen.gds</groupId>
+            <artifactId>gds-properties-actors</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen.gds</groupId>
+            <artifactId>gds-postprocessing-policy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen.gds</groupId>
+            <artifactId>gds-fits-checker</artifactId>
+        </dependency-->
+
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-service</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-jetty-bundle</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-extender-whiteboard</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-extender-war</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.external.osgi.org.eclipse.jdt.core.compiler</groupId>
+            <artifactId>ecj</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

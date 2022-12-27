@@ -371,17 +371,6 @@
                 <artifactId>gmp-epics-status-service</artifactId>
                 <version>0.4.11-SNAPSHOT</version>
             </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gmp</groupId>
-                <artifactId>gmp-webconsole-docs</artifactId>
-                <version>0.2.11-SNAPSHOT</version>
-                <type>war</type>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gmp</groupId>
-                <artifactId>gmp-webconsole-branding</artifactId>
-                <version>0.2.11-SNAPSHOT</version>
-            </dependency>
 
             <!-- EProperties -->
             <dependency>
@@ -894,6 +883,8 @@
         <module>gmp-heartbeat</module>
         <module>gmp-heartbeat-distributor-service</module>
         <module>giapi-tester</module>
+        <module>epics-heartbeat</module>
+        <module>gmp-tui</module>
         <module>gmp-top</module>
         <module>gmp-epics-to-status</module>
         <module>gds</module>
