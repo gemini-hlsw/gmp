@@ -53,8 +53,12 @@
         <junit.version>4.13.2</junit.version>
         <felix.framework.version>5.4.0</felix.framework.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
+        <slf4j.api.version>1.7.30</slf4j.api.version>
         <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
 
+        <fs2.version>3.0.4</fs2.version>
+        <fs2.core>fs2-core_2.13</fs2.core>
+        <fs2.io>fs2-io_2.13</fs2.io>
         <gmp.version>${project.version}</gmp.version>
         <!-- Global encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -338,101 +342,6 @@
                 <version>0.0.4-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-fp</artifactId>
-                <version>0.0.4-SNAPSHOT</version>
-            </dependency>
-            <!-- <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-api</artifactId>
-                <version>0.6.13-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-actors-composer</artifactId>
-                <version>0.1.30-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-keywords-database</artifactId>
-                <version>0.2.30-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-config-validator</artifactId>
-                <version>0.1.30-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-datalabel-provider</artifactId>
-                <version>0.1.30-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-static-header-receiver</artifactId>
-                <version>0.2.29-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-seqexec-actors</artifactId>
-                <version>0.1.30-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-obsevent-handler</artifactId>
-                <version>0.4.13-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-instrument-status-actors</artifactId>
-                <version>0.1.30-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-properties-actors</artifactId>
-                <version>0.1.25-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-constant-actors</artifactId>
-                <version>0.2.19-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-performance-monitoring</artifactId>
-                <version>0.2.27-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-fits-updater</artifactId>
-                <version>0.4.15-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-epics-actors</artifactId>
-                <version>0.1.31-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-postprocessing-policy</artifactId>
-                <version>0.4.11-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-fits-checker</artifactId>
-                <version>0.4.14-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-health</artifactId>
-                <version>0.5.10-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds</groupId>
-                <artifactId>gds-observation-state-publisher</artifactId>
-                <version>0.4.19-SNAPSHOT</version>
-            </dependency> -->
-            <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-pcs-updater</artifactId>
                 <version>0.7.11-SNAPSHOT</version>
@@ -488,6 +397,11 @@
                 <version>1.1.1</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-annotation_1.0_spec</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
@@ -501,14 +415,15 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.5.11</version>
+                <version>${slf4j.api.version}</version>
                 <scope>provided</scope>
+                <optional>true</optional>
             </dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.5.11</version>
+                <version>${slf4j.api.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -552,12 +467,6 @@
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>kahadb</artifactId>
                 <version>${org.activemq.core.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.geronimo.specs</groupId>
-                <artifactId>geronimo-annotation_1.0_spec</artifactId>
-                <version>1.1.1</version>
                 <scope>runtime</scope>
             </dependency>
 
@@ -733,13 +642,6 @@
                 <version>1.0.1</version>
             </dependency>
 
-            <!-- Dependency on nom.tam.fits library -->
-            <dependency>
-                <groupId>edu.gemini.external.osgi.nom.tam</groupId>
-                <artifactId>fits</artifactId>
-                <version>1.0.8</version>
-            </dependency>
-
             <!-- PAX-Logging -->
             <dependency>
                 <groupId>org.ops4j.pax.logging</groupId>
@@ -844,6 +746,25 @@
                 <artifactId>jzlib</artifactId>
                 <version>1.0.7</version>
             </dependency>
+            <dependency>
+                <groupId>edu.gemini.gds</groupId>
+                <artifactId>gds-fp</artifactId>
+                <version>0.0.8</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>co.fs2</artifactId>
+                        <groupId>fs2-core_2.13</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>co.fs2</artifactId>
+                        <groupId>fs2-io_2.13</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>org.http4s</artifactId>
+                        <groupId>http4s-dsl_2.13</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -872,6 +793,10 @@
         <dependency>
             <groupId>gsbase</groupId>
             <artifactId>gsbase</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-annotation_1.0_spec</artifactId>
         </dependency>
 
         <dependency>
@@ -927,10 +852,6 @@
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.configadmin</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
     </dependencies>
 
     <modules>
@@ -973,30 +894,11 @@
         <module>gmp-heartbeat</module>
         <module>gmp-heartbeat-distributor-service</module>
         <module>giapi-tester</module>
-        <module>gmp-webconsole-branding</module>
-        <module>gmp-webconsole-docs</module>
         <module>gmp-top</module>
         <module>gmp-epics-to-status</module>
         <module>gds</module>
-        <module>gds-fp</module>
-        <!-- <module>gds-api</module>
-        <module>gds-config-validator</module>
-        <module>gds-performance-monitoring</module>
-        <module>gds-keywords-database</module>
-        <module>gds-actors-composer</module>
-        <module>gds-epics-actors</module>
-        <module>gds-instrument-status-actors</module>
-        <module>gds-properties-actors</module>
-        <module>gds-obsevent-handler</module>
-        <module>gds-datalabel-provider</module>
-        <module>gds-static-header-receiver</module>
-        <module>gds-seqexec-actors</module>
-        <module>gds-postprocessing-policy</module>
-        <module>gds-health</module>
-        <module>gds-observation-state-publisher</module>
-        <module>gds-fits-checker</module>
-        <module>gpi</module>
-        <module>integration-tests</module> -->
+        <!-- <module>gpi</module> -->
+        <module>integration-tests</module>
         <module>distribution</module>
     </modules>
 

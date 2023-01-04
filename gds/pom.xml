@@ -89,7 +89,7 @@
             <artifactId>edu-gemini-util-osgi_${scala.lib.suffix}</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
+            <groupId>edu.gemini.gds</groupId>
             <artifactId>gds-fp</artifactId>
         </dependency>
 
