@@ -37,7 +37,6 @@ class HandlerResponseTracker {
 
         private AtomicInteger pendingResponses = new AtomicInteger(); //how many responses are required to complete the request
 
-
         /**
          * Adds a response to the list.
          * @param response new response to be considered in the final result
@@ -80,13 +79,20 @@ class HandlerResponseTracker {
         public void addPendingResponse() {
             pendingResponses.incrementAndGet();
         }
+
+        /**
+         * Increments in one the number of responses needed.
+         */
+        public void removePendingResponse() {
+            pendingResponses.decrementAndGet();
+        }
     }
 
     /**
      * Map each action to a structure that keeps track of the responses obtained for that
      * action
      */
-    private Map<Action, ResponseHolder> _actionResponsesMap =
+    private final Map<Action, ResponseHolder> _actionResponsesMap =
             Collections.synchronizedMap(new HashMap<Action, ResponseHolder>());
 
     /**
@@ -141,6 +147,10 @@ class HandlerResponseTracker {
         responseHolder.addPendingResponse();
     }
 
+    public void decreaseRequiredResponses(Action a) {
+        ResponseHolder responseHolder = getResponseHolder(a);
+        responseHolder.removePendingResponse();
+    }
     /**
      * Remove the action from the list of tracked actions.
      * @param a action to remove

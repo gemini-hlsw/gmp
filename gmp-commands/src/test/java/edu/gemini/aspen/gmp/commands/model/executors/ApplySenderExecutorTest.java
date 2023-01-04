@@ -70,6 +70,14 @@ public class ApplySenderExecutorTest {
     }
 
     /**
+     * Count the handlers
+     */
+    @Test
+    public void testCountResponses() {
+        assertEquals(1, _executor.countExpectedResponses(_applyConfig, ConfigPath.EMPTY_PATH));
+    }
+
+    /**
      * Test that an APPLY command without configuration will produce an ERROR response
      */
     @Test
@@ -98,25 +106,4 @@ public class ApplySenderExecutorTest {
         HandlerResponse response = _executor.execute(action, sender);
         assertEquals(HandlerResponse.get(HandlerResponse.Response.NOANSWER), response);
     }
-
-    /**
-     * This test verifies that the handler response produced
-     * by the execute() method is the correct one.
-     */
-    @Test
-    public void testCorrectHandlerResponse() {
-        Command command = new Command(
-                SequenceCommand.APPLY,
-                Activity.START,
-                _applyConfig);
-
-        Action action = new Action(command, new CompletionListenerMock());
-
-        for (HandlerResponse response : _responses) {
-            ActionSender sender = new ActionSenderMock(response);
-            HandlerResponse myResponse = _executor.execute(action, sender);
-            assertEquals(response, myResponse);
-        }
-    }
-
 }

@@ -6,6 +6,8 @@ import edu.gemini.giapi.tool.arguments.*;
 import edu.gemini.giapi.tool.parser.Argument;
 import edu.gemini.giapi.tool.parser.Operation;
 import edu.gemini.jms.activemq.provider.ActiveMQJmsProvider;
+import com.google.common.base.Stopwatch;
+import java.util.concurrent.TimeUnit;
 
 import java.util.logging.Logger;
 
@@ -36,6 +38,11 @@ public class CommandOperation implements Operation {
         this.senderClient = senderClient;
     }
 
+    protected CommandOperation(CommandSenderClient senderClient, int timeout) {
+        this.senderClient = senderClient;
+        this.timeout = timeout;
+    }
+
     @Override
     public int execute() throws Exception {
         CommandSenderClient senderClient = buildCommandSender();
@@ -48,9 +55,10 @@ public class CommandOperation implements Operation {
         int result = 0;
         for (int x = 0; x < repetitions; x++) {
             WaitingCompletionListener listener = new WaitingCompletionListener();
-            HandlerResponse response = senderClient.sendCommand(command, listener);
+            Stopwatch stopwatch = Stopwatch.createStarted();
+            HandlerResponse response = senderClient.sendCommand(command, listener, timeout);
 
-            LOG.info("Response Received: " + response);
+            LOG.info("Response Received in " + stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " [ms]:" + response);
 
             if (response == HandlerResponse.STARTED) {
                 //now, wait for the answer, synchronously

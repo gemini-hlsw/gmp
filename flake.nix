@@ -17,9 +17,8 @@
       in {
         devShell = pkgs.devshell.mkShell {
           imports = [ typelevel-nix.typelevelShell ];
-          packages = [ 
+          packages = [
             (pkgs.maven.override { jdk = pkgs.jdk8; })
-            pkgs.rpm
           ];
           typelevelShell = { jdk.package = pkgs.jdk8; };
         };

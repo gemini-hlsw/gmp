@@ -56,17 +56,17 @@ public class ActionManagerImpl implements ActionManager {
     /**
      * A Lock to synchronize the action manager with the command sender.
      */
-    private Lock _lock = new ReentrantLock(true);
+    private final Lock _lock = new ReentrantLock(true);
 
     /**
      * Tracks the responses received for the tracked actions
      */
-    private HandlerResponseTracker _handlerResponseTracker = new HandlerResponseTracker();
+    private final HandlerResponseTracker _handlerResponseTracker = new HandlerResponseTracker();
 
     /**
      * A container for the update information received
      */
-    private class UpdateData {
+    private static final class UpdateData {
         int actionId;
         HandlerResponse response;
 
@@ -87,6 +87,19 @@ public class ActionManagerImpl implements ActionManager {
         if (action != null && action.getCommand().isApply()) {
             _handlerResponseTracker.increaseRequiredResponses(action);
         }
+    }
+
+    @Override
+    public void decreaseRequiredResponses(Action action) {
+        if (action != null && action.getCommand().isApply()) {
+            _handlerResponseTracker.decreaseRequiredResponses(action);
+        }
+
+    }
+
+    @Override
+    public boolean isComplete(Action action) {
+        return _handlerResponseTracker.isComplete(action);
     }
 
     /**
@@ -148,7 +161,7 @@ public class ActionManagerImpl implements ActionManager {
                         //store this response to combine it with the other answers we might receive for the same action
                         _handlerResponseTracker.storeResponse(action, response);
                         if (_handlerResponseTracker.isComplete(action)) {
-                            LOG.info("Updating clients with action " + action + " response " + response);
+                            LOG.info("Updating clients with action " + action + " response " + _handlerResponseTracker.getResponse(action));
                             action.sendResponseToListeners(_handlerResponseTracker.getResponse(action));
                             //remove the action from the list of tracked actions
                             _handlerResponseTracker.removeTrackedAction(action);
