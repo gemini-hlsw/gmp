@@ -14,6 +14,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CommandOperationTest {
+    int DEFAULT_COMMAND_RESPONSE_TIMEOUT = 1000;
+
     @Test
     public void testConstructionOfPark() {
         CommandOperation commandOperation = new CommandOperation();
@@ -64,7 +66,7 @@ public class CommandOperationTest {
 
         buildApplyCommand(commandOperation);
 
-        when(senderClient.sendCommand(Matchers.<Command>anyObject(), Matchers.<CompletionListener>anyObject())).thenReturn(HandlerResponse.createError("Error"));
+        when(senderClient.sendCommand(Matchers.<Command>anyObject(), Matchers.<CompletionListener>anyObject(), Matchers.anyInt())).thenReturn(HandlerResponse.createError("Error"));
 
         assertEquals(1, commandOperation.execute());
     }
@@ -92,7 +94,7 @@ public class CommandOperationTest {
         commandOperation.setArgument(secondConfigArgument);
 
         ArgumentCaptor<Command> argument = ArgumentCaptor.forClass(Command.class);
-        when(senderClient.sendCommand(argument.capture(), Matchers.<CompletionListener>anyObject())).thenReturn(HandlerResponse.createError("Error"));
+        when(senderClient.sendCommand(argument.capture(), Matchers.<CompletionListener>anyObject(), Matchers.anyInt())).thenReturn(HandlerResponse.createError("Error"));
 
         assertEquals(1, commandOperation.execute());
 
@@ -108,7 +110,7 @@ public class CommandOperationTest {
 
         buildApplyCommand(commandOperation);
 
-        when(senderClient.sendCommand(Matchers.<Command>anyObject(), Matchers.<CompletionListener>anyObject())).thenReturn(HandlerResponse.get(HandlerResponse.Response.NOANSWER));
+        when(senderClient.sendCommand(Matchers.<Command>anyObject(), Matchers.<CompletionListener>anyObject(), Matchers.anyInt())).thenReturn(HandlerResponse.get(HandlerResponse.Response.NOANSWER));
 
         assertEquals(1, commandOperation.execute());
     }
