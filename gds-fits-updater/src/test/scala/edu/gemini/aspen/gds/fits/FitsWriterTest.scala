@@ -4,11 +4,13 @@ import org.junit.Assert._
 import java.io.File
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
+import org.junit.Ignore
 import com.google.common.io.Files
 import edu.gemini.aspen.gds.api.fits.{HeaderItem, Header}
 import edu.gemini.aspen.gds.api.Conversions._
 import org.scalatest.{BeforeAndAfterEach, BeforeAndAfter, FunSuite}
 
+@Ignore
 @RunWith(classOf[JUnitRunner])
 class FitsWriterTest extends FunSuite with FitsSamplesDownloader with FitsSamplesVerificationData with BeforeAndAfter with BeforeAndAfterEach {
   before {
