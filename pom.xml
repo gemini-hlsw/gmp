@@ -926,12 +926,12 @@
             <artifactId>scala-library</artifactId>
         </dependency>
 
-        <!--dependency>
+        <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.ipojo.arch.gogo</artifactId>
             <version>1.0.1</version>
             <scope>provided</scope>
-        </dependency-->
+        </dependency>
 
         <!-- Felix Shell and remote shell -->
         <!--dependency>

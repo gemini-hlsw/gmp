@@ -59,7 +59,9 @@ public class ActiveMQBrokerFactory implements ManagedServiceFactory {
             properties.get(ConfigDefaults.BROKER_USE_ADVISORY_MESSAGES_PROPERTY) != null &&
             properties.get(ConfigDefaults.BROKER_JMX_RMI_PORT_PROPERTY) != null &&
             properties.get(ConfigDefaults.BROKER_JMX_CONNECTOR_PORT_PROPERTY) != null &&
-            properties.get(ConfigDefaults.BROKER_MEMORY_PERCENTAGE_PROPERTY) != null;
+            properties.get(ConfigDefaults.BROKER_MEMORY_PERCENTAGE_PROPERTY) != null &&
+            properties.get(ConfigDefaults.BROKER_MAX_STORAGE_MB_PROPERTY) != null && 
+            properties.get(ConfigDefaults.BROKER_MAX_MESSAGES_LIMIT_PROPERTY) != null;
     }
 
     @Override

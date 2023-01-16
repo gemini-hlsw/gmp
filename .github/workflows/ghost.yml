@@ -1,0 +1,55 @@
+name: release
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt' # See 'Supported distributions' for available options
+          java-version: '8'
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build rpm
+        run: mvn -Pproduction,ghost clean install
+      - name: Rename rpm
+        run: |
+          cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-ghost-${{ github.ref_name }}.rpm
+      - name: Rename tarball
+        run: |
+          ls distribution/target
+          cp distribution/target/gmp-server-*.tar.gz gmp-server-ghost${{ github.ref_name }}.tar.gz
+      - name: Upload rpm
+        id: upload-release-rpm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: gmp-server-ghost-${{ github.ref_name }}.rpm
+          asset_name: gmp-server-ghost--${{ github.ref_name }}.rpm
+          asset_content_type: application/x-rpm
+      - name: Upload tarball
+        id: upload-release-tarball
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: gmp-server-ghost-${{ github.ref_name }}.tar.gz
+          asset_name: gmp-server-ghost-${{ github.ref_name }}.tar.gz
+          asset_content_type: application/gzip
