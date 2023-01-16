@@ -77,6 +77,16 @@
             <directory>target/site/doxygen</directory>
             <outputDirectory>/doc</outputDirectory>
         </fileSet>
+        <!-- Copy startup scripts of any project specific config -->
+        <fileSet>
+            <directory>../instances/${gmp.instance}/src/main/etc/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>gmp-server-ctl.sh</include>
+            </includes>
+        </fileSet>
         <fileSet>
             <directory>src/main/etc/bin</directory>
             <fileMode>0755</fileMode>
@@ -87,13 +97,6 @@
                 <include>gmp-server-ctl.sh</include>
                 <include>gmp-server</include>
             </includes>
-        </fileSet>
-        <!-- Copy startup scripts of any project specific config -->
-        <fileSet>
-            <directory>../instances/${gmp.instance}/src/main/etc/bin</directory>
-            <outputDirectory>/bin</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <directory>../giapi-tester/src/main/etc/bin</directory>

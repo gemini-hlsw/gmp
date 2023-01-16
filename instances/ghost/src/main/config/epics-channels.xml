@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+    
+<!--
+Copyright RSAA, The Australian National University
+
+The Gemini High Resolution Optical Spectrograph
+ Project partners:
+    The Gemini Observatory (Gemini, AURA),
+    The Australian Astrophysical Observatory (AAO), 
+    The Australian National University (ANU) and
+    The Canadian National Research Council (NRC)
+
+Warning: This is a generated file - take care if editing by hand
+
+-->
+
+<!--
+ This file contains the list of authorized EPICS channels
+ that can be monitored through the GIAPI.
+-->
+<channels>
+    
+    <channel>ag:port:ghost</channel>
+    <channel>tcs:sad:chopState</channel>
+    <channel>tcs:sad:currentAirPressure</channel>
+    <channel>tcs:sad:currentExternalTemp</channel>
+    <channel>tcs:sad:currentRma</channel>
+    <channel>tcs:sad:currentZd</channel>
+    <channel>tcs:sad:delat</channel>
+    <channel>tcs:sad:delut</channel>
+    <channel>tcs:sad:djmls</channel>
+    <channel>tcs:sad:instrPA</channel>
+    <channel>tcs:sad:parAngle</channel>
+    <channel>tcs:sad:sourceATrackEq</channel>
+    <channel>tcs:sad:sourceATrackFrame</channel>
+    <channel>tcs:sad:sourceAWavelength</channel>
+    <channel>tcs:sad:tlongm</channel>
+</channels>
+    

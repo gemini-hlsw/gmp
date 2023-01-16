@@ -1,0 +1,961 @@
+<?xml version="1.0"?>
+    
+<!--
+Copyright RSAA, The Australian National University
+
+The Gemini High Resolution Optical Spectrograph
+ Project partners:
+    The Gemini Observatory (Gemini, AURA),
+    The Australian Astrophysical Observatory (AAO), 
+    The Australian National University (ANU) and
+    The Canadian National Research Council (NRC)
+
+Warning: This is a generated file - take care if editing by hand
+
+-->
+
+<Records xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="giapi-apply-config.xsd">
+    <Apply name="apply" timeout="1000">
+        <SequenceCommand>TEST</SequenceCommand>
+        <SequenceCommand>REBOOT</SequenceCommand>
+        <SequenceCommand>INIT</SequenceCommand>
+        <SequenceCommand>DATUM</SequenceCommand>
+        <SequenceCommand>PARK</SequenceCommand>
+        <SequenceCommand>VERIFY</SequenceCommand>
+        <SequenceCommand>END_VERIFY</SequenceCommand>
+        <SequenceCommand>OBSERVE</SequenceCommand>
+        <SequenceCommand>END_OBSERVE</SequenceCommand>
+        <SequenceCommand>GUIDE</SequenceCommand>
+        <SequenceCommand>END_GUIDE</SequenceCommand>
+        <SequenceCommand>PAUSE</SequenceCommand>
+        <SequenceCommand>CONTINUE</SequenceCommand>
+        <SequenceCommand>STOP</SequenceCommand>
+        <SequenceCommand>ABORT</SequenceCommand>
+
+
+        <!-- From JSON file cicada_config/ghostRed_demand.json-->
+        <ConfigRecord name="dc:red">
+            <ConfigSet name="dc:red">
+                <field>address</field>
+                <field>arg</field>
+                <field>auto_archive</field>
+                <field>auto_rdc</field>
+                <field>board</field>
+                <field>camera_coords</field>
+                <field>ccd_request_type</field>
+                <field>ccf</field>
+                <field>chip_mask</field>
+                <field>cmd</field>
+                <field>comment</field>
+                <field>config</field>
+                <field>cosmic_rate</field>
+                <field>dark</field>
+                <field>data</field>
+                <field>data_label</field>
+                <field>debug</field>
+                <field>deflect</field>
+                <field>do_continuous</field>
+                <field>do_display</field>
+                <field>do_flush</field>
+                <field>do_idle</field>
+                <field>do_power_on</field>
+                <field>do_readout</field>
+                <field>do_reset</field>
+                <field>do_save</field>
+                <field>do_short_test</field>
+                <field>do_test</field>
+                <field>do_test_pattern</field>
+                <field>do_util_download</field>
+                <field>do_warmup</field>
+                <field>dummy_steps</field>
+                <field>duration</field>
+                <field>fitskw1</field>
+                <field>fitskw2</field>
+                <field>fitskw3</field>
+                <field>fitskw4</field>
+                <field>fitsv1</field>
+                <field>fitsv2</field>
+                <field>fitsv3</field>
+                <field>fitsv4</field>
+                <field>fname</field>
+                <field>fwhm0</field>
+                <field>fwhm1</field>
+                <field>fwhm2</field>
+                <field>fwhm3</field>
+                <field>has_utility_board</field>
+                <field>header</field>
+                <field>height</field>
+                <field>idle_set</field>
+                <field>imagetyp</field>
+                <field>memory_space</field>
+                <field>nargs</field>
+                <field>ndat</field>
+                <field>nregions</field>
+                <field>nresets</field>
+                <field>object</field>
+                <field>observer</field>
+                <field>open</field>
+                <field>out_dir</field>
+                <field>out_prefix</field>
+                <field>out_suffix</field>
+                <field>overscan_cols</field>
+                <field>overscan_rows</field>
+                <field>pixel_clear_time</field>
+                <field>pon_timeout</field>
+                <field>random_std_dev</field>
+                <field>rcf</field>
+                <field>read_mode</field>
+                <field>repeat</field>
+                <field>request_type</field>
+                <field>reset_delay</field>
+                <field>run_number</field>
+                <field>scintillation</field>
+                <field>setpoint</field>
+                <field>sim_exptime</field>
+                <field>sim_image</field>
+                <field>sim_image_bias</field>
+                <field>sim_image_max_noise</field>
+                <field>star_amp0</field>
+                <field>star_amp1</field>
+                <field>star_amp2</field>
+                <field>star_amp3</field>
+                <field>sync</field>
+                <field>sync_id</field>
+                <field>systematic_std_dev</field>
+                <field>test_pattern_amp_increment</field>
+                <field>test_pattern_constant</field>
+                <field>test_pattern_increment</field>
+                <field>test_pattern_overscan</field>
+                <field>test_pattern_readout_increment</field>
+                <field>test_pattern_seed</field>
+                <field>tim_filename</field>
+                <field>timeout</field>
+                <field>tracking</field>
+                <field>unit</field>
+                <field>use_gen_stars</field>
+                <field>util_filename</field>
+                <field>value</field>
+                <field>verify</field>
+                <field>warmup_interval</field>
+                <field>warmup_step</field>
+                <field>warmup_tol</field>
+                <field>width</field>
+                <field>window</field>
+                <field>xo</field>
+                <field>xpos0</field>
+                <field>xpos1</field>
+                <field>xpos2</field>
+                <field>xpos3</field>
+                <field>yo</field>
+                <field>ypos0</field>
+                <field>ypos1</field>
+                <field>ypos2</field>
+                <field>ypos3</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostBlue_demand.json-->
+        <ConfigRecord name="dc:blue">
+            <ConfigSet name="dc:blue">
+                <field>address</field>
+                <field>arg</field>
+                <field>auto_archive</field>
+                <field>auto_rdc</field>
+                <field>board</field>
+                <field>camera_coords</field>
+                <field>ccd_request_type</field>
+                <field>ccf</field>
+                <field>chip_mask</field>
+                <field>cmd</field>
+                <field>comment</field>
+                <field>config</field>
+                <field>cosmic_rate</field>
+                <field>dark</field>
+                <field>data</field>
+                <field>data_label</field>
+                <field>debug</field>
+                <field>deflect</field>
+                <field>do_continuous</field>
+                <field>do_display</field>
+                <field>do_flush</field>
+                <field>do_idle</field>
+                <field>do_power_on</field>
+                <field>do_readout</field>
+                <field>do_reset</field>
+                <field>do_save</field>
+                <field>do_short_test</field>
+                <field>do_test</field>
+                <field>do_test_pattern</field>
+                <field>do_util_download</field>
+                <field>do_warmup</field>
+                <field>dummy_steps</field>
+                <field>duration</field>
+                <field>fitskw1</field>
+                <field>fitskw2</field>
+                <field>fitskw3</field>
+                <field>fitskw4</field>
+                <field>fitsv1</field>
+                <field>fitsv2</field>
+                <field>fitsv3</field>
+                <field>fitsv4</field>
+                <field>fname</field>
+                <field>fwhm0</field>
+                <field>fwhm1</field>
+                <field>fwhm2</field>
+                <field>fwhm3</field>
+                <field>has_utility_board</field>
+                <field>header</field>
+                <field>height</field>
+                <field>idle_set</field>
+                <field>imagetyp</field>
+                <field>memory_space</field>
+                <field>nargs</field>
+                <field>ndat</field>
+                <field>nregions</field>
+                <field>nresets</field>
+                <field>object</field>
+                <field>observer</field>
+                <field>open</field>
+                <field>out_dir</field>
+                <field>out_prefix</field>
+                <field>out_suffix</field>
+                <field>overscan_cols</field>
+                <field>overscan_rows</field>
+                <field>pixel_clear_time</field>
+                <field>pon_timeout</field>
+                <field>random_std_dev</field>
+                <field>rcf</field>
+                <field>read_mode</field>
+                <field>repeat</field>
+                <field>request_type</field>
+                <field>reset_delay</field>
+                <field>run_number</field>
+                <field>scintillation</field>
+                <field>setpoint</field>
+                <field>sim_exptime</field>
+                <field>sim_image</field>
+                <field>sim_image_bias</field>
+                <field>sim_image_max_noise</field>
+                <field>star_amp0</field>
+                <field>star_amp1</field>
+                <field>star_amp2</field>
+                <field>star_amp3</field>
+                <field>sync</field>
+                <field>sync_id</field>
+                <field>systematic_std_dev</field>
+                <field>test_pattern_amp_increment</field>
+                <field>test_pattern_constant</field>
+                <field>test_pattern_increment</field>
+                <field>test_pattern_overscan</field>
+                <field>test_pattern_readout_increment</field>
+                <field>test_pattern_seed</field>
+                <field>tim_filename</field>
+                <field>timeout</field>
+                <field>tracking</field>
+                <field>unit</field>
+                <field>use_gen_stars</field>
+                <field>util_filename</field>
+                <field>value</field>
+                <field>verify</field>
+                <field>warmup_interval</field>
+                <field>warmup_step</field>
+                <field>warmup_tol</field>
+                <field>width</field>
+                <field>window</field>
+                <field>xo</field>
+                <field>xpos0</field>
+                <field>xpos1</field>
+                <field>xpos2</field>
+                <field>xpos3</field>
+                <field>yo</field>
+                <field>ypos0</field>
+                <field>ypos1</field>
+                <field>ypos2</field>
+                <field>ypos3</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostSlitViewer_demand.json-->
+        <ConfigRecord name="dc:sv">
+            <ConfigSet name="dc:sv">
+                <field>auto_archive</field>
+                <field>avt_keyword</field>
+                <field>avt_type</field>
+                <field>avt_value</field>
+                <field>ccd_request_type</field>
+                <field>ccf</field>
+                <field>chip_mask</field>
+                <field>comment</field>
+                <field>config</field>
+                <field>data_label</field>
+                <field>do_continuous</field>
+                <field>do_display</field>
+                <field>do_save</field>
+                <field>do_test</field>
+                <field>duration</field>
+                <field>fitskw1</field>
+                <field>fitskw2</field>
+                <field>fitskw3</field>
+                <field>fitskw4</field>
+                <field>fitsv1</field>
+                <field>fitsv2</field>
+                <field>fitsv3</field>
+                <field>fitsv4</field>
+                <field>fname</field>
+                <field>height</field>
+                <field>hibluethreshold</field>
+                <field>hibluethreshold_enabled</field>
+                <field>hiredthreshold</field>
+                <field>hiredthreshold_enabled</field>
+                <field>ifu1bluethreshold</field>
+                <field>ifu1bluethreshold_enabled</field>
+                <field>ifu1redthreshold</field>
+                <field>ifu1redthreshold_enabled</field>
+                <field>ifu2bluethreshold</field>
+                <field>ifu2bluethreshold_enabled</field>
+                <field>ifu2redthreshold</field>
+                <field>ifu2redthreshold_enabled</field>
+                <field>imagetyp</field>
+                <field>nregions</field>
+                <field>object</field>
+                <field>observer</field>
+                <field>out_dir</field>
+                <field>out_prefix</field>
+                <field>out_suffix</field>
+                <field>overscan_cols</field>
+                <field>overscan_rows</field>
+                <field>rcf</field>
+                <field>repeat</field>
+                <field>request_type</field>
+                <field>run_number</field>
+                <field>unit</field>
+                <field>width</field>
+                <field>window</field>
+                <field>xo</field>
+                <field>yo</field>
+                <field>zero_accumulated_flux</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostGuider_demand.json-->
+        <ConfigRecord name="dc:ag">
+            <ConfigSet name="dc:ag">
+                <field>auto_archive</field>
+                <field>avt_keyword</field>
+                <field>avt_type</field>
+                <field>avt_value</field>
+                <field>background</field>
+                <field>ccd_request_type</field>
+                <field>ccf</field>
+                <field>chip_mask</field>
+                <field>comment</field>
+                <field>config</field>
+                <field>data_label</field>
+                <field>do_continuous</field>
+                <field>do_display</field>
+                <field>do_save</field>
+                <field>do_test</field>
+                <field>duration</field>
+                <field>enable_guide</field>
+                <field>enable_spiral</field>
+                <field>fitskw1</field>
+                <field>fitskw2</field>
+                <field>fitskw3</field>
+                <field>fitskw4</field>
+                <field>fitsv1</field>
+                <field>fitsv2</field>
+                <field>fitsv3</field>
+                <field>fitsv4</field>
+                <field>fname</field>
+                <field>height</field>
+                <field>hi_delta_x</field>
+                <field>hi_delta_y</field>
+                <field>hi_threshold</field>
+                <field>ifu1_delta_x</field>
+                <field>ifu1_delta_y</field>
+                <field>ifu1_sim_obj_x</field>
+                <field>ifu1_sim_obj_y</field>
+                <field>ifu1_threshold</field>
+                <field>ifu2_delta_x</field>
+                <field>ifu2_delta_y</field>
+                <field>ifu2_sim_obj_x</field>
+                <field>ifu2_sim_obj_y</field>
+                <field>ifu2_threshold</field>
+                <field>imagetyp</field>
+                <field>nregions</field>
+                <field>object</field>
+                <field>observer</field>
+                <field>out_dir</field>
+                <field>out_prefix</field>
+                <field>out_suffix</field>
+                <field>overscan_cols</field>
+                <field>overscan_rows</field>
+                <field>pos1_mode</field>
+                <field>pos1_reset_spiral</field>
+                <field>pos2_mode</field>
+                <field>pos2_reset_spiral</field>
+                <field>rcf</field>
+                <field>repeat</field>
+                <field>request_type</field>
+                <field>run_number</field>
+                <field>simulate_flux</field>
+                <field>unit</field>
+                <field>width</field>
+                <field>window</field>
+                <field>xo</field>
+                <field>yo</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostCassegrainUnitCC_Slave_demand.json-->
+        <ConfigRecord name="cc:cu:adc1">
+            <ConfigSet name="cc:cu:adc1">
+                <field>correctiona</field>
+                <field>correctionb</field>
+                <field>demand_adcC</field>
+                <field>demand_air_pressure</field>
+                <field>demand_air_temperature</field>
+                <field>override_adcC</field>
+                <field>override_air_pressure</field>
+                <field>override_air_temperature</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:adc1a">
+            <ConfigSet name="cc:cu:adc1a">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:adc1b">
+            <ConfigSet name="cc:cu:adc1b">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:adc2">
+            <ConfigSet name="cc:cu:adc2">
+                <field>correctiona</field>
+                <field>correctionb</field>
+                <field>demand_adcC</field>
+                <field>demand_air_pressure</field>
+                <field>demand_air_temperature</field>
+                <field>override_adcC</field>
+                <field>override_air_pressure</field>
+                <field>override_air_temperature</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:adc2a">
+            <ConfigSet name="cc:cu:adc2a">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:adc2b">
+            <ConfigSet name="cc:cu:adc2b">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:demand">
+            <ConfigSet name="cc:cu:demand">
+                <field>cmd_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ici">
+            <ConfigSet name="cc:cu:ici">
+                <field>instrumentRunning</field>
+                <field>simulate</field>
+                <field>softwareEmergencyStop</field>
+                <field>watchdogTimeoutEnableDisable</field>
+                <field>watchdogTimerTrigger</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ifu1">
+            <ConfigSet name="cc:cu:ifu1">
+                <field>bundle</field>
+                <field>dec</field>
+                <field>dec_offset</field>
+                <field>fpx</field>
+                <field>fpx_offset</field>
+                <field>fpy</field>
+                <field>fpy_offset</field>
+                <field>guide_type</field>
+                <field>guide_x</field>
+                <field>guide_y</field>
+                <field>object</field>
+                <field>offset_from_base</field>
+                <field>ra</field>
+                <field>ra_offset</field>
+                <field>simulate</field>
+                <field>target</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ifu1x">
+            <ConfigSet name="cc:cu:ifu1x">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ifu1y">
+            <ConfigSet name="cc:cu:ifu1y">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ifu2">
+            <ConfigSet name="cc:cu:ifu2">
+                <field>bundle</field>
+                <field>dec</field>
+                <field>dec_offset</field>
+                <field>fpx</field>
+                <field>fpx_offset</field>
+                <field>fpy</field>
+                <field>fpy_offset</field>
+                <field>guide_type</field>
+                <field>guide_x</field>
+                <field>guide_y</field>
+                <field>object</field>
+                <field>offset_from_base</field>
+                <field>ra</field>
+                <field>ra_offset</field>
+                <field>simulate</field>
+                <field>target</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ifu2x">
+            <ConfigSet name="cc:cu:ifu2x">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:ifu2y">
+            <ConfigSet name="cc:cu:ifu2y">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:cu:targets">
+            <ConfigSet name="cc:cu:targets">
+                <field>n_targets</field>
+                <field>target1_dec</field>
+                <field>target1_name</field>
+                <field>target1_ra</field>
+                <field>target2_dec</field>
+                <field>target2_name</field>
+                <field>target2_ra</field>
+                <field>target3_dec</field>
+                <field>target3_name</field>
+                <field>target3_ra</field>
+                <field>target4_dec</field>
+                <field>target4_name</field>
+                <field>target4_ra</field>
+                <field>target5_dec</field>
+                <field>target5_name</field>
+                <field>target5_ra</field>
+                <field>target6_dec</field>
+                <field>target6_name</field>
+                <field>target6_ra</field>
+                <field>target7_dec</field>
+                <field>target7_name</field>
+                <field>target7_ra</field>
+                <field>target8_dec</field>
+                <field>target8_name</field>
+                <field>target8_ra</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostSlitUnitCC_Slave_demand.json-->
+        <ConfigRecord name="cc:slu:cfw">
+            <ConfigSet name="cc:slu:cfw">
+                <field>position</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:cfwAmp">
+            <ConfigSet name="cc:slu:cfwAmp">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:demand">
+            <ConfigSet name="cc:slu:demand">
+                <field>cmd_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:fa1">
+            <ConfigSet name="cc:slu:fa1">
+                <field>amplitude</field>
+                <field>frequency</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:fa1Amp">
+            <ConfigSet name="cc:slu:fa1Amp">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:fa2">
+            <ConfigSet name="cc:slu:fa2">
+                <field>amplitude</field>
+                <field>frequency</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:fa2Amp">
+            <ConfigSet name="cc:slu:fa2Amp">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:ici">
+            <ConfigSet name="cc:slu:ici">
+                <field>instrumentRunning</field>
+                <field>simulate</field>
+                <field>softwareEmergencyStop</field>
+                <field>watchdogTimeoutEnableDisable</field>
+                <field>watchdogTimerTrigger</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:ins">
+            <ConfigSet name="cc:slu:ins">
+                <field>hclPowerCtl</field>
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:smp">
+            <ConfigSet name="cc:slu:smp">
+                <field>position</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:slu:smpAmp">
+            <ConfigSet name="cc:slu:smpAmp">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostSpectrographCC_Slave_demand.json-->
+        <ConfigRecord name="cc:spe:bFocus">
+            <ConfigSet name="cc:spe:bFocus">
+                <field>position</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:bFocusAmp">
+            <ConfigSet name="cc:spe:bFocusAmp">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:bLakeshore336">
+            <ConfigSet name="cc:spe:bLakeshore336">
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:bShutter">
+            <ConfigSet name="cc:spe:bShutter">
+                <field>expose</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:bVacuum">
+            <ConfigSet name="cc:spe:bVacuum">
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:demand">
+            <ConfigSet name="cc:spe:demand">
+                <field>cmd_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:ici">
+            <ConfigSet name="cc:spe:ici">
+                <field>instrumentRunning</field>
+                <field>simulate</field>
+                <field>softwareEmergencyStop</field>
+                <field>watchdogTimeoutEnableDisable</field>
+                <field>watchdogTimerTrigger</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:lakeshore224">
+            <ConfigSet name="cc:spe:lakeshore224">
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter1">
+            <ConfigSet name="cc:spe:meerstetter1">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter10">
+            <ConfigSet name="cc:spe:meerstetter10">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter11">
+            <ConfigSet name="cc:spe:meerstetter11">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter12">
+            <ConfigSet name="cc:spe:meerstetter12">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter13">
+            <ConfigSet name="cc:spe:meerstetter13">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter14">
+            <ConfigSet name="cc:spe:meerstetter14">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter15">
+            <ConfigSet name="cc:spe:meerstetter15">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter16">
+            <ConfigSet name="cc:spe:meerstetter16">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter17">
+            <ConfigSet name="cc:spe:meerstetter17">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter18">
+            <ConfigSet name="cc:spe:meerstetter18">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter19">
+            <ConfigSet name="cc:spe:meerstetter19">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter2">
+            <ConfigSet name="cc:spe:meerstetter2">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter20">
+            <ConfigSet name="cc:spe:meerstetter20">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter21">
+            <ConfigSet name="cc:spe:meerstetter21">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter22">
+            <ConfigSet name="cc:spe:meerstetter22">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter23">
+            <ConfigSet name="cc:spe:meerstetter23">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter24">
+            <ConfigSet name="cc:spe:meerstetter24">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter25">
+            <ConfigSet name="cc:spe:meerstetter25">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter3">
+            <ConfigSet name="cc:spe:meerstetter3">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter4">
+            <ConfigSet name="cc:spe:meerstetter4">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter5">
+            <ConfigSet name="cc:spe:meerstetter5">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter6">
+            <ConfigSet name="cc:spe:meerstetter6">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter7">
+            <ConfigSet name="cc:spe:meerstetter7">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter8">
+            <ConfigSet name="cc:spe:meerstetter8">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:meerstetter9">
+            <ConfigSet name="cc:spe:meerstetter9">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:onewire">
+            <ConfigSet name="cc:spe:onewire">
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:rFocus">
+            <ConfigSet name="cc:spe:rFocus">
+                <field>position</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:rFocusAmp">
+            <ConfigSet name="cc:spe:rFocusAmp">
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:rShutter">
+            <ConfigSet name="cc:spe:rShutter">
+                <field>expose</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:rVacuum">
+            <ConfigSet name="cc:spe:rVacuum">
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:thermalEnclosure">
+            <ConfigSet name="cc:spe:thermalEnclosure">
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:spe:thermoRack401">
+            <ConfigSet name="cc:spe:thermoRack401">
+                <field>commandArg</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostCassegrainUnitCC_demand.json-->
+        <ConfigRecord name="cc:cu">
+            <ConfigSet name="cc:cu">
+                <field>do_test</field>
+                <field>request_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostSlitUnitCC_demand.json-->
+        <ConfigRecord name="cc:slu">
+            <ConfigSet name="cc:slu">
+                <field>do_test</field>
+                <field>request_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostSpectrographCC_demand.json-->
+        <ConfigRecord name="cc:spe">
+            <ConfigSet name="cc:spe">
+                <field>do_test</field>
+                <field>request_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+    </Apply>
+</Records>
