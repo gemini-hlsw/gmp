@@ -40,7 +40,7 @@
 
         <!-- Component versions -->
         <clover.version>3.1.0</clover.version>
-        <org.activemq.core.version>5.5.1</org.activemq.core.version>
+        <org.activemq.core.version>5.6.0</org.activemq.core.version>
         <pax-web.version>6.1.2</pax-web.version>
         <pax-logging.version>1.10.1</pax-logging.version>
         <pax-runner.version>1.9.0</pax-runner.version>
