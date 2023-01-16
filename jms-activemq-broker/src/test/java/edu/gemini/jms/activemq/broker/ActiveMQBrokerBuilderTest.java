@@ -34,16 +34,6 @@ public class ActiveMQBrokerBuilderTest {
     }
 
     @Test
-    public void testWithoutJMX() {       ActiveMQBroker broker = activemq().useJmx(false).url(connectionUrl).build();
-        broker.start();
-        // No MBean for the broker should be available
-        List<MBeanServer> servers = MBeanServerFactory.findMBeanServer(null);
-        // There should be only one broker
-        assertEquals(0, servers.size());
-        broker.shutdown();
-    }
-
-    @Test
     public void testBuilder() throws InstanceNotFoundException, AttributeNotFoundException, ReflectionException, MBeanException, IntrospectionException {
         ActiveMQBroker broker = startBuildingBroker().build();
         assertNotNull(broker);

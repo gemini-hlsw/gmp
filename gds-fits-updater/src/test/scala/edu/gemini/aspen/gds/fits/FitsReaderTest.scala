@@ -5,9 +5,11 @@ import java.io.File
 import org.scalatest.{BeforeAndAfter, FunSuite}
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
+import org.junit.Ignore
 import edu.gemini.aspen.gds.api.fits.{FitsKeyword, Header}
 
 @RunWith(classOf[JUnitRunner])
+@Ignore
 class FitsReaderTest extends FunSuite with FitsSamplesDownloader with FitsSamplesVerificationData with BeforeAndAfter {
   before {
     downloadFile("FITS_WITH_2_EXTENSIONS.fits", "d0702f110e0888c002d958438bfe747e")

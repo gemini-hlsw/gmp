@@ -42,8 +42,84 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
         if (config.isEmpty()) {
             return HandlerResponse.createError(ERROR_MSG);
         } else {
+
+            int expectedResponses = countExpectedResponses(config, ConfigPath.EMPTY_PATH);
+            LOG.fine("Action " + action + " expects " + expectedResponses + " responses");
+
+            if (!canBeFullyHandled(config)) {
+              LOG.severe("Action " + action + " cannot be fully handled, there are missing handlers. return NOANSWER");
+              
+              return HandlerResponse.NOANSWER;
+            }
+            for (int i = 0; i < expectedResponses; i++) {
+                _actionManager.increaseRequiredResponses(action);
+            }
+
             return getResponse(action, config, ConfigPath.EMPTY_PATH, sender);
         }
+    }
+
+    protected boolean canBeFullyHandled(Configuration config) {
+       return _canBeFullyHandled(false, config, ConfigPath.EMPTY_PATH);
+    }
+
+    private boolean _canBeFullyHandled(boolean current, Configuration config, ConfigPath path) {
+
+        ConfigPathNavigator navigator = new ConfigPathNavigator(config);
+        Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
+        boolean ct = current;
+
+        if (configPathSet.isEmpty()) {
+            return false;
+        }
+
+        //this analyzer will get the result answer from this part of the configuration
+        List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
+        if (applyHandlers.isEmpty()) return false;
+
+        for (ConfigPath cp : configPathSet) {
+            //get the sub-configuration
+            Configuration c = config.getSubConfiguration(cp);
+
+            if (applyHandlers.isEmpty() || applyHandlers.contains(cp)) {
+                current = true;
+            } else {
+                // If there are no handlers registered go straight to the sub-handlers
+                return _canBeFullyHandled(current, c, cp);
+            }
+        }
+        return current;
+    }
+
+    protected int countExpectedResponses(Configuration config, ConfigPath path) {
+       return _countExpectedResponses(0, config, path);
+    }
+
+    private int _countExpectedResponses(int counter, Configuration config, ConfigPath path) {
+
+        ConfigPathNavigator navigator = new ConfigPathNavigator(config);
+        Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
+        int ct = counter;
+
+        if (configPathSet.isEmpty()) {
+            return 1;
+        }
+
+        //this analyzer will get the result answer from this part of the configuration
+        List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
+
+        for (ConfigPath cp : configPathSet) {
+            //get the sub-configuration
+            Configuration c = config.getSubConfiguration(cp);
+
+            if (applyHandlers.isEmpty() || applyHandlers.contains(cp)) {
+                ct = ct + 1;
+            } else {
+                // If there are no handlers registered go straight to the sub-handlers
+                return _countExpectedResponses(ct, c, cp);
+            }
+        }
+        return ct;
     }
 
     /**
@@ -67,7 +143,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
         Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
 
         if (configPathSet.isEmpty()) {
-            LOG.fine("Action " + action + " has empty path set, respond NOANSWER");
+            LOG.info("Action " + action + " has empty path set, respond NOANSWER");
             return HandlerResponse.NOANSWER;
         }
 
@@ -81,18 +157,16 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
 
             HandlerResponse response = null;
             if (applyHandlers.isEmpty() || applyHandlers.contains(cp)) {
-                LOG.fine("Attempt to send apply for configuration " + c + " with id " + action.getId() + " and timeout " + action.getTimeout());
+                LOG.info("Attempt to send apply for configuration " + c + " with id " + action.getId() + " and timeout " + action.getTimeout());
                 ActionMessage am = _actionMessageBuilder.buildActionMessage(action, cp);
                 Stopwatch s = Stopwatch.createStarted();
                 response = sender.send(am, action.getTimeout());
-                LOG.fine("Response for apply was " + response + " took " + s.stop().elapsed(TimeUnit.MILLISECONDS) + " [ms]");
+                LOG.finer("Response for apply was " + response + " took " + s.stop().elapsed(TimeUnit.MILLISECONDS) + " [ms]");
 
-                //if the response is started, there is one handler that will
-                //provide answer to this action later. Notify the action
-                //manager about this
-                if (response == HandlerResponse.STARTED) {
-                    LOG.finer("Increase expected responses for action " + action.getId());
-                    _actionManager.increaseRequiredResponses(action);
+                // if the response is COMPLETED remove waiting for a response
+                if (response == HandlerResponse.COMPLETED) {
+                    LOG.info("Action immediately completed: " + action.getId());
+                    _actionManager.decreaseRequiredResponses(action);
                 }
 
                 //if there are no handlers, recursively decompose this config in
