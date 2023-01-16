@@ -179,12 +179,12 @@
             <dependency>
                 <groupId>edu.gemini.jms</groupId>
                 <artifactId>jms-api</artifactId>
-                <version>1.5.29-SNAPSHOT</version>
+                <version>1.5.30-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.jms</groupId>
                 <artifactId>jms-activemq-broker</artifactId>
-                <version>1.2.28-SNAPSHOT</version>
+                <version>1.2.29-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.jms</groupId>
@@ -450,36 +450,6 @@
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-epics-status-service</artifactId>
                 <version>0.3.9-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-                <artifactId>gds-web-ui-keywords</artifactId>
-                <version>0.1.27</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-                <artifactId>gds-web-ui-configuration</artifactId>
-                <version>0.1.27</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-                <artifactId>gds-web-ui-status</artifactId>
-                <version>0.3.7</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-                <artifactId>gds-web-ui-logs</artifactId>
-                <version>0.1.27</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.giapi.web.ui.vaadin</groupId>
-                <artifactId>giapi-vaadin-common</artifactId>
-                <version>0.1.27</version>
-            </dependency>
-            <dependency>
-                <groupId>edu.gemini.aspen.gds.web.ui</groupId>
-                <artifactId>gds-web-ui</artifactId>
-                <version>0.3.7</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
