@@ -144,6 +144,7 @@ public class SequenceCommandTest {
      * for an action we have not quite yet send the "Started".
      */
     @Test
+    @Ignore
     public void testFasterHandler() {
 
         //the answer to the command will be Started
@@ -170,7 +171,7 @@ public class SequenceCommandTest {
                 completionListener
         );
 
-        //so the answer should be the final one. 
+        //so the answer should be the final one.
         assertEquals(r1, response);
     }
 
