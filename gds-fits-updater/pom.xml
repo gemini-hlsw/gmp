@@ -5,7 +5,7 @@
         <relativePath>../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>14.5.0</version>
+        <version>14.5.1-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gds</groupId>
     <artifactId>gds-fits-updater</artifactId>
-    <version>0.4.12</version>
+    <version>0.4.13-SNAPSHOT</version>
 
     <name>GDS FITS Updater</name>
     <description>API to add FITS keywords to files</description>
