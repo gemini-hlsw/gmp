@@ -5,7 +5,7 @@
         <relativePath>../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>14.5.2-SNAPSHOT</version>
+        <version>14.5.2</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gds</groupId>
     <artifactId>gds-static-header-receiver</artifactId>
-    <version>0.2.28-SNAPSHOT</version>
+    <version>0.2.28</version>
 
     <name>GDS Static Header Receiver</name>
     <description>The module provides a service for the seqexec to publish its FITS headers</description>

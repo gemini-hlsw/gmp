@@ -5,7 +5,7 @@
         <relativePath>../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>14.5.2-SNAPSHOT</version>
+        <version>14.5.2</version>
     </parent>
 
     <properties>
@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gds</groupId>
     <artifactId>gds-fits-checker</artifactId>
-    <version>0.4.13-SNAPSHOT</version>
+    <version>0.4.13</version>
 
     <name>GDS FITS Checker</name>
     <description>The module contains components that check the FITS file written by the instrument.
