@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen</groupId>
     <artifactId>giapi-osgi</artifactId>
-    <version>14.5.0</version>
+    <version>14.5.1-SNAPSHOT</version>
 
     <name>giapi-osgi</name>
 
@@ -164,32 +164,32 @@
             <dependency>
                 <groupId>edu.gemini.gmp</groupId>
                 <artifactId>gmp-top</artifactId>
-                <version>0.1.7</version>
+                <version>0.1.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>epics-heartbeat</artifactId>
-                <version>0.4.7</version>
+                <version>0.4.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi</artifactId>
-                <version>1.0.25</version>
+                <version>1.0.26-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.jms</groupId>
                 <artifactId>jms-api</artifactId>
-                <version>1.5.28</version>
+                <version>1.5.29-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.jms</groupId>
                 <artifactId>jms-activemq-broker</artifactId>
-                <version>1.2.27</version>
+                <version>1.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.jms</groupId>
                 <artifactId>jms-activemq-provider</artifactId>
-                <version>1.5.7</version>
+                <version>1.5.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.external.osgi.com.cosylab.epics.caj</groupId>
@@ -204,252 +204,252 @@
             <dependency>
                 <groupId>edu.gemini.epics</groupId>
                 <artifactId>epics-api</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.epics</groupId>
                 <artifactId>epics-service</artifactId>
-                <version>0.17</version>
+                <version>0.18-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-epics-access</artifactId>
-                <version>0.4.7</version>
+                <version>0.4.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.cas</groupId>
                 <artifactId>cas</artifactId>
-                <version>0.3.7</version>
+                <version>0.3.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.cas</groupId>
                 <artifactId>casdb</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi-jms-util</artifactId>
-                <version>0.4.7</version>
+                <version>0.4.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.giapi</groupId>
                 <artifactId>giapi-status-setter</artifactId>
-                <version>0.1.7</version>
+                <version>0.1.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi-status-service</artifactId>
-                <version>0.5.7</version>
+                <version>0.5.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.gmp</groupId>
                 <artifactId>gmp-status-translator</artifactId>
-                <version>0.1.7</version>
+                <version>0.1.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-statusdb</artifactId>
-                <version>0.2.7</version>
+                <version>0.2.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-status-gateway</artifactId>
-                <version>0.2.27</version>
+                <version>0.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-status-simulator</artifactId>
-                <version>0.3.7</version>
+                <version>0.3.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-services</artifactId>
-                <version>0.4.10</version>
+                <version>0.4.11-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-commands</artifactId>
-                <version>1.1.7</version>
+                <version>1.1.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-command-handlers</artifactId>
-                <version>1.0.24</version>
+                <version>1.0.25-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-commands-jms-bridge</artifactId>
-                <version>0.5.7</version>
+                <version>0.5.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-commands-jms-client</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.giapi.clients</groupId>
                 <artifactId>giapi-clients-lib</artifactId>
-                <version>1.0.6</version>
+                <version>1.0.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi-test-support</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi-fileevents</artifactId>
-                <version>0.2.27</version>
+                <version>0.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-health</artifactId>
-                <version>1.1.7</version>
+                <version>1.1.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-heartbeat</artifactId>
-                <version>0.5.7</version>
+                <version>0.5.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>gmp-heartbeat-distributor-service</artifactId>
-                <version>0.4.7</version>
+                <version>0.4.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi-status-dispatcher</artifactId>
-                <version>0.3.7</version>
+                <version>0.3.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen</groupId>
                 <artifactId>giapi-obsevents</artifactId>
-                <version>0.2.27</version>
+                <version>0.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-epics-to-status</artifactId>
-                <version>0.1.21</version>
+                <version>0.1.22-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-api</artifactId>
-                <version>0.6.10</version>
+                <version>0.6.11-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-actors-composer</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-keywords-database</artifactId>
-                <version>0.2.27</version>
+                <version>0.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-config-validator</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-datalabel-provider</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-static-header-receiver</artifactId>
-                <version>0.2.26</version>
+                <version>0.2.27-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-seqexec-actors</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-obsevent-handler</artifactId>
-                <version>0.4.10</version>
+                <version>0.4.11-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-instrument-status-actors</artifactId>
-                <version>0.1.27</version>
+                <version>0.1.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-properties-actors</artifactId>
-                <version>0.1.22</version>
+                <version>0.1.23-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-constant-actors</artifactId>
-                <version>0.2.16</version>
+                <version>0.2.17-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-performance-monitoring</artifactId>
-                <version>0.2.24</version>
+                <version>0.2.25-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-fits-updater</artifactId>
-                <version>0.4.12</version>
+                <version>0.4.13-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-epics-actors</artifactId>
-                <version>0.1.28</version>
+                <version>0.1.29-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-postprocessing-policy</artifactId>
-                <version>0.4.8</version>
+                <version>0.4.9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-fits-checker</artifactId>
-                <version>0.4.11</version>
+                <version>0.4.12-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-health</artifactId>
-                <version>0.5.7</version>
+                <version>0.5.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds</groupId>
                 <artifactId>gds-observation-state-publisher</artifactId>
-                <version>0.4.16</version>
+                <version>0.4.17-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-pcs-updater</artifactId>
-                <version>0.6.7</version>
+                <version>0.6.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-tcs-context</artifactId>
-                <version>0.2.27</version>
+                <version>0.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-logging</artifactId>
-                <version>0.2.27</version>
+                <version>0.2.28-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.gmp</groupId>
                 <artifactId>gmp-commands-records</artifactId>
-                <version>0.6.5</version>
+                <version>0.6.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-epics-simulator</artifactId>
-                <version>0.3.7</version>
+                <version>0.3.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-epics-status-service</artifactId>
-                <version>0.3.7</version>
+                <version>0.3.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gds.web.ui</groupId>
@@ -484,7 +484,7 @@
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-tui</artifactId>
-                <version>0.5.24</version>
+                <version>0.5.25-SNAPSHOT</version>
             </dependency>
 
             <!-- EProperties -->
