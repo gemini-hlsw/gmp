@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen</groupId>
     <artifactId>giapi-osgi</artifactId>
-    <version>14.5.3-SNAPSHOT</version>
+    <version>14.5.2</version>
 
     <name>giapi-osgi</name>
 
@@ -204,7 +204,7 @@
             <dependency>
                 <groupId>edu.gemini.epics</groupId>
                 <artifactId>epics-api</artifactId>
-                <version>0.1.30-SNAPSHOT</version>
+                <version>0.1.29</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.epics</groupId>
@@ -219,7 +219,7 @@
             <dependency>
                 <groupId>edu.gemini.cas</groupId>
                 <artifactId>cas</artifactId>
-                <version>0.3.10-SNAPSHOT</version>
+                <version>0.3.9</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.cas</groupId>
@@ -1049,7 +1049,7 @@
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
         <url>git@github.com:gemini-hlsw/gmp.git</url>
-        <tag>HEAD</tag>
+        <tag>v14.5.2</tag>
     </scm>
 
 </project>
