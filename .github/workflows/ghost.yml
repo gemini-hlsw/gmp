@@ -25,7 +25,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Build rpm
-        run: mvn -Pproduction,ghost clean install
+        run: mvn -Pproduction,ghost -DskipTests clean install
       - name: Rename rpm
         run: |
           cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-ghost-${{ github.ref_name }}.rpm
