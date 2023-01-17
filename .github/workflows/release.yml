@@ -63,3 +63,25 @@ jobs:
           asset_path: gmp-server-${{ github.ref_name }}.tar.gz
           asset_name: gmp-server-${{ github.ref_name }}.tar.gz
           asset_content_type: application/gzip
+      - name: Build ghost rpm
+        run: mvn -DskipTests -Pproduction clean install
+      - name: Upload ghost rpm
+        id: upload-release-rpm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: gmp-server-ghost-${{ github.ref_name }}.rpm
+          asset_name: gmp-server-ghost-${{ github.ref_name }}.rpm
+          asset_content_type: application/x-rpm
+      - name: Upload ghost tarball
+        id: upload-release-tarball
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: gmp-server-ghost-${{ github.ref_name }}.tar.gz
+          asset_name: gmp-server-ghost-${{ github.ref_name }}.tar.gz
+          asset_content_type: application/gzip
