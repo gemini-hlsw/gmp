@@ -65,6 +65,12 @@ jobs:
           asset_content_type: application/gzip
       - name: Build ghost rpm
         run: mvn -DskipTests -Pproduction clean install
+      - name: Rename ghost rpm
+        run: |
+          cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-ghost-${{ github.ref_name }}.rpm
+      - name: Rename ghost tarball
+        run: |
+          cp distribution/target/gmp-server-*.tar.gz gmp-server-ghost-${{ github.ref_name }}.tar.gz
       - name: Upload ghost rpm
         id: upload-ghost-release-rpm
         uses: actions/upload-release-asset@v1
