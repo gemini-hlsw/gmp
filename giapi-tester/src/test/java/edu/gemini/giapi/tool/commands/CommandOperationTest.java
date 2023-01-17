@@ -66,8 +66,7 @@ public class CommandOperationTest {
 
         buildApplyCommand(commandOperation);
 
-        when(senderClient.sendCommand(any(Command.class), any(CompletionListener.class), anyInt())).thenReturn(HandlerResponse.createError("Error"));
->>>>>>> 3db914063 (Rework on the way actions are processed to handle how GHOST processes)
+        when(senderClient.sendCommand(any(Command.class), any(CompletionListener.class), anyLong())).thenReturn(HandlerResponse.createError("Error"));
 
         assertEquals(1, commandOperation.execute());
     }
@@ -95,7 +94,7 @@ public class CommandOperationTest {
         commandOperation.setArgument(secondConfigArgument);
 
         ArgumentCaptor<Command> argument = ArgumentCaptor.forClass(Command.class);
-        when(senderClient.sendCommand(argument.capture(), any(CompletionListener.class), anyInt())).thenReturn(HandlerResponse.createError("Error"));
+        when(senderClient.sendCommand(argument.capture(), any(CompletionListener.class), anyLong())).thenReturn(HandlerResponse.createError("Error"));
 
         assertEquals(1, commandOperation.execute());
 
@@ -111,7 +110,7 @@ public class CommandOperationTest {
 
         buildApplyCommand(commandOperation);
 
-        when(senderClient.sendCommand(any(Command.class), any(CompletionListener.class), anyInt())).thenReturn(HandlerResponse.get(HandlerResponse.Response.NOANSWER));
+        when(senderClient.sendCommand(any(Command.class), any(CompletionListener.class), anyLong())).thenReturn(HandlerResponse.get(HandlerResponse.Response.NOANSWER));
 
         assertEquals(1, commandOperation.execute());
     }
