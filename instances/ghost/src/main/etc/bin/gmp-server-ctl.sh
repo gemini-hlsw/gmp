@@ -12,12 +12,12 @@ set -u # Don't allow using non defined variables
 PAX_RUNNER_VERSION=${pax-runner.version}
 GMP_VERSION=${gmp.version}
 
-# Confirm that java is available
-which java > /dev/null || { echo "Need java in PATH to run"; exit 1; }
-
 # Overrides locally JAVA_HOME to use java 8
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 JAVA8=$JAVA_HOME/bin/java
+#
+# Confirm that java is available
+which $JAVA8 > /dev/null || { echo "Need java in PATH to run"; exit 1; }
 
 # Verify existing variables
 if [ -z ${GMP_ROOT:-} ]; then

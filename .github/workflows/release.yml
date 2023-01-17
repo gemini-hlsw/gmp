@@ -64,7 +64,7 @@ jobs:
           asset_name: gmp-server-${{ github.ref_name }}.tar.gz
           asset_content_type: application/gzip
       - name: Build ghost rpm
-        run: mvn -DskipTests -Pproduction clean install
+        run: mvn -DskipTests -Pproduction,ghost clean install
       - name: Rename ghost rpm
         run: |
           cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-ghost-${{ github.ref_name }}.rpm
