@@ -41,7 +41,7 @@ public class WaitingCompletionListener implements CompletionListener {
         } catch (InterruptedException e) {
             // Ignore, this means we should return an error
         }
-        return new CompletionInformation(HandlerResponse.createError("Response not arrived in time: " + timeout), Command.noCommand());
+        return new CompletionInformation(HandlerResponse.createError("Response not arrived in the timeout of " + timeout + " [ms]"), Command.noCommand());
     }
 
 }

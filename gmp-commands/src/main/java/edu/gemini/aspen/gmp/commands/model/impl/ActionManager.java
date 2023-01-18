@@ -19,6 +19,18 @@ public interface ActionManager {
     void increaseRequiredResponses(Action action);
 
     /**
+     * Remove a required response, this is used when a sub action completes right away
+     *
+     * @param action the APPLY action that will get a future response later.
+     */
+    void decreaseRequiredResponses(Action action);
+
+    /**
+     * Indicates if the action has completed
+     */
+    boolean isComplete(Action action);
+
+    /**
      * Register this Action to keep track its progress internally. When
      * the completion information associated to this action is available, the
      * listener contained in it will be invoked.

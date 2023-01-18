@@ -21,7 +21,7 @@ public class WaitingCompletionListenerTest {
         // No responses will arrive in this case
         CompletionInformation completionInformation = completionListener.waitForResponse(TIMEOUT);
 
-        assertEquals(HandlerResponse.createError("Response not arrived in time: " + TIMEOUT), completionInformation.getHandlerResponse());
+        assertEquals(HandlerResponse.createError("Response not arrived in the timeout of " + TIMEOUT + " [ms]"), completionInformation.getHandlerResponse());
         assertTrue((System.currentTimeMillis() - start) >= TIMEOUT);
     }
 
