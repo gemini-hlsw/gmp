@@ -4,319 +4,319 @@
 
 
     <HealthChannel>
-        <giapiname>gpi:gds:health</giapiname>
+        <giapiname>gds:health</giapiname>
         <epicsname>gds:health</epicsname>
     </HealthChannel>
 
     <!--STATUS ITEMS reported to Gemini-->
     <SimpleChannel>
-        <giapiname>gpi:state</giapiname>
+        <giapiname>state</giapiname>
         <epicsname>state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <!-- too much noise in logs
        <SimpleChannel>
-            <giapiname>gpi:heartbeat</giapiname>
+            <giapiname>heartbeat</giapiname>
             <epicsname>heartbeat</epicsname>
             <type>INT</type>
             <initial>0</initial>
         </SimpleChannel>
     -->
     <SimpleChannel>
-        <giapiname>gpi:adcDeploy</giapiname>
+        <giapiname>adcDeploy</giapiname>
         <epicsname>adcDeploy</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:adcOrientation</giapiname>
+        <giapiname>adcOrientation</giapiname>
         <epicsname>adcOrientation</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:adcPower</giapiname>
+        <giapiname>adcPower</giapiname>
         <epicsname>adcPower</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:aoSettled</giapiname>
+        <giapiname>aoSettled</giapiname>
         <epicsname>aoSettled</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:calSettled</giapiname>
+        <giapiname>calSettled</giapiname>
         <epicsname>calSettled</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:following</giapiname>
+        <giapiname>following</giapiname>
         <epicsname>following</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:aoReadingCalData</giapiname>
+        <giapiname>aoReadingCalData</giapiname>
         <epicsname>aoReadingCalData</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:ppmMask</giapiname>
+        <giapiname>ppmMask</giapiname>
         <epicsname>ppmMask</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:artificialSourceIR</giapiname>
+        <giapiname>artificialSourceIR</giapiname>
         <epicsname>artificialSourceIR</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:artificialSourceVIS</giapiname>
+        <giapiname>artificialSourceVIS</giapiname>
         <epicsname>artificialSourceVIS</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:artificialSourceSC</giapiname>
+        <giapiname>artificialSourceSC</giapiname>
         <epicsname>artificialSourceSC</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:artificialSourceDeploy</giapiname>
+        <giapiname>artificialSourceDeploy</giapiname>
         <epicsname>artificialSourceDeploy</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:artificialSourceSCDb</giapiname>
+        <giapiname>artificialSourceSCDb</giapiname>
         <epicsname>artificialSourceSCDb</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:calSphereSCDB</giapiname>
+        <giapiname>calSphereSCDB</giapiname>
         <epicsname>calSphereSCDB</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:calSphereDeploy</giapiname>
+        <giapiname>calSphereDeploy</giapiname>
         <epicsname>calSphereDeploy</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:controlWavefront</giapiname>
+        <giapiname>controlWavefront</giapiname>
         <epicsname>controlWavefront</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:debugLevel</giapiname>
+        <giapiname>debugLevel</giapiname>
         <epicsname>debugLevel</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:errMsg</giapiname>
+        <giapiname>errMsg</giapiname>
         <epicsname>errMsg</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:exposureInProgress</giapiname>
+        <giapiname>exposureInProgress</giapiname>
         <epicsname>exposureInProgress</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:calEntranceShutter</giapiname>
+        <giapiname>calEntranceShutter</giapiname>
         <epicsname>calEntranceShutter</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:calExitShutter</giapiname>
+        <giapiname>calExitShutter</giapiname>
         <epicsname>calExitShutter</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:aoLoopRunning</giapiname>
+        <giapiname>aoLoopRunning</giapiname>
         <epicsname>aoLoopRunning</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:lyotMask</giapiname>
+        <giapiname>lyotMask</giapiname>
         <epicsname>lyotMask</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:omssEntranceShutter</giapiname>
+        <giapiname>omssEntranceShutter</giapiname>
         <epicsname>omssEntranceShutter</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:omssExitShutter</giapiname>
+        <giapiname>omssExitShutter</giapiname>
         <epicsname>omssExitShutter</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:observationInProgress</giapiname>
+        <giapiname>observationInProgress</giapiname>
         <epicsname>observationInProgress</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:fpmMask</giapiname>
+        <giapiname>fpmMask</giapiname>
         <epicsname>fpmMask</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:polarizerDeploy</giapiname>
+        <giapiname>polarizerDeploy</giapiname>
         <epicsname>polarizerDeploy</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:polarizerAngle</giapiname>
+        <giapiname>polarizerAngle</giapiname>
         <epicsname>polarizerAngle</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:referenceShutter</giapiname>
+        <giapiname>referenceShutter</giapiname>
         <epicsname>referenceShutter</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:scienceShutter</giapiname>
+        <giapiname>scienceShutter</giapiname>
         <epicsname>scienceShutter</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:simulationLevel</giapiname>
+        <giapiname>simulationLevel</giapiname>
         <epicsname>simulationLevel</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:starIntensity</giapiname>
+        <giapiname>starIntensity</giapiname>
         <epicsname>starIntensity</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:observationMode</giapiname>
+        <giapiname>observationMode</giapiname>
         <epicsname>observationMode</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:aoWfsFilter</giapiname>
+        <giapiname>aoWfsFilter</giapiname>
         <epicsname>aoWfsFilter</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsFilter</giapiname>
+        <giapiname>ifsFilter</giapiname>
         <epicsname>ifsFilter</epicsname>
         <type>STRING</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:aoSpatialFilterSetting</giapiname>
+        <giapiname>aoSpatialFilterSetting</giapiname>
         <epicsname>aoSpatialFilterSetting</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:pupilViewingMirror</giapiname>
+        <giapiname>pupilViewingMirror</giapiname>
         <epicsname>pupilViewingMirror</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:aoFoldMirrorTip</giapiname>
+        <giapiname>aoFoldMirrorTip</giapiname>
         <epicsname>aoFoldMirrorTip</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:aoFoldMirrorTilt</giapiname>
+        <giapiname>aoFoldMirrorTilt</giapiname>
         <epicsname>aoFoldMirrorTilt</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:calIfsFovPointingTip</giapiname>
+        <giapiname>calIfsFovPointingTip</giapiname>
         <epicsname>calIfsFovPointingTip</epicsname>
         <type>DOUBLE</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:calIfsFovPointingTilt</giapiname>
+        <giapiname>calIfsFovPointingTilt</giapiname>
         <epicsname>calIfsFovPointingTilt</epicsname>
         <type>DOUBLE</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.cameraFrameRate</giapiname>
+        <giapiname>ao.cameraFrameRate</giapiname>
         <epicsname>ao.cameraFrameRate</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.m2Offloading</giapiname>
+        <giapiname>ao.m2Offloading</giapiname>
         <epicsname>ao.m2Offloading</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.optimization</giapiname>
+        <giapiname>ao.optimization</giapiname>
         <epicsname>ao.optimization</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs.currentIntegrationTime</giapiname>
+        <giapiname>ifs.currentIntegrationTime</giapiname>
         <epicsname>ifs:currentIntegrationTime</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.roAverage</giapiname>
+        <giapiname>ao.roAverage</giapiname>
         <epicsname>ao.roAverage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoRmsWavefrontError</giapiname>
+        <giapiname>ao.aoRmsWavefrontError</giapiname>
         <epicsname>ao.aoRmsWavefrontError</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoAveModesRMS</giapiname>
+        <giapiname>ao.aoAveModesRMS</giapiname>
         <epicsname>ao.aoAveModesRMS</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
@@ -326,247 +326,247 @@
         Start GEA channels
     -->
     <SimpleChannel>
-        <giapiname>gpi:ao:wfsDetTemp</giapiname>
+        <giapiname>ao:wfsDetTemp</giapiname>
         <epicsname>aoc:wfsDetTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxGlycolInputTemp</giapiname>
+        <giapiname>maxGlycolInputTemp</giapiname>
         <epicsname>tlc:maxGlycolInputTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxGlycolOutputTemp</giapiname>
+        <giapiname>maxGlycolOutputTemp</giapiname>
         <epicsname>tlc:maxGlycolOutputTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxAirHeatExInputTemp</giapiname>
+        <giapiname>maxAirHeatExInputTemp</giapiname>
         <epicsname>tlc:maxAirHeatExInputTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxAirHeatExOutputTemp</giapiname>
+        <giapiname>maxAirHeatExOutputTemp</giapiname>
         <epicsname>tlc:maxAirHeatExOutputTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:avgOmssAoRelayTemp</giapiname>
+        <giapiname>avgOmssAoRelayTemp</giapiname>
         <epicsname>avgOmssAoRelayTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxOmssAoRelayTemp</giapiname>
+        <giapiname>maxOmssAoRelayTemp</giapiname>
         <epicsname>maxOmssAoRelayTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxIfsCryoGlycolInputTemp</giapiname>
+        <giapiname>maxIfsCryoGlycolInputTemp</giapiname>
         <epicsname>tlc:maxIfsCryoGlycolInputTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxIfsCryoGlycolOutputTemp</giapiname>
+        <giapiname>maxIfsCryoGlycolOutputTemp</giapiname>
         <epicsname>tlc:maxIfsCryoGlycolOutputTemp</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxEEHumidity</giapiname>
+        <giapiname>maxEEHumidity</giapiname>
         <epicsname>tlc:maxEEHumidity</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxMemsHumidity</giapiname>
+        <giapiname>maxMemsHumidity</giapiname>
         <epicsname>tlc:maxMemsHumidity</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:maxOmssHumidity</giapiname>
+        <giapiname>maxOmssHumidity</giapiname>
         <epicsname>tlc:maxOmssHumidity</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:meanAmbientHumidity</giapiname>
+        <giapiname>meanAmbientHumidity</giapiname>
         <epicsname>tlc:meanAmbientHumidity</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsDetectorColdTip</giapiname>
+        <giapiname>ifsDetectorColdTip</giapiname>
         <epicsname>ifsDetectorColdTip1</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsDetectorColdTip2</giapiname>
+        <giapiname>ifsDetectorColdTip2</giapiname>
         <epicsname>ifsDetectorColdTip2</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsDetectorMollyBlock</giapiname>
+        <giapiname>ifsDetectorMollyBlock</giapiname>
         <epicsname>ifs:ifsDetectorMollyBlock</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsDetectorHead</giapiname>
+        <giapiname>ifsDetectorHead</giapiname>
         <epicsname>ifsDetectorHead</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsPressure1</giapiname>
+        <giapiname>ifsPressure1</giapiname>
         <epicsname>ifs:ifsPressure1</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifsPressure2</giapiname>
+        <giapiname>ifsPressure2</giapiname>
         <epicsname>ifs:ifsPressure2</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:currentTempSuperC</giapiname>
+        <giapiname>currentTempSuperC</giapiname>
         <epicsname>currentTempSuperC</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoRmsWavefrontError</giapiname>
+        <giapiname>ao:aoRmsWavefrontError</giapiname>
         <epicsname>ao:aoRmsWavefrontError</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_0</giapiname>
+        <giapiname>ao:aoZernikes_0</giapiname>
         <epicsname>ao:aoZernikes_0</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_0</giapiname>
+        <giapiname>ao:aoZernikes_0</giapiname>
         <epicsname>ao:aoZernikes_0</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_1</giapiname>
+        <giapiname>ao:aoZernikes_1</giapiname>
         <epicsname>ao:aoZernikes_1</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_2</giapiname>
+        <giapiname>ao:aoZernikes_2</giapiname>
         <epicsname>ao:aoZernikes_2</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_3</giapiname>
+        <giapiname>ao:aoZernikes_3</giapiname>
         <epicsname>ao:aoZernikes_3</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_4</giapiname>
+        <giapiname>ao:aoZernikes_4</giapiname>
         <epicsname>ao:aoZernikes_4</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_5</giapiname>
+        <giapiname>ao:aoZernikes_5</giapiname>
         <epicsname>ao:aoZernikes_5</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_6</giapiname>
+        <giapiname>ao:aoZernikes_6</giapiname>
         <epicsname>ao:aoZernikes_6</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_7</giapiname>
+        <giapiname>ao:aoZernikes_7</giapiname>
         <epicsname>ao:aoZernikes_7</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_8</giapiname>
+        <giapiname>ao:aoZernikes_8</giapiname>
         <epicsname>ao:aoZernikes_8</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_9</giapiname>
+        <giapiname>ao:aoZernikes_9</giapiname>
         <epicsname>ao:aoZernikes_9</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_10</giapiname>
+        <giapiname>ao:aoZernikes_10</giapiname>
         <epicsname>ao:aoZernikes_10</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_11</giapiname>
+        <giapiname>ao:aoZernikes_11</giapiname>
         <epicsname>ao:aoZernikes_11</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_12</giapiname>
+        <giapiname>ao:aoZernikes_12</giapiname>
         <epicsname>ao:aoZernikes_12</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_13</giapiname>
+        <giapiname>ao:aoZernikes_13</giapiname>
         <epicsname>ao:aoZernikes_13</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoZernikes_14</giapiname>
+        <giapiname>ao:aoZernikes_14</giapiname>
         <epicsname>ao:aoZernikes_14</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:cameraFrameRate</giapiname>
+        <giapiname>ao:cameraFrameRate</giapiname>
         <epicsname>ao:cameraFrameRate</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:aoRmsWavefrontError</giapiname>
+        <giapiname>ao:aoRmsWavefrontError</giapiname>
         <epicsname>ao:aoRmsWavefrontError</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:roAverage</giapiname>
+        <giapiname>ao:roAverage</giapiname>
         <epicsname>ao:roAverage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao:flux</giapiname>
+        <giapiname>ao:flux</giapiname>
         <epicsname>ao:flux</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
@@ -575,50 +575,50 @@
         Start GEA channels
     -->
     <SimpleChannel>
-        <giapiname>gpi:ao:darkLevel</giapiname>
+        <giapiname>ao:darkLevel</giapiname>
         <epicsname>aoc:darkLevel</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:cal.lowfsSampleRate</giapiname>
+        <giapiname>cal.lowfsSampleRate</giapiname>
         <epicsname>cal:lowfsSampleRate</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cal.howfsSampleRate</giapiname>
+        <giapiname>cal.howfsSampleRate</giapiname>
         <epicsname>cal:howfsSampleRate</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cal.rmsTip</giapiname>
+        <giapiname>cal.rmsTip</giapiname>
         <epicsname>cal:rmsTip</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cal.rmsTilt</giapiname>
+        <giapiname>cal.rmsTilt</giapiname>
         <epicsname>cal:rmsTilt</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cal.rmsFocus</giapiname>
+        <giapiname>cal.rmsFocus</giapiname>
         <epicsname>cal:rmsFocus</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cal.lowfsTotalFlux</giapiname>
+        <giapiname>cal.lowfsTotalFlux</giapiname>
         <epicsname>cal:lowfsTotalFlux</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cal.calRmsWavefrontError[0]</giapiname>
+        <giapiname>cal.calRmsWavefrontError[0]</giapiname>
         <epicsname>cal:calRmsWavefrontError[0]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
@@ -626,121 +626,121 @@
 
     <!--M1 Zernikes-->
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[0]</giapiname>
+        <giapiname>ao.aoZernikes[0]</giapiname>
         <epicsname>ao.aoZernikes[0]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[1]</giapiname>
+        <giapiname>ao.aoZernikes[1]</giapiname>
         <epicsname>ao.aoZernikes[1]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[2]</giapiname>
+        <giapiname>ao.aoZernikes[2]</giapiname>
         <epicsname>ao.aoZernikes[2]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[3]</giapiname>
+        <giapiname>ao.aoZernikes[3]</giapiname>
         <epicsname>ao.aoZernikes[3]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[4]</giapiname>
+        <giapiname>ao.aoZernikes[4]</giapiname>
         <epicsname>ao.aoZernikes[4]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[5]</giapiname>
+        <giapiname>ao.aoZernikes[5]</giapiname>
         <epicsname>ao.aoZernikes[5]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[6]</giapiname>
+        <giapiname>ao.aoZernikes[6]</giapiname>
         <epicsname>ao.aoZernikes[6]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[7]</giapiname>
+        <giapiname>ao.aoZernikes[7]</giapiname>
         <epicsname>ao.aoZernikes[7]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[8]</giapiname>
+        <giapiname>ao.aoZernikes[8]</giapiname>
         <epicsname>ao.aoZernikes[8]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[9]</giapiname>
+        <giapiname>ao.aoZernikes[9]</giapiname>
         <epicsname>ao.aoZernikes[9]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[10]</giapiname>
+        <giapiname>ao.aoZernikes[10]</giapiname>
         <epicsname>ao.aoZernikes[10]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[11]</giapiname>
+        <giapiname>ao.aoZernikes[11]</giapiname>
         <epicsname>ao.aoZernikes[11]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[12]</giapiname>
+        <giapiname>ao.aoZernikes[12]</giapiname>
         <epicsname>ao.aoZernikes[12]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[13]</giapiname>
+        <giapiname>ao.aoZernikes[13]</giapiname>
         <epicsname>ao.aoZernikes[13]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[14]</giapiname>
+        <giapiname>ao.aoZernikes[14]</giapiname>
         <epicsname>ao.aoZernikes[14]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[15]</giapiname>
+        <giapiname>ao.aoZernikes[15]</giapiname>
         <epicsname>ao.aoZernikes[15]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[16]</giapiname>
+        <giapiname>ao.aoZernikes[16]</giapiname>
         <epicsname>ao.aoZernikes[16]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[17]</giapiname>
+        <giapiname>ao.aoZernikes[17]</giapiname>
         <epicsname>ao.aoZernikes[17]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[18]</giapiname>
+        <giapiname>ao.aoZernikes[18]</giapiname>
         <epicsname>ao.aoZernikes[18]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ao.aoZernikes[19]</giapiname>
+        <giapiname>ao.aoZernikes[19]</giapiname>
         <epicsname>ao.aoZernikes[19]</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
@@ -749,193 +749,193 @@
     <!--Sequence commands-->
 
     <SimpleChannel>
-        <giapiname>gpi:ABORT.state</giapiname>
+        <giapiname>ABORT.state</giapiname>
         <epicsname>ABORT.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ABORT.ack</giapiname>
+        <giapiname>ABORT.ack</giapiname>
         <epicsname>ABORT.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:CONTINUE.state</giapiname>
+        <giapiname>CONTINUE.state</giapiname>
         <epicsname>CONTINUE.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:CONTINUE.ack</giapiname>
+        <giapiname>CONTINUE.ack</giapiname>
         <epicsname>CONTINUE.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:DATUM.state</giapiname>
+        <giapiname>DATUM.state</giapiname>
         <epicsname>DATUM.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:DATUM.ack</giapiname>
+        <giapiname>DATUM.ack</giapiname>
         <epicsname>DATUM.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:DEBUG.state</giapiname>
+        <giapiname>DEBUG.state</giapiname>
         <epicsname>DEBUG.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:DEBUG.ack</giapiname>
+        <giapiname>DEBUG.ack</giapiname>
         <epicsname>DEBUG.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:END_GUIDE.ack</giapiname>
+        <giapiname>END_GUIDE.ack</giapiname>
         <epicsname>END_GUIDE.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:END_GUIDE.state</giapiname>
+        <giapiname>END_GUIDE.state</giapiname>
         <epicsname>END_GUIDE.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:END_OBSERVE.ack</giapiname>
+        <giapiname>END_OBSERVE.ack</giapiname>
         <epicsname>END_OBSERVE.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:END_OBSERVE.state</giapiname>
+        <giapiname>END_OBSERVE.state</giapiname>
         <epicsname>END_OBSERVE.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:END_VERIFY.state</giapiname>
+        <giapiname>END_VERIFY.state</giapiname>
         <epicsname>END_VERIFY.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:END_VERIFY.ack</giapiname>
+        <giapiname>END_VERIFY.ack</giapiname>
         <epicsname>END_VERIFY.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:GUIDE.state</giapiname>
+        <giapiname>GUIDE.state</giapiname>
         <epicsname>GUIDE.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:GUIDE.ack</giapiname>
+        <giapiname>GUIDE.ack</giapiname>
         <epicsname>GUIDE.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:INIT.state</giapiname>
+        <giapiname>INIT.state</giapiname>
         <epicsname>INIT.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:INIT.ack</giapiname>
+        <giapiname>INIT.ack</giapiname>
         <epicsname>INIT.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:OBSERVE.state</giapiname>
+        <giapiname>OBSERVE.state</giapiname>
         <epicsname>OBSERVE.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:OBSERVE.ack</giapiname>
+        <giapiname>OBSERVE.ack</giapiname>
         <epicsname>OBSERVE.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:PARK.state</giapiname>
+        <giapiname>PARK.state</giapiname>
         <epicsname>PARK.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:PARK.ack</giapiname>
+        <giapiname>PARK.ack</giapiname>
         <epicsname>PARK.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:PAUSE.state</giapiname>
+        <giapiname>PAUSE.state</giapiname>
         <epicsname>PAUSE.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:PAUSE.ack</giapiname>
+        <giapiname>PAUSE.ack</giapiname>
         <epicsname>PAUSE.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:REBOOT.state</giapiname>
+        <giapiname>REBOOT.state</giapiname>
         <epicsname>REBOOT.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:REBOOT.ack</giapiname>
+        <giapiname>REBOOT.ack</giapiname>
         <epicsname>REBOOT.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:STOP.state</giapiname>
+        <giapiname>STOP.state</giapiname>
         <epicsname>STOP.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:STOP.ack</giapiname>
+        <giapiname>STOP.ack</giapiname>
         <epicsname>STOP.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:TEST.state</giapiname>
+        <giapiname>TEST.state</giapiname>
         <epicsname>TEST.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:TEST.ack</giapiname>
+        <giapiname>TEST.ack</giapiname>
         <epicsname>TEST.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:VERIFY.state</giapiname>
+        <giapiname>VERIFY.state</giapiname>
         <epicsname>VERIFY.state</epicsname>
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:VERIFY.ack</giapiname>
+        <giapiname>VERIFY.ack</giapiname>
         <epicsname>VERIFY.ack</epicsname>
         <type>INT</type>
         <initial>0</initial>
@@ -1132,322 +1132,322 @@
 
     <!-- remaining time -->
     <SimpleChannel>
-        <giapiname>gpi:ifs:timeLeft</giapiname>
+        <giapiname>ifs:timeLeft</giapiname>
         <epicsname>ifs:timeLeft</epicsname>
         <type>DOUBLE</type>
         <initial>0</initial>
     </SimpleChannel>
     <!-- IFS Cryo Temperatures -->
     <SimpleChannel>
-        <giapiname>gpi:cryo1TemperatureVal</giapiname>
+        <giapiname>cryo1TemperatureVal</giapiname>
         <epicsname>ifs:cryo1Temperature</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:cryo2TemperatureVal</giapiname>
+        <giapiname>cryo2TemperatureVal</giapiname>
         <epicsname>ifs:cryo2Temperature</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <!-- OneWire Measurements -->
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:omssAoBench</giapiname>
+        <giapiname>oneWire:temperature:omssAoBench</giapiname>
         <epicsname>oneWire:temperature:omssAoBench</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:omssMountingFrame</giapiname>
+        <giapiname>oneWire:temperature:omssMountingFrame</giapiname>
         <epicsname>oneWire:temperature:omssMountingFrame</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:omssInterfaceStructure</giapiname>
+        <giapiname>oneWire:temperature:omssInterfaceStructure</giapiname>
         <epicsname>oneWire:temperature:omssInterfaceStructure</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:adcDeployStage</giapiname>
+        <giapiname>oneWire:temperature:adcDeployStage</giapiname>
         <epicsname>oneWire:temperature:adcDeployStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:adcSeparationStage</giapiname>
+        <giapiname>oneWire:temperature:adcSeparationStage</giapiname>
         <epicsname>oneWire:temperature:adcSeparationStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:adcExitPrismStage</giapiname>
+        <giapiname>oneWire:temperature:adcExitPrismStage</giapiname>
         <epicsname>oneWire:temperature:adcExitPrismStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:adcEntrancePrismStage</giapiname>
+        <giapiname>oneWire:temperature:adcEntrancePrismStage</giapiname>
         <epicsname>oneWire:temperature:adcEntrancePrismStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:asuXStage</giapiname>
+        <giapiname>oneWire:temperature:asuXStage</giapiname>
         <epicsname>oneWire:temperature:asuXStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:asuYStage</giapiname>
+        <giapiname>oneWire:temperature:asuYStage</giapiname>
         <epicsname>oneWire:temperature:asuYStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ppmLinearStage</giapiname>
+        <giapiname>oneWire:temperature:ppmLinearStage</giapiname>
         <epicsname>oneWire:temperature:ppmLinearStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ppmRotateStage</giapiname>
+        <giapiname>oneWire:temperature:ppmRotateStage</giapiname>
         <epicsname>oneWire:temperature:ppmRotateStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoWfsSpatialFilterStage</giapiname>
+        <giapiname>oneWire:temperature:aoWfsSpatialFilterStage</giapiname>
         <epicsname>oneWire:temperature:aoWfsSpatialFilterStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoWfsFilterStage</giapiname>
+        <giapiname>oneWire:temperature:aoWfsFilterStage</giapiname>
         <epicsname>oneWire:temperature:aoWfsFilterStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoWfsCameraBody</giapiname>
+        <giapiname>oneWire:temperature:aoWfsCameraBody</giapiname>
         <epicsname>oneWire:temperature:aoWfsCameraBody</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:outsideOE</giapiname>
+        <giapiname>oneWire:temperature:outsideOE</giapiname>
         <epicsname>oneWire:temperature:outsideOE</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:oeInteriorAir</giapiname>
+        <giapiname>oneWire:temperature:oeInteriorAir</giapiname>
         <epicsname>oneWire:temperature:oeInteriorAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoEEHeatExchangerAirIn</giapiname>
+        <giapiname>oneWire:temperature:aoEEHeatExchangerAirIn</giapiname>
         <epicsname>oneWire:temperature:aoEEHeatExchangerAirIn</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoEEHeatExchangerAirOut</giapiname>
+        <giapiname>oneWire:temperature:aoEEHeatExchangerAirOut</giapiname>
         <epicsname>oneWire:temperature:aoEEHeatExchangerAirOut</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoEEHeatExchangerGlycolIn</giapiname>
+        <giapiname>oneWire:temperature:aoEEHeatExchangerGlycolIn</giapiname>
         <epicsname>oneWire:temperature:aoEEHeatExchangerGlycolIn</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aoEEHeatExchangerGlycolOut</giapiname>
+        <giapiname>oneWire:temperature:aoEEHeatExchangerGlycolOut</giapiname>
         <epicsname>oneWire:temperature:aoEEHeatExchangerGlycolOut</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:calIfsEEHeatExchangerAirIn</giapiname>
+        <giapiname>oneWire:temperature:calIfsEEHeatExchangerAirIn</giapiname>
         <epicsname>oneWire:temperature:calIfsEEHeatExchangerAirIn</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:calIfsEEHeatExchangerAirOut</giapiname>
+        <giapiname>oneWire:temperature:calIfsEEHeatExchangerAirOut</giapiname>
         <epicsname>oneWire:temperature:calIfsEEHeatExchangerAirOut</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:calIfsEEHeatExchangerGlycolIn</giapiname>
+        <giapiname>oneWire:temperature:calIfsEEHeatExchangerGlycolIn</giapiname>
         <epicsname>oneWire:temperature:calIfsEEHeatExchangerGlycolIn</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:calIfsEEHeatExchangerGlycolOut</giapiname>
+        <giapiname>oneWire:temperature:calIfsEEHeatExchangerGlycolOut</giapiname>
         <epicsname>oneWire:temperature:calIfsEEHeatExchangerGlycolOut</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:calIfsEEMovableAir</giapiname>
+        <giapiname>oneWire:temperature:calIfsEEMovableAir</giapiname>
         <epicsname>oneWire:temperature:calIfsEEMovableAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:3rdEEHeatExchangerAirIn</giapiname>
+        <giapiname>oneWire:temperature:3rdEEHeatExchangerAirIn</giapiname>
         <epicsname>oneWire:temperature:3rdEEHeatExchangerAirIn</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:3rdEEHeatExchangerAirOut</giapiname>
+        <giapiname>oneWire:temperature:3rdEEHeatExchangerAirOut</giapiname>
         <epicsname>oneWire:temperature:3rdEEHeatExchangerAirOut</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:3rdEEHeatExchangerGlycolIn</giapiname>
+        <giapiname>oneWire:temperature:3rdEEHeatExchangerGlycolIn</giapiname>
         <epicsname>oneWire:temperature:3rdEEHeatExchangerGlycolIn</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:3rdEEHeatExchangerGlycolOut</giapiname>
+        <giapiname>oneWire:temperature:3rdEEHeatExchangerGlycolOut</giapiname>
         <epicsname>oneWire:temperature:3rdEEHeatExchangerGlycolOut</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:calWall</giapiname>
+        <giapiname>oneWire:temperature:calWall</giapiname>
         <epicsname>oneWire:temperature:calWall</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ifsDewarWall</giapiname>
+        <giapiname>oneWire:temperature:ifsDewarWall</giapiname>
         <epicsname>oneWire:temperature:ifsDewarWall</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ccrBody</giapiname>
+        <giapiname>oneWire:temperature:ccrBody</giapiname>
         <epicsname>oneWire:temperature:ccrBody</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:aowfsOutputAir</giapiname>
+        <giapiname>oneWire:temperature:aowfsOutputAir</giapiname>
         <epicsname>oneWire:temperature:aowfsOutputAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:asuChassisAir</giapiname>
+        <giapiname>oneWire:temperature:asuChassisAir</giapiname>
         <epicsname>oneWire:temperature:asuChassisAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ifsCCDNeck</giapiname>
+        <giapiname>oneWire:temperature:ifsCCDNeck</giapiname>
         <epicsname>oneWire:temperature:ifsCCDNeck</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ifsCCRGlycolOutput</giapiname>
+        <giapiname>oneWire:temperature:ifsCCRGlycolOutput</giapiname>
         <epicsname>oneWire:temperature:ifsCCRGlycolOutput</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:ifsCCRGlycolInput</giapiname>
+        <giapiname>oneWire:temperature:ifsCCRGlycolInput</giapiname>
         <epicsname>oneWire:temperature:ifsCCRGlycolInput</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:wooferElectronicsAirOutput</giapiname>
+        <giapiname>oneWire:temperature:wooferElectronicsAirOutput</giapiname>
         <epicsname>oneWire:temperature:wooferElectronicsAirOutput</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:temperature:polarizationModulatorStage</giapiname>
+        <giapiname>oneWire:temperature:polarizationModulatorStage</giapiname>
         <epicsname>oneWire:temperature:polarizationModulatorStage</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange01</giapiname>
+        <giapiname>ifs:temperatureGradientChange01</giapiname>
         <epicsname>ifs:temperatureGradientChange01</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange02</giapiname>
+        <giapiname>ifs:temperatureGradientChange02</giapiname>
         <epicsname>ifs:temperatureGradientChange02</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange03</giapiname>
+        <giapiname>ifs:temperatureGradientChange03</giapiname>
         <epicsname>ifs:temperatureGradientChange03</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange04</giapiname>
+        <giapiname>ifs:temperatureGradientChange04</giapiname>
         <epicsname>ifs:temperatureGradientChange04</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange05</giapiname>
+        <giapiname>ifs:temperatureGradientChange05</giapiname>
         <epicsname>ifs:temperatureGradientChange05</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange06</giapiname>
+        <giapiname>ifs:temperatureGradientChange06</giapiname>
         <epicsname>ifs:temperatureGradientChange06</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange07</giapiname>
+        <giapiname>ifs:temperatureGradientChange07</giapiname>
         <epicsname>ifs:temperatureGradientChange07</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange08</giapiname>
+        <giapiname>ifs:temperatureGradientChange08</giapiname>
         <epicsname>ifs:temperatureGradientChange08</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange09</giapiname>
+        <giapiname>ifs:temperatureGradientChange09</giapiname>
         <epicsname>ifs:temperatureGradientChange09</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:temperatureGradientChange10</giapiname>
+        <giapiname>ifs:temperatureGradientChange10</giapiname>
         <epicsname>ifs:temperatureGradientChange10</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:ifs:absPressureDifference</giapiname>
+        <giapiname>ifs:absPressureDifference</giapiname>
         <epicsname>ifs:absPressureDifference</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
@@ -1455,56 +1455,56 @@
 
     <!-- One Wire Humidity measurements -->
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:3rdEEHeatExchanger</giapiname>
+        <giapiname>oneWire:humidity:3rdEEHeatExchanger</giapiname>
         <epicsname>oneWire:humidity:3rdEEHeatExchanger</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:aoEEHeatExchanger</giapiname>
+        <giapiname>oneWire:humidity:aoEEHeatExchanger</giapiname>
         <epicsname>oneWire:humidity:aoEEHeatExchanger</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:calIfsEEHeatExchanger</giapiname>
+        <giapiname>oneWire:humidity:calIfsEEHeatExchanger</giapiname>
         <epicsname>oneWire:humidity:calIfsEEHeatExchanger</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:outsideOEAir</giapiname>
+        <giapiname>oneWire:humidity:outsideOEAir</giapiname>
         <epicsname>oneWire:humidity:outsideOEAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:interiorOEAir</giapiname>
+        <giapiname>oneWire:humidity:interiorOEAir</giapiname>
         <epicsname>oneWire:humidity:interiorOEAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:interiorOEAir</giapiname>
+        <giapiname>oneWire:humidity:interiorOEAir</giapiname>
         <epicsname>oneWire:humidity:interiorOEAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:pressure:memsAir</giapiname>
+        <giapiname>oneWire:pressure:memsAir</giapiname>
         <epicsname>oneWire:pressure:memsAir</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gpi:oneWire:humidity:mems</giapiname>
+        <giapiname>oneWire:humidity:mems</giapiname>
         <epicsname>oneWire:humidity:mems</epicsname>
         <type>FLOAT</type>
         <initial>0</initial>
     </SimpleChannel>
 
     <SimpleChannel>
-        <giapiname>gpi:fpsParkRequest</giapiname>
+        <giapiname>fpsParkRequest</giapiname>
         <epicsname>fpsParkRequest</epicsname>
         <type>INT</type>
         <initial>0</initial>
@@ -1706,7 +1706,7 @@
 
     <!--health-->
     <HealthChannel>
-        <giapiname>gpi:health</giapiname>
+        <giapiname>health</giapiname>
         <epicsname>health</epicsname>
     </HealthChannel>
 
