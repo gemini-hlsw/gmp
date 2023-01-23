@@ -86,7 +86,7 @@ public class EpicsStatusService implements StatusHandler {
                 } else if (item instanceof AlarmChannelType) {
                     addAlarmVariable(top.buildStatusItemName(item.getGiapiname()), top.buildEpicsChannelName(item.getEpicsname()), ChannelsHelper.getInitial((SimpleChannelType) item));
                 } else if (item instanceof SimpleChannelType) {
-                    addVariable(item.getGiapiname(), top.buildEpicsChannelName(item.getEpicsname()), ChannelsHelper.getInitial((SimpleChannelType) item));
+                    addVariable(top.buildStatusItemName(item.getGiapiname()), top.buildEpicsChannelName(item.getEpicsname()), ChannelsHelper.getInitial((SimpleChannelType) item));
                 }
             } catch (CAException ex) {
                 LOG.log(Level.SEVERE, ex.getMessage(), ex);

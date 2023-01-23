@@ -4,36 +4,36 @@
 
     <!-- Channels for integration tests -->
     <SimpleChannel>
-        <giapiname>gmp:status1</giapiname>
+        <giapiname>status1</giapiname>
         <epicsname>status1</epicsname>
         <type>INT</type>
         <initial>2</initial>
     </SimpleChannel>
     <SimpleChannel>
-        <giapiname>gmp:status2</giapiname>
+        <giapiname>status2</giapiname>
         <epicsname>status2</epicsname>
         <type>INT</type>
         <initial>2</initial>
     </SimpleChannel>
     <AlarmChannel>
-        <giapiname>gmp:alarm1</giapiname>
+        <giapiname>alarm1</giapiname>
         <epicsname>alarm1</epicsname>
         <type>INT</type>
         <initial>2</initial>
     </AlarmChannel>
     <HealthChannel>
-        <giapiname>gmp:health1</giapiname>
+        <giapiname>health1</giapiname>
         <epicsname>health1</epicsname>
     </HealthChannel>
 
     <HealthChannel>
-        <giapiname>gmp:gds:health</giapiname>
+        <giapiname>gds:health</giapiname>
         <epicsname>gds:health</epicsname>
     </HealthChannel>
 
     <!--STATUS ITEMS reported to Gemini-->
     <SimpleChannel>
-        <giapiname>gmp:state</giapiname>
+        <giapiname>state</giapiname>
         <epicsname>state</epicsname>
         <type>INT</type>
         <initial>0</initial>
@@ -48,7 +48,7 @@
     -->
     <!--health-->
     <HealthChannel>
-        <giapiname>gpi:health</giapiname>
+        <giapiname>health</giapiname>
         <epicsname>health</epicsname>
     </HealthChannel>
 
