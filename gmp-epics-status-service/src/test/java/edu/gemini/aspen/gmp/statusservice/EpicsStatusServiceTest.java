@@ -118,11 +118,11 @@ public class EpicsStatusServiceTest{
 
         for (BaseChannelType cc : essc.getSimulatedChannels().getSimpleChannelOrAlarmChannelOrHealthChannel()) {
             if (cc instanceof HealthChannelType) {
-                assertTrue(hc.keySet().contains("gpi:" + cc.getGiapiname()));
+                assertTrue(hc.keySet().contains(epicsTop.buildEpicsChannelName(cc.getGiapiname())));
             } else if (cc instanceof AlarmChannelType) {
-                assertTrue(ac.keySet().contains("gpi:" + cc.getGiapiname()));
+                assertTrue(ac.keySet().contains(epicsTop.buildEpicsChannelName(cc.getGiapiname())));
             } else if (cc instanceof SimpleChannelType) {
-                assertTrue(nc.keySet().contains(cc.getGiapiname()));
+                assertTrue(nc.keySet().contains(epicsTop.buildEpicsChannelName(cc.getGiapiname())));
             } else {
                 fail();
             }
@@ -134,7 +134,6 @@ public class EpicsStatusServiceTest{
 
         StatusItem<Double> asi = new AlarmStatus<Double>("giapialarmdouble", 2.0, AlarmSeverity.ALARM_FAILURE, AlarmCause.ALARM_CAUSE_HI);
         ess.update(asi);
-
 
         StatusItem<Health> hsi = new HealthStatus("giapihealth1", Health.GOOD);
         ess.update(hsi);
