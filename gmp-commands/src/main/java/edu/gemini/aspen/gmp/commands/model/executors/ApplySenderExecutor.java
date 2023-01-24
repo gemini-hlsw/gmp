@@ -116,7 +116,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
                 ct = ct + 1;
             } else {
                 // If there are no handlers registered go straight to the sub-handlers
-                return _countExpectedResponses(ct, c, cp);
+                ct = _countExpectedResponses(ct, c, cp);
             }
         }
         return ct;
