@@ -4,13 +4,13 @@
     <parent>
         <groupId>edu.gemini.aspen</groupId>
         <artifactId>giapi-osgi</artifactId>
-        <version>14.5.8</version>
+        <version>14.5.9-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.gpi</groupId>
     <artifactId>gpi</artifactId>
-    <version>0.1.16</version>
+    <version>0.1.17-SNAPSHOT</version>
 
     <name>GPI Modules</name>
     <description>GPI Modules</description>
