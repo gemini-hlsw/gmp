@@ -18,12 +18,44 @@ import java.util.logging.LogManager;
  * The GIAPI Tester main class.
  */
 public class GiapiTester {
-
+    
     public static void main(String[] args) throws Exception {
         initializeLogging();
 
         //register the default message to show in case of problems
         Util.registerDefaultMessage("Let me help you. Try: java -jar giapi-tester.jar -?");
+
+
+	    if (Arrays.asList(args).contains("-file")) {
+		    // Find the index of the -file argument in the array
+        	int index = Arrays.asList(args).indexOf("-file");
+
+        	// Check if there is a filename after the -file argument
+        	if (args.length > index + 1) {
+            		String fileName = args[index + 1];
+            		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            			String line;
+            			while ((line = br.readLine()) != null) {
+                			// Execute each line from the file
+					        String[] lineArray = line.split("\\s+");
+                			executeArgs(lineArray);
+            			}
+        		    } 
+			        catch (IOException e) {
+            			Util.die("Failed to read file");
+        		    }
+        	} 
+		    else {
+            		Util.die("You must specify a filename after the -file argument");
+        	}
+	    }
+	    else{
+		    executeArgs(args);
+	    }
+
+    }
+
+    private static void executeArgs(String [] args) throws Exception {	
 
         //create the parser
         ArgumentParser parser = new ArgumentParser(args);
@@ -70,10 +102,22 @@ public class GiapiTester {
 
         if (op != null) {
             execute(op);
-        } else {
-            Util.die("I'm sorry, what operation do you mean?");
-        }
+        } 
+	    else {
+	        if (args[0].equals("Wait")) {
+		        try {
+           		    int waitTime = Integer.parseInt(args[1]) * 1000; // convert seconds to milliseconds
+            		Thread.sleep(waitTime); // wait for the specified time
+        	    } catch (NumberFormatException e) {
+            		System.err.println("Invalid argument: " + args[1]);
+        	    }
+	        }
+	        else {
+                Util.die("I'm sorry, what operation do you mean?");
+	        }
+	    }
     }
+
 
     private static void execute(Operation op) throws Exception {
         try {
