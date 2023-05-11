@@ -32,20 +32,11 @@ The Igrins2 instrument.
         <SequenceCommand>STOP</SequenceCommand>
         <SequenceCommand>ABORT</SequenceCommand>
 
-
-        <ConfigRecord name="dc">
-            <ConfigSet name="dc">
-                <field>texp</field>
-                <field>numsvc</field>
-                <field>dark</field>
-                <field>do_reset</field>
-                <field>do_init</field>
-                <field>do_test</field>
-                <field>do_test_pattern</field>
-                <field>xo</field>
-                <field>yo</field>
-            </ConfigSet>
-        </ConfigRecord>
+     <!--
+        It is not necessary to declare anything here because
+        this file configuration is not used by Instrument as 
+        IGRINS2. 
+     -->
 	
     </Apply>
 </Records>
