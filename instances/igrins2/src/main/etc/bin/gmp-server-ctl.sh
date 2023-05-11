@@ -9,8 +9,8 @@ set -u # Don't allow using non defined variables
 
 # Vars that are set at build time
 
-PAX_RUNNER_VERSION=1.8.6
-GMP_VERSION=15.0.7-SNAPSHOT
+PAX_RUNNER_VERSION=15.0.8
+GMP_VERSION=15.0.8-SNAPSHOT
 
 # Overrides locally JAVA_HOME to use java 8
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
