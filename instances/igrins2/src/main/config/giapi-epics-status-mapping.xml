@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+    
+<!--
+Copyright RSAA, The Korean Astronomy and Space Sciend Institue
+
+The Igrins2 instrument. 
+ Project partners:
+    The Gemini Observatory (Gemini, AURA)
+-->
+
+<Channels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="giapi-epics-status-mapping.xsd">
+
+  <HealthChannel>
+    <giapiname>sad.health</giapiname>
+    <epicsname>sad.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <giapiname>sad.health_msg</giapiname>
+    <epicsname>sad.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <giapiname>sad:detk:temp</giapiname>
+    <epicsname>sad:detk:temp</epicsname>
+    <type>FLOAT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <giapiname>sad:deth:temp</giapiname>
+    <epicsname>sad:deth:temp</epicsname>
+    <type>FLOAT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+
+  <SimpleChannel>
+    <giapiname>sad:heartbeat</giapiname>
+    <epicsname>sad:heartbeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:temp</giapiname>
+      <epicsname>sad:bench:temp</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:heater</giapiname>
+      <epicsname>sad:bench:heater</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:radShield</giapiname>
+      <epicsname>sad:bench:radShield</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:coldStop</giapiname>
+      <epicsname>sad:bench:coldStop</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:iobarrel</giapiname>
+      <epicsname>sad:bench:iobarrel</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:charcoalBox</giapiname>
+      <epicsname>sad:bench:charcoalBox</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:imGrating</giapiname>
+      <epicsname>sad:bench:imGrating</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:coldHeadFirst</giapiname>
+      <epicsname>sad:bench:coldHeadFirst</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:bench:coldHeadSecond</giapiname>
+      <epicsname>sad:bench:coldHeadSecond</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:dch:temp</giapiname>
+      <epicsname>sad:dch:temp</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:dch:tempHeater</giapiname>
+      <epicsname>sad:dch:tempHeater</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:dck:temp</giapiname>
+      <epicsname>sad:dck:temp</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:dck:tempHeater</giapiname>
+      <epicsname>sad:dck:tempHeater</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:dcs:temp</giapiname>
+      <epicsname>sad:dcs:temp</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+   <SimpleChannel>
+      <giapiname>sad:dcs:tempHeater</giapiname>
+      <epicsname>sad:dcs:tempHeater</epicsname>
+      <type>FLOAT</type>
+      <initial>0.0</initial>
+   </SimpleChannel>
+</Channels>
+        

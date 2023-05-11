@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+    
+<!--
+Copyright RSAA, The Korean Astronomy and Space Sciend Institue
+
+The Igrins2 instrument. 
+ Project partners:
+    The Gemini Observatory (Gemini, AURA),
+-->
+
+<!--
+ This file contains the list of authorized EPICS channels
+ that can be monitored through the GIAPI.
+-->
+
+<Records xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="giapi-apply-config.xsd">
+    <Apply name="apply" timeout="1000">
+        <SequenceCommand>TEST</SequenceCommand>
+        <SequenceCommand>REBOOT</SequenceCommand>
+        <SequenceCommand>INIT</SequenceCommand>
+        <SequenceCommand>DATUM</SequenceCommand>
+        <SequenceCommand>PARK</SequenceCommand>
+        <SequenceCommand>VERIFY</SequenceCommand>
+        <SequenceCommand>END_VERIFY</SequenceCommand>
+        <SequenceCommand>OBSERVE</SequenceCommand>
+        <SequenceCommand>END_OBSERVE</SequenceCommand>
+        <SequenceCommand>GUIDE</SequenceCommand>
+        <SequenceCommand>END_GUIDE</SequenceCommand>
+        <SequenceCommand>PAUSE</SequenceCommand>
+        <SequenceCommand>CONTINUE</SequenceCommand>
+        <SequenceCommand>STOP</SequenceCommand>
+        <SequenceCommand>ABORT</SequenceCommand>
+
+
+        <ConfigRecord name="dc">
+            <ConfigSet name="dc">
+                <field>texp</field>
+                <field>numsvc</field>
+                <field>dark</field>
+                <field>do_reset</field>
+                <field>do_init</field>
+                <field>do_test</field>
+                <field>do_test_pattern</field>
+                <field>xo</field>
+                <field>yo</field>
+            </ConfigSet>
+        </ConfigRecord>
+	
+    </Apply>
+</Records>
