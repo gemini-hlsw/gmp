@@ -9,8 +9,8 @@ set -u # Don't allow using non defined variables
 
 # Vars that are set at build time
 
-PAX_RUNNER_VERSION=${pax-runner.version}
-GMP_VERSION=${gmp.version}
+PAX_RUNNER_VERSION=1.8.6
+GMP_VERSION=14.5.9-SNAPSHOT
 
 # Overrides locally JAVA_HOME to use java 8
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
@@ -21,7 +21,8 @@ which $JAVA8 > /dev/null || { echo "Need java in PATH to run"; exit 1; }
 
 # Verify existing variables
 if [ -z ${GMP_ROOT:-} ]; then
-    GMP_ROOT=/opt/ghost
+    tmp=`pwd`
+    GMP_ROOT="${tmp%/*}"
     echo "GMP_ROOT not set. Using $GMP_ROOT"
 fi
 if ! [ -d $GMP_ROOT ]; then
@@ -34,7 +35,7 @@ fi
 
 # App variables
 app_name=gmp-server
-app_root=${GMP_ROOT}/gmp-server-$GMP_VERSION
+app_root=${GMP_ROOT}
 pid_file=${app_root}/bin/${app_name}.pid
 log_dir=${app_root}/logs/
 log_file=${log_dir}/${app_name}.out
