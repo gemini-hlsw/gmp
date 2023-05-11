@@ -233,6 +233,12 @@
             </dependencies>
         </profile>
         <profile>
+            <id>igrins2</id>
+            <properties>
+                <gmp.instance>igrins2</gmp.instance>
+            </properties>
+        </profile>
+        <profile>
             <id>production</id>
             <dependencies>
                 <!-- Felix core -->
