@@ -9,8 +9,8 @@ set -u # Don't allow using non defined variables
 
 # Vars that are set at build time
 
-PAX_RUNNER_VERSION=${pax-runner.version}
-GMP_VERSION=${gmp.version}
+PAX_RUNNER_VERSION=15.0.8
+GMP_VERSION=15.0.8-SNAPSHOT
 
 # Overrides locally JAVA_HOME to use java 8
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
@@ -82,7 +82,7 @@ function startContainer() {
         echo "Starting ${app_name} version $GMP_VERSION"
         # Will start pax-runner as a daemon reading the configuration from the file bin/runner.args
         pushd ${app_root}/bin > /dev/null;
-        java -cp ${app_root}/bin/pax-runner-${PAX_RUNNER_VERSION}.jar org.ops4j.pax.runner.daemon.DaemonLauncher --startd &> ${log_file}
+        $JAVA8 -cp ${app_root}/bin/pax-runner-${PAX_RUNNER_VERSION}.jar org.ops4j.pax.runner.daemon.DaemonLauncher --startd &> ${log_file}
         wait $!
         sleep 4
         popd > /dev/null

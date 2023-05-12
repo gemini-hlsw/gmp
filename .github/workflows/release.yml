@@ -25,7 +25,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Build rpm
-        run: mvn -Pproduction clean install
+        run: mvn -DskipTests -Pproduction clean install
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -62,4 +62,32 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: gmp-server-${{ github.ref_name }}.tar.gz
           asset_name: gmp-server-${{ github.ref_name }}.tar.gz
+          asset_content_type: application/gzip
+      - name: Build igrins2 rpm
+        run: mvn -DskipTests -Pproduction,igrins2 clean install
+      - name: Rename igrins2 rpm
+        run: |
+          cp distribution/target/rpm/gmp-server/RPMS/noarch/*.rpm gmp-server-igrins2-${{ github.ref_name }}.rpm
+      - name: Rename igrins2 tarball
+        run: |
+          cp distribution/target/gmp-server-*.tar.gz gmp-server-igrins2-${{ github.ref_name }}.tar.gz
+      - name: Upload igrins2 rpm
+        id: upload-igrins2-release-rpm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: gmp-server-igrins2-${{ github.ref_name }}.rpm
+          asset_name: gmp-server-igrins2-${{ github.ref_name }}.rpm
+          asset_content_type: application/x-rpm
+      - name: Upload igrins2 tarball
+        id: upload-igrins2-release-tarball
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: gmp-server-igrins2-${{ github.ref_name }}.tar.gz
+          asset_name: gmp-server-igrins2-${{ github.ref_name }}.tar.gz
           asset_content_type: application/gzip
