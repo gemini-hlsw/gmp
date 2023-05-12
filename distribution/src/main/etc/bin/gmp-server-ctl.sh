@@ -12,22 +12,30 @@ set -u # Don't allow using non defined variables
 PAX_RUNNER_VERSION=${pax-runner.version}
 GMP_VERSION=${gmp.version}
 
+# Overrides locally JAVA_HOME to use java 8
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+JAVA8=$JAVA_HOME/bin/java
+#
 # Confirm that java is available
-which java > /dev/null || { echo "Need java in PATH to run"; exit 1; }
+which $JAVA8 > /dev/null || { echo "Need java in PATH to run"; exit 1; }
 
 # Verify existing variables
-if [ -z ${GPI_ROOT:-} ]; then
-    GPI_ROOT=/gemsoft/opt/gpi/
-    echo "GPI_ROOT not set. Using $GPI_ROOT"
+if [ -z ${GMP_ROOT:-} ]; then
+    tmp=`pwd`
+    GMP_ROOT="${tmp%/*}"
+    echo "GMP_ROOT not set. Using $GMP_ROOT"
 fi
-if ! [ -d $GPI_ROOT ]; then
-    echo "$GPI_ROOT directory not found"
+if ! [ -d $GMP_ROOT ]; then
+    echo "$GMP_ROOT directory not found"
     exit -1
+fi
+if [ -z "${HOME:-}" ]; then
+    HOME=$GMP_ROOT
 fi
 
 # App variables
 app_name=gmp-server
-app_root=${GPI_ROOT}/gmp-server-$GMP_VERSION
+app_root=${GMP_ROOT}
 pid_file=${app_root}/bin/${app_name}.pid
 log_dir=${app_root}/logs/
 log_file=${log_dir}/${app_name}.out
@@ -95,13 +103,14 @@ function startContainer() {
 function stopContainer() {
   if [ ! -z ${pid_isrunning} ]; then
     echo "Stopping ${app_name} with pid ${pid}"
-    java -cp ${app_root}/bin/pax-runner-${PAX_RUNNER_VERSION}.jar org.ops4j.pax.runner.daemon.DaemonLauncher --stop
+    $JAVA8 -cp ${app_root}/bin/pax-runner-${PAX_RUNNER_VERSION}.jar org.ops4j.pax.runner.daemon.DaemonLauncher --stop
     counter=0
     while kill -0 "$pid" 2> /dev/null; do
       counter=$((counter+1))
       sleep 1
       if [[ "$counter" -gt 25 ]]; then
         echo "Taking too long to die, forced to kill"
+        jstack -l "$pid" > $HOME/.pax/dump_${pid}
         kill -9 "$pid"
         sleep 5
       fi
@@ -114,7 +123,6 @@ function stopContainer() {
     echo "${app_name} not running"
   fi
 }
-
 
 #
 # Kill the GMP process

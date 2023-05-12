@@ -91,7 +91,7 @@ function startContainer() {
         retval=$?
         sleep 10
         echo "Started ${app_name}"
-        return $retvalw
+        return $retval
     else
         echo "${app_name} already running with pid ${pid}"
     fi
