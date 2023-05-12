@@ -46,6 +46,25 @@ public class ApplyExecutorTest {
     }
 
     /**
+     * GHOST test case
+     */
+    @Test
+    public void testCountGhostResponses() {
+        _executor = new ApplySenderExecutor(builder, actionManager, handlers);
+
+        List<ConfigPath> registeredHandlers = ImmutableList.of( configPath("ghost:cc:slu:fa1"), configPath("ghost:dc:blue"), configPath("ghost:dc:red"));
+        when(handlers.getApplyHandlers()).thenReturn(registeredHandlers);
+
+        Configuration _applyConfig1 = configurationBuilder()
+                .withPath(configPath("ghost:dc:blue.ccf"), "4")
+                .withPath(configPath("ghost:dc:red.ccf"), "4")
+                .withPath(configPath("ghost:cc:slu:fa1.type"), "SET")
+                .build();
+
+        assert (_executor.canBeFullyHandled(_applyConfig1));
+        assertEquals(3, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH));
+    }
+    /**
      * Count the handlers
      */
     @Test
