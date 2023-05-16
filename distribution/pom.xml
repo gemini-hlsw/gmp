@@ -258,11 +258,11 @@
                     <artifactId>pax-runner</artifactId>
                     <version>${pax-runner.version}</version>
                     <exclusions>
-        <exclusion>
-            <groupId>*</groupId>
-            <artifactId>*</artifactId>
-        </exclusion>
-    </exclusions>
+                        <exclusion>
+                            <groupId>*</groupId>
+                            <artifactId>*</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
                 <!-- Felix Shell and GOGO -->
                 <dependency>

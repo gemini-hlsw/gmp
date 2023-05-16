@@ -44,7 +44,6 @@ public class ActiveMQJMSProviderIT extends FelixContainerConfigurationBase {
                 mavenBundle().artifactId("kahadb").groupId("org.apache.activemq").versionAsInProject(),
                 mavenBundle().artifactId("geronimo-annotation_1.0_spec").groupId("org.apache.geronimo.specs").versionAsInProject(),
                 mavenBundle().artifactId("jms-api").groupId("edu.gemini.jms").versionAsInProject(),
-                mavenBundle().artifactId("eproperties").groupId("edu.gemini.external.osgi.net.jmatrix.eproperties").versionAsInProject(),
                 mavenBundle().artifactId("jms-activemq-provider").groupId("edu.gemini.jms").versionAsInProject()
         ));
     }
