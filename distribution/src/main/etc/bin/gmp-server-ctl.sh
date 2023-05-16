@@ -13,7 +13,11 @@ PAX_RUNNER_VERSION=${pax-runner.version}
 GMP_VERSION=${gmp.version}
 
 # Overrides locally JAVA_HOME to use java 8
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+if [ -z ${JAVA_HOME:-} ]; then
+   export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+   echo "Using $JAVA_HOME for default: $JAVA_HOME"
+fi
+
 JAVA8=$JAVA_HOME/bin/java
 #
 # Confirm that java is available
@@ -22,7 +26,7 @@ which $JAVA8 > /dev/null || { echo "Need java in PATH to run"; exit 1; }
 # Verify existing variables
 if [ -z ${GMP_ROOT:-} ]; then
     tmp=`pwd`
-    GMP_ROOT="${tmp%/*}"
+    GMP_ROOT="${tmp%/bin*}"
     echo "GMP_ROOT not set. Using $GMP_ROOT"
 fi
 if ! [ -d $GMP_ROOT ]; then
