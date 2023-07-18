@@ -13,7 +13,7 @@ object GDSConfigValidator {
   def main(args: Array[String]):Unit = {
 
     val usage = """
-    Usage: ./gds-validator.sh [-h|--help] [-p|--print] [-f|--file filename]
+    Usage: ./gds-config-validator.sh [-h|--help] [-p|--print] [-f|--file filename]
   """
     if (args.length == 0) {
       println(usage)
