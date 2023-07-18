@@ -918,6 +918,7 @@
         <module>gmp-top</module>
         <module>gmp-epics-to-status</module>
         <module>gds</module>
+        <module>gds-config-validator</module>
         <module>integration-tests</module>
         <module>distribution</module>
     </modules>
