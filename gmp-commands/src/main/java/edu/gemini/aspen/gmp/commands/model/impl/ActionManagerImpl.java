@@ -2,10 +2,11 @@ package edu.gemini.aspen.gmp.commands.model.impl;
 
 import edu.gemini.aspen.giapi.commands.HandlerResponse;
 import edu.gemini.aspen.gmp.commands.model.Action;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -26,11 +27,10 @@ public class ActionManagerImpl implements ActionManager {
             ActionManager.class.getName());
 
     /**
-     * The Action Queue stores the actions initiated when a sequence command
+     * The Action List stores the actions initiated when a sequence command
      * is received from the OCS and dispatched to the instrument
      */
-    private final Queue<Action> _actionQueue =
-            new ConcurrentLinkedQueue<Action>();
+  private final List<Action> _actionList = Collections.synchronizedList(new ArrayList());
 
     /**
      * The Update Queue stores the completion information updates that come
@@ -122,25 +122,21 @@ public class ActionManagerImpl implements ActionManager {
         private void updateClients(UpdateData updateData) {
             int actionId = updateData.actionId;
             HandlerResponse response = updateData.response;
-            synchronized (_actionQueue) {
-                Action action = _actionQueue.peek();
+            synchronized (_actionList) {
+                boolean foundAction = false;
+                Action action = null;
 
-                if (action == null) {
+                for (Action a : _actionList) {
+                    if (a.getId() == actionId) {
+                        action = a;
+                        foundAction = true;
+                        break;
+                    }
+                }
+
+                if (!foundAction) {
                     LOG.log(Level.WARNING,
                             "I don't know about action ID " + actionId + ". Usually this means a problem in the instrument code.");
-                    return;
-                }
-                //If the first action in the queue is bigger
-                //than the one received, we don't have anything to do. Log this
-                //since it's an indication something weird is happening
-                if (action.getId() > actionId) {
-                    LOG.log(Level.WARNING,
-                            "Action ID received " + actionId +
-                                    " but our first action to notify is "
-                                    + action.getId() +
-                                    ". Usually this means a duplicate action " +
-                                    "id was received or we got a higher action " +
-                                    "id confirmation first.");
                     return;
                 }
 
@@ -157,7 +153,7 @@ public class ActionManagerImpl implements ActionManager {
                 _lock.lock(); //acquire the lock before start updating
 
                 try {
-                    while (action != null && action.getId() <= actionId) {
+                    if (action != null) {
                         //store this response to combine it with the other answers we might receive for the same action
                         _handlerResponseTracker.storeResponse(action, response);
                         if (_handlerResponseTracker.isComplete(action)) {
@@ -166,10 +162,8 @@ public class ActionManagerImpl implements ActionManager {
                             //remove the action from the list of tracked actions
                             _handlerResponseTracker.removeTrackedAction(action);
 
-                            //now, remove the element from the queue
-                            _actionQueue.poll();
-                            //iterate to the next element
-                            action = _actionQueue.peek();
+                            //now, remove the element from the list
+                            _actionList.remove(action);
                         } else {
                             LOG.info("Received update for action " + action + " response " +
                                     response + ". Waiting for the other parts of the action to complete...");
@@ -228,13 +222,13 @@ public class ActionManagerImpl implements ActionManager {
     @Override
     public void registerAction(Action action) {
         LOG.fine("Start monitoring progress for Action " + action);
-        _actionQueue.add(action);
+        _actionList.add(action);
     }
 
     @Override
     public void unregisterAction(Action action) {
         LOG.fine("Stopped monitoring progress for Action " + action + ". Action Completed Immediately");
-        _actionQueue.remove(action);
+        _actionList.remove(action);
     }
 
     @Override
