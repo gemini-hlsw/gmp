@@ -102,7 +102,6 @@ public class ActionManagerImplTest {
 
     /**
      * Validates that completion info for an action will trigger the listeners
-     * of all the actions with lower action ID.
      */
     @Test
     public void testMultiplePendingActions() {
@@ -110,10 +109,12 @@ public class ActionManagerImplTest {
             manager.registerAction(a);
         }
 
-        //trigger the last to one action...
-        manager.registerCompletionInformation(actions.get(TOTAL_ACTIONS - 1 - 1).getId(),
-                HandlerResponse.COMPLETED);
-
+       // Set all actions bar last complete
+        for (int i = 0; i < TOTAL_ACTIONS - 1; i++) {
+           manager.registerCompletionInformation(actions.get(i).getId(),  
+                   HandlerResponse.COMPLETED);
+       }
+       
         //and give the listeners a chance to run...
         for (Action a : actions) {
             CompletionListenerMock cl = completionListeners.get(a);
