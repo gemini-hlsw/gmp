@@ -357,11 +357,6 @@
                 <version>0.3.15-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>edu.gemini.gmp</groupId>
-                <artifactId>gmp-commands-records</artifactId>
-                <version>0.7.15-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-epics-simulator</artifactId>
                 <version>0.4.15-SNAPSHOT</version>
@@ -902,7 +897,6 @@
         <module>gmp-commands</module>
         <module>gmp-commands-jms-bridge</module>
         <module>gmp-commands-jms-client</module>
-        <module>gmp-commands-records</module>
         <module>gmp-services</module>
         <module>gmp-pcs-updater</module>
         <module>gmp-status-gateway</module>
