@@ -4,7 +4,7 @@ import edu.gemini.giapi.tool.fileevents.MonitorFileEventsOperation;
 import edu.gemini.giapi.tool.obsevents.SendObsEventOperation;
 import edu.gemini.giapi.tool.parser.*;
 import edu.gemini.giapi.tool.arguments.*;
-import edu.gemini.giapi.tool.commands.CommandOperation;
+import edu.gemini.giapi.tool.commands.*;
 import edu.gemini.giapi.tool.help.HelpOperation;
 import edu.gemini.giapi.tool.status.*;
 import edu.gemini.giapi.tool.obsevents.MonitorObsEventOperation;
@@ -84,6 +84,7 @@ public class GiapiTester {
         parser.registerArgument(new DataLabelArgument());
         parser.registerArgument(new ExpectedValueArgument());
         parser.registerArgument(new ShowMillisecondsArgument());
+	parser.registerArgument(new WaitArgument());
 
         //possible operations
         parser.registerOperation(new HelpOperation());
@@ -96,26 +97,17 @@ public class GiapiTester {
         parser.registerOperation(new MonitorObsEventOperation());
         parser.registerOperation(new SendObsEventOperation());
         parser.registerOperation(new MonitorFileEventsOperation());
+	parser.registerOperation(new WaitOperation());
 
-        //get the Operation the parser found
-        Operation op = parser.parse();
+        
+	//get the Operation the parser found
+	Operation op = parser.parse();
 
         if (op != null) {
             execute(op);
-        } 
-	    else {
-	        if (args[0].equals("Wait")) {
-		        try {
-           		    int waitTime = Integer.parseInt(args[1]) * 1000; // convert seconds to milliseconds
-            		Thread.sleep(waitTime); // wait for the specified time
-        	    } catch (NumberFormatException e) {
-            		System.err.println("Invalid argument: " + args[1]);
-        	    }
-	        }
-	        else {
-                Util.die("I'm sorry, what operation do you mean?");
-	        }
-	    }
+        } else {
+            Util.die("I'm sorry, what operation do you mean?");
+        }
     }
 
 
