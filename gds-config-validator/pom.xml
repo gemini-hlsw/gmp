@@ -5,7 +5,7 @@
         <relativePath>../poms/scala/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>scala-compiled-bundle-settings</artifactId>
-        <version>15.0.1-SNAPSHOT</version>
+        <version>0.2.2-SNAPSHOT</version>
 
     </parent>
 
@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen.gds</groupId>
     <artifactId>gds-config-validator</artifactId>
-    <version>0.1.30-SNAPSHOT</version>
+    <version>0.1.31-SNAPSHOT</version>
 
     <name>GDS Config Validator</name>
 
@@ -28,6 +28,8 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <finalName>${project.artifactId}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
                             <mainClass>edu.gemini.aspen.gds.config.GDSConfigValidator</mainClass>
@@ -58,8 +60,7 @@
         </dependency>
         <dependency>
             <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds-api</artifactId>
-            <scope>compile</scope>
+            <artifactId>gds</artifactId>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>

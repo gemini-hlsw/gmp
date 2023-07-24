@@ -37,7 +37,6 @@ public class StatusSetterIT extends FelixContainerConfigurationBase {
                 mavenBundle().artifactId("gmp-statusdb").groupId("edu.gemini.aspen.gmp").versionAsInProject(),
                 mavenBundle().artifactId("jms-activemq-provider").groupId("edu.gemini.jms").versionAsInProject(),
                 mavenBundle().artifactId("jms-activemq-broker").groupId("edu.gemini.jms").versionAsInProject(),
-                mavenBundle().artifactId("eproperties").groupId("edu.gemini.external.osgi.net.jmatrix.eproperties").versionAsInProject(),
                 mavenBundle().artifactId("activemq-core").groupId("org.apache.activemq").versionAsInProject(),
                 mavenBundle().artifactId("geronimo-j2ee-management_1.1_spec").groupId("org.apache.geronimo.specs").versionAsInProject(),
                 mavenBundle().artifactId("kahadb").groupId("org.apache.activemq").versionAsInProject(),

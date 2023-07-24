@@ -36,7 +36,17 @@ public enum ObservationEvent {
      * Event indicates that the instrument has completed writing
      * the dataset to GSDN
      */
-    OBS_END_DSET_WRITE("OBS_END_DSET_WRITE");
+    OBS_END_DSET_WRITE("OBS_END_DSET_WRITE"),
+
+    /**
+     * Event sent by an external entity to indicate that the observation has ended
+     */
+    EXT_END_OBS("EXT_END_OBS"),
+
+    /**
+     * Event sent by an external entity to indicate that the observation will start
+     */
+    EXT_START_OBS("EXT_START_OBS");
 
     private final String eventName;
 

@@ -7,6 +7,9 @@
 # Minimal debug from pax-runner
 --log=info
 
+# Set the execution environment
+--ee=JavaSE-1.8
+
 # Use the repositories set in felix and bundles
 --repositories=file:../felix@id=felix
 --localRepository=file:../felix@id=felix

@@ -5,11 +5,11 @@
     <parent>
         <groupId>edu.gemini.aspen</groupId>
         <artifactId>giapi-osgi</artifactId>
-        <version>0.1.6-SNAPSHOT</version>
+        <version>0.2.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>gmp-server</artifactId>
-    <version>0.1.6-SNAPSHOT</version>
+    <version>0.2.2-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -109,10 +109,9 @@
             <artifactId>gmp-epics-to-status</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.gemini.gmp</groupId>
-            <artifactId>gmp-commands-records</artifactId>
+            <groupId>edu.gemini.aspen.gds</groupId>
+            <artifactId>gds</artifactId>
         </dependency>
-
         <dependency>
             <groupId>edu.gemini.aspen.gmp</groupId>
             <artifactId>gmp-health</artifactId>
@@ -142,13 +141,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <!-- <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh</artifactId>
-                <version>1.0-beta-6</version>
-            </extension>
-        </extensions> -->
     </build>
 
     <profiles>
@@ -233,6 +225,12 @@
             </dependencies>
         </profile>
         <profile>
+            <id>igrins2</id>
+            <properties>
+                <gmp.instance>igrins2</gmp.instance>
+            </properties>
+        </profile>
+        <profile>
             <id>production</id>
             <dependencies>
                 <!-- Felix core -->
@@ -252,11 +250,11 @@
                     <artifactId>pax-runner</artifactId>
                     <version>${pax-runner.version}</version>
                     <exclusions>
-        <exclusion>
-            <groupId>*</groupId>
-            <artifactId>*</artifactId>
-        </exclusion>
-    </exclusions>
+                        <exclusion>
+                            <groupId>*</groupId>
+                            <artifactId>*</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
                 <!-- Felix Shell and GOGO -->
                 <dependency>

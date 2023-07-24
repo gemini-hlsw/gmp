@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+    
+<!--
+Copyright RSAA, The Korean Astronomy and Space Sciend Institue
+
+The Igrins2 instrument. 
+ Project partners:
+    The Gemini Observatory (Gemini, AURA)
+-->
+
+<!--
+ This file contains the list of authorized EPICS channels
+ that can be monitored through the GIAPI.
+-->
+<channels>
+    <channel>ag:port:igrins2</channel>
+    <channel>tcs:sad:chopState</channel>
+    <channel>tcs:sad:currentAirPressure</channel>
+    <channel>tcs:sad:currentExternalTemp</channel>
+    <channel>tcs:sad:currentRma</channel>
+    <channel>tcs:sad:currentZd</channel>
+    <channel>tcs:sad:delat</channel>
+    <channel>tcs:sad:delut</channel>
+    <channel>tcs:sad:djmls</channel>
+    <channel>tcs:sad:instrPA</channel>
+    <channel>tcs:sad:parAngle</channel>
+    <channel>tcs:sad:sourceATrackEq</channel>
+    <channel>tcs:sad:sourceATrackFrame</channel>
+    <channel>tcs:sad:sourceAWavelength</channel>
+    <channel>tcs:sad:tlongm</channel>
+    <channel>tcs:sad:windSpeed.VAL</channel>
+    <channel>tcs:sad:currentWindSpeed.VAL</channel>
+</channels>
+    

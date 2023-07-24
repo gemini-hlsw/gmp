@@ -12,7 +12,6 @@
         <dependencySet>
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>/bin</outputDirectory>
-            <fileMode>0644</fileMode>
             <includes>
                 <include>org.ops4j.pax.runner:*</include>
             </includes>
@@ -20,7 +19,6 @@
         <dependencySet>
             <useProjectArtifact>false</useProjectArtifact>
             <outputDirectory>/bundles/level4</outputDirectory>
-            <!--useTransitiveFiltering>true</useTransitiveFiltering-->
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <useTransitiveFiltering>false</useTransitiveFiltering>
             <includes>
@@ -31,6 +29,7 @@
                 <exclude>org.apache.felix:org.apache.felix.framework</exclude>
                 <exclude>org.apache.felix:org.apache.felix.main</exclude>
                 <exclude>org.apache.felix:org.apache.felix.gogo.*</exclude>
+                <exclude>org.osgi:org.osgi.compendium</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>
@@ -78,29 +77,28 @@
         </fileSet>
         <fileSet>
             <directory>src/main/etc/bin</directory>
-            <fileMode>0755</fileMode>
             <outputDirectory>/bin</outputDirectory>
             <filtered>true</filtered>
-            <includes>
+	          <includes>
                 <include>start.sh</include>
-                <include>gmp-server-ctl.sh</include>
+		            <include>gmp-server-ctl.sh</include>
                 <include>gmp-server</include>
             </includes>
+            <fileMode>0755</fileMode>
         </fileSet>
         <!-- Copy startup scripts of any project specific config -->
         <fileSet>
             <directory>../instances/${gmp.instance}/src/main/etc/bin</directory>
             <outputDirectory>/bin</outputDirectory>
             <filtered>true</filtered>
-            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <directory>../giapi-tester/src/main/etc/bin</directory>
-            <fileMode>0755</fileMode>
             <outputDirectory>/bin</outputDirectory>
             <includes>
                 <include>giapi-tester.sh</include>
             </includes>
+            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <directory>../giapi-tester/target/</directory>
@@ -108,6 +106,21 @@
             <includes>
                 <include>giapi-tester.jar</include>
             </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../gds-config-validator/target/</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+                <include>gds-config-validator.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../gds-config-validator/src/main/etc/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+                <include>gds-config-validator.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
         </fileSet>
         <!-- Copy configurations out of any project specific config -->
         <fileSet>
@@ -140,7 +153,6 @@
         <fileSet>
             <directory>src/main/doc</directory>
             <outputDirectory>/</outputDirectory>
-            <fileMode>0644</fileMode>
             <filtered>true</filtered>
             <includes>
                 <include>*.txt</include>
@@ -149,7 +161,6 @@
         <fileSet>
             <directory>src/main/doc</directory>
             <outputDirectory>/</outputDirectory>
-            <fileMode>0644</fileMode>
             <filtered>true</filtered>
             <includes>
                 <include>README</include>
