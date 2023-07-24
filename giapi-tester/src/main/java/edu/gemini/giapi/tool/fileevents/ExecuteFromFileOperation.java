@@ -37,7 +37,7 @@ public class ExecuteFromFileOperation implements Operation {
             while ((line = br.readLine()) != null) {
                 // Split the line into an array of arguments and execute them
                 String[] lineArray = line.split("\\s+");
-                GiapiTester.executeArgs(lineArray);
+                GiapiTester.argumentHandler(lineArray);
             }
         } catch (IOException e) {
             System.err.println("Failed to read file: " + e.getMessage());
