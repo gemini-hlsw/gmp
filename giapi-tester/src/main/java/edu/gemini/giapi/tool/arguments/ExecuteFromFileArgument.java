@@ -11,7 +11,7 @@ public class ExecuteFromFileArgument extends AbstractArgument {
     private String fileName;
 
     public ExecuteFromFileArgument() {
-        super("-file");
+        super("file");
     }
 
     public boolean requireParameter() {
