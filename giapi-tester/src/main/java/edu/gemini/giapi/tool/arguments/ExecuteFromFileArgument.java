@@ -1,7 +1,7 @@
 package edu.gemini.giapi.tool.arguments;
 
 import edu.gemini.giapi.tool.parser.Argument;
-import edu.gemini.giapi.tool.parser.util.AbstractArgument;
+import edu.gemini.giapi.tool.parser.AbstractArgument;
 
 /**
  * Argument to specify a file containing commands to execute.
