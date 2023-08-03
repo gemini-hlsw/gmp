@@ -1,4 +1,4 @@
-package edu.gemini.giapi.tool.wait;
+package edu.gemini.giapi.tool.commands;
 
 import edu.gemini.giapi.tool.arguments.WaitArgument;
 import edu.gemini.giapi.tool.parser.Operation;
