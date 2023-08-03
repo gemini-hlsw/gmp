@@ -72,7 +72,7 @@ public class GiapiTester {
         parser.registerOperation(new SendObsEventOperation());
         parser.registerOperation(new MonitorFileEventsOperation());
 	parser.registerOperation(new WaitOperation());
-	parser.registerOperation(new ExecuteFromFileOperation()):
+	parser.registerOperation(new ExecuteFromFileOperation());
 
         
 	//get the Operation the parser found
