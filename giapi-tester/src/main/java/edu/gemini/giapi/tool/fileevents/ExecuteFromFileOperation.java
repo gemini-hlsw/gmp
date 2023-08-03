@@ -3,6 +3,7 @@ package edu.gemini.giapi.tool.fileevents;
 import edu.gemini.giapi.tool.parser.Operation;
 import edu.gemini.giapi.tool.parser.Argument;
 import edu.gemini.giapi.tool.GiapiTester;
+import edu.gemini.giapi.tool.arguments.ExecuteFromFileArgument;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
