@@ -1,10 +1,10 @@
 package edu.gemini.giapi.tool;
 
-import edu.gemini.giapi.tool.fileevents.MonitorFileEventsOperation;
+import edu.gemini.giapi.tool.fileevents.*;
 import edu.gemini.giapi.tool.obsevents.SendObsEventOperation;
 import edu.gemini.giapi.tool.parser.*;
 import edu.gemini.giapi.tool.arguments.*;
-import edu.gemini.giapi.tool.commands.CommandOperation;
+import edu.gemini.giapi.tool.commands.*;
 import edu.gemini.giapi.tool.help.HelpOperation;
 import edu.gemini.giapi.tool.status.*;
 import edu.gemini.giapi.tool.obsevents.MonitorObsEventOperation;
@@ -18,12 +18,17 @@ import java.util.logging.LogManager;
  * The GIAPI Tester main class.
  */
 public class GiapiTester {
-
+    
     public static void main(String[] args) throws Exception {
         initializeLogging();
 
         //register the default message to show in case of problems
         Util.registerDefaultMessage("Let me help you. Try: java -jar giapi-tester.jar -?");
+	argumentHandler(args);
+
+    }
+
+    public static void argumentHandler(String [] args) throws Exception {	
 
         //create the parser
         ArgumentParser parser = new ArgumentParser(args);
@@ -52,6 +57,8 @@ public class GiapiTester {
         parser.registerArgument(new DataLabelArgument());
         parser.registerArgument(new ExpectedValueArgument());
         parser.registerArgument(new ShowMillisecondsArgument());
+	parser.registerArgument(new WaitArgument());
+	parser.registerArgument(new ExecuteFromFileArgument());
 
         //possible operations
         parser.registerOperation(new HelpOperation());
@@ -64,9 +71,12 @@ public class GiapiTester {
         parser.registerOperation(new MonitorObsEventOperation());
         parser.registerOperation(new SendObsEventOperation());
         parser.registerOperation(new MonitorFileEventsOperation());
+	parser.registerOperation(new WaitOperation());
+	parser.registerOperation(new ExecuteFromFileOperation());
 
-        //get the Operation the parser found
-        Operation op = parser.parse();
+        
+	//get the Operation the parser found
+	Operation op = parser.parse();
 
         if (op != null) {
             execute(op);
@@ -74,6 +84,7 @@ public class GiapiTester {
             Util.die("I'm sorry, what operation do you mean?");
         }
     }
+
 
     private static void execute(Operation op) throws Exception {
         try {
