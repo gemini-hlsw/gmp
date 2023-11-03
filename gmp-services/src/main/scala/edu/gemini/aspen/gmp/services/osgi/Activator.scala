@@ -26,7 +26,7 @@ class Activator extends BundleActivator {
     trackerPH = Option(Tracker.track[PropertyHolder, JmsService](context) { p =>
       val ps = new PropertyService(p)
       val props: util.Hashtable[String, String] = new util.Hashtable()
-      psService = Option(context.registerService(Array[String](classOf[Service].getName, classOf[JmsService].getName), ps, props))
+      psService = Option(context.registerService(Array[String](classOf[Service].getName, classOf[JmsService].getName, classOf[JmsArtifact].getName), ps, props))
       ps
     } { _ => psService.foreach(_.unregister())})
     trackerPH.foreach(_.open)
