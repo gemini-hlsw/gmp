@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <relativePath>../poms/scala/</relativePath>
+        <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
+        <artifactId>scala-compiled-bundle-settings</artifactId>
+        <version>0.2.2-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <bundle.symbolicName>edu.gemini.aspen.gmp.tcsoffset</bundle.symbolicName>
+        <bundle.namespace>edu.gemini.aspen.gmp.tcsoffset</bundle.namespace>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.gemini.aspen.gmp</groupId>
+    <artifactId>gmp-tcs-offset</artifactId>
+    <version>0.3.16-SNAPSHOT</version>
+
+    <name>GMP TCS Offset Service</name>
+    <description>TCS Offset service</description>
+
+    <packaging>bundle</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>edu.gemini.jms</groupId>
+            <artifactId>jms-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.epics</groupId>
+            <artifactId>epics-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.cas</groupId>
+            <artifactId>cas</artifactId>
+        </dependency>
+	<!--<dependency>
+            <groupId>edu.gemini.aspen.gmp</groupId>
+            <artifactId>gmp-commands</artifactId>
+            <version>1.2.16-SNAPSHOT</version>
+	</dependency>
+        -->
+        <dependency>
+            <groupId>edu.gemini.aspen</groupId>
+            <artifactId>giapi</artifactId>
+            <version>1.1.16-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen</groupId>
+            <artifactId>giapi-jms-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.ocs</groupId>
+            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.10.1</version>
+        </dependency>
+    </dependencies>
+
+</project>

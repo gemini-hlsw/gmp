@@ -350,6 +350,11 @@
                 <groupId>edu.gemini.aspen.gmp</groupId>
                 <artifactId>gmp-tcs-context</artifactId>
                 <version>0.3.16-SNAPSHOT</version>
+	    </dependency>
+	    <dependency>
+                <groupId>edu.gemini.aspen.gmp</groupId>
+                <artifactId>gmp-tcs-offset</artifactId>
+                <version>0.3.16-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.aspen.gmp</groupId>
@@ -899,6 +904,7 @@
         <module>gmp-commands-jms-client</module>
         <module>gmp-services</module>
         <module>gmp-pcs-updater</module>
+        <module>gmp-tcs-offset</module>
         <module>gmp-status-gateway</module>
         <module>gmp-statusdb</module>
         <module>gmp-epics-access</module>

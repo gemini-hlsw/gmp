@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0">
+
+    <OCD description="GMP Tcs Context" name="GMP Tcs Context" id="edu.gemini.aspen.gmp.tcs.model.TcsContextComponent">
+        <AD name="TCS Epics Channel" id="tcsChannel" required="true"
+            type="String" default="tc1:sad:astCtx"/>
+        <AD name="Simulation" id="simulation" required="true"
+            type="Boolean" default="true"/>
+        <AD name="Simuation Data File" id="simulationData" required="true"
+            type="String" default="${conf.base}/tcsCtx.data"/>
+    </OCD>
+
+    <!--Designate pid="edu.gemini.aspen.gmp.tcs.model.TcsContextComponent">
+        <Object ocdref="edu.gemini.aspen.gmp.tcs.model.TcsContextComponent"/>
+    </Designate-->
+
+</metatype:MetaData>

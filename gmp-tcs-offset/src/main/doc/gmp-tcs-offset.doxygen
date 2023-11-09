@@ -1,0 +1,39 @@
+/*!
+ * \page gmp-tcs-context GMP TCS Context
+ *
+ * This bundle fetches the TCS Context from the TCS at Gemini upon request
+ * from the instrument via the GIAPI (getTcsContext() method).
+ * It can also be configured to simulate TCS Context information for testing
+ * purposes without accessing the EPICS network
+ *
+ *
+ * \section gmp-tcs-context_provides_sec Provided Services
+ * This bundle doesn't provide any services
+ *
+ * \section gmp-tcs-context_requires_sec Required Services
+ * This bundle requires the \ref edu.gemini.epics.EpicsReader "EpicsReader" OSGI service, provided by the
+ * \ref epics-service bundle, to access the TCS via EPICS.
+ *
+ * It also requires a reference to the \ref edu.gemini.jms.api.JmsProvider "JmsProvider" service,
+ * to get JMS communications to the instrument code via the GIAPI.
+ *
+ * \section gmp-tcs-context_configuration_sec Configuration
+ * This bundle has its main configuration file in \ref edu.gemini.aspen.gmp.tcs.model.TcsContextComponent-default.cfg
+ *
+ * There, you can set three properties:
+ *
+ * - tcsChannel: The channel to get the TCS Context from. You can configure
+ * this so you can get the TCS context information from the real TCS or from
+ * the TCS simulator.
+ * - simulation: if true the bundle will run in simulation mode. In this mode, this
+ * bundle will generate TCS Context information internally, and it won't attempt
+ * to access EPICS. This is useful for testing purposes. The data that will be
+ * generated is obtained from a data file (see the next configuration item). For
+ * safety reasons, this bundle starts in simulation mode by default if its not
+ * explicitly configured.
+ * - simulationData: Points to a data file containing TCS Context information to
+ *  be used when running in simulation mode.
+ *
+ * Refer to the \ref tcs_context_test to get information about how to
+ * verify this bundle is operating correctly.
+ */
