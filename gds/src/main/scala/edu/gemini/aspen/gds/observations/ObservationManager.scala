@@ -25,11 +25,11 @@ object ObservationManager {
     keywordManager: KeywordManager[F],
     obsStateQ:      QueueSink[F, ObservationStateEvent],
     fitsQ:          QueueSink[F, (DataLabel, List[CollectedKeyword])]
-  )(implicit F:     Async[F]): F[ObservationManager[F]] =
+  )(implicit F: Async[F]): F[ObservationManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, ObservationItem[F]]().map { mapref =>
       new ObservationManager[F] {
         def process(stateEvent: ObservationStateEvent): F[Unit] = stateEvent match {
-          case Start(dataLabel, programId) =>
+          case Start(dataLabel, _) =>
             for {
               _   <- logger.infoF(s"Starting observation $dataLabel")
               _   <- logIfExists(dataLabel)
@@ -37,7 +37,7 @@ object ObservationManager {
               fsm <-
                 ObservationFSM(config.eventRetries, dataLabel, obsStateQ)
               _   <- mapref
-                       .setKeyValue(dataLabel, ObservationItem(programId, fsm, now + config.lifespan))
+                       .setKeyValue(dataLabel, ObservationItem(fsm, now + config.lifespan))
               _   <- keywordManager.initialize(dataLabel)
             } yield ()
 
@@ -83,10 +83,21 @@ object ObservationManager {
         }
 
         def withObsItem(dataLabel: DataLabel, event: ObservationStateEvent)(
-          action:                  ObservationItem[F] => F[Unit]
+          action: ObservationItem[F] => F[Unit]
         ): F[Unit] =
           mapref(dataLabel).get.flatMap {
-            case None       => logger.warningF(s"Observation not found for event: $event")
+            case None =>
+              for {
+                now <- Clock[F].realTime
+                fsm <-
+                  ObservationFSM(config.eventRetries, dataLabel, obsStateQ)
+                _   <-
+                  logger.warningF(s"Observation not preregistered, adding it for for event: $event")
+                item = ObservationItem(fsm, now + config.lifespan)
+                _   <- mapref.setKeyValue(dataLabel, item)
+                _   <- action(item)
+              } yield ()
+
             case Some(item) => action(item)
           }
 
@@ -112,7 +123,6 @@ object ObservationManager {
     }
 
   final case class ObservationItem[F[_]](
-    programId:  String,
     fsm:        ObservationFSM[F],
     expiration: FiniteDuration
   )

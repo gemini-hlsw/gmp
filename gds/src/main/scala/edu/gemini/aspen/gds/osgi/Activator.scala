@@ -7,7 +7,7 @@ import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
 import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsConfiguration }
 import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
-import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
+import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent, ObservationEventHandler }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 import edu.gemini.aspen.gmp.services.PropertyHolder
 import edu.gemini.epics.EpicsReader
@@ -17,11 +17,10 @@ import edu.gemini.util.osgi.Tracker
 import org.osgi.framework.{ BundleActivator, BundleContext, Constants, ServiceRegistration }
 import org.osgi.util.tracker.ServiceTracker
 import org.osgi.service.cm.ManagedServiceFactory
-import org.osgi.service.event.{ EventConstants, EventHandler }
 import scala.concurrent.duration._
 
 // TODO: Do we need to implement a health service? If not, maybe remove GDS from the health monitor
-// TODO: What about the ObservationEventLogger? And the time measurement in KeywordSetComposer?
+// TODO: And the time measurement in KeywordSetComposer?
 // TODO: Clean up logging.
 
 class Activator extends BundleActivator {
@@ -95,12 +94,10 @@ class Activator extends BundleActivator {
     )
     propTracker.foreach(_.open(true))
 
-    val eventAdminProps = new util.Hashtable[String, String]()
-    eventAdminProps.put(EventConstants.EVENT_TOPIC, ObservationEventReceiver.ObsEventTopic)
     obsEventSvc = context
-      .registerService(classOf[EventHandler].getName,
+      .registerService(classOf[ObservationEventHandler].getName,
                        new ObservationEventReceiver(handleObsEvent),
-                       eventAdminProps
+                       new util.Hashtable[String, String]()
       )
       .some
 
