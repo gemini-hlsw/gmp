@@ -26,5 +26,6 @@ final case class GdsConfiguration(
   observation:    ObservationConfig,
   keywordRetries: RetryConfig,
   seqexecPort:    Int,
+  seqexecHost:    String,
   fitsConfig:     FitsConfig
 )

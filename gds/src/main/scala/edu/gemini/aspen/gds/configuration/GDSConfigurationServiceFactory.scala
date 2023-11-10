@@ -62,6 +62,7 @@ class GDSConfigurationServiceFactory(
     val keywordRetries = asPosInt(props, "keyword.collection.retries")
     val keywordSleep   = asDuration(props, "keyword.collection.sleep")
     val seqexecPort    = asPosInt(props, "seqexec.server.port")
+    val seqexecHost    = asString(props, "seqexec.server.host")
     val fitsDelOrig    = asBool(props, "fits.deleteOriginal")
 
     val configValidated = (keywordConfig,
@@ -72,17 +73,19 @@ class GDSConfigurationServiceFactory(
                            keywordRetries,
                            keywordSleep,
                            seqexecPort,
+                           seqexecHost,
                            fitsSrcDir,
                            fitsDestDir,
                            fitsAddSuffix,
                            fitsSetOwner(props),
                            fitsSetPermissions(props),
                            fitsDelOrig
-    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, fsd, fdd, fas, fso, fsp, fdo) =>
+    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, sh, fsd, fdd, fas, fso, fsp, fdo) =>
       GdsConfiguration(kc,
                        ObservationConfig(cr, lf, RetryConfig(er, es)),
                        RetryConfig(kr, ks),
                        sp,
+                       sh,
                        FitsConfig(fsd, fdd, fas, fso, fsp, fdo)
       )
     }

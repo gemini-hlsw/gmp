@@ -26,6 +26,7 @@ object SeqexecServer {
 
   def apply(
     obsStateQ: QueueSink[IO, ObservationStateEvent],
+    host:      String,
     port:      Integer
   ): Stream[IO, Unit] = {
     def kwv2Collected(kwv: KeywordValue) =
@@ -69,7 +70,7 @@ object SeqexecServer {
     val httpApp = Router("gds-seqexec" -> service).orNotFound
 
     BlazeServerBuilder[IO](scala.concurrent.ExecutionContext.Implicits.global)
-      .bindHttp(port, "localhost")
+      .bindHttp(port, host)
       .withHttpApp(httpApp)
       .serve
       .as(())

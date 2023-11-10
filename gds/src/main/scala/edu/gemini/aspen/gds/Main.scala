@@ -38,7 +38,7 @@ object Main {
                       )
       obsMgr       <- ObservationManager(config.observation, kwMgr, obsStateQ, fitsQ)
       fitsProcessor = FitsFileProcessor[IO](config.fitsConfig, keywordConfig)
-      seqexecServer = SeqexecServer(obsStateQ, config.seqexecPort)
+      seqexecServer = SeqexecServer(obsStateQ, config.seqexecHost, config.seqexecPort)
       obsPurge      = Stream
                         .fixedDelay[IO](config.observation.cleanupRate)
                         .foreach(_ => obsStateQ.offer(ObservationStateEvent.PurgeStale))
