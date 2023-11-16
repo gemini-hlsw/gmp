@@ -24,7 +24,7 @@ object KeywordManager {
   def apply[F[_]](
     retryConfig: RetryConfig,
     collectors:  KeywordCollector[F]*
-  )(implicit F:  Async[F]): F[KeywordManager[F]] =
+  )(implicit F: Async[F]): F[KeywordManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, KeywordItem]().map { mapref =>
       new KeywordManager[F] {
 

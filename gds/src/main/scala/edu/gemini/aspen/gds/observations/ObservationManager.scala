@@ -27,59 +27,82 @@ object ObservationManager {
     fitsQ:          QueueSink[F, (DataLabel, List[CollectedKeyword])]
   )(implicit F: Async[F]): F[ObservationManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, ObservationItem[F]]().map { mapref =>
+      def addDataLabel(dataLabel: DataLabel): F[ObservationItem[F]] =
+        for {
+          _   <- logIfExists(dataLabel)
+          now <- Clock[F].realTime
+          fsm <-
+            ObservationFSM(config.eventRetries, dataLabel, obsStateQ)
+          item = ObservationItem(fsm, now + config.lifespan)
+          _   <- mapref.setKeyValue(dataLabel, item)
+          _   <- keywordManager.initialize(dataLabel)
+        } yield item
+
+      def logIfExists(dataLabel: DataLabel): F[Unit] =
+        mapref(dataLabel).get.flatMap {
+          case None    => F.unit
+          case Some(_) =>
+            logger.severeF(
+              s"A new start event has been received for observation $dataLabel, which already exists. Overwriting old observation."
+            )
+        }
+
+      def logEvent(stateEvent: ObservationStateEvent): F[Unit] =
+        logger.infoF(s"Got an event $stateEvent")
+
       new ObservationManager[F] {
-        def process(stateEvent: ObservationStateEvent): F[Unit] = stateEvent match {
-          case Start(dataLabel, _) =>
-            for {
-              _   <- logger.infoF(s"Starting observation $dataLabel")
-              _   <- logIfExists(dataLabel)
-              now <- Clock[F].realTime
-              fsm <-
-                ObservationFSM(config.eventRetries, dataLabel, obsStateQ)
-              _   <- mapref
-                       .setKeyValue(dataLabel, ObservationItem(fsm, now + config.lifespan))
-              _   <- keywordManager.initialize(dataLabel)
-            } yield ()
-
-          case e @ Stop(dataLabel) => withObsItem(dataLabel, e)(_.fsm.stopObservation)
-
-          case Abort(dataLabel) =>
-            logger.warningF(s"Received Abort event for observation $dataLabel") >>
-              obsStateQ.offer(Delete(dataLabel))
-
-          case Delete(dataLabel) =>
-            logger.infoF(s"Removing observation $dataLabel") >> keywordManager.delete(
-              dataLabel
-            ) >> mapref.unsetKey(dataLabel)
-
-          case e @ AddObservationEvent(dataLabel, obsEvent) =>
-            withObsItem(dataLabel, e)(_.fsm.addObservationEvent(obsEvent))
-
-          case e @ AddKeyword(dataLabel, keyword) =>
-            withObsItem(dataLabel, e)(_ => keywordManager.add(dataLabel, keyword))
-
-          case e @ CollectKeywords(dataLabel, obsEvent) =>
-            withObsItem(dataLabel, e)(_ => keywordManager.collect(dataLabel, obsEvent))
-
-          case e @ Step(dataLabel) => withObsItem(dataLabel, e)(_.fsm.step)
-
-          case e @ Complete(dataLabel) =>
-            withObsItem(dataLabel, e) { _ =>
+        def process(stateEvent: ObservationStateEvent): F[Unit] = {
+          println(stateEvent)
+          stateEvent match {
+            case Start(dataLabel, _) =>
               for {
-                kws <- keywordManager.get(dataLabel)
-                _   <- logger.infoF(s"Got these keywords for $dataLabel:\n\t${kws.mkString("\n\t")}")
-                _   <- fitsQ.offer((dataLabel, kws))
-                _   <- obsStateQ.offer(Delete(dataLabel))
+                _ <- logger.infoF(s"Starting observation $dataLabel")
+                _ <- addDataLabel(dataLabel)
               } yield ()
-            }
 
-          case PurgeStale =>
-            for {
-              _    <- logger.infoF("Checking for expired observations.")
-              keys <- mapref.keys
-              now  <- Clock[F].realTime
-              _    <- keys.traverse(purgeIfNeeded(_, now))
-            } yield ()
+            case e @ Stop(dataLabel) => withObsItem(dataLabel, e)(_.fsm.stopObservation)
+
+            case Abort(dataLabel) =>
+              logger.warningF(s"Received Abort event for observation $dataLabel") >>
+                obsStateQ.offer(Delete(dataLabel))
+
+            case Delete(dataLabel) =>
+              logger.infoF(s"Removing observation $dataLabel") >> keywordManager.delete(
+                dataLabel
+              ) >> mapref.unsetKey(dataLabel)
+
+            case e @ AddObservationEvent(dataLabel, obsEvent) =>
+              logEvent(e) *> withObsItem(dataLabel, e)(_.fsm.addObservationEvent(obsEvent))
+
+            case e @ AddKeyword(dataLabel, keyword) =>
+              withObsItem(dataLabel, e)(_ => keywordManager.add(dataLabel, keyword))
+
+            case e @ CollectKeywords(dataLabel, obsEvent) =>
+              logEvent(e) *> withObsItem(dataLabel, e)(_ =>
+                keywordManager.collect(dataLabel, obsEvent)
+              )
+
+            case e @ Step(dataLabel) => withObsItem(dataLabel, e)(_.fsm.step)
+
+            case e @ Complete(dataLabel) =>
+              withObsItem(dataLabel, e) { _ =>
+                for {
+                  kws <- keywordManager.get(dataLabel)
+                  _   <-
+                    logger.infoF(s"Got these keywords for $dataLabel:\n\t${kws.mkString("\n\t")}")
+                  _   <- fitsQ.offer((dataLabel, kws))
+                  _   <- obsStateQ.offer(Delete(dataLabel))
+                } yield ()
+              }
+
+            case PurgeStale =>
+              for {
+                _    <- logger.infoF("Checking for expired observations.")
+                keys <- mapref.keys
+                now  <- Clock[F].realTime
+                _    <- keys.traverse(purgeIfNeeded(_, now))
+              } yield ()
+          }
         }
 
         def withObsItem(dataLabel: DataLabel, event: ObservationStateEvent)(
@@ -88,17 +111,13 @@ object ObservationManager {
           mapref(dataLabel).get.flatMap {
             case None =>
               for {
-                now <- Clock[F].realTime
-                fsm <-
-                  ObservationFSM(config.eventRetries, dataLabel, obsStateQ)
-                _   <-
-                  logger.warningF(s"Observation not preregistered, adding it for for event: $event")
-                item = ObservationItem(fsm, now + config.lifespan)
-                _   <- mapref.setKeyValue(dataLabel, item)
-                _   <- action(item)
+                _    <- logger.warningF(s"Observation not found for event: $event")
+                item <- addDataLabel(dataLabel)
+                _    <- action(item)
               } yield ()
 
-            case Some(item) => action(item)
+            case Some(item) =>
+              logger.infoF(s"with obs item $event") *> action(item)
           }
 
         def purgeIfNeeded(dataLabel: DataLabel, now: FiniteDuration): F[Unit] =
@@ -111,14 +130,6 @@ object ObservationManager {
             case _                                   => Async[F].unit
           }
 
-        def logIfExists(dataLabel: DataLabel): F[Unit] =
-          mapref(dataLabel).get.flatMap {
-            case None    => F.unit
-            case Some(_) =>
-              logger.severeF(
-                s"A new start event has been received for observation $dataLabel, which already exists. Overwriting old observation."
-              )
-          }
       }
     }
 

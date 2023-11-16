@@ -115,7 +115,7 @@ class Activator extends BundleActivator {
         Main.run(config, epicsReaderRef, statusDbRef, observationStateEventQ)
     }
 
-    val resource = Resource.make(run.start)(IO.println("Cleanup") >> _.cancel)
+    val resource = Resource.make(run.start)(_.cancel)
     val io       = resource.use { f =>
       fiber = f.some
       f.join.void

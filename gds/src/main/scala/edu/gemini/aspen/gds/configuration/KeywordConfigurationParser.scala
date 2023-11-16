@@ -140,7 +140,7 @@ class KeywordConfigurationParser extends RegexParsers {
 }
 
 object GdsConfigurationParser {
-  //todo: improve internal format, for now we accept anything that doesn't include quotes and does include %
+  // todo: improve internal format, for now we accept anything that doesn't include quotes and does include %
   def internalFormat = """([^"]*%[^"]*)|()""".r
 
 }
