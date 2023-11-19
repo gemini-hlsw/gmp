@@ -68,10 +68,10 @@ object FitsFileProcessor {
         exists   <- Fs2Files[F].exists(fullPath)
         safePath <-
           if (exists)
-            logger.infoF(
+            logger.warningF(
               s"Output file $fullPath already exists - generating new name."
             ) >> safeDestinationFile(dir, newDestinationFileName(name))
-          else F.delay(fullPath)
+          else fullPath.pure[F]
       } yield safePath
 
       def newDestinationFileName(fullName: String): String = {

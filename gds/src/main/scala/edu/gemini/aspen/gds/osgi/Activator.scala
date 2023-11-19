@@ -1,7 +1,7 @@
 package edu.gemini.aspen.gds.osgi
 
 import cats.syntax.all._
-import cats.effect.{ Deferred, FiberIO, IO, Ref, Resource }
+import cats.effect.{ FiberIO, IO, Ref, Resource }
 import cats.effect.std.Queue
 import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
@@ -30,7 +30,7 @@ class Activator extends BundleActivator {
   private var observationStateEventQ: Queue[IO, ObservationStateEvent] = null
   private var epicsReaderRef: Ref[IO, Option[EpicsReader]]             = null
   private var statusDbRef: Ref[IO, Option[StatusDatabaseService]]      = null
-  private var configDeferred: Deferred[IO, GdsConfiguration]           = null
+  private var configDeferred: Ref[IO, Option[GdsConfiguration]]        = null
 
   // The option bit for the trackers is odd...Does tracking fail at times?
   var epicsTracker: Option[ServiceTracker[EpicsReader, Unit]]                     = None
@@ -42,7 +42,7 @@ class Activator extends BundleActivator {
     obsStateQ: Queue[IO, ObservationStateEvent],
     epicsRef:  Ref[IO, Option[EpicsReader]],
     statusRef: Ref[IO, Option[StatusDatabaseService]],
-    configDef: Deferred[IO, GdsConfiguration]
+    configDef: Ref[IO, Option[GdsConfiguration]]
   ): Unit = {
     observationStateEventQ = obsStateQ
     epicsReaderRef = epicsRef
@@ -57,7 +57,7 @@ class Activator extends BundleActivator {
       obsStateQ <- Queue.unbounded[IO, ObservationStateEvent]
       epicsRef  <- Ref.of[IO, Option[EpicsReader]](none[EpicsReader])
       statusRef <- Ref.of[IO, Option[StatusDatabaseService]](none)
-      configDef <- Deferred[IO, GdsConfiguration]
+      configDef <- Ref.of[IO, Option[GdsConfiguration]](none)
       _          = setIOVars(obsStateQ, epicsRef, statusRef, configDef)
     } yield ()
 
@@ -102,8 +102,8 @@ class Activator extends BundleActivator {
       .some
 
     // wait for config and start running if we receive it. Otherwise timeout and stop GDS
-    val run = configDeferred.get.timeout(5.seconds).attempt.flatMap {
-      case Left(_)       =>
+    val run = IO.sleep(5.seconds) *> configDeferred.get.attempt.flatMap {
+      case Left(_) | Right(None)      =>
         IO {
           logger.severe("GDS timed out waiting for configuration. Shutting down.")
           // Trying to cancel the fiber in stop() will result in stop() never completing.
@@ -111,7 +111,7 @@ class Activator extends BundleActivator {
           fiber = none
           context.getBundle().stop()
         }.void
-      case Right(config) =>
+      case Right(Some(config)) =>
         Main.run(config, epicsReaderRef, statusDbRef, observationStateEventQ)
     }
 
@@ -144,7 +144,7 @@ class Activator extends BundleActivator {
 
   private def handleConfigResult(context: BundleContext)(result: Option[GdsConfiguration]): Unit =
     result match {
-      case Some(config) => configDeferred.complete(config).void.unsafeRunSync()
+      case Some(config) => configDeferred.set(Some(config)).void.unsafeRunSync()
       case None         =>
         logger.severe("GDS stopping itself due to bad configuration.")
         context.getBundle().stop()

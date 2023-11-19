@@ -128,7 +128,10 @@ class KeywordConfigurationParser extends RegexParsers {
 
   def CRLF = "\r\n" | "\n"
 
-  def EOF = "\\z".r
+  val EOF = Parser { in =>
+    if (in.atEnd) Success((), in)
+    else Failure(s"EOF expected, but 0x${Integer.toHexString(in.first.toInt)} found", in)
+  }
 
   def parseFileRawResult(fileName: String) = {
     val file = Source.fromFile(fileName, "UTF8")
