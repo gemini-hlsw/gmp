@@ -6,7 +6,7 @@ import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
 sealed trait ObservationStateEvent
 
 object ObservationStateEvent {
-  final case class Start(dataLabel: DataLabel, programId: String) extends ObservationStateEvent
+  final case class Start(dataLabel: DataLabel) extends ObservationStateEvent
   final case class Stop(dataLabel: DataLabel) extends ObservationStateEvent
   final case class Abort(dataLabel: DataLabel) extends ObservationStateEvent
   final case class Delete(dataLabel: DataLabel) extends ObservationStateEvent

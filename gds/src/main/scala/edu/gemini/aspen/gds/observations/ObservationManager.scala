@@ -54,10 +54,11 @@ object ObservationManager {
         def process(stateEvent: ObservationStateEvent): F[Unit] = {
           println(stateEvent)
           stateEvent match {
-            case Start(dataLabel, _) =>
+            case Start(dataLabel) =>
               for {
                 _ <- logger.infoF(s"Starting observation $dataLabel")
-                _ <- addDataLabel(dataLabel)
+                i <- addDataLabel(dataLabel)
+                _ <- i.fsm.startObservation
               } yield ()
 
             case e @ Stop(dataLabel) => withObsItem(dataLabel, e)(_.fsm.stopObservation)

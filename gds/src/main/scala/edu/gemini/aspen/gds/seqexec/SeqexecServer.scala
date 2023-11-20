@@ -46,7 +46,7 @@ object SeqexecServer {
           for {
             oor <- req.as[OpenObservationRequest]
             _   <-
-              obsStateQ.offer(Start(oor.dataLabel, oor.programId))
+              obsStateQ.offer(Start(oor.dataLabel))
             _   <- oor.keywords.traverse { kw =>
                      obsStateQ.offer(AddKeyword(oor.dataLabel, kwv2Collected(kw)))
                    }

@@ -13,7 +13,6 @@ private[seqexec] final case class KeywordRequest(
 )
 
 private[seqexec] final case class OpenObservationRequest(
-  programId: String,
   dataLabel: DataLabel,
   keywords:  List[KeywordValue]
 )
@@ -53,10 +52,9 @@ object Decoders {
     new Decoder[OpenObservationRequest] {
       final def apply(c: HCursor): Decoder.Result[OpenObservationRequest] =
         for {
-          pi  <- c.downField("program_id").as[String]
           dl  <- c.downField("data_label").as[DataLabel]
           kws <- c.downField("keywords").as[List[KeywordValue]]
-        } yield OpenObservationRequest(pi, dl, kws)
+        } yield OpenObservationRequest(dl, kws)
     }
 
   implicit val dataLabelRqstDecoder: Decoder[DataLabelRequest] =
