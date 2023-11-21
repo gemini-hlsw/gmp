@@ -6,7 +6,7 @@ import cats.effect.std.Queue
 import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
 import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsConfiguration }
-import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
+import edu.gemini.aspen.gds.observations.ObservationStateEvent
 import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent, ObservationEventHandler }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 import edu.gemini.aspen.gmp.services.PropertyHolder
@@ -95,15 +95,19 @@ class Activator extends BundleActivator {
     propTracker.foreach(_.open(true))
 
     obsEventSvc = context
-      .registerService(classOf[ObservationEventHandler].getName,
-                       new ObservationEventReceiver(handleObsEvent),
-                       new util.Hashtable[String, String]()
+      .registerService(
+        classOf[ObservationEventHandler].getName,
+        new ObservationEventHandler {
+          def onObservationEvent(event: ObservationEvent, dataLabel: DataLabel): Unit =
+            handleObsEvent(dataLabel, event)
+        },
+        new util.Hashtable[String, String]()
       )
       .some
 
     // wait for config and start running if we receive it. Otherwise timeout and stop GDS
     val run = IO.sleep(5.seconds) *> configDeferred.get.attempt.flatMap {
-      case Left(_) | Right(None)      =>
+      case Left(_) | Right(None) =>
         IO {
           logger.severe("GDS timed out waiting for configuration. Shutting down.")
           // Trying to cancel the fiber in stop() will result in stop() never completing.
@@ -111,7 +115,7 @@ class Activator extends BundleActivator {
           fiber = none
           context.getBundle().stop()
         }.void
-      case Right(Some(config)) =>
+      case Right(Some(config))   =>
         Main.run(config, epicsReaderRef, statusDbRef, observationStateEventQ)
     }
 

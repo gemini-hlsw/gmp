@@ -24,7 +24,8 @@ private[seqexec] final case class DataLabelRequest(
 object Decoders {
   implicit val dataLabelDecoder: Decoder[DataLabel]     =
     Decoder.decodeString.emapTry(s => Try(new DataLabel(s)))
-  implicit val fitsKeywordDecoder: Decoder[FitsKeyword] = Decoder.decodeString.emap(FitsKeyword(_))
+  implicit val fitsKeywordDecoder: Decoder[FitsKeyword] = 
+    Decoder.decodeString.emap(FitsKeyword(_))
   implicit val fitsTypeDecoder: Decoder[FitsType]       = Decoder.decodeString.emap(FitsType.fromString)
 
   // The incoming json has 3 fields

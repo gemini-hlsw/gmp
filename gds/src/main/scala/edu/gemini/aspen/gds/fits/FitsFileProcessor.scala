@@ -1,6 +1,7 @@
 package edu.gemini.aspen.gds.fits
 
 import cats.effect.Async
+import cats.effect.Clock
 import cats.syntax.all._
 import com.google.common.io.{ Files => GFiles }
 import edu.gemini.aspen.gds.configuration.{
@@ -30,7 +31,7 @@ object FitsFileProcessor {
   def apply[F[_]](
     fitsConfig:     FitsConfig,
     keywordConfigs: List[KeywordConfigurationItem]
-  )(implicit F:     Async[F]): FitsFileProcessor[F] =
+  )(implicit F: Async[F]): FitsFileProcessor[F] =
     new FitsFileProcessor[F] {
       val requiredKeywords: Map[Int, List[String]] =
         keywordConfigs
@@ -49,8 +50,10 @@ object FitsFileProcessor {
           source <- F.delay(fitsConfig.sourceDir.resolve(inFileName))
           dest   <- safeDestinationFile(fitsConfig.destDir, outFileName)
           cards  <- processKeywordsToCards(keywords)
-          _      <- FitsFileTransferrer.transfer(source, dest, requiredKeywords, cards)
-          _      <- logger.infoF(s"FITS file $dest transfer completed.")
+          t1     <- Clock[F].realTime
+          c      <- FitsFileTransferrer.transfer(source, dest, requiredKeywords, cards)
+          t2     <- Clock[F].realTime
+          _      <- logger.infoF(s"FITS file $dest transfer of $c bytes completed in ${t2-t1}.")
           _      <- setPermissions(dest, fitsConfig.setPermissions)
           _      <- setOwner(dest, fitsConfig.setOwner)
           _      <- deleteOriginal(source, fitsConfig.deleteOriginal)

@@ -51,8 +51,7 @@ object ObservationManager {
         logger.infoF(s"Got an event $stateEvent")
 
       new ObservationManager[F] {
-        def process(stateEvent: ObservationStateEvent): F[Unit] = {
-          println(stateEvent)
+        def process(stateEvent: ObservationStateEvent): F[Unit] =
           stateEvent match {
             case Start(dataLabel) =>
               for {
@@ -104,7 +103,6 @@ object ObservationManager {
                 _    <- keys.traverse(purgeIfNeeded(_, now))
               } yield ()
           }
-        }
 
         def withObsItem(dataLabel: DataLabel, event: ObservationStateEvent)(
           action: ObservationItem[F] => F[Unit]

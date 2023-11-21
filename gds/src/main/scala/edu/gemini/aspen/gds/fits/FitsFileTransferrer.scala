@@ -198,7 +198,7 @@ object FitsFileTransferrer {
     output:            Path,
     requiredHeaders:   Map[Int, List[String]],
     additionalHeaders: Map[Int, List[FitsHeaderCard]]
-  ): F[Unit] =
+  ): F[Long] =
     deleteIfExists(output) >>
       stream(
         Files[F]
@@ -208,5 +208,5 @@ object FitsFileTransferrer {
       )
         .through(Files[F].writeAll(output))
         .compile
-        .drain
+        .count
 }
