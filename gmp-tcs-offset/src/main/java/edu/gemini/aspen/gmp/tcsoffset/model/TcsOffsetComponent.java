@@ -5,7 +5,6 @@ import edu.gemini.aspen.gmp.tcsoffset.epics.EpicsTcsOffsetIOC;
 import edu.gemini.aspen.gmp.tcsoffset.jms.JmsTcsOffsetDispatcher;
 import edu.gemini.aspen.gmp.tcsoffset.jms.TcsOffsetRequestListener;
 import edu.gemini.epics.EpicsObserver;
-import edu.gemini.epics.EpicsReader;
 import edu.gemini.jms.api.*;
 import gov.aps.jca.CAException;
 import gov.aps.jca.TimeoutException;
@@ -44,15 +43,15 @@ public class TcsOffsetComponent implements JmsArtifact {
 
     private TcsOffsetIOC _tcsOffsetIOC;
 
-    public static String TCS_TOP_PROPERTY = "tcsTop";
+    public final static String TCS_TOP_PROPERTY = "tcsTop";
 
-    public static String TCS_OFFSET_CONFIG = "offsetConfig";
+    public final static String TCS_OFFSET_CONFIG = "offsetConfig";
 
-    public static String TCS_ChannelLoops = "tcsChLoops";
+    public final static String TCS_ChannelLoops = "tcsChLoops";
 
-    public static String SIMULATION = "simulation";
+    public final static String SIMULATION = "simulation";
 
-    public static String OFFSETCONFIG = "offsetConfig";
+    public final static String OFFSETCONFIG = "offsetConfig";
 
     public JsonObject _offsetConfig;
 

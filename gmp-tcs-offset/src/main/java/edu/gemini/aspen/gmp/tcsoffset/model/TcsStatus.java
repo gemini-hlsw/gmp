@@ -5,7 +5,7 @@ package edu.gemini.aspen.gmp.tcsoffset.model;
  * on the TCS (<tcsTop>:ErrorVal.VAL) 
  */
 
-public enum TCSSTATUS {
+public enum TcsStatus {
     OK(0,"OK"),
     ERR(1, "ERROR");
 
@@ -13,14 +13,14 @@ public enum TCSSTATUS {
 
     private final String _str;
 
-    private TCSSTATUS(int val, String str) {_val = val; _str = str;}
+    private TcsStatus(int val, String str) {_val = val; _str = str;}
 
     public int getVal() {return _val;}
 
     public String getStr() {return _str;}
 
-    public static TCSSTATUS getFromInt(int val) {
-        for (TCSSTATUS e : TCSSTATUS.values()) {
+    public static TcsStatus getFromInt(int val) {
+        for (TcsStatus e : TcsStatus.values()) {
             if (e.getVal() == val)
                 return e;
         }

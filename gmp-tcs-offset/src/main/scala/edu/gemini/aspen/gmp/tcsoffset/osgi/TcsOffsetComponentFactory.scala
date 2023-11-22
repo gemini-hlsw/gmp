@@ -35,9 +35,8 @@ class TcsOffsetComponentFactory(context: BundleContext, ew: EpicsWriter, eo: Epi
       existingComponents.put(pid, component)
       existingServices.put(pid, reference)
     }
-    else { 
-      TcsOffsetComponent.LOG.warning("Cannot build " + classOf[TcsOffsetComponent].getName + " without the required properties")
-    }
+    else
+       TcsOffsetComponent.LOG.warning("Cannot build " + classOf[TcsOffsetComponent].getName + " without the required properties")
   }
 
   private def checkProperties(properties: Dictionary[String, _]): Boolean =

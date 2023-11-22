@@ -4,7 +4,7 @@ public enum OffsetType {
     ACQ(0, "acquisition"),
     SLOWGUIDING(1, "slowguiding");
     private final int _type;
-    private String _text;
+    private final String _text;
 
     private OffsetType(int type, String text ) {
         _type = type;
@@ -15,10 +15,8 @@ public enum OffsetType {
 
     public String getText() { return _text;}
     public static OffsetType getFromInt(int nType) {
-        System.out.println("OffseTypeeeeeeeeeeeeeeeeeee: "+nType);
         for (OffsetType e : OffsetType.values()) {
             if (e.getType() == nType) {
-                System.out.println(e.getType() + " ==  " + nType);
                 return e;
             }
         }

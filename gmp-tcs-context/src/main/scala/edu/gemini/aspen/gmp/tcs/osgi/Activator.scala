@@ -15,15 +15,15 @@ class Activator extends BundleActivator {
 
   override def start(context: BundleContext): Unit = {
     trackerTop = Option(Tracker.track[EpicsReader, TcsContextComponentFactory](context) { p =>
-      val ps = new TcsContextComponentFactory(context, p)
-      val props: util.Hashtable[String, String] = new util.Hashtable()
-      props.put("service.pid", classOf[TcsContextComponent].getName)
-      psService = Option(context.registerService(classOf[ManagedServiceFactory].getName, ps, props))
-      ps
+       val ps = new TcsContextComponentFactory(context, p)
+       val props: util.Hashtable[String, String] = new util.Hashtable()
+       props.put("service.pid", classOf[TcsContextComponent].getName)
+       psService = Option(context.registerService(classOf[ManagedServiceFactory].getName, ps, props))
+       ps
     } { p =>
-        p.stopServices()
-        psService.foreach(_.unregister())
-        psService = None
+       p.stopServices()
+       psService.foreach(_.unregister())
+       psService = None
     })
     trackerTop.foreach(_.open)
   }

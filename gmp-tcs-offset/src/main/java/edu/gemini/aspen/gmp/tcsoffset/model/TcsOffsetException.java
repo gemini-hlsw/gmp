@@ -4,9 +4,10 @@ package edu.gemini.aspen.gmp.tcsoffset.model;
  * TCS Offset Exception. Every TcsOffsetException has associated
  * an Error code, and message which gives more information about the error.
  */
-public class TcsOffsetException extends Exception {
+public class TcsOffsetException extends RuntimeException {
 
     private Error _errorType;
+
     public enum Error {
         TIMEOUT,
         BINDINGCHANNEL,

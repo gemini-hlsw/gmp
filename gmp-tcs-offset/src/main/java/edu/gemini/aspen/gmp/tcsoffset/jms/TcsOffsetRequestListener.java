@@ -26,24 +26,12 @@ public class TcsOffsetRequestListener implements MessageListener {
     private  JmsTcsOffsetDispatcher _dispatcher;
     private  JsonObject _offsetConfig;
 
-    private  Boolean _simulation;
+    private  Boolean _simulation = false;
 
     /**
      * Apply the offsets to the TCS. 
      */
     private TcsOffsetIOC _epicsTcsOffsetIOC;
-
-    /**
-     * Constructor. Takes as an argument the JMS dispatcher that will
-     * be used to reply back to the requester.
-     *
-     * @param dispatcher JMS Dispatcher that sends back the TCS Offseta
-     * @param offsetConfig json object describing the threshold of each 
-     *        observation phase and the sequence management loops (closing and opening).
-     */
-    public TcsOffsetRequestListener(JmsTcsOffsetDispatcher dispatcher, JsonObject offsetConfig) {
-        setAttributes(dispatcher, offsetConfig, false);
-    }
 
     public TcsOffsetRequestListener(JmsTcsOffsetDispatcher dispatcher, JsonObject offsetConfig, Boolean simulation) {
         setAttributes(dispatcher, offsetConfig, simulation);
