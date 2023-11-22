@@ -291,7 +291,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
 
     /**
      * This function is associated to <tcsTop>:ErrorVal.VAL monitor and
-     * this is called for any update in this monitor. 
+     * this is called for any update in this monitor.
      * @param lStatus: Short list with the current values changed.
      *
      */
@@ -304,7 +304,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
 
     /**
      * This function is associated to <tcsTop>:inPosCombine monitor and
-     * this is called for any update in this monitor. 
+     * this is called for any update in this monitor.
      * @param values: Double list with the current values changed.
      *
      */
@@ -464,7 +464,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
      * are defined in the configuration file. 
      * @param loopKey: Indicates the loop sequence which will be executed.
      */
-    private void iterateSequence(String loopKey) throws CAException, TimeoutException, TcsOffsetException {
+    private synchronized void iterateSequence(String loopKey) throws CAException, TimeoutException, TcsOffsetException {
         LOG.fine("Starting the " + loopKey +" sequence.");
         Iterator<JsonElement> it = ((JsonArray) _tcsChLoops.get(loopKey)).iterator();
         int indexCallFunc = -1;
@@ -487,6 +487,8 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
                 }
             }
         }
+        if (_tcsState == CarState.ERROR || _tcsStatus == TcsStatus.ERR)
+            throw new TcsOffsetException(TcsOffsetException.Error.TCS_STATE, _tcsErrorMsg);
         LOG.fine("End the : " + loopKey + " sequence. TCS_STATE: " + _tcsState + " TCS_STATUS: " + _tcsStatus);
     }
 
@@ -520,7 +522,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
         if (_tcsState == CarState.ERROR || _tcsStatus == TcsStatus.ERR)
             throw new TcsOffsetException(TcsOffsetException.Error.TCS_STATE,
                     "There is an error in the TCS, please clean the TCS before continue. ");
-       
+
         synchronized (this) {
             if (!_tcsIsInPosition && (!waitTcsInPos(FIVE_SECS, true)))
                 throw new TcsOffsetException(TcsOffsetException.Error.TCS_NOT_INPOS,
@@ -534,8 +536,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
             applyOffset(Double.toString(q), Q_ANGLE);
             waitTcsInPosBlinking();
             iterateSequence("closeLoop");
-            if (_tcsState == CarState.ERROR || _tcsStatus == TcsStatus.ERR)
-                throw new TcsOffsetException(TcsOffsetException.Error.TCS_STATE, _tcsErrorMsg);
+
 
         } catch (CAException  e) {
             LOG.log(Level.WARNING, e.getMessage(), e);
