@@ -2,7 +2,7 @@ package edu.gemini.aspen.gds.transfer
 
 import cats._
 import cats.data._
-import cats.effect.{ Async, Sync }
+import cats.effect.{ Async, Ref, Sync }
 import cats.syntax.all._
 import edu.gemini.aspen.gds.fits._
 import edu.gemini.aspen.gds.syntax.all._
@@ -199,14 +199,22 @@ object FitsFileTransferrer {
     requiredHeaders:   Map[Int, List[String]],
     additionalHeaders: Map[Int, List[FitsHeaderCard]]
   ): F[Long] =
-    deleteIfExists(output) >>
-      stream(
-        Files[F]
-          .readAll(input, chunkSize = RecordLength),
-        requiredHeaders,
-        additionalHeaders
-      )
-        .through(Files[F].writeAll(output))
-        .compile
-        .count
+    for {
+      _    <- deleteIfExists(output)
+      ref  <- Ref.of(0L)
+      _    <- stream(
+                Files[F]
+                  .readAll(input, chunkSize = RecordLength),
+                requiredHeaders,
+                additionalHeaders
+              )
+              .chunks
+              .evalTap(c => ref.update(_ + c.size))
+              // if/when fs2 is upgraded, can switch to `unchunks` instead of flatMap
+              .flatMap(Stream.chunk(_))
+              .through(Files[F].writeAll(output))
+              .compile
+              .drain
+      size <- ref.get
+    } yield size
 }
