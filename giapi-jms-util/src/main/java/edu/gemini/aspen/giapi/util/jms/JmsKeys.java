@@ -82,4 +82,7 @@ public class JmsKeys {
     //TCS Context Keys
     public final static String GMP_TCS_CONTEXT_DESTINATION = GMP_PREFIX + GMP_SEPARATOR + "TCS_CONTEXT_DESTINATION";
 
+    //TCS Offset Keys
+    public final static String GMP_TCS_OFFSET_DESTINATION = GMP_PREFIX + GMP_SEPARATOR + "TCS_OFFSET_DESTINATION";
+
 }

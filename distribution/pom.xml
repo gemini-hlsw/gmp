@@ -62,6 +62,10 @@
         </dependency>
         <dependency>
             <groupId>edu.gemini.aspen.gmp</groupId>
+            <artifactId>gmp-tcs-offset</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen.gmp</groupId>
             <artifactId>gmp-pcs-updater</artifactId>
         </dependency>
         <dependency>
