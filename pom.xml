@@ -56,9 +56,6 @@
         <slf4j.api.version>1.7.30</slf4j.api.version>
         <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
 
-        <fs2.version>3.0.4</fs2.version>
-        <fs2.core>fs2-core_2.13</fs2.core>
-        <fs2.io>fs2-io_2.13</fs2.io>
         <gmp.version>${project.version}</gmp.version>
         <!-- Global encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -761,7 +758,7 @@
             <dependency>
                 <groupId>edu.gemini.gds</groupId>
                 <artifactId>gds-fp</artifactId>
-                <version>0.0.8</version>
+                <version>0.0.9</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>co.fs2</artifactId>

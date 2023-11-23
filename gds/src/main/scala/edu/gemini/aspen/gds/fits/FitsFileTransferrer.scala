@@ -7,8 +7,7 @@ import cats.syntax.all._
 import edu.gemini.aspen.gds.fits._
 import edu.gemini.aspen.gds.syntax.all._
 import fs2._
-import fs2.io.file.Files
-import java.nio.file.Path
+import fs2.io.file.{ Files, Flags, Path }
 import java.util.logging.Logger
 
 object FitsFileTransferrer {
@@ -177,13 +176,12 @@ object FitsFileTransferrer {
     in => go(in, ParserState.empty).stream
   }
 
-  private def deleteIfExists[F[_]: Async](output: Path): F[Unit] =
+  private def deleteIfExists[F[_]: Async: Files](output: Path): F[Unit] =
     Files[F].exists(output).flatMap {
       case true  =>
-        logger.warningF(s"Output file $output already exists. It will be deleted.") >> Files[F]
-          .deleteIfExists(output)
-          .void
-      case false => Applicative[F].unit
+        logger.warningF(s"Output file $output already exists. It will be deleted.") >>
+          Files[F].deleteIfExists(output).void
+      case false => Async[F].unit
     }
 
   def stream[F[_]: Async](
@@ -193,7 +191,7 @@ object FitsFileTransferrer {
   ): Stream[F, Byte] =
     input.through(fitsPipe(requiredHeaders, additionalHeaders))
 
-  def transfer[F[_]: Async](
+  def transfer[F[_]: Async: Files](
     input:             Path,
     output:            Path,
     requiredHeaders:   Map[Int, List[String]],
@@ -203,15 +201,13 @@ object FitsFileTransferrer {
       _    <- deleteIfExists(output)
       ref  <- Ref.of(0L)
       _    <- stream(
-                Files[F]
-                  .readAll(input, chunkSize = RecordLength),
+                Files[F].readAll(input, chunkSize = RecordLength, flags = Flags.Read),
                 requiredHeaders,
                 additionalHeaders
               )
               .chunks
               .evalTap(c => ref.update(_ + c.size))
-              // if/when fs2 is upgraded, can switch to `unchunks` instead of flatMap
-              .flatMap(Stream.chunk(_))
+              .unchunks
               .through(Files[F].writeAll(output))
               .compile
               .drain

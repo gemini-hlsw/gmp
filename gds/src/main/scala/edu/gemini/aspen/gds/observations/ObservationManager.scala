@@ -1,6 +1,7 @@
 package edu.gemini.aspen.gds.observations
 
-import cats.effect.{ Async, Clock }
+import cats.effect.{ Async, Clock, Ref }
+import cats.effect.std.MapRef
 import cats.effect.std.QueueSink
 import cats.syntax.all._
 import edu.gemini.aspen.gds.configuration.ObservationConfig
@@ -8,8 +9,6 @@ import edu.gemini.aspen.gds.keywords.{ CollectedKeyword, KeywordManager }
 import edu.gemini.aspen.gds.observations.ObservationStateEvent._
 import edu.gemini.aspen.gds.syntax.all._
 import edu.gemini.aspen.giapi.data.DataLabel
-import io.chrisdavenport.mapref.MapRef
-import io.chrisdavenport.mapref.implicits._
 import java.util.logging.Logger
 import scala.concurrent.duration._
 
@@ -26,7 +25,9 @@ object ObservationManager {
     obsStateQ:      QueueSink[F, ObservationStateEvent],
     fitsQ:          QueueSink[F, (DataLabel, List[CollectedKeyword])]
   )(implicit F: Async[F]): F[ObservationManager[F]] =
-    MapRef.ofConcurrentHashMap[F, DataLabel, ObservationItem[F]]().map { mapref =>
+    Ref.of(Map[DataLabel, ObservationItem[F]]()).map { refOfMap =>
+      val mapref = MapRef.fromSingleImmutableMapRef(refOfMap)
+
       def addDataLabel(dataLabel: DataLabel): F[ObservationItem[F]] =
         for {
           _   <- logIfExists(dataLabel)
@@ -98,7 +99,7 @@ object ObservationManager {
             case PurgeStale =>
               for {
                 _    <- logger.infoF("Checking for expired observations.")
-                keys <- mapref.keys
+                keys <- refOfMap.get.map(_.keys.toList)
                 now  <- Clock[F].realTime
                 _    <- keys.traverse(purgeIfNeeded(_, now))
               } yield ()
