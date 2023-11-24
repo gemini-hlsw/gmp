@@ -147,11 +147,11 @@ public class TcsOffsetRequestListener implements MessageListener {
         double pVal = (limitP) ? p : 0;
         double qVal = (limitQ) ? q : 0;
         try {
-            _epicsTcsOffsetIOC.setTcsOffset(pVal,qVal);
+            _epicsTcsOffsetIOC.setTcsOffset(pVal,qVal, offsetType);
         } catch (TcsOffsetException e) {
             e.printStackTrace();
             if (e.getTypeError() == TcsOffsetException.Error.TCS_WAS_REBOOTED)
-                _epicsTcsOffsetIOC.setTcsOffset(p,q);
+                _epicsTcsOffsetIOC.setTcsOffset(p,q, offsetType);
             else
                 throw e;
         }

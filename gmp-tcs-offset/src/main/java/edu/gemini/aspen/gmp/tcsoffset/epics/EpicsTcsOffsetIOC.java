@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import edu.gemini.aspen.giapi.offset.OffsetType;
 import edu.gemini.epics.*;
 import edu.gemini.epics.impl.ReadWriteEpicsEnumChannel;
 import gov.aps.jca.CAException;
@@ -511,7 +512,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
      */
 
     @Override
-    public void setTcsOffset(double p, double q) throws TcsOffsetException {
+    public void setTcsOffset(double p, double q, OffsetType offsetType) throws TcsOffsetException {
         LOG.fine("Setting offset  p: " + p + " q: " + q + " -14");
         if (!areChannelsInit())
             throw new TcsOffsetException(TcsOffsetException.Error.BINDINGCHANNEL,
@@ -529,14 +530,16 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
                         "Tcs is not in position before applying the offset ");
         }
         try {
-            iterateSequence("openLoop");
+            if (offsetType == OffsetType.ACQ)
+                iterateSequence("openLoop");
             // Applying P offset
             applyOffset(Double.toString(p), P_ANGLE);
             // Applying Q offset
             applyOffset(Double.toString(q), Q_ANGLE);
-            waitTcsInPosBlinking();
-            iterateSequence("closeLoop");
-
+            if (offsetType == OffsetType.ACQ) {
+                waitTcsInPosBlinking();
+                iterateSequence("closeLoop");
+            }
 
         } catch (CAException  e) {
             LOG.log(Level.WARNING, e.getMessage(), e);

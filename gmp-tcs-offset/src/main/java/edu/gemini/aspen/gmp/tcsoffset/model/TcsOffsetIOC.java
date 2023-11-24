@@ -12,6 +12,6 @@ import javax.jms.Destination;
  */
 public interface TcsOffsetIOC {
 
-    void setTcsOffset(double p, double q) throws TcsOffsetException;
+    void setTcsOffset(double p, double q, OffsetType offsetType) throws TcsOffsetException;
 
 }
