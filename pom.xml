@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.aspen</groupId>
     <artifactId>giapi-osgi</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.5-SNAPSHOT</version>
 
     <name>giapi-osgi</name>
 

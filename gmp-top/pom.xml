@@ -4,7 +4,7 @@
         <relativePath>../poms/compiled/</relativePath>
         <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.5-SNAPSHOT</version>
     </parent>
 
     <properties>
