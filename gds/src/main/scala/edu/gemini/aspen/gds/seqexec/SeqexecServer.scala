@@ -3,16 +3,17 @@ package edu.gemini.aspen.gds.seqexec
 import cats.effect._
 import cats.effect.std.QueueSink
 import cats.syntax.all._
+import com.comcast.ip4s.Host
+import com.comcast.ip4s.Port
 import edu.gemini.aspen.gds.keywords.CollectedKeyword
 import edu.gemini.aspen.gds.model.KeywordSource
 import edu.gemini.aspen.gds.observations.ObservationStateEvent
 import edu.gemini.aspen.gds.observations.ObservationStateEvent._
-import fs2.Stream
 import org.http4s._
 import org.http4s.circe._
 import org.http4s.dsl.io._
 import org.http4s.implicits._
-import org.http4s.blaze.server._
+import org.http4s.ember.server._
 import org.http4s.server.Router
 
 import Decoders._
@@ -26,8 +27,9 @@ object SeqexecServer {
 
   def apply(
     obsStateQ: QueueSink[IO, ObservationStateEvent],
-    port:      Integer
-  ): Stream[IO, Unit] = {
+    host:      Host,
+    port:      Port
+  ): IO[Unit] = {
     def kwv2Collected(kwv: KeywordValue) =
       CollectedKeyword.Value(kwv.keyword, KeywordSource.SeqExec, none, kwv.value)
 
@@ -45,7 +47,7 @@ object SeqexecServer {
           for {
             oor <- req.as[OpenObservationRequest]
             _   <-
-              obsStateQ.offer(Start(oor.dataLabel, oor.programId))
+              obsStateQ.offer(Start(oor.dataLabel))
             _   <- oor.keywords.traverse { kw =>
                      obsStateQ.offer(AddKeyword(oor.dataLabel, kwv2Collected(kw)))
                    }
@@ -68,10 +70,12 @@ object SeqexecServer {
 
     val httpApp = Router("gds-seqexec" -> service).orNotFound
 
-    BlazeServerBuilder[IO](scala.concurrent.ExecutionContext.Implicits.global)
-      .bindHttp(port, "localhost")
+    EmberServerBuilder
+      .default[IO]
+      .withHost(host)
+      .withPort(port)
       .withHttpApp(httpApp)
-      .serve
-      .as(())
+      .build
+      .use(_ => IO.never)
   }
 }

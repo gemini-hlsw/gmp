@@ -12,6 +12,7 @@ import java.util.logging.Logger
 trait ObservationFSM[F[_]] {
   def addObservationEvent(obsEvent: ObservationEvent): F[Unit]
   def stopObservation: F[Unit]
+  def startObservation: F[Unit]
   def step: F[Unit]
 }
 
@@ -58,13 +59,17 @@ object ObservationFSM {
             )
         }.flatten
 
-        def stopObservation: F[Unit] = state.modify {
-          case Running(events) =>
-            WaitingForEvents(events, retryConfig.retries) -> (logger.infoF(
-              s"Observation $dataLabel stopped by Seqexeq"
-            ) >> qStep)
-          case st @ _          => st -> F.unit
-        }.flatten
+        def startObservation: F[Unit] = addObservationEvent(ObservationEvent.EXT_START_OBS)
+
+        def stopObservation: F[Unit] = 
+          addObservationEvent(ObservationEvent.EXT_END_OBS) *> 
+            state.modify {
+              case Running(events) =>
+                WaitingForEvents(events, retryConfig.retries) -> (logger.infoF(
+                  s"Observation $dataLabel stopped by Seqexeq"
+                ) >> qStep)
+              case st @ _          => st -> F.unit
+            }.flatten
 
         def step: F[Unit] = state.modify {
           case st @ WaitingForEvents(_, _) => st -> waitForEvents

@@ -1,13 +1,13 @@
 package edu.gemini.aspen.gds.osgi
 
 import cats.syntax.all._
-import cats.effect.{ Deferred, FiberIO, IO, Ref, Resource }
+import cats.effect.{ FiberIO, IO, Ref, Resource }
 import cats.effect.std.Queue
 import cats.effect.unsafe.implicits.global
 import edu.gemini.aspen.gds.Main
 import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsConfiguration }
-import edu.gemini.aspen.gds.observations.{ ObservationEventReceiver, ObservationStateEvent }
-import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
+import edu.gemini.aspen.gds.observations.ObservationStateEvent
+import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent, ObservationEventHandler }
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 import edu.gemini.aspen.gmp.services.PropertyHolder
 import edu.gemini.epics.EpicsReader
@@ -17,11 +17,10 @@ import edu.gemini.util.osgi.Tracker
 import org.osgi.framework.{ BundleActivator, BundleContext, Constants, ServiceRegistration }
 import org.osgi.util.tracker.ServiceTracker
 import org.osgi.service.cm.ManagedServiceFactory
-import org.osgi.service.event.{ EventConstants, EventHandler }
 import scala.concurrent.duration._
 
 // TODO: Do we need to implement a health service? If not, maybe remove GDS from the health monitor
-// TODO: What about the ObservationEventLogger? And the time measurement in KeywordSetComposer?
+// TODO: And the time measurement in KeywordSetComposer?
 // TODO: Clean up logging.
 
 class Activator extends BundleActivator {
@@ -31,7 +30,7 @@ class Activator extends BundleActivator {
   private var observationStateEventQ: Queue[IO, ObservationStateEvent] = null
   private var epicsReaderRef: Ref[IO, Option[EpicsReader]]             = null
   private var statusDbRef: Ref[IO, Option[StatusDatabaseService]]      = null
-  private var configDeferred: Deferred[IO, GdsConfiguration]           = null
+  private var configDeferred: Ref[IO, Option[GdsConfiguration]]        = null
 
   // The option bit for the trackers is odd...Does tracking fail at times?
   var epicsTracker: Option[ServiceTracker[EpicsReader, Unit]]                     = None
@@ -43,7 +42,7 @@ class Activator extends BundleActivator {
     obsStateQ: Queue[IO, ObservationStateEvent],
     epicsRef:  Ref[IO, Option[EpicsReader]],
     statusRef: Ref[IO, Option[StatusDatabaseService]],
-    configDef: Deferred[IO, GdsConfiguration]
+    configDef: Ref[IO, Option[GdsConfiguration]]
   ): Unit = {
     observationStateEventQ = obsStateQ
     epicsReaderRef = epicsRef
@@ -58,7 +57,7 @@ class Activator extends BundleActivator {
       obsStateQ <- Queue.unbounded[IO, ObservationStateEvent]
       epicsRef  <- Ref.of[IO, Option[EpicsReader]](none[EpicsReader])
       statusRef <- Ref.of[IO, Option[StatusDatabaseService]](none)
-      configDef <- Deferred[IO, GdsConfiguration]
+      configDef <- Ref.of[IO, Option[GdsConfiguration]](none)
       _          = setIOVars(obsStateQ, epicsRef, statusRef, configDef)
     } yield ()
 
@@ -95,18 +94,20 @@ class Activator extends BundleActivator {
     )
     propTracker.foreach(_.open(true))
 
-    val eventAdminProps = new util.Hashtable[String, String]()
-    eventAdminProps.put(EventConstants.EVENT_TOPIC, ObservationEventReceiver.ObsEventTopic)
     obsEventSvc = context
-      .registerService(classOf[EventHandler].getName,
-                       new ObservationEventReceiver(handleObsEvent),
-                       eventAdminProps
+      .registerService(
+        classOf[ObservationEventHandler].getName,
+        new ObservationEventHandler {
+          def onObservationEvent(event: ObservationEvent, dataLabel: DataLabel): Unit =
+            handleObsEvent(dataLabel, event)
+        },
+        new util.Hashtable[String, String]()
       )
       .some
 
     // wait for config and start running if we receive it. Otherwise timeout and stop GDS
-    val run = configDeferred.get.timeout(5.seconds).attempt.flatMap {
-      case Left(_)       =>
+    val run = IO.sleep(5.seconds) *> configDeferred.get.attempt.flatMap {
+      case Left(_) | Right(None) =>
         IO {
           logger.severe("GDS timed out waiting for configuration. Shutting down.")
           // Trying to cancel the fiber in stop() will result in stop() never completing.
@@ -114,11 +115,11 @@ class Activator extends BundleActivator {
           fiber = none
           context.getBundle().stop()
         }.void
-      case Right(config) =>
+      case Right(Some(config))   =>
         Main.run(config, epicsReaderRef, statusDbRef, observationStateEventQ)
     }
 
-    val resource = Resource.make(run.start)(IO.println("Cleanup") >> _.cancel)
+    val resource = Resource.make(run.start)(_.cancel)
     val io       = resource.use { f =>
       fiber = f.some
       f.join.void
@@ -147,7 +148,7 @@ class Activator extends BundleActivator {
 
   private def handleConfigResult(context: BundleContext)(result: Option[GdsConfiguration]): Unit =
     result match {
-      case Some(config) => configDeferred.complete(config).void.unsafeRunSync()
+      case Some(config) => configDeferred.set(Some(config)).void.unsafeRunSync()
       case None         =>
         logger.severe("GDS stopping itself due to bad configuration.")
         context.getBundle().stop()

@@ -11,7 +11,7 @@ object KeywordSource {
   case object Status     extends KeywordSource("STATUS")      // sent previously by the instrument as StatusItem
   case object Constant   extends KeywordSource("CONSTANT")    // constant value read from gds config file
   case object Property   extends KeywordSource("PROPERTY")    // value read out of a system or java property
-  case object Instrument extends KeywordSource( "INSTRUMENT") // value already written in the FITS file by the Instrument. GDS will check that these items are in place.
+  case object Instrument extends KeywordSource("INSTRUMENT") // value already written in the FITS file by the Instrument. GDS will check that these items are in place.
   // format: on
 
   val all: List[KeywordSource] =

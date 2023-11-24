@@ -1,6 +1,8 @@
 package edu.gemini.aspen.gds.configuration
 
-import java.nio.file.Path
+import fs2.io.file.Path
+import com.comcast.ip4s.Host
+import com.comcast.ip4s.Port
 import scala.concurrent.duration._
 
 final case class ObservationConfig(
@@ -25,6 +27,7 @@ final case class GdsConfiguration(
   keywords:       List[KeywordConfigurationItem],
   observation:    ObservationConfig,
   keywordRetries: RetryConfig,
-  seqexecPort:    Int,
+  seqexecPort:    Port,
+  seqexecHost:    Host,
   fitsConfig:     FitsConfig
 )

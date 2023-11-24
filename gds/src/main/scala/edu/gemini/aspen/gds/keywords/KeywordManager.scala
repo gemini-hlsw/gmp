@@ -1,13 +1,12 @@
 package edu.gemini.aspen.gds.keywords
 
 import cats.effect.kernel._
+import cats.effect.std.MapRef
 import cats.effect.syntax.all._
 import cats.syntax.all._
 import edu.gemini.aspen.gds.configuration.RetryConfig
 import edu.gemini.aspen.gds.syntax.all._
 import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent }
-import io.chrisdavenport.mapref.MapRef
-import io.chrisdavenport.mapref.implicits._
 import java.util.logging.Logger
 
 sealed trait KeywordManager[F[_]] {
@@ -24,7 +23,7 @@ object KeywordManager {
   def apply[F[_]](
     retryConfig: RetryConfig,
     collectors:  KeywordCollector[F]*
-  )(implicit F:  Async[F]): F[KeywordManager[F]] =
+  )(implicit F: Async[F]): F[KeywordManager[F]] =
     MapRef.ofConcurrentHashMap[F, DataLabel, KeywordItem]().map { mapref =>
       new KeywordManager[F] {
 

@@ -13,7 +13,6 @@ private[seqexec] final case class KeywordRequest(
 )
 
 private[seqexec] final case class OpenObservationRequest(
-  programId: String,
   dataLabel: DataLabel,
   keywords:  List[KeywordValue]
 )
@@ -25,7 +24,8 @@ private[seqexec] final case class DataLabelRequest(
 object Decoders {
   implicit val dataLabelDecoder: Decoder[DataLabel]     =
     Decoder.decodeString.emapTry(s => Try(new DataLabel(s)))
-  implicit val fitsKeywordDecoder: Decoder[FitsKeyword] = Decoder.decodeString.emap(FitsKeyword(_))
+  implicit val fitsKeywordDecoder: Decoder[FitsKeyword] = 
+    Decoder.decodeString.emap(FitsKeyword(_))
   implicit val fitsTypeDecoder: Decoder[FitsType]       = Decoder.decodeString.emap(FitsType.fromString)
 
   // The incoming json has 3 fields
@@ -53,10 +53,9 @@ object Decoders {
     new Decoder[OpenObservationRequest] {
       final def apply(c: HCursor): Decoder.Result[OpenObservationRequest] =
         for {
-          pi  <- c.downField("program_id").as[String]
           dl  <- c.downField("data_label").as[DataLabel]
           kws <- c.downField("keywords").as[List[KeywordValue]]
-        } yield OpenObservationRequest(pi, dl, kws)
+        } yield OpenObservationRequest(dl, kws)
     }
 
   implicit val dataLabelRqstDecoder: Decoder[DataLabelRequest] =

@@ -3,7 +3,10 @@ package edu.gemini.aspen.gds.configuration
 import cats.data.{ NonEmptyChain, ValidatedNec }
 import cats.data.Validated.{ Invalid, Valid }
 import cats.syntax.all._
+import com.comcast.ip4s.Host
+import com.comcast.ip4s.Port
 import edu.gemini.aspen.gmp.services.PropertyHolder
+import fs2.io.file.{ Path => Fs2Path }
 import java.nio.file._
 import java.util.{ Dictionary }
 import java.util.logging.Logger
@@ -61,7 +64,8 @@ class GDSConfigurationServiceFactory(
     val eventSleep     = asDuration(props, "observation.event.sleep")
     val keywordRetries = asPosInt(props, "keyword.collection.retries")
     val keywordSleep   = asDuration(props, "keyword.collection.sleep")
-    val seqexecPort    = asPosInt(props, "seqexec.server.port")
+    val seqexecPort    = asPort(props, "seqexec.server.port")
+    val seqexecHost    = asHost(props, "seqexec.server.host")
     val fitsDelOrig    = asBool(props, "fits.deleteOriginal")
 
     val configValidated = (keywordConfig,
@@ -72,17 +76,19 @@ class GDSConfigurationServiceFactory(
                            keywordRetries,
                            keywordSleep,
                            seqexecPort,
+                           seqexecHost,
                            fitsSrcDir,
                            fitsDestDir,
                            fitsAddSuffix,
                            fitsSetOwner(props),
                            fitsSetPermissions(props),
                            fitsDelOrig
-    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, fsd, fdd, fas, fso, fsp, fdo) =>
+    ).mapN { case (kc, cr, lf, er, es, kr, ks, sp, sh, fsd, fdd, fas, fso, fsp, fdo) =>
       GdsConfiguration(kc,
                        ObservationConfig(cr, lf, RetryConfig(er, es)),
                        RetryConfig(kr, ks),
                        sp,
+                       sh,
                        FitsConfig(fsd, fdd, fas, fso, fsp, fdo)
       )
     }
@@ -99,6 +105,16 @@ class GDSConfigurationServiceFactory(
 
   private def asString(props: Map[String, _], key: String): ValidatedNec[String, String] =
     props.get(key).map(_.toString).toValidNec(s"Config value missing for `$key`")
+
+  private def asHost(props: Map[String, _], key: String): ValidatedNec[String, Host] =
+    asString(props, key).andThen(s =>
+      Host.fromString(s).toValidNec(s"Invalid host name `$s` for `$key`")
+    )
+
+  private def asPort(props: Map[String, _], key: String): ValidatedNec[String, Port] =
+    asString(props, key).andThen(s =>
+      Port.fromString(s).toValidNec(s"Invalid port value`$s` for `$key`. Must be a positive integer.")
+    )
 
   private def asPosInt(props: Map[String, _], key: String): ValidatedNec[String, Int] =
     asString(props, key).andThen(s =>
@@ -124,17 +140,19 @@ class GDSConfigurationServiceFactory(
         Option.when(duration.isFinite)(duration.asInstanceOf[FiniteDuration])
     }
 
-  private def fitsSrcDir: ValidatedNec[String, Path]  = dirFromPropHolder(fitsSrcPathKey)
-  private def fitsDestDir: ValidatedNec[String, Path] = dirFromPropHolder(fitsDestPathKey)
+  private def fitsSrcDir: ValidatedNec[String, Fs2Path]  = dirFromPropHolder(fitsSrcPathKey)
+  private def fitsDestDir: ValidatedNec[String, Fs2Path] = dirFromPropHolder(fitsDestPathKey)
 
   // PropertyHolder shouldn't return null, but...
   private def propHolderValue(key: String): ValidatedNec[String, String] =
     Option(propertyHolder.getProperty(key))
       .toValidNec(s"Value for PropertyHolder sevice key `$key` cannot be null.")
 
-  private def dirFromPropHolder(key: String): ValidatedNec[String, Path] =
+  private def dirFromPropHolder(key: String): ValidatedNec[String, Fs2Path] =
     propHolderValue(key).andThen { dir =>
       Try {
+        // Not using FS2 io here, because it would introduce an `F[_]', which would not work well at
+        // this point in osgi
         val path = Paths.get(dir)
         if (path.toFile().isDirectory()) path.validNec
         else
@@ -142,7 +160,7 @@ class GDSConfigurationServiceFactory(
       } match {
         case Failure(e)     =>
           s"Error creating Path for PropertyHolder service key `$key`, value `$dir`: ${e.getMessage}".invalidNec
-        case Success(value) => value
+        case Success(value) => value.map(p => Fs2Path.fromNioPath(p))
       }
     }
 
