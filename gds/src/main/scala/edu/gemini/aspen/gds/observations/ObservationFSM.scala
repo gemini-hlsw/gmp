@@ -66,7 +66,7 @@ object ObservationFSM {
             state.modify {
               case Running(events) =>
                 WaitingForEvents(events, retryConfig.retries) -> (logger.infoF(
-                  s"Observation $dataLabel stopped by Seqexeq"
+                  s"Observation $dataLabel stopped by Seqexec"
                 ) >> qStep)
               case st @ _          => st -> F.unit
             }.flatten

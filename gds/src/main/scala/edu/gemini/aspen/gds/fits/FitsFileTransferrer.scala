@@ -7,7 +7,7 @@ import cats.syntax.all._
 import edu.gemini.aspen.gds.fits._
 import edu.gemini.aspen.gds.syntax.all._
 import fs2._
-import fs2.io.file.{ Files, Flags, Path }
+import fs2.io.file.{ CopyFlag, CopyFlags, Files, Flags, Path }
 import java.util.logging.Logger
 
 object FitsFileTransferrer {
@@ -38,7 +38,7 @@ object FitsFileTransferrer {
     chunk.size >= ray.length &&
       ray.zipWithIndex.forall { case (b, idx) => b === chunk(idx) }
 
-  private def isHeader(chunk:     Chunk[Byte]): Boolean =
+  private def isHeader(chunk: Chunk[Byte]): Boolean =
     matchesArray(chunk, simpleHeader) || matchesArray(chunk, extensionHeader)
 
   private def extractKeyword(chunk: Chunk[Byte]): String =
@@ -199,18 +199,22 @@ object FitsFileTransferrer {
   ): F[Long] =
     for {
       _    <- deleteIfExists(output)
+      tmp  <-
+        Files[F].createTempFile(output.parent, "gds", "_fits", None)
+      _    <- logger.infoF(s"Start with a tmp file at $tmp")
       ref  <- Ref.of(0L)
       _    <- stream(
                 Files[F].readAll(input, chunkSize = RecordLength, flags = Flags.Read),
                 requiredHeaders,
                 additionalHeaders
-              )
-              .chunks
-              .evalTap(c => ref.update(_ + c.size))
-              .unchunks
-              .through(Files[F].writeAll(output))
-              .compile
-              .drain
+              ).chunks
+                .evalTap(c => ref.update(_ + c.size))
+                .unchunks
+                .through(Files[F].writeAll(tmp))
+                .compile
+                .drain
+      _    <- logger.infoF(s"Move $tmp to $output")
+      _    <- Files[F].move(tmp, output, CopyFlags(CopyFlag.AtomicMove))
       size <- ref.get
     } yield size
 }
