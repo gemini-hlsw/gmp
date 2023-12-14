@@ -23,7 +23,7 @@ object ObservationFSM {
     retryConfig: RetryConfig,
     dataLabel:   DataLabel,
     obsStateQ:   QueueSink[F, ObservationStateEvent]
-  )(implicit F:  Async[F]): F[ObservationFSM[F]] =
+  )(implicit F: Async[F]): F[ObservationFSM[F]] =
     Ref.of[F, State](Running(Set.empty)).map { state =>
       new ObservationFSM[F] {
         val allEvents: Set[ObservationEvent] = ObservationEvent.values.toSet
@@ -61,8 +61,8 @@ object ObservationFSM {
 
         def startObservation: F[Unit] = addObservationEvent(ObservationEvent.EXT_START_OBS)
 
-        def stopObservation: F[Unit] = 
-          addObservationEvent(ObservationEvent.EXT_END_OBS) *> 
+        def stopObservation: F[Unit] =
+          addObservationEvent(ObservationEvent.EXT_END_OBS) *>
             state.modify {
               case Running(events) =>
                 WaitingForEvents(events, retryConfig.retries) -> (logger.infoF(
@@ -78,7 +78,10 @@ object ObservationFSM {
 
         def waitForEvents: F[Unit] = state.modify {
           case WaitingForEvents(events, remaining) =>
-            val required = allEvents.diff(events)
+            // TODO make this configurable
+            val allNeededEvents =
+              allEvents - ObservationEvent.EXT_START_OBS - ObservationEvent.OBS_START_READOUT - ObservationEvent.OBS_END_READOUT
+            val required        = allNeededEvents.diff(events)
             if (required.isEmpty)
               Completed -> (logger.infoF(
                 s"All events have arrived for observation $dataLabel"
@@ -112,7 +115,7 @@ object ObservationFSM {
     }
 
   sealed trait State
-  case class Running(events: Set[ObservationEvent]) extends State
+  case class Running(events: Set[ObservationEvent])                          extends State
   case class WaitingForEvents(events: Set[ObservationEvent], remaining: Int) extends State
-  case object Completed extends State
+  case object Completed                                                      extends State
 }
