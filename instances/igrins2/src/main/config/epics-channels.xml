@@ -30,5 +30,11 @@ The Igrins2 instrument.
     <channel>tcs:sad:tlongm</channel>
     <channel>tcs:sad:windSpeed.VAL</channel>
     <channel>tcs:sad:currentWindSpeed.VAL</channel>
+    <channel>tcs:sad:airMass</channel>
+    <channel>tcs:sad:airMassNow</channel>
+    <channel>tcs:sad:currentHAString</channel>
+    <channel>tcs:sad:currentRA</channel>
+    <channel>tcs:sad:currentDec</channel>
+
 </channels>
     
