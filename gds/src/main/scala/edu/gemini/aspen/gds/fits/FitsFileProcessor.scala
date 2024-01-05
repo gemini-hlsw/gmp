@@ -147,7 +147,7 @@ object FitsFileProcessor {
             toHeaderCard(item, value).some.pure
           case CollectedKeyword.Error(_, _, _, message) =>
             if (item.isMandatory)
-              logError(item, s"Collection error for manadatory keyword: $message") >> none.pure
+              logError(item, s"Collection error for mandatory keyword: $message") >> none.pure
             else if (item.keywordSource === KeywordSource.Constant)
               logError(item, s"The constant value is bad: $message") >> none.pure
             else
