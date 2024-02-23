@@ -21,7 +21,9 @@ public class TcsOffsetComponent implements JmsArtifact {
     private final Boolean simulation;
 
     private final EpicsObserver _eo;
-    private final JsonObject _tcsChLoops;
+    private final JsonObject _tcsLoops;
+
+    private final JsonObject _jCADef;
 
 
     /**
@@ -62,18 +64,20 @@ public class TcsOffsetComponent implements JmsArtifact {
      * @param eo            : EpicsObserver service which is used to create monitors on Epics Channels records.
      * @param simulation    : Used to deploy the component in simulation mode.
      * @param offsetConfig  : JsonObject with the size of P and Q offset allowed.
-     * @param jsonTcsChLoops: JsonObject with the sequence action to execute to open and close the loop.
+     * @param jTcsLoops: JsonObject with the sequence action to execute to open and close the loop.
      */
     public TcsOffsetComponent(EpicsWriter ew1, EpicsObserver eo,
                               Boolean simulation, JsonObject offsetConfig,
-                              JsonObject jsonTcsChLoops) {
+                              JsonObject jTcsLoops,
+                              JsonObject jCADef) {
 
         this.simulation = simulation;
         _ew1 = ew1;
         _eo = eo;
         _dispatcher = new JmsTcsOffsetDispatcher("TCS Offset Replier");
         _offsetConfig = offsetConfig;
-        _tcsChLoops = jsonTcsChLoops;
+        _tcsLoops = jTcsLoops;
+        _jCADef = jCADef;
         _listener = new TcsOffsetRequestListener(_dispatcher, _offsetConfig, simulation);
         //Creates the TCS Offset Request Consumer
         _messageConsumer = new BaseMessageConsumer("JMS TCS Offset Request Consumer",
@@ -86,7 +90,7 @@ public class TcsOffsetComponent implements JmsArtifact {
     public void start() throws JMSException, CAException, TimeoutException {
         LOG.info("Starting service, simulation is: " + simulation);
         if (!simulation) {
-            _tcsOffsetIOC = new EpicsTcsOffsetIOC(_ew1, _eo, _tcsChLoops);
+            _tcsOffsetIOC = new EpicsTcsOffsetIOC(_ew1, _eo, _tcsLoops, _jCADef);
             _listener.registerTcsOffset(_tcsOffsetIOC);
         } else {
             LOG.warning("TCS in simulation mode not implemented yet");

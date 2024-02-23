@@ -124,6 +124,11 @@ public class EpicsReaderMock implements EpicsReader {
     }
 
     @Override
+    public ReadOnlyClientEpicsChannel<Short> getEnumAsShortChannel(String channelName) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public ReadOnlyClientEpicsChannel<?> getChannelAsync(String channel) throws EpicsException {
         throw new UnsupportedOperationException();
     }

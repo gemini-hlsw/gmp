@@ -230,6 +230,23 @@ class EpicsChannelFactory {
         return ch;
     }
 
+    protected ReadWriteEpicsChannelImpl<Short> _getEnumAsShortChannel(String channelName) {
+        ReadWriteEpicsChannelImpl<Short> ch;
+
+        CAJChannel cajChannel = bindChannel(channelName);
+        if (!cajChannel.getFieldType().isENUM()) {
+            try {
+                cajChannel.destroy();
+            } catch (CAException e) {
+                LOG.log(Level.WARNING, e.getMessage(), e);
+            }
+            throw new IllegalArgumentException("Channel " + channelName + " can be connected to, but is of incorrect type.");
+        } else {
+            ch = new ReadWriteEpicsChannelImpl<Short>(cajChannel, timeout, readRetries);
+        }
+        return ch;
+    }
+
     protected ReadWriteEpicsChannelImpl<?> _getChannelAsync(String channelName) {
         CAJChannel cajChannel = bindChannelAsync(channelName, null);
         ReadWriteEpicsChannelImpl<?> ch = new ReadWriteEpicsChannelImpl(cajChannel, timeout, readRetries);
