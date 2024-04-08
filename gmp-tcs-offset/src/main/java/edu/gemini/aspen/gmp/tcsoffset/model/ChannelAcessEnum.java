@@ -34,14 +34,12 @@ public class ChannelAcessEnum extends ChannelAccess<Short> {
 
     @Override
     public Short getValues() throws CAException, TimeoutException {
-        System.out.println("Getting short value ");
         return _epicsChannel.getFirst();
     }
 
 
     @Override
     public void setValue (JsonElement val) throws CAException, TimeoutException {
-        System.out.println("Setting (JsonPrimitive) as enum " + val + " value in "+_caname );
         _epicsChannel.setValue(val.getAsShort());
     }
 
@@ -49,7 +47,6 @@ public class ChannelAcessEnum extends ChannelAccess<Short> {
     @Override
     public boolean check(JsonElement value) {
         try {
-            //return (v.compareTo(getValues()) == 0);
             return value.getAsShort() == _epicsChannel.getFirst();
         } catch (CAException | TimeoutException e) {
             LOG.warning("Error getting the value of " + _caname + " epics channel access");

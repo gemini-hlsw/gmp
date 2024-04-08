@@ -33,7 +33,6 @@ public class ChannelAcessShort extends ChannelAccess<Short>{
 
     @Override
     public void setValue (JsonElement val) throws CAException, TimeoutException {
-        System.out.println("Setting (JsonPrimitive) as float " + val + " value in "+_caname );
         _epicsChannel.setValue(val.getAsShort());
     }
 
@@ -50,7 +49,6 @@ public class ChannelAcessShort extends ChannelAccess<Short>{
 
     @Override
     public Short getValues () throws CAException, TimeoutException {
-        System.out.println("Getting short value ");
         return _epicsChannel.getFirst();
     }
 

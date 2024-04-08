@@ -34,15 +34,12 @@ public class ChannelAcessDouble extends ChannelAccess<Double>{
 
     @Override
     public void setValue (JsonElement val) throws CAException, TimeoutException {
-        System.out.println("Setting (JsonPrimitive) as float " + val + " value in "+_caname );
         _epicsChannel.setValue(val.getAsDouble());
     }
 
     @Override
     public boolean check(JsonElement val) {
         try {
-            //Double val2 = val.getAsDouble();
-            //return  (val2.compareTo(getValues()) == 0);
             return val.getAsDouble() == _epicsChannel.getFirst();
         } catch (CAException | TimeoutException e) {
             LOG.warning("Error getting the value of " +_caname + " epics channel access");

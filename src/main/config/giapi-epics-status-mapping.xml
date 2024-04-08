@@ -38,6 +38,12 @@
         <type>INT</type>
         <initial>0</initial>
     </SimpleChannel>
+    <SimpleChannel>
+        <giapiname>instdummy:sad:FW1.filterpos</giapiname>
+        <epicsname>instdummy:sad:FW1.filterpos</epicsname>
+        <type>FLOAT</type>
+        <initial>0.0</initial>
+    </SimpleChannel>
     <!-- too much noise in logs
        <SimpleChannel>
             <giapiname>gpi:heartbeat</giapiname>
