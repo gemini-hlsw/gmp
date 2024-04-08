@@ -33,8 +33,6 @@ public class ChannelAccessString extends ChannelAccess<String>
 
     public boolean check (String value) {
         try {
-            System.out.println("comparingString. " + _caname + ", value: " + _epicsChannel.getFirst() +
-                    " - " + value + " - " + _epicsChannel.getFirst().equals(value));
             return _epicsChannel.getFirst().equals(value);
         } catch (CAException | TimeoutException e) {
             LOG.warning("Error getting the value of " +_caname + " epics channel access");
@@ -49,14 +47,12 @@ public class ChannelAccessString extends ChannelAccess<String>
 
     @Override
     public void setValue (JsonElement val) throws CAException, TimeoutException {
-        System.out.println("Setting (JsonPrimitive) as float " + val + " value in "+_caname );
         _epicsChannel.setValue(val.getAsString());
     }
 
 
     @Override
     public String getValues () throws CAException, TimeoutException {
-        System.out.println("Getting string type ");
         return _epicsChannel.getFirst();
     }
 

@@ -1,6 +1,5 @@
 package edu.gemini.aspen.gmp.tcsoffset.epics;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,6 +27,36 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
      * TCS offset channel EPICS IOC 
      */
     public static final String TCS_OFFSET_CHANNEL = "poAdjust";
+
+    /*
+     * This attribute or field is declared in the caListDef json object
+     * defined in the TcsOffsetComponent-default.cfg configuration file
+     */
+    public static final String CANAME_ATTR = "caname";
+
+    /*
+     * This attribute or field is declared in the caListDef json object
+     * defined in the TcsOffsetComponent-default.cfg configuration file
+     */
+    public static final String EXECUTE_ATTR = "execute";
+
+    /*
+     * This attribute or field is declared in the tcsChLoops json object
+     * defined in the TcsOffsetComponent-default.cfg configuration file
+     */
+    public static final String WASOPEN_ATTR = "ifwasopen";
+
+    /*
+     * This attribute or field is declared in the tcsChLoops json object
+     * defined in the TcsOffsetComponent-default.cfg configuration file
+     */
+    public static final String CHECK_ATTR = "check";
+
+    /*
+     * This attribute or field is declared in the tcsChLoops json object
+     * defined in the TcsOffsetComponent-default.cfg configuration file
+     */
+    public static final String TYPE_ATTR = "type";
 
 
     /**
@@ -160,31 +189,8 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
             _angleChannel = _ew1.getStringChannel(_tcsOffsetChannel +".C");
             _virtualTelChannel = _ew1.getStringChannel(_tcsOffsetChannel + ".D");
             _tcsApply = (ReadWriteEpicsEnumChannel<Dir>) _ew1.getEnumChannel( _tcsTop+"apply.DIR", Dir.class);
-            /*ChannelAccess epicsCA = ChannelAccessFactory.createChannelAccess("tc1:apply.DIR", _ew1, (short) 5);
-            ChannelAccess epicsCA2 = ChannelAccessFactory.createChannelAccess("tc1:m2GuideControl.A", _ew1, (short) 4);
-            epicsCA.connect();
-            epicsCA2.connect();
-            //EpicsCA<Short> epicsCA = new EpicsCA<Short>(_ew1.getShortChannel("tc1:drives:p2Integrating.VAL"));
-            System.out.println("###################################################");
-            System.out.println("the integration is: " + epicsCA.getValues());
-            System.out.println("setting value dir and waiting 5 secs");
-            epicsCA.setValue((short) 1);
-            Thread.sleep(FIVE_SECS);
-            System.out.println("the value is: " + epicsCA.getValues());
-            System.out.println("the value is: " + epicsCA2.getValues());
-            System.out.println("###################################################");
-            //ReadWriteClientEpicsChannel<Short> p2Integrating =  _ew1.getEnumAsShortChannel("tc1:drives:p2Integrating.VAL");
 
-            System.out.println("###################################################");
-            System.out.println("the integration is: " + p2Integrating.getFirst());
-            System.out.println("setting value dir and waiting 5 secs");
-            p2Integrating.setValue((short) 1);
-            Thread.sleep(FIVE_SECS);
-            System.out.println("the value is: " + p2Integrating.getFirst());
-            System.out.println("###################################################");
-            */
             // Monitor Channels
-
             LOG.fine("Creating monitors ");
             _eo.registerEpicsClient(new ChannelAccessSubscribe(this::setTcsInPos, _tcsTop + "inPosCombine"),
                                     ImmutableList.of(_tcsTop + "inPosCombine"));
@@ -196,8 +202,6 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
 
             _eo.registerEpicsClient(new ChannelAccessSubscribe(this::tcsErrorMsg, _tcsTop + "ErrorMess.VAL"),
                     ImmutableList.of(_tcsTop + "ErrorMess.VAL"));
-
-            // Init the _chLoops hash map. 
 
             initMaps();
             LOG.fine("TCS channels initialized well. The " + _tcsOffsetChannel + " TCS channel is used to apply the offsets");
@@ -229,13 +233,10 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
         Iterator<String> keys = curObj.keySet().iterator();
         while (keys.hasNext()) {
             String key = keys.next();
-            //System.out.println(key);
             if (curObj.get(key) instanceof  JsonObject) {
                 newObj.add(parseStr(key, objConfig), new JsonObject());
                 parseJsonObj(curObj.getAsJsonObject(key), newObj.get(key).getAsJsonObject(), objConfig);
             }else if (curObj.get(key) instanceof JsonArray) {
-                //Iterator<JsonElement> key2 = ((JsonArray) curObj.get(key)).iterator();
-                //System.out.println(key + " -> "+key2);
                 JsonArray newArray = new JsonArray();
                 JsonArray keyArray = curObj.get(key).getAsJsonArray();
                 keyArray.forEach(it -> {
@@ -243,19 +244,14 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
                         JsonObject obj = new JsonObject();
                         parseJsonObj(it.getAsJsonObject(), obj, objConfig);
                         newArray.add(obj);
-                    } else{
-                        //System.out.println(key + " -> " + it.getAsString());
+                    } else
                         newArray.add(it);
-                    }
                 });
 
                 newObj.add(parseStr(key, objConfig), newArray);
             }
             else {
-               //newObj.add(parseStr(key, objConfig),
-               //           new JsonPrimitive(parseStr(curObj.get(key).getAsString(), objConfig)));
                String regex = "[0-9]+[\\.]?[0-9]*";
-
                if (!Pattern.matches(regex, curObj.get(key).getAsString()))
                    newObj.add(parseStr(key, objConfig),
                            new JsonPrimitive(parseStr(curObj.get(key).getAsString(), objConfig)));
@@ -269,7 +265,6 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
         Matcher m = _pRegex.matcher(key);
         String key1 = null;
         String newKey = key;
-        //System.out.println("newKey: " + newKey);
         while (m.find( )) {
             for (int i = 0; i <= m.groupCount(); i++) {
                 key1 = m.group(i).replace("{", "").replace("}", "");
@@ -285,70 +280,25 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
     }
 
     /**
-     * Initialize the _chLoops hashmap from the _tcsChLoops configuration json file
-     * defined by the user. 
+     * Initialize the _caLoops hashmap from the _jCADef configuration. The _jCADef is a json object
+     * where the user (developer) defined all the CA used to control the loops control.
      */
     private void initMaps() throws TcsOffsetException{
         LOG.fine("Initializing CA");
-
-        initCAMap();
-    }
-
-    private void initCAMap() {
-
         Iterator<String> keys = _jCADef.keySet().iterator();
         while (keys.hasNext()) {
             String key = keys.next();
             if (_jCADef.get(key).isJsonObject()) {
                 JsonObject e = _jCADef.get(key).getAsJsonObject();
-                ChannelAccess ca = ChannelAccessFactory.createChannelAccess(e.get("caname").getAsString(),
+                ChannelAccess ca = ChannelAccessFactory.createChannelAccess(e.get(CANAME_ATTR).getAsString(),
                                                         _ew1,
-                                                        e.get("type").getAsInt());
+                                                        e.get(TYPE_ATTR).getAsInt());
                 ca.connect();
                 _caLoops.put(key,ca);
             }
         }
-        /*
-        for (Map.Entry<String, ChannelAccess> set : _caLoops.entrySet()) {
-            // Printing all elements of a Map
-            try {
-                System.out.println(set.getKey() + " -> " + set.getValue().getCAname() + " = " + set.getValue().getValues());
-            } catch (CAException e) {
-                throw new RuntimeException(e);
-            } catch (TimeoutException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-         */
-
         LOG.fine("End createLoopChannels");
     }
-
-    /*
-    private void createLoopChannels(String loopKey, 
-                                    HashMap<String, ReadWriteClientEpicsChannel<String>> map) throws TcsOffsetException {
-        if (_tcsLoops.get(loopKey) == null)
-            throw new TcsOffsetException(TcsOffsetException.Error.CONFIGURATION_FILE,
-                                         "Error, There is not the " + loopKey +
-                                         " declared in the tcsChLoops json configuration");
-
-        LOG.fine("Starting createLoopChannels");
-        Iterator<JsonElement> key2 = ((JsonArray) _tcsLoops.get(loopKey)).iterator();
-        while (key2.hasNext()) {
-            JsonObject e = key2.next().getAsJsonObject();
-            Iterator<String> key3 = e.keySet().iterator();
-            while (key3.hasNext()) {
-                String strKey = key3.next();
-                if (!strKey.contains("$"))
-                    map.put(strKey, _ew1.getStringChannel(strKey));
-
-            }
-
-        }
-        LOG.fine("End createLoopChannels");
-    }
-     */
 
     /**
      * This function is associated to <tcsTop>:ErrorMess.VAL monitor and
@@ -530,146 +480,63 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
         tcsApply();
     }
 
-    /*
-    private synchronized void openLoop()throws CAException, TimeoutException, TcsOffsetException {
-        keyArray.forEach(it -> {
-            JsonObject jObj = it.getAsJsonObject();
-            System.out.println(it.toString());
-            boolean executeAction = true;
-            if (jObj.has("check")) {
-                JsonObject check = jObj.get("check").getAsJsonObject();
-                Iterator<String> it2  = check.keySet().iterator();
-                while (executeAction && it2.hasNext()) {
-                    String key = it2.next();
-                    executeAction = _caLoops.get(key).check(check.get(key));
-                    System.out.println(key + " -> " + check.get(key) + " execAction: " + executeAction);
-                }
-            } else if (jObj.has("ifwasopen")) {
-                JsonArray keyArray2 = jObj.get("ifwasopen").getAsJsonArray();
-                keyArray2.forEach(it3 -> {
-                    System.out.println(it3.getAsString());
-                });
-            } else {
-                //`executeSpecialCmd`(key.substring(indexCallFunc + 1, key.length()));
-                jObj.entrySet().forEach(it3 -> {
 
-                });
-
-                executeAction = false;
-            }
-            if (executeAction) {
-                JsonArray keyArray2 = jObj.get("execute").getAsJsonArray();
-                keyArray2.forEach(it3 -> {
-                    for (Iterator<String> iter = it3.getAsJsonObject().keySet().iterator(); iter.hasNext(); ) {
-                        String execKey = iter.next();
-                        System.out.println("Executing " + execKey + " -> " + it3.getAsJsonObject().get(execKey));
-
-                    }
-                });
-            }
-        });
-
-        System.out.println("///////////////////////////////////");
-    }
-
-    */
     /**
      * This function manages the open or close loop sequence actions. The open and close sequence actions
      * are defined in the configuration file. 
      * @param loopKey: Indicates the loop sequence which will be executed.
      */
 
-    /*
-                } catch (CAException e) {
-                        throw new TcsOffsetException(TcsOffsetException.Error.CAException,
-                                                     "Error executing the " + cmd + " special command");
-                    } catch (TimeoutException e) {
-                        throw new TcsOffsetException(TcsOffsetException.Error.TIMEOUT,
-                                                     "Error executing the " + cmd + " special command");
-                    }
-                */
     private synchronized void iterateSequence(String loopKey) throws CAException, TimeoutException, TcsOffsetException {
         LOG.fine("Starting the " + loopKey +" sequence.");
-
-        //System.out.println("Startinggggg the " + loopKey +" sequence. $$$$$$$$$$$$$$$$$$$$$$$$$");
-        //System.out.println(_tcsLoops.get(loopKey).toString());
-        //System.out.println(_tcsLoops.get(loopKey).isJsonArray());
         JsonArray keyArray = _tcsLoops.get(loopKey).getAsJsonArray();
         Iterator<JsonElement> it = _tcsLoops.get(loopKey).getAsJsonArray().iterator();
         while (it.hasNext()) {
             JsonObject jObj = it.next().getAsJsonObject();
-            //System.out.println(it.toString());
             boolean executeAction = true;
-            if (jObj.has("check")) {
-                JsonObject check = jObj.get("check").getAsJsonObject();
+            // Check the different attributes defined in the tcsChLoops sequence json file
+            // and execute the action associated to them.
+            if (jObj.has(CHECK_ATTR)) {
+                JsonObject check = jObj.get(CHECK_ATTR).getAsJsonObject();
                 Iterator<String> it2  = check.keySet().iterator();
                 while (executeAction && it2.hasNext()) {
                     String key = it2.next();
                     executeAction = _caLoops.get(key).check(check.get(key));
                 }
-            } else if (jObj.has("ifwasopen")) {
-                Iterator<JsonElement> it5 = jObj.get("ifwasopen").getAsJsonArray().iterator();
+            } else if (jObj.has(WASOPEN_ATTR)) {
+                Iterator<JsonElement> it5 = jObj.get(WASOPEN_ATTR).getAsJsonArray().iterator();
                 while (executeAction && it5.hasNext()) {
                     String keyMark = it5.next().getAsString();
                     executeAction = _caLoops.get(keyMark).isMark();
                 }
             } else {
-                //`executeSpecialCmd`(key.substring(indexCallFunc + 1, key.length()));
                 Iterator<String> it3 = jObj.keySet().iterator();
                 while(it3.hasNext()){
                     String key = it3.next();
-                    //System.out.println("keyyyyyy: " + key + " -> "+ jObj.get(key));
                     executeSpecialCmd(key);
                 }
                 executeAction = false;
             }
+            // if the command defined in the tcsChLoops json object is not a special command (tcs:apply)
+            // the below code will set the the code below will set the value of that AC proper to perform
+            // the action required in this step of the sequence.
             if (executeAction) {
-                Iterator<JsonElement> it4 = jObj.get("execute").getAsJsonArray().iterator();
+                Iterator<JsonElement> it4 = jObj.get(EXECUTE_ATTR).getAsJsonArray().iterator();
                 while (it4.hasNext()){
                     JsonObject obj = it4.next().getAsJsonObject();
                     Iterator<String> keys = obj.keySet().iterator();
                     while(keys.hasNext()) {
                         String execKey = keys.next();
-                        System.out.println("Setting the value, "+ execKey + " val: "+ obj.get(execKey).toString());
                         _caLoops.get(execKey).setValue(obj.get(execKey));
                         boolean mark = loopKey.equals("openLoop") ? true : false;
                         _caLoops.get(execKey).setMark(mark);
-                        System.out.println("Executing " + execKey + " -> " + obj.get(execKey)
-                                           + " loop: " + loopKey + "  mark:  " + mark);
                     }
                 }
             }
         }
-
-        System.out.println("///////////////////////////////////");
-
-
-        /*
-        Iterator<JsonElement> it = ((JsonArray) _tcsLoops.get(loopKey)).iterator();
-        int indexCallFunc = -1;
-        while (it.hasNext()) {
-            JsonObject json = it.next().getAsJsonObject();
-
-            while (it2.hasNext()) {
-                String key = it2.next();
-                String val = json.get(key).toString().replace("\"", "");
-                indexCallFunc = key.indexOf("$");
-                if (indexCallFunc == -1) {
-                    if (_caLoops.get(key) != null) {
-                        LOG.fine("Setting the " + key +" CA");
-                        _caLoops.get(key).setValue(val);
-                    }
-                    else
-                        LOG.warning("The next command " + key + " can not be applied");
-                } else {
-                    executeSpecialCmd(key.substring(indexCallFunc + 1, key.length()));
-                }
-            }
-
-        }*/
         if (_tcsState == CarState.ERROR || _tcsStatus == TcsStatus.ERR)
             throw new TcsOffsetException(TcsOffsetException.Error.TCS_STATE, _tcsErrorMsg);
-        System.out.println("End the : " + loopKey + " sequence. TCS_STATE: " + _tcsState + " TCS_STATUS: " + _tcsStatus);
+        LOG.fine("End the : " + loopKey + " sequence. TCS_STATE: " + _tcsState + " TCS_STATUS: " + _tcsStatus);
     }
 
     private void executeSpecialCmd(String epicsCA) throws CAException, TimeoutException, TcsOffsetException {
@@ -692,7 +559,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
 
     @Override
     public void setTcsOffset(double p, double q, OffsetType offsetType) throws TcsOffsetException {
-        System.out.println("Setting offset  p: " + p + " q: " + q + " -14");
+        LOG.fine("Setting offset  p: " + p + " q: " + q + " -14");
         if (!areChannelsInit())
             throw new TcsOffsetException(TcsOffsetException.Error.BINDINGCHANNEL,
                                          "Problem binding " + _tcsOffsetChannel +

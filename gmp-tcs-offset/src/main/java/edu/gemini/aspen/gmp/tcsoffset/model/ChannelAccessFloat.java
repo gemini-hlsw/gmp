@@ -32,15 +32,12 @@ public class ChannelAccessFloat extends ChannelAccess<Float>
 
     @Override
     public Float getValues () throws CAException, TimeoutException {
-        System.out.println("Getting float type ");
         return _epicsChannel.getFirst();
     }
 
     @Override
     public boolean check(JsonElement val) {
         try {
-            //Float val2 = val.getAsFloat();
-            //return  (val2.compareTo(getValues()) == 0);
             return val.getAsFloat() == _epicsChannel.getFirst();
         } catch (CAException | TimeoutException e) {
             LOG.warning("Error getting the value of " +_caname + " epics channel access");
@@ -50,7 +47,6 @@ public class ChannelAccessFloat extends ChannelAccess<Float>
 
     @Override
     public void setValue (JsonElement val) throws CAException, TimeoutException {
-        System.out.println("Setting (JsonPrimitive) as float " + val + " value in "+_caname );
         _epicsChannel.setValue(val.getAsFloat());
     }
 
