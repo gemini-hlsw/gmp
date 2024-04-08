@@ -1,5 +1,6 @@
 package edu.gemini.aspen.gmp.tcsoffset.epics;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -58,6 +59,9 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
      */
     public static final String TYPE_ATTR = "type";
 
+    public static final String OPEN_LOOP = "openLoop";
+
+    public static final String CLOSE_LOOP = "closeLoop";
 
     /**
      * Default tcs simulation 
@@ -528,7 +532,7 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
                     while(keys.hasNext()) {
                         String execKey = keys.next();
                         _caLoops.get(execKey).setValue(obj.get(execKey));
-                        boolean mark = loopKey.equals("openLoop") ? true : false;
+                        boolean mark = loopKey.equals(OPEN_LOOP) ? true : false;
                         _caLoops.get(execKey).setMark(mark);
                     }
                 }
@@ -553,8 +557,8 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
 
     /**
      * Apply the P and Q offsets provide by the instrument.
-     * @param p         : P offset value. Units arcseconds. 
-     * @param q         : Q offset value. Units arcseconds. 
+     * @param p         : P offset value. Units arcseconds.
+     * @param q         : Q offset value. Units arcseconds.
      */
 
     @Override
@@ -577,14 +581,14 @@ public class EpicsTcsOffsetIOC implements TcsOffsetIOC {
         }
         try {
             if (offsetType == OffsetType.ACQ)
-                iterateSequence("openLoop");
+                iterateSequence(OPEN_LOOP);
             // Applying P offset
             applyOffset(Double.toString(p), P_ANGLE);
             // Applying Q offset
             applyOffset(Double.toString(q), Q_ANGLE);
             if (offsetType == OffsetType.ACQ) {
                 waitTcsInPosBlinking();
-                iterateSequence("closeLoop");
+                iterateSequence(CLOSE_LOOP);
             }
 
         } catch (CAException  e) {

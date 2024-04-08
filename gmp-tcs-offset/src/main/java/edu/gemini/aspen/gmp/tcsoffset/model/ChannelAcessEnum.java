@@ -32,10 +32,6 @@ public class ChannelAcessEnum extends ChannelAccess<Short> {
 
     }
 
-    @Override
-    public Short getValues() throws CAException, TimeoutException {
-        return _epicsChannel.getFirst();
-    }
 
 
     @Override

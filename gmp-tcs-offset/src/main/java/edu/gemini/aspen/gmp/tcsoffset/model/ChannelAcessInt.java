@@ -46,9 +46,4 @@ public class ChannelAcessInt extends ChannelAccess<Integer>{
     }
 
 
-    @Override
-    public Integer getValues () throws CAException, TimeoutException {
-        return _epicsChannel.getFirst();
-    }
-
 }

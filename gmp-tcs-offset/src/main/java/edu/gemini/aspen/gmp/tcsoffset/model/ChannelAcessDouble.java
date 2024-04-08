@@ -48,11 +48,4 @@ public class ChannelAcessDouble extends ChannelAccess<Double>{
     }
 
 
-
-    @Override
-    public Double getValues () throws CAException, TimeoutException {
-        System.out.println("Getting short value ");
-        return _epicsChannel.getFirst();
-    }
-
 }

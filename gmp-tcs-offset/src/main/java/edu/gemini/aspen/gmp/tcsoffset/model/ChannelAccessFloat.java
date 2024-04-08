@@ -30,11 +30,7 @@ public class ChannelAccessFloat extends ChannelAccess<Float>
         super(caname, ew1, type);
     }
 
-    @Override
-    public Float getValues () throws CAException, TimeoutException {
-        return _epicsChannel.getFirst();
-    }
-
+    
     @Override
     public boolean check(JsonElement val) {
         try {
