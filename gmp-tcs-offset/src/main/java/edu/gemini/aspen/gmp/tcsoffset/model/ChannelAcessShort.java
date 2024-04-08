@@ -46,10 +46,4 @@ public class ChannelAcessShort extends ChannelAccess<Short>{
         return false;
     }
 
-
-    @Override
-    public Short getValues () throws CAException, TimeoutException {
-        return _epicsChannel.getFirst();
-    }
-
 }
