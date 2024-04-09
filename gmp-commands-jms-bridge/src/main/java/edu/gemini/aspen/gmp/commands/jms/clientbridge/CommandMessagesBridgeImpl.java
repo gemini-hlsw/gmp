@@ -5,10 +5,7 @@ import edu.gemini.aspen.giapi.commands.Command;
 import edu.gemini.aspen.giapi.commands.CommandSender;
 import edu.gemini.aspen.giapi.commands.HandlerResponse;
 import edu.gemini.aspen.giapi.util.jms.JmsKeys;
-import edu.gemini.jms.api.DestinationData;
-import edu.gemini.jms.api.DestinationType;
-import edu.gemini.jms.api.FormatException;
-import edu.gemini.jms.api.JmsProvider;
+import edu.gemini.jms.api.*;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -51,6 +48,13 @@ public class CommandMessagesBridgeImpl implements CommandMessagesBridge {
         } catch (JMSException e) {
             //this is produced when sending initial reply back to the client
             LOG.log(Level.SEVERE, "Problem sending response back to client ", e);
+        } catch (MessagingException e) {
+            // This exception could happen when the Client sent first the completed
+            // before sending the STARTED. The exception is triggered in the
+            // JmsMapMessageSender.sendMapMessage(JmsMapMessageSender.java:53)
+            LOG.log(Level.SEVERE, "It was not possible to send a response " +
+                                       "to client because the sender is not ready", e);
+
         }
     }
 
