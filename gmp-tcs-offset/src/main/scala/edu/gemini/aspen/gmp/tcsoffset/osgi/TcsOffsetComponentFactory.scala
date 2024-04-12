@@ -27,9 +27,11 @@ class TcsOffsetComponentFactory(context: BundleContext, ew: EpicsWriter, eo: Epi
       val simulation = java.lang.Boolean.parseBoolean(properties.get(TcsOffsetComponent.SIMULATION).toString)
       val offsetConfig = properties.get(TcsOffsetComponent.OFFSETCONFIG).toString
       val jsonOffsetConfig = JsonParser.parseString(offsetConfig.substring(1,offsetConfig.length()-1)).getAsJsonObject()
-      val tcsChLoopsStr = properties.get("tcsChLoops").toString
-      val jsonTcsChLoops = JsonParser.parseString(tcsChLoopsStr.substring(1,tcsChLoopsStr.length()-1)).getAsJsonObject()
-      val component = new TcsOffsetComponent(ew, eo, simulation, jsonOffsetConfig, jsonTcsChLoops)
+      val tcsLoopsStr = properties.get("tcsChLoops").toString
+      val cadefinition = properties.get("caListDef").toString
+      val jTcsLoops = JsonParser.parseString(tcsLoopsStr.substring(1,tcsLoopsStr.length()-1)).getAsJsonObject()
+      val jcaDefs = JsonParser.parseString(cadefinition.substring(1,cadefinition.length()-1)).getAsJsonObject()
+      val component = new TcsOffsetComponent(ew, eo, simulation, jsonOffsetConfig, jTcsLoops, jcaDefs)
       component.start()
       val reference = context.registerService(classOf[JmsArtifact], component: JmsArtifact, new java.util.Hashtable[String, String]())
       existingComponents.put(pid, component)

@@ -49,6 +49,11 @@ public class EpicsWriterImpl extends EpicsChannelFactory implements EpicsWriter 
     }
 
     @Override
+    public ReadWriteClientEpicsChannel<Short> getEnumAsShortChannel(String channelName) {
+        return _getEnumAsShortChannel(channelName);
+    }
+
+    @Override
     public ReadWriteClientEpicsChannel<?> getChannelAsync(String channelName) {
         return _getChannelAsync(channelName);
     }

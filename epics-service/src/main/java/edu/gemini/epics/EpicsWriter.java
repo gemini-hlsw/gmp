@@ -26,5 +26,8 @@ public interface EpicsWriter extends EpicsReader {
     <T extends Enum<T>> ReadWriteClientEpicsChannel<T> getEnumChannel(String channelName, Class<T> enumClass);
 
     @Override
+    ReadWriteClientEpicsChannel<Short> getEnumAsShortChannel(String channelName);
+
+    @Override
     ReadWriteClientEpicsChannel<?> getChannelAsync(String channelName);
 }
