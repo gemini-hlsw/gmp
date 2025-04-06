@@ -2018,3 +2018,8 @@ releases.properties
 /src/main/config/services/target
 
 .idea
+.direnv/
+.metals/
+.pax/
+
+.bloop/
