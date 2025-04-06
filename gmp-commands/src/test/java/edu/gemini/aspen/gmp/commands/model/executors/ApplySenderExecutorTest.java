@@ -15,6 +15,7 @@ import org.junit.Test;
 import static edu.gemini.aspen.giapi.commands.ConfigPath.configPath;
 import static edu.gemini.aspen.giapi.commands.DefaultConfiguration.configurationBuilder;
 import static edu.gemini.aspen.giapi.commands.DefaultConfiguration.emptyConfiguration;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -30,11 +31,12 @@ public class ApplySenderExecutorTest {
 
     private Configuration _applyConfig;
     private ActionManagerImpl actionManager;
+    private CommandHandlers handlers;
 
     @Before
     public void setUp() {
         ActionMessageBuilder builder = mock(ActionMessageBuilder.class);
-        CommandHandlers handlers = mock(CommandHandlers.class);
+        handlers = mock(CommandHandlers.class);
 
         actionManager = new ActionManagerImpl();
         actionManager.start();
@@ -74,7 +76,8 @@ public class ApplySenderExecutorTest {
      */
     @Test
     public void testCountResponses() {
-        assertEquals(1, _executor.countExpectedResponses(_applyConfig, ConfigPath.EMPTY_PATH));
+        List<ConfigPath> applyHandlers = handlers.getApplyHandlers();
+        assertEquals(1, _executor.countExpectedResponses(_applyConfig, ConfigPath.EMPTY_PATH, applyHandlers));
     }
 
     /**

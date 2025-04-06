@@ -104,8 +104,9 @@ public class ApplySenderExecutorWithMultipleHandlersTest {
                 .withPath(configPath("X:S2:C.val2"), "xc2")
                 .withPath(configPath("X:S2:C.val3"), "xc3")
                 .build();
+        List<ConfigPath> applyHandlers = handlers.getApplyHandlers();
 
-        assertEquals(2, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH));
+        assertEquals(2, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH, applyHandlers));
 
         Configuration _applyConfig2 = configurationBuilder()
                 .withPath(configPath("X:S1:A.val1"), "xa1")
@@ -117,7 +118,7 @@ public class ApplySenderExecutorWithMultipleHandlersTest {
                 .withPath(configPath("X:S1:B.val3"), "xb3")
                 .build();
 
-        assertEquals(1, _executor.countExpectedResponses(_applyConfig2, ConfigPath.EMPTY_PATH));
+        assertEquals(1, _executor.countExpectedResponses(_applyConfig2, ConfigPath.EMPTY_PATH, applyHandlers));
 
         Configuration _applyConfig3 = configurationBuilder()
                 .withPath(configPath("X:S1:A.val1"), "xa1")
@@ -125,9 +126,9 @@ public class ApplySenderExecutorWithMultipleHandlersTest {
                 .withPath(configPath("X:S3:C.val3"), "xc3") // This one is unhandled
                 .build();
 
-        assertEquals(1, _executor.countExpectedResponses(_applyConfig3, ConfigPath.EMPTY_PATH));
+        assertEquals(1, _executor.countExpectedResponses(_applyConfig3, ConfigPath.EMPTY_PATH, applyHandlers));
 
-        assertEquals(1, _executor.countExpectedResponses(configurationBuilder().build(), ConfigPath.EMPTY_PATH));
+        assertEquals(1, _executor.countExpectedResponses(configurationBuilder().build(), ConfigPath.EMPTY_PATH, applyHandlers));
     }
 
     /**
