@@ -2023,3 +2023,4 @@ releases.properties
 .pax/
 
 .bloop/
+/nb-configuration.xml
