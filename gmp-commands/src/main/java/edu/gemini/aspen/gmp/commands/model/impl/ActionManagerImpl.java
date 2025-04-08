@@ -157,7 +157,8 @@ public class ActionManagerImpl implements ActionManager {
                         //store this response to combine it with the other answers we might receive for the same action
                         _handlerResponseTracker.storeResponse(action, response);
                         if (_handlerResponseTracker.isComplete(action)) {
-                            LOG.info("Updating clients with action " + action + " response " + _handlerResponseTracker.getResponse(action));
+                            LOG.info("Updating clients with ActionID:" + action.getId() + " response " 
+                                    + _handlerResponseTracker.getResponse(action));
                             action.sendResponseToListeners(_handlerResponseTracker.getResponse(action));
                             //remove the action from the list of tracked actions
                             _handlerResponseTracker.removeTrackedAction(action);
@@ -165,12 +166,12 @@ public class ActionManagerImpl implements ActionManager {
                             //now, remove the element from the list
                             _actionList.remove(action);
                         } else {
-                           LOG.info("Received update for action " + action + " response "
+                           LOG.info("Received update for ActionID:" + action.getId() + " response "
                                   + response + ". Waiting for " + _handlerResponseTracker.getPendingResponses(action)
                                   + " other parts of the action to complete...");
                             //in this case, the loop is aborted, since this action is not completed yet,
                             //so we have to keep waiting.
-                            action = null;
+                            //action = null;
                         }
                     }
                 } finally {
@@ -222,13 +223,13 @@ public class ActionManagerImpl implements ActionManager {
 
     @Override
     public void registerAction(Action action) {
-        LOG.fine("Start monitoring progress for Action " + action);
+        LOG.fine("Start monitoring progress for ActionID:" + action.getId());
         _actionList.add(action);
     }
 
     @Override
     public void unregisterAction(Action action) {
-        LOG.fine("Stopped monitoring progress for Action " + action + ". Action Completed Immediately");
+        LOG.fine("Stopped monitoring progress for ActionID: " + action.getId() + ". Action Completed Immediately");
         _actionList.remove(action);
     }
 

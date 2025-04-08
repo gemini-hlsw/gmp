@@ -150,7 +150,7 @@ class HandlerResponseTracker {
         if (responseHolder != null) {
             return responseHolder.getResponse();
         }
-        LOG.warning("We are not tracking progress for action " + action);
+        LOG.warning("We are not tracking progress for ActionID:" + action.getId());
         return null;
     }
 
