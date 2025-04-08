@@ -165,8 +165,9 @@ public class ActionManagerImpl implements ActionManager {
                             //now, remove the element from the list
                             _actionList.remove(action);
                         } else {
-                            LOG.info("Received update for action " + action + " response " +
-                                    response + ". Waiting for the other parts of the action to complete...");
+                           LOG.info("Received update for action " + action + " response "
+                                  + response + ". Waiting for " + _handlerResponseTracker.getPendingResponses(action)
+                                  + " other parts of the action to complete...");
                             //in this case, the loop is aborted, since this action is not completed yet,
                             //so we have to keep waiting.
                             action = null;

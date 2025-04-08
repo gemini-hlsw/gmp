@@ -2024,3 +2024,4 @@ releases.properties
 
 .bloop/
 /nb-configuration.xml
+/distribution/nb-configuration.xml
