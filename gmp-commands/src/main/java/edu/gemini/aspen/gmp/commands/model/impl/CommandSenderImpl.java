@@ -78,7 +78,7 @@ public class CommandSenderImpl implements CommandSender {
         _manager.registerAction(action);
 
         Stopwatch stopwatch = Stopwatch.createStarted();
-        LOG.fine("About to execute apply for ActionID:" + action.getId());
+        LOG.fine("About to execute apply for action " + action);
         HandlerResponse response = _executor.execute(action, _sender);
 
         //The only response that indicates actions have started is
@@ -86,10 +86,10 @@ public class CommandSenderImpl implements CommandSender {
         //that must be completed at a later time, therefore the
         //Completion listener is ignored in this case. See GIAPI design
         //and use, section 10.6
-        LOG.info("Response for ActionID:" + action.getId() + " arrived: " + response + " in " + 
+        LOG.info("Response for action ID " + action.getId() + " arrived: " + response + " in " + 
                 stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " [ms]");
         if (response != null) {
-            LOG.fine("Got response " + response + " for ActionID:" + action.getId());
+            LOG.fine("Got response " + response + " for action ID " + action.getId());
             if (response.getResponse() == HandlerResponse.Response.STARTED) {
                 //now, it is possible the action has completed _while_ we were
                 //here.... let's take care of that case and if so, use the
@@ -103,7 +103,7 @@ public class CommandSenderImpl implements CommandSender {
                 try {
                     if (decoratorListener.getResponse() != null) {
                         response = decoratorListener.getResponse();
-                        LOG.fine("Got response " + response + " for ActionID:" + action.getId());
+                        LOG.fine("Got response " + response + " for action ID " + action.getId());
                         //this action is no longer valid.
                         _manager.unregisterAction(action);
                     }

@@ -43,14 +43,14 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
             return HandlerResponse.createError(ERROR_MSG);
         } else {
             List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
-            LOG.fine("Execute ActionID:" + action.getId() + " got " + applyHandlers.size() + 
+            LOG.fine("Execute action ID " + action.getId() + " got " + applyHandlers.size() + 
                     " Apply Handlers (" + applyHandlers + ")");         
 
             int expectedResponses = countExpectedResponses(config, ConfigPath.EMPTY_PATH, applyHandlers);
-            LOG.fine("Action ActionID:" + action.getId() + " expects " + expectedResponses + " responses");
+            LOG.fine("Action action ID " + action.getId() + " expects " + expectedResponses + " responses");
 
             if (!canBeFullyHandled(config, applyHandlers)) {
-              LOG.severe("Action ActionID:" + action.getId() + " cannot be fully handled, there are missing handlers. return NOANSWER");
+              LOG.severe("Action action ID " + action.getId() + " cannot be fully handled, there are missing handlers. return NOANSWER");
               
               return HandlerResponse.NOANSWER;
             }
@@ -151,7 +151,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
         Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
 
         if (configPathSet.isEmpty()) {
-            LOG.info("Action ActionID:" + action.getId() + " has empty path set, respond NOANSWER");
+            LOG.info("Action action ID " + action.getId() + " has empty path set, respond NOANSWER");
             return HandlerResponse.NOANSWER;
         }
 
@@ -165,7 +165,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
 
             HandlerResponse response = null;
             if (applyHandlers.isEmpty() || applyHandlers.contains(cp)) {
-                LOG.info("Attempt to send apply for configuration " + c + " with ActionID:" + action.getId() + " and timeout " 
+                LOG.info("Attempt to send apply for configuration " + c + " with action ID " + action.getId() + " and timeout " 
                         + action.getTimeout());
                 ActionMessage am = _actionMessageBuilder.buildActionMessage(action, cp);
                 Stopwatch s = Stopwatch.createStarted();
@@ -174,7 +174,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
 
                 // if the response is COMPLETED remove waiting for a response
                 if (response == HandlerResponse.COMPLETED) {
-                    LOG.info("Action immediately completed ActionID:" + action.getId());
+                    LOG.info("Action immediately completed action ID " + action.getId());
                     _actionManager.decreaseRequiredResponses(action);
                 }
 
