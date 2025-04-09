@@ -38,6 +38,7 @@ Warning: This is a generated file - take care if editing by hand
         <ConfigRecord name="dc:red">
             <ConfigSet name="dc:red">
                 <field>address</field>
+                <field>arc_commands_type</field>
                 <field>arg</field>
                 <field>auto_archive</field>
                 <field>auto_rdc</field>
@@ -49,6 +50,7 @@ Warning: This is a generated file - take care if editing by hand
                 <field>cmd</field>
                 <field>comment</field>
                 <field>config</field>
+                <field>controller_type</field>
                 <field>cosmic_rate</field>
                 <field>dark</field>
                 <field>data</field>
@@ -158,6 +160,7 @@ Warning: This is a generated file - take care if editing by hand
         <ConfigRecord name="dc:blue">
             <ConfigSet name="dc:blue">
                 <field>address</field>
+                <field>arc_commands_type</field>
                 <field>arg</field>
                 <field>auto_archive</field>
                 <field>auto_rdc</field>
@@ -169,6 +172,7 @@ Warning: This is a generated file - take care if editing by hand
                 <field>cmd</field>
                 <field>comment</field>
                 <field>config</field>
+                <field>controller_type</field>
                 <field>cosmic_rate</field>
                 <field>dark</field>
                 <field>data</field>
@@ -292,6 +296,7 @@ Warning: This is a generated file - take care if editing by hand
                 <field>do_save</field>
                 <field>do_test</field>
                 <field>duration</field>
+                <field>exp_meter</field>
                 <field>fitskw1</field>
                 <field>fitskw2</field>
                 <field>fitskw3</field>
@@ -324,6 +329,7 @@ Warning: This is a generated file - take care if editing by hand
                 <field>overscan_cols</field>
                 <field>overscan_rows</field>
                 <field>rcf</field>
+                <field>read_mode</field>
                 <field>repeat</field>
                 <field>request_type</field>
                 <field>run_number</field>
@@ -393,6 +399,7 @@ Warning: This is a generated file - take care if editing by hand
                 <field>pos2_mode</field>
                 <field>pos2_reset_spiral</field>
                 <field>rcf</field>
+                <field>read_mode</field>
                 <field>repeat</field>
                 <field>request_type</field>
                 <field>run_number</field>
@@ -911,6 +918,11 @@ Warning: This is a generated file - take care if editing by hand
                 <field>type</field>
             </ConfigSet>
         </ConfigRecord>
+        <ConfigRecord name="cc:spe:rLakeshore336">
+            <ConfigSet name="cc:spe:rLakeshore336">
+                <field>simulate</field>
+            </ConfigSet>
+        </ConfigRecord>
         <ConfigRecord name="cc:spe:rShutter">
             <ConfigSet name="cc:spe:rShutter">
                 <field>expose</field>
@@ -936,6 +948,34 @@ Warning: This is a generated file - take care if editing by hand
                 <field>type</field>
             </ConfigSet>
         </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostTestUnitCC_Slave_demand.json-->
+        <ConfigRecord name="cc:tst:demand">
+            <ConfigSet name="cc:tst:demand">
+                <field>cmd_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:tst:ici">
+            <ConfigSet name="cc:tst:ici">
+                <field>instrumentRunning</field>
+                <field>simulate</field>
+                <field>softwareEmergencyStop</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:tst:tm">
+            <ConfigSet name="cc:tst:tm">
+                <field>position</field>
+                <field>simulate</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <ConfigRecord name="cc:tst:tmAmp">
+            <ConfigSet name="cc:tst:tmAmp">
+                <field>positioning</field>
+                <field>target_enc</field>
+                <field>target_user</field>
+                <field>type</field>
+            </ConfigSet>
+        </ConfigRecord>
         <!-- From JSON file cicada_config/ghostCassegrainUnitCC_demand.json-->
         <ConfigRecord name="cc:cu">
             <ConfigSet name="cc:cu">
@@ -953,6 +993,13 @@ Warning: This is a generated file - take care if editing by hand
         <!-- From JSON file cicada_config/ghostSpectrographCC_demand.json-->
         <ConfigRecord name="cc:spe">
             <ConfigSet name="cc:spe">
+                <field>do_test</field>
+                <field>request_type</field>
+            </ConfigSet>
+        </ConfigRecord>
+        <!-- From JSON file cicada_config/ghostTestUnitCC_demand.json-->
+        <ConfigRecord name="cc:tst">
+            <ConfigSet name="cc:tst">
                 <field>do_test</field>
                 <field>request_type</field>
             </ConfigSet>

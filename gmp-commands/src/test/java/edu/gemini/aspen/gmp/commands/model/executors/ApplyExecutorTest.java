@@ -60,9 +60,9 @@ public class ApplyExecutorTest {
                 .withPath(configPath("ghost:dc:red.ccf"), "4")
                 .withPath(configPath("ghost:cc:slu:fa1.type"), "SET")
                 .build();
-
-        assert (_executor.canBeFullyHandled(_applyConfig1));
-        assertEquals(3, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH));
+        List<ConfigPath> applyHandlers = handlers.getApplyHandlers();
+        assert (_executor.canBeFullyHandled(_applyConfig1, applyHandlers));
+        assertEquals(3, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH, applyHandlers));
     }
     /**
      * Count the handlers
@@ -85,9 +85,9 @@ public class ApplyExecutorTest {
                 .withPath(configPath("X:S2:C.val2"), "xc2")
                 .withPath(configPath("X:S2:C.val3"), "xc3")
                 .build();
-
-        assert (_executor.canBeFullyHandled(_applyConfig1));
-        assertEquals(2, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH));
+        List<ConfigPath> applyHandlers = handlers.getApplyHandlers();
+        assert (_executor.canBeFullyHandled(_applyConfig1, applyHandlers));
+        assertEquals(2, _executor.countExpectedResponses(_applyConfig1, ConfigPath.EMPTY_PATH, applyHandlers));
 
         Configuration _applyConfig3 = configurationBuilder()
                 .withPath(configPath("X:S1:A.val1"), "xa1")
@@ -95,8 +95,8 @@ public class ApplyExecutorTest {
                 .withPath(configPath("X:S3:C.val3"), "xc3") // This one is unhandled
                 .build();
 
-        assert (!_executor.canBeFullyHandled(_applyConfig3));
-        assertEquals(1, _executor.countExpectedResponses(_applyConfig3, ConfigPath.EMPTY_PATH));
+        assert (!_executor.canBeFullyHandled(_applyConfig3, applyHandlers));
+        assertEquals(1, _executor.countExpectedResponses(_applyConfig3, ConfigPath.EMPTY_PATH, applyHandlers));
     }
 
     /**

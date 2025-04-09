@@ -25,209 +25,207 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </AlarmChannel>
         
-
   <!-- From JSON file cicada_config/ghost.json-->
   <HealthChannel>
-    <!--giapiname>inst_health_rec.health</giapiname-->
+    <!--giapiname>ghost:inst_health_rec.health</giapiname-->
     <giapiname>sad.health</giapiname>
     <epicsname>sad.health</epicsname>
   </HealthChannel>
   <SimpleChannel>
-    <!--giapiname>inst_health_rec.health_msg</giapiname-->
+    <!--giapiname>ghost:inst_health_rec.health_msg</giapiname-->
     <giapiname>sad.health_msg</giapiname>
     <epicsname>sad.health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>archiver_flag</giapiname-->
+    <!--giapiname>ghost:archiver_flag</giapiname-->
     <giapiname>sad:is.archiver_flag</giapiname>
     <epicsname>sad:is.archiver_flag</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <HealthChannel>
-    <!--giapiname>archiver_health_rec.health</giapiname-->
+    <!--giapiname>ghost:archiver_health_rec.health</giapiname-->
     <giapiname>sad:is.archiver_health</giapiname>
     <epicsname>sad:is.archiver_health</epicsname>
   </HealthChannel>
   <SimpleChannel>
-    <!--giapiname>archiver_health_rec.health_msg</giapiname-->
+    <!--giapiname>ghost:archiver_health_rec.health_msg</giapiname-->
     <giapiname>sad:is.archiver_health_msg</giapiname>
     <epicsname>sad:is.archiver_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>archiver_heartbeat</giapiname-->
+    <!--giapiname>ghost:archiver_heartbeat</giapiname-->
     <giapiname>sad:is.archiver_heartbeat</giapiname>
     <epicsname>sad:is.archiver_heartbeat</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>archiver_state</giapiname-->
+    <!--giapiname>ghost:archiver_state</giapiname-->
     <giapiname>sad:is.archiver_state</giapiname>
     <epicsname>sad:is.archiver_state</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>command_state</giapiname-->
+    <!--giapiname>ghost:command_state</giapiname-->
     <giapiname>sad:is.command_state</giapiname>
     <epicsname>sad:is.command_state</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>specific.debug</giapiname-->
+    <!--giapiname>ghost:specific.debug</giapiname-->
     <giapiname>sad:is.debug</giapiname>
     <epicsname>sad:is.debug</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>displayer_flag</giapiname-->
+    <!--giapiname>ghost:displayer_flag</giapiname-->
     <giapiname>sad:is.displayer_flag</giapiname>
     <epicsname>sad:is.displayer_flag</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <HealthChannel>
-    <!--giapiname>displayer_health_rec.health</giapiname-->
+    <!--giapiname>ghost:displayer_health_rec.health</giapiname-->
     <giapiname>sad:is.displayer_health</giapiname>
     <epicsname>sad:is.displayer_health</epicsname>
   </HealthChannel>
   <SimpleChannel>
-    <!--giapiname>displayer_health_rec.health_msg</giapiname-->
+    <!--giapiname>ghost:displayer_health_rec.health_msg</giapiname-->
     <giapiname>sad:is.displayer_health_msg</giapiname>
     <epicsname>sad:is.displayer_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>displayer_heartbeat</giapiname-->
+    <!--giapiname>ghost:displayer_heartbeat</giapiname-->
     <giapiname>sad:is.displayer_heartbeat</giapiname>
     <epicsname>sad:is.displayer_heartbeat</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>displayer_state</giapiname-->
+    <!--giapiname>ghost:displayer_state</giapiname-->
     <giapiname>sad:is.displayer_state</giapiname>
     <epicsname>sad:is.displayer_state</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <HealthChannel>
-    <!--giapiname>health_rec.health</giapiname-->
+    <!--giapiname>ghost:health_rec.health</giapiname-->
     <giapiname>sad:is.health</giapiname>
     <epicsname>sad:is.health</epicsname>
   </HealthChannel>
   <SimpleChannel>
-    <!--giapiname>health_rec.health_msg</giapiname-->
+    <!--giapiname>ghost:health_rec.health_msg</giapiname-->
     <giapiname>sad:is.health_msg</giapiname>
     <epicsname>sad:is.health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>master_flag</giapiname-->
+    <!--giapiname>ghost:master_flag</giapiname-->
     <giapiname>sad:is.master_flag</giapiname>
     <epicsname>sad:is.master_flag</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <HealthChannel>
-    <!--giapiname>master_health_rec.health</giapiname-->
+    <!--giapiname>ghost:master_health_rec.health</giapiname-->
     <giapiname>sad:is.master_health</giapiname>
     <epicsname>sad:is.master_health</epicsname>
   </HealthChannel>
   <SimpleChannel>
-    <!--giapiname>master_health_rec.health_msg</giapiname-->
+    <!--giapiname>ghost:master_health_rec.health_msg</giapiname-->
     <giapiname>sad:is.master_health_msg</giapiname>
     <epicsname>sad:is.master_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>master_heartbeat</giapiname-->
+    <!--giapiname>ghost:master_heartbeat</giapiname-->
     <giapiname>sad:is.master_heartbeat</giapiname>
     <epicsname>sad:is.master_heartbeat</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>master_state</giapiname-->
+    <!--giapiname>ghost:master_state</giapiname-->
     <giapiname>sad:is.master_state</giapiname>
     <epicsname>sad:is.master_state</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>specific.ghost_rpc_port</giapiname-->
+    <!--giapiname>ghost:specific.ghost_rpc_port</giapiname-->
     <giapiname>sad:is.rpc_port</giapiname>
     <epicsname>sad:is.rpc_port</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>script_abort</giapiname-->
+    <!--giapiname>ghost:script_abort</giapiname-->
     <giapiname>sad:is.script_abort</giapiname>
     <epicsname>sad:is.script_abort</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>script_msg</giapiname-->
+    <!--giapiname>ghost:script_msg</giapiname-->
     <giapiname>sad:is.script_msg</giapiname>
     <epicsname>sad:is.script_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>script_result</giapiname-->
+    <!--giapiname>ghost:script_result</giapiname-->
     <giapiname>sad:is.script_result</giapiname>
     <epicsname>sad:is.script_result</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>script_running</giapiname-->
+    <!--giapiname>ghost:script_running</giapiname-->
     <giapiname>sad:is.script_running</giapiname>
     <epicsname>sad:is.script_running</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>script_state</giapiname-->
+    <!--giapiname>ghost:script_state</giapiname-->
     <giapiname>sad:is.script_state</giapiname>
     <epicsname>sad:is.script_state</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>script_stop</giapiname-->
+    <!--giapiname>ghost:script_stop</giapiname-->
     <giapiname>sad:is.script_stop</giapiname>
     <epicsname>sad:is.script_stop</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>specific.ghost_server_port</giapiname-->
+    <!--giapiname>ghost:specific.ghost_server_port</giapiname-->
     <giapiname>sad:is.server_port</giapiname>
     <epicsname>sad:is.server_port</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>specific.simulation</giapiname-->
+    <!--giapiname>ghost:specific.simulation</giapiname-->
     <giapiname>sad:is.simulation</giapiname>
     <epicsname>sad:is.simulation</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostCassegrainUnitCC.json-->
   <HealthChannel>
     <!--giapiname>ghostCassegrainUnitCC:inst_ctl_health_rec.health</giapiname-->
@@ -326,7 +324,6 @@ Warning: This is a generated file - take care if editing by hand
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostSlitUnitCC.json-->
   <HealthChannel>
     <!--giapiname>ghostSlitUnitCC:inst_ctl_health_rec.health</giapiname-->
@@ -425,7 +422,6 @@ Warning: This is a generated file - take care if editing by hand
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostSpectrographCC.json-->
   <HealthChannel>
     <!--giapiname>ghostSpectrographCC:inst_ctl_health_rec.health</giapiname-->
@@ -524,7 +520,104 @@ Warning: This is a generated file - take care if editing by hand
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
-
+  <!-- From JSON file cicada_config/ghostTestUnitCC.json-->
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:inst_ctl_health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst.control_health</giapiname>
+    <epicsname>sad:cc:tst.control_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:inst_ctl_health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst.control_health_msg</giapiname>
+    <epicsname>sad:cc:tst.control_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:control_heartbeat</giapiname-->
+    <giapiname>sad:cc:tst.control_heartbeat</giapiname>
+    <epicsname>sad:cc:tst.control_heartbeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:control_state</giapiname-->
+    <giapiname>sad:cc:tst.control_state</giapiname>
+    <epicsname>sad:cc:tst.control_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:data_state</giapiname-->
+    <giapiname>sad:cc:tst.data_state</giapiname>
+    <epicsname>sad:cc:tst.data_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:specific.debug</giapiname-->
+    <giapiname>sad:cc:tst.debug</giapiname>
+    <epicsname>sad:cc:tst.debug</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:specific.simulation</giapiname-->
+    <giapiname>sad:cc:tst.hw_simulation</giapiname>
+    <epicsname>sad:cc:tst.hw_simulation</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:part_health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst.part_health</giapiname>
+    <epicsname>sad:cc:tst.part_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:part_health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst.part_health_msg</giapiname>
+    <epicsname>sad:cc:tst.part_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:slave_health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst.slave_health</giapiname>
+    <epicsname>sad:cc:tst.slave_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:slave_health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst.slave_health_msg</giapiname>
+    <epicsname>sad:cc:tst.slave_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:slave_heartbeat</giapiname-->
+    <giapiname>sad:cc:tst.slave_heartbeat</giapiname>
+    <epicsname>sad:cc:tst.slave_heartbeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:slave_state</giapiname-->
+    <giapiname>sad:cc:tst.slave_state</giapiname>
+    <epicsname>sad:cc:tst.slave_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst.top_health</giapiname>
+    <epicsname>sad:cc:tst.top_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst.top_health_msg</giapiname>
+    <epicsname>sad:cc:tst.top_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
   <!-- From JSON file cicada_config/ghostCassegrainUnitCC_Slave.json-->
   <HealthChannel>
     <!--giapiname>ghostCassegrainUnitCC:status.alarm_health.health</giapiname-->
@@ -614,7 +707,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.result.result</giapiname-->
     <giapiname>sad:cc:cu.result</giapiname>
     <epicsname>sad:cc:cu.result</epicsname>
     <type>INT</type>
@@ -779,6 +872,13 @@ Warning: This is a generated file - take care if editing by hand
     <type>DOUBLE</type>
     <initial>0.0</initial>
   </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostCassegrainUnitCC:status.adc1.pos.dispersion</giapiname-->
+    <giapiname>sad:cc:cu:adc1.dispersion</giapiname>
+    <epicsname>sad:cc:cu:adc1.dispersion</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
   <HealthChannel>
     <!--giapiname>ghostCassegrainUnitCC:status.adc1.health_rec.health</giapiname-->
     <giapiname>sad:cc:cu:adc1.health</giapiname>
@@ -799,7 +899,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.adc1.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.adc1.result.result</giapiname-->
     <giapiname>sad:cc:cu:adc1.result</giapiname>
     <epicsname>sad:cc:cu:adc1.result</epicsname>
     <type>INT</type>
@@ -930,7 +1030,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.adc1.a.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.adc1.a.result.result</giapiname-->
     <giapiname>sad:cc:cu:adc1a.result</giapiname>
     <epicsname>sad:cc:cu:adc1a.result</epicsname>
     <type>INT</type>
@@ -1089,7 +1189,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.adc1.b.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.adc1.b.result.result</giapiname-->
     <giapiname>sad:cc:cu:adc1b.result</giapiname>
     <epicsname>sad:cc:cu:adc1b.result</epicsname>
     <type>INT</type>
@@ -1228,6 +1328,13 @@ Warning: This is a generated file - take care if editing by hand
     <type>DOUBLE</type>
     <initial>0.0</initial>
   </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostCassegrainUnitCC:status.adc2.pos.dispersion</giapiname-->
+    <giapiname>sad:cc:cu:adc2.dispersion</giapiname>
+    <epicsname>sad:cc:cu:adc2.dispersion</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
   <HealthChannel>
     <!--giapiname>ghostCassegrainUnitCC:status.adc2.health_rec.health</giapiname-->
     <giapiname>sad:cc:cu:adc2.health</giapiname>
@@ -1248,7 +1355,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.adc2.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.adc2.result.result</giapiname-->
     <giapiname>sad:cc:cu:adc2.result</giapiname>
     <epicsname>sad:cc:cu:adc2.result</epicsname>
     <type>INT</type>
@@ -1379,7 +1486,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.adc2.a.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.adc2.a.result.result</giapiname-->
     <giapiname>sad:cc:cu:adc2a.result</giapiname>
     <epicsname>sad:cc:cu:adc2a.result</epicsname>
     <type>INT</type>
@@ -1538,7 +1645,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.adc2.b.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.adc2.b.result.result</giapiname-->
     <giapiname>sad:cc:cu:adc2b.result</giapiname>
     <epicsname>sad:cc:cu:adc2b.result</epicsname>
     <type>INT</type>
@@ -1774,7 +1881,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.result.result</giapiname-->
     <giapiname>sad:cc:cu:ici.result</giapiname>
     <epicsname>sad:cc:cu:ici.result</epicsname>
     <type>INT</type>
@@ -1842,6 +1949,13 @@ Warning: This is a generated file - take care if editing by hand
     <epicsname>sad:cc:cu:ifu1.fpy</epicsname>
     <type>DOUBLE</type>
     <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostCassegrainUnitCC:guide.ifu1.heartbeat</giapiname-->
+    <giapiname>sad:cc:cu:ifu1.guide_heartbeat</giapiname>
+    <epicsname>sad:cc:cu:ifu1.guide_heartbeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostCassegrainUnitCC:guide.ifu1.x</giapiname-->
@@ -1940,7 +2054,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ifu1.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ifu1.result.result</giapiname-->
     <giapiname>sad:cc:cu:ifu1.result</giapiname>
     <epicsname>sad:cc:cu:ifu1.result</epicsname>
     <type>INT</type>
@@ -2680,7 +2794,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ifu1.x.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ifu1.x.result.result</giapiname-->
     <giapiname>sad:cc:cu:ifu1x.result</giapiname>
     <epicsname>sad:cc:cu:ifu1x.result</epicsname>
     <type>INT</type>
@@ -2846,7 +2960,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ifu1.y.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ifu1.y.result.result</giapiname-->
     <giapiname>sad:cc:cu:ifu1y.result</giapiname>
     <epicsname>sad:cc:cu:ifu1y.result</epicsname>
     <type>INT</type>
@@ -2944,6 +3058,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostCassegrainUnitCC:guide.ifu2.heartbeat</giapiname-->
+    <giapiname>sad:cc:cu:ifu2.guide_heartbeat</giapiname>
+    <epicsname>sad:cc:cu:ifu2.guide_heartbeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostCassegrainUnitCC:guide.ifu2.x</giapiname-->
     <giapiname>sad:cc:cu:ifu2.guide_x</giapiname>
     <epicsname>sad:cc:cu:ifu2.guide_x</epicsname>
@@ -3012,7 +3133,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ifu2.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ifu2.result.result</giapiname-->
     <giapiname>sad:cc:cu:ifu2.result</giapiname>
     <epicsname>sad:cc:cu:ifu2.result</epicsname>
     <type>INT</type>
@@ -3458,7 +3579,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ifu2.x.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ifu2.x.result.result</giapiname-->
     <giapiname>sad:cc:cu:ifu2x.result</giapiname>
     <epicsname>sad:cc:cu:ifu2x.result</epicsname>
     <type>INT</type>
@@ -3624,7 +3745,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ifu2.y.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ifu2.y.result.result</giapiname-->
     <giapiname>sad:cc:cu:ifu2y.result</giapiname>
     <epicsname>sad:cc:cu:ifu2y.result</epicsname>
     <type>INT</type>
@@ -3685,7 +3806,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ins_io.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ins_io.result.result</giapiname-->
     <giapiname>sad:cc:cu:ins.result</giapiname>
     <epicsname>sad:cc:cu:ins.result</epicsname>
     <type>INT</type>
@@ -3713,7 +3834,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.instrumentRunning.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.instrumentRunning.result.result</giapiname-->
     <giapiname>sad:cc:cu:instrumentRunning.result</giapiname>
     <epicsname>sad:cc:cu:instrumentRunning.result</epicsname>
     <type>INT</type>
@@ -3748,7 +3869,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.softwareEmergencyStop.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.softwareEmergencyStop.result.result</giapiname-->
     <giapiname>sad:cc:cu:softwareEmergencyStop.result</giapiname>
     <epicsname>sad:cc:cu:softwareEmergencyStop.result</epicsname>
     <type>INT</type>
@@ -3951,7 +4072,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.watchdogTimeoutEnableDisable.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.watchdogTimeoutEnableDisable.result.result</giapiname-->
     <giapiname>sad:cc:cu:watchdogTimeoutEnableDisable.result</giapiname>
     <epicsname>sad:cc:cu:watchdogTimeoutEnableDisable.result</epicsname>
     <type>INT</type>
@@ -3972,7 +4093,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.watchdogTimerTrigger.result</giapiname-->
+    <!--giapiname>ghostCassegrainUnitCC:status.ici_io.watchdogTimerTrigger.result.result</giapiname-->
     <giapiname>sad:cc:cu:watchdogTimerTrigger.result</giapiname>
     <epicsname>sad:cc:cu:watchdogTimerTrigger.result</epicsname>
     <type>INT</type>
@@ -3985,8 +4106,17 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostSlitUnitCC_Slave.json-->
+  <HealthChannel>
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.accessPanel.health_rec.health</giapiname-->
+    <giapiname>sad:cc:slu.accessPanel_health</giapiname>
+    <epicsname>sad:cc:slu.accessPanel_health</epicsname>
+  </HealthChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.actuator24VDCPowerOn.health_rec.health</giapiname-->
+    <giapiname>sad:cc:slu.actuator24V_health</giapiname>
+    <epicsname>sad:cc:slu.actuator24V_health</epicsname>
+  </HealthChannel>
   <HealthChannel>
     <!--giapiname>ghostSlitUnitCC:status.alarm_health.health</giapiname-->
     <giapiname>sad:cc:slu.alarm_health</giapiname>
@@ -4026,7 +4156,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.result.result</giapiname-->
     <giapiname>sad:cc:slu.result</giapiname>
     <epicsname>sad:cc:slu.result</epicsname>
     <type>INT</type>
@@ -4143,7 +4273,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.cfw.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.cfw.result.result</giapiname-->
     <giapiname>sad:cc:slu:cfw.result</giapiname>
     <epicsname>sad:cc:slu:cfw.result</epicsname>
     <type>INT</type>
@@ -4267,7 +4397,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.cfw.amp.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.cfw.amp.result.result</giapiname-->
     <giapiname>sad:cc:slu:cfwAmp.result</giapiname>
     <epicsname>sad:cc:slu:cfwAmp.result</epicsname>
     <type>INT</type>
@@ -4405,7 +4535,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.fa1.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.fa1.result.result</giapiname-->
     <giapiname>sad:cc:slu:fa1.result</giapiname>
     <epicsname>sad:cc:slu:fa1.result</epicsname>
     <type>INT</type>
@@ -4529,7 +4659,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.fa1.amp.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.fa1.amp.result.result</giapiname-->
     <giapiname>sad:cc:slu:fa1Amp.result</giapiname>
     <epicsname>sad:cc:slu:fa1Amp.result</epicsname>
     <type>INT</type>
@@ -4611,7 +4741,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.fa2.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.fa2.result.result</giapiname-->
     <giapiname>sad:cc:slu:fa2.result</giapiname>
     <epicsname>sad:cc:slu:fa2.result</epicsname>
     <type>INT</type>
@@ -4735,7 +4865,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.fa2.amp.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.fa2.amp.result.result</giapiname-->
     <giapiname>sad:cc:slu:fa2Amp.result</giapiname>
     <epicsname>sad:cc:slu:fa2Amp.result</epicsname>
     <type>INT</type>
@@ -4833,7 +4963,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ins_io.hclPowerCtl.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ins_io.hclPowerCtl.result.result</giapiname-->
     <giapiname>sad:cc:slu:hclPowerCtl.result</giapiname>
     <epicsname>sad:cc:slu:hclPowerCtl.result</epicsname>
     <type>INT</type>
@@ -4866,7 +4996,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ici_io.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.result.result</giapiname-->
     <giapiname>sad:cc:slu:ici.result</giapiname>
     <epicsname>sad:cc:slu:ici.result</epicsname>
     <type>INT</type>
@@ -4899,7 +5029,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ins_io.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ins_io.result.result</giapiname-->
     <giapiname>sad:cc:slu:ins.result</giapiname>
     <epicsname>sad:cc:slu:ins.result</epicsname>
     <type>INT</type>
@@ -4927,7 +5057,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ici_io.instrumentRunning.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.instrumentRunning.result.result</giapiname-->
     <giapiname>sad:cc:slu:instrumentRunning.result</giapiname>
     <epicsname>sad:cc:slu:instrumentRunning.result</epicsname>
     <type>INT</type>
@@ -5002,7 +5132,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.smp.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.smp.result.result</giapiname-->
     <giapiname>sad:cc:slu:smp.result</giapiname>
     <epicsname>sad:cc:slu:smp.result</epicsname>
     <type>INT</type>
@@ -5126,7 +5256,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.smp.amp.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.smp.amp.result.result</giapiname-->
     <giapiname>sad:cc:slu:smpAmp.result</giapiname>
     <epicsname>sad:cc:slu:smpAmp.result</epicsname>
     <type>INT</type>
@@ -5175,7 +5305,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ici_io.softwareEmergencyStop.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.softwareEmergencyStop.result.result</giapiname-->
     <giapiname>sad:cc:slu:softwareEmergencyStop.result</giapiname>
     <epicsname>sad:cc:slu:softwareEmergencyStop.result</epicsname>
     <type>INT</type>
@@ -5231,7 +5361,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ici_io.watchdogTimeoutEnableDisable.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.watchdogTimeoutEnableDisable.result.result</giapiname-->
     <giapiname>sad:cc:slu:watchdogTimeoutEnableDisable.result</giapiname>
     <epicsname>sad:cc:slu:watchdogTimeoutEnableDisable.result</epicsname>
     <type>INT</type>
@@ -5252,7 +5382,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSlitUnitCC:status.ici_io.watchdogTimerTrigger.result</giapiname-->
+    <!--giapiname>ghostSlitUnitCC:status.ici_io.watchdogTimerTrigger.result.result</giapiname-->
     <giapiname>sad:cc:slu:watchdogTimerTrigger.result</giapiname>
     <epicsname>sad:cc:slu:watchdogTimerTrigger.result</epicsname>
     <type>INT</type>
@@ -5272,7 +5402,6 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </AlarmChannel>
-
   <!-- From JSON file cicada_config/ghostSpectrographCC_Slave.json-->
   <HealthChannel>
     <!--giapiname>ghostSpectrographCC:status.alarm_health.health</giapiname-->
@@ -5306,7 +5435,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.result.result</giapiname-->
     <giapiname>sad:cc:spe.result</giapiname>
     <epicsname>sad:cc:spe.result</epicsname>
     <type>INT</type>
@@ -5367,6 +5496,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostSpectrographCC:status.bFocus.infocus</giapiname-->
+    <giapiname>sad:cc:spe:bFocus.infocus</giapiname>
+    <epicsname>sad:cc:spe:bFocus.infocus</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostSpectrographCC:status.bFocus.position</giapiname-->
     <giapiname>sad:cc:spe:bFocus.position</giapiname>
     <epicsname>sad:cc:spe:bFocus.position</epicsname>
@@ -5374,7 +5510,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bFocus.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bFocus.result.result</giapiname-->
     <giapiname>sad:cc:spe:bFocus.result</giapiname>
     <epicsname>sad:cc:spe:bFocus.result</epicsname>
     <type>INT</type>
@@ -5457,6 +5593,18 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.bFocus.amp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:bFocusAmp.health</giapiname>
+    <epicsname>sad:cc:spe:bFocusAmp.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSpectrographCC:status.bFocus.amp.health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:spe:bFocusAmp.health_msg</giapiname>
+    <epicsname>sad:cc:spe:bFocusAmp.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostSpectrographCC:status.bFocus.amp.home.enc</giapiname-->
     <giapiname>sad:cc:spe:bFocusAmp.home_enc</giapiname>
@@ -5500,7 +5648,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bFocus.amp.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bFocus.amp.result.result</giapiname-->
     <giapiname>sad:cc:spe:bFocusAmp.result</giapiname>
     <epicsname>sad:cc:spe:bFocusAmp.result</epicsname>
     <type>INT</type>
@@ -5560,20 +5708,27 @@ Warning: This is a generated file - take care if editing by hand
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
+  <AlarmChannel>
+    <!--giapiname>ghostSpectrographCC:status.bLakeshore336.heater.value</giapiname-->
+    <giapiname>sad:cc:spe:bLakeshore336.heater</giapiname>
+    <epicsname>sad:cc:spe:bLakeshore336.heater</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </AlarmChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bLakeshore336.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bLakeshore336.result.result</giapiname-->
     <giapiname>sad:cc:spe:bLakeshore336.result</giapiname>
     <epicsname>sad:cc:spe:bLakeshore336.result</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-  <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bLakeshore336.setpoint</giapiname-->
+  <AlarmChannel>
+    <!--giapiname>ghostSpectrographCC:status.bLakeshore336.setpoint.value</giapiname-->
     <giapiname>sad:cc:spe:bLakeshore336.setPoint</giapiname>
     <epicsname>sad:cc:spe:bLakeshore336.setPoint</epicsname>
     <type>DOUBLE</type>
     <initial>0.0</initial>
-  </SimpleChannel>
+  </AlarmChannel>
   <SimpleChannel>
     <!--giapiname>ghostSpectrographCC:status.bLakeshore336.simulation</giapiname-->
     <giapiname>sad:cc:spe:bLakeshore336.simulation</giapiname>
@@ -5624,7 +5779,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bShutter.bladeA_Status.errorInterlock</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bShutter.bladeA_Status.errorInterlocked</giapiname-->
     <giapiname>sad:cc:spe:bShutter.bladeAerrorInterlock</giapiname>
     <epicsname>sad:cc:spe:bShutter.bladeAerrorInterlock</epicsname>
     <type>INT</type>
@@ -5701,7 +5856,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bShutter.bladeB_Status.errorInterlock</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bShutter.bladeB_Status.errorInterlocked</giapiname-->
     <giapiname>sad:cc:spe:bShutter.bladeBerrorInterlock</giapiname>
     <epicsname>sad:cc:spe:bShutter.bladeBerrorInterlock</epicsname>
     <type>INT</type>
@@ -5762,7 +5917,14 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bShutter.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bShutter.open</giapiname-->
+    <giapiname>sad:cc:spe:bShutter.open</giapiname>
+    <epicsname>sad:cc:spe:bShutter.open</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSpectrographCC:status.bShutter.result.result</giapiname-->
     <giapiname>sad:cc:spe:bShutter.result</giapiname>
     <epicsname>sad:cc:spe:bShutter.result</epicsname>
     <type>INT</type>
@@ -5795,7 +5957,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.bVacuum.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.bVacuum.result.result</giapiname-->
     <giapiname>sad:cc:spe:bVacuum.result</giapiname>
     <epicsname>sad:cc:spe:bVacuum.result</epicsname>
     <type>INT</type>
@@ -6010,7 +6172,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.ici_io.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.ici_io.result.result</giapiname-->
     <giapiname>sad:cc:spe:ici.result</giapiname>
     <epicsname>sad:cc:spe:ici.result</epicsname>
     <type>INT</type>
@@ -6052,7 +6214,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.ici_io.instrumentRunning.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.ici_io.instrumentRunning.result.result</giapiname-->
     <giapiname>sad:cc:spe:instrumentRunning.result</giapiname>
     <epicsname>sad:cc:spe:instrumentRunning.result</epicsname>
     <type>INT</type>
@@ -6092,7 +6254,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.lakeshore224.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.lakeshore224.result.result</giapiname-->
     <giapiname>sad:cc:spe:lakeshore224.result</giapiname>
     <epicsname>sad:cc:spe:lakeshore224.result</epicsname>
     <type>INT</type>
@@ -6160,7 +6322,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[0].result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[0].result.result</giapiname-->
     <giapiname>sad:cc:spe:meerstetter1.result</giapiname>
     <epicsname>sad:cc:spe:meerstetter1.result</epicsname>
     <type>INT</type>
@@ -6255,6 +6417,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[9].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter10:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter10:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[9].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter10:objectTemp.value</giapiname>
@@ -6337,6 +6504,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[10].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter11:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter11:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[10].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter11:objectTemp.value</giapiname>
@@ -6412,6 +6584,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[11].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter12:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter12:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[11].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter12:objectTemp.value</giapiname>
@@ -6487,6 +6664,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[12].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter13:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter13:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[12].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter13:objectTemp.value</giapiname>
@@ -6562,6 +6744,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[13].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter14:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter14:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[13].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter14:objectTemp.value</giapiname>
@@ -6637,6 +6824,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[14].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter15:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter15:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[14].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter15:objectTemp.value</giapiname>
@@ -6712,6 +6904,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[15].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter16:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter16:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[15].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter16:objectTemp.value</giapiname>
@@ -6787,6 +6984,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[16].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter17:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter17:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[16].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter17:objectTemp.value</giapiname>
@@ -6862,6 +7064,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[17].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter18:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter18:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[17].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter18:objectTemp.value</giapiname>
@@ -6937,6 +7144,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[18].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter19:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter19:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[18].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter19:objectTemp.value</giapiname>
@@ -6944,6 +7156,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>DOUBLE</type>
     <initial>0.0</initial>
   </AlarmChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[0].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter1:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter1:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[0].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter1:objectTemp.value</giapiname>
@@ -7087,6 +7304,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[19].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter20:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter20:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[19].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter20:objectTemp.value</giapiname>
@@ -7162,6 +7384,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[20].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter21:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter21:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[20].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter21:objectTemp.value</giapiname>
@@ -7237,6 +7464,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[21].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter22:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter22:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[21].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter22:objectTemp.value</giapiname>
@@ -7312,6 +7544,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[22].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter23:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter23:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[22].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter23:objectTemp.value</giapiname>
@@ -7387,6 +7624,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[23].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter24:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter24:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[23].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter24:objectTemp.value</giapiname>
@@ -7462,6 +7704,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[24].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter25:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter25:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[24].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter25:objectTemp.value</giapiname>
@@ -7469,6 +7716,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>DOUBLE</type>
     <initial>0.0</initial>
   </AlarmChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[1].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter2:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter2:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[1].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter2:objectTemp.value</giapiname>
@@ -7544,6 +7796,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[2].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter3:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter3:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[2].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter3:objectTemp.value</giapiname>
@@ -7619,6 +7876,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[3].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter4:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter4:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[3].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter4:objectTemp.value</giapiname>
@@ -7694,6 +7956,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[4].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter5:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter5:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[4].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter5:objectTemp.value</giapiname>
@@ -7769,6 +8036,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[5].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter6:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter6:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[5].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter6:objectTemp.value</giapiname>
@@ -7844,6 +8116,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[6].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter7:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter7:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[6].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter7:objectTemp.value</giapiname>
@@ -7919,6 +8196,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[7].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter8:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter8:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[7].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter8:objectTemp.value</giapiname>
@@ -7994,6 +8276,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[8].objectTemp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:meerstetter9:objectTemp.health</giapiname>
+    <epicsname>sad:cc:spe:meerstetter9:objectTemp.health</epicsname>
+  </HealthChannel>
   <AlarmChannel>
     <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.meerstetter[8].objectTemp.value</giapiname-->
     <giapiname>sad:cc:spe:meerstetter9:objectTemp.value</giapiname>
@@ -8021,7 +8308,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.onewire.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.onewire.result.result</giapiname-->
     <giapiname>sad:cc:spe:onewire.result</giapiname>
     <epicsname>sad:cc:spe:onewire.result</epicsname>
     <type>INT</type>
@@ -8138,6 +8425,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostSpectrographCC:status.rFocus.infocus</giapiname-->
+    <giapiname>sad:cc:spe:rFocus.infocus</giapiname>
+    <epicsname>sad:cc:spe:rFocus.infocus</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostSpectrographCC:status.rFocus.position</giapiname-->
     <giapiname>sad:cc:spe:rFocus.position</giapiname>
     <epicsname>sad:cc:spe:rFocus.position</epicsname>
@@ -8145,7 +8439,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rFocus.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rFocus.result.result</giapiname-->
     <giapiname>sad:cc:spe:rFocus.result</giapiname>
     <epicsname>sad:cc:spe:rFocus.result</epicsname>
     <type>INT</type>
@@ -8228,6 +8522,18 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSpectrographCC:status.rFocus.amp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:spe:rFocusAmp.health</giapiname>
+    <epicsname>sad:cc:spe:rFocusAmp.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSpectrographCC:status.rFocus.amp.health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:spe:rFocusAmp.health_msg</giapiname>
+    <epicsname>sad:cc:spe:rFocusAmp.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostSpectrographCC:status.rFocus.amp.home.enc</giapiname-->
     <giapiname>sad:cc:spe:rFocusAmp.home_enc</giapiname>
@@ -8271,7 +8577,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0.0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rFocus.amp.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rFocus.amp.result.result</giapiname-->
     <giapiname>sad:cc:spe:rFocusAmp.result</giapiname>
     <epicsname>sad:cc:spe:rFocusAmp.result</epicsname>
     <type>INT</type>
@@ -8331,20 +8637,27 @@ Warning: This is a generated file - take care if editing by hand
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
+  <AlarmChannel>
+    <!--giapiname>ghostSpectrographCC:status.rLakeshore336.heater.value</giapiname-->
+    <giapiname>sad:cc:spe:rLakeshore336.heater</giapiname>
+    <epicsname>sad:cc:spe:rLakeshore336.heater</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </AlarmChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rLakeshore336.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rLakeshore336.result.result</giapiname-->
     <giapiname>sad:cc:spe:rLakeshore336.result</giapiname>
     <epicsname>sad:cc:spe:rLakeshore336.result</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-  <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rLakeshore336.setpoint</giapiname-->
+  <AlarmChannel>
+    <!--giapiname>ghostSpectrographCC:status.rLakeshore336.setpoint.value</giapiname-->
     <giapiname>sad:cc:spe:rLakeshore336.setPoint</giapiname>
     <epicsname>sad:cc:spe:rLakeshore336.setPoint</epicsname>
     <type>DOUBLE</type>
     <initial>0.0</initial>
-  </SimpleChannel>
+  </AlarmChannel>
   <SimpleChannel>
     <!--giapiname>ghostSpectrographCC:status.rLakeshore336.simulation</giapiname-->
     <giapiname>sad:cc:spe:rLakeshore336.simulation</giapiname>
@@ -8365,7 +8678,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rPi.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rPi.result.result</giapiname-->
     <giapiname>sad:cc:spe:rPi.result</giapiname>
     <epicsname>sad:cc:spe:rPi.result</epicsname>
     <type>INT</type>
@@ -8449,7 +8762,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rShutter.bladeA_Status.errorInterlock</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rShutter.bladeA_Status.errorInterlocked</giapiname-->
     <giapiname>sad:cc:spe:rShutter.bladeAerrorInterlock</giapiname>
     <epicsname>sad:cc:spe:rShutter.bladeAerrorInterlock</epicsname>
     <type>INT</type>
@@ -8526,7 +8839,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rShutter.bladeB_Status.errorInterlock</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rShutter.bladeB_Status.errorInterlocked</giapiname-->
     <giapiname>sad:cc:spe:rShutter.bladeBerrorInterlock</giapiname>
     <epicsname>sad:cc:spe:rShutter.bladeBerrorInterlock</epicsname>
     <type>INT</type>
@@ -8601,7 +8914,14 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rShutter.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rShutter.open</giapiname-->
+    <giapiname>sad:cc:spe:rShutter.open</giapiname>
+    <epicsname>sad:cc:spe:rShutter.open</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSpectrographCC:status.rShutter.result.result</giapiname-->
     <giapiname>sad:cc:spe:rShutter.result</giapiname>
     <epicsname>sad:cc:spe:rShutter.result</epicsname>
     <type>INT</type>
@@ -8634,7 +8954,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.rVacuum.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.rVacuum.result.result</giapiname-->
     <giapiname>sad:cc:spe:rVacuum.result</giapiname>
     <epicsname>sad:cc:spe:rVacuum.result</epicsname>
     <type>INT</type>
@@ -8760,7 +9080,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.ici_io.softwareEmergencyStop.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.ici_io.softwareEmergencyStop.result.result</giapiname-->
     <giapiname>sad:cc:spe:softwareEmergencyStop.result</giapiname>
     <epicsname>sad:cc:spe:softwareEmergencyStop.result</epicsname>
     <type>INT</type>
@@ -8807,7 +9127,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.thermalEnclosure.result.result</giapiname-->
     <giapiname>sad:cc:spe:thermalEnclosure.result</giapiname>
     <epicsname>sad:cc:spe:thermalEnclosure.result</epicsname>
     <type>INT</type>
@@ -8931,7 +9251,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.thermoRack401.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.thermoRack401.result.result</giapiname-->
     <giapiname>sad:cc:spe:thermoRack401.result</giapiname>
     <epicsname>sad:cc:spe:thermoRack401.result</epicsname>
     <type>INT</type>
@@ -9001,7 +9321,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.ici_io.watchdogTimeoutEnableDisable.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.ici_io.watchdogTimeoutEnableDisable.result.result</giapiname-->
     <giapiname>sad:cc:spe:watchdogTimeoutEnableDisable.result</giapiname>
     <epicsname>sad:cc:spe:watchdogTimeoutEnableDisable.result</epicsname>
     <type>INT</type>
@@ -9022,7 +9342,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.ici_io.watchdogTimerTrigger.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.ici_io.watchdogTimerTrigger.result.result</giapiname-->
     <giapiname>sad:cc:spe:watchdogTimerTrigger.result</giapiname>
     <epicsname>sad:cc:spe:watchdogTimerTrigger.result</epicsname>
     <type>INT</type>
@@ -9055,7 +9375,7 @@ Warning: This is a generated file - take care if editing by hand
     <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
-    <!--giapiname>ghostSpectrographCC:status.waterLeakDetector.result</giapiname-->
+    <!--giapiname>ghostSpectrographCC:status.waterLeakDetector.result.result</giapiname-->
     <giapiname>sad:cc:spe:waterLeakDetector.result</giapiname>
     <epicsname>sad:cc:spe:waterLeakDetector.result</epicsname>
     <type>INT</type>
@@ -9075,7 +9395,340 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-
+  <!-- From JSON file cicada_config/ghostTestUnitCC_Slave.json-->
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:status.alarm_health.health</giapiname-->
+    <giapiname>sad:cc:tst.alarm_health</giapiname>
+    <epicsname>sad:cc:tst.alarm_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.alarm_health.health_msg</giapiname-->
+    <giapiname>sad:cc:tst.alarm_health_msg</giapiname>
+    <epicsname>sad:cc:tst.alarm_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.command_state</giapiname-->
+    <giapiname>sad:cc:tst.command_state</giapiname>
+    <epicsname>sad:cc:tst.command_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:status.health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst.health</giapiname>
+    <epicsname>sad:cc:tst.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst.health_msg</giapiname>
+    <epicsname>sad:cc:tst.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.pva_server_port</giapiname-->
+    <giapiname>sad:cc:tst.pva_server_port</giapiname>
+    <epicsname>sad:cc:tst.pva_server_port</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <AlarmChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.electronicsRackTemp1.scaledValue</giapiname-->
+    <giapiname>sad:cc:tst:electronicsRackTemp1.scaledValue</giapiname>
+    <epicsname>sad:cc:tst:electronicsRackTemp1.scaledValue</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </AlarmChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.electronicsRackTemp1.value</giapiname-->
+    <giapiname>sad:cc:tst:electronicsRackTemp1.value</giapiname>
+    <epicsname>sad:cc:tst:electronicsRackTemp1.value</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <AlarmChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.electronicsRackTemp2.scaledValue</giapiname-->
+    <giapiname>sad:cc:tst:electronicsRackTemp2.scaledValue</giapiname>
+    <epicsname>sad:cc:tst:electronicsRackTemp2.scaledValue</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </AlarmChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.electronicsRackTemp2.value</giapiname-->
+    <giapiname>sad:cc:tst:electronicsRackTemp2.value</giapiname>
+    <epicsname>sad:cc:tst:electronicsRackTemp2.value</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst:ici.health</giapiname>
+    <epicsname>sad:cc:tst:ici.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst:ici.health_msg</giapiname>
+    <epicsname>sad:cc:tst:ici.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.result.result</giapiname-->
+    <giapiname>sad:cc:tst:ici.result</giapiname>
+    <epicsname>sad:cc:tst:ici.result</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.simulation</giapiname-->
+    <giapiname>sad:cc:tst:ici.simulation</giapiname>
+    <epicsname>sad:cc:tst:ici.simulation</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.instrumentEnabled.value</giapiname-->
+    <giapiname>sad:cc:tst:instrumentEnabled.value</giapiname>
+    <epicsname>sad:cc:tst:instrumentEnabled.value</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.instrumentRunning.command_state</giapiname-->
+    <giapiname>sad:cc:tst:instrumentRunning.command_state</giapiname>
+    <epicsname>sad:cc:tst:instrumentRunning.command_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.instrumentRunning.result.result</giapiname-->
+    <giapiname>sad:cc:tst:instrumentRunning.result</giapiname>
+    <epicsname>sad:cc:tst:instrumentRunning.result</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.instrumentRunning.value</giapiname-->
+    <giapiname>sad:cc:tst:instrumentRunning.value</giapiname>
+    <epicsname>sad:cc:tst:instrumentRunning.value</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.instrumentSWRunning.value</giapiname-->
+    <giapiname>sad:cc:tst:instrumentSWRunning.value</giapiname>
+    <epicsname>sad:cc:tst:instrumentSWRunning.value</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.softwareEmergencyStop.command_state</giapiname-->
+    <giapiname>sad:cc:tst:softwareEmergencyStop.command_state</giapiname>
+    <epicsname>sad:cc:tst:softwareEmergencyStop.command_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.ici_io.softwareEmergencyStop.value</giapiname-->
+    <giapiname>sad:cc:tst:softwareEmergencyStop.value</giapiname>
+    <epicsname>sad:cc:tst:softwareEmergencyStop.value</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.command_state</giapiname-->
+    <giapiname>sad:cc:tst:tm.command_state</giapiname>
+    <epicsname>sad:cc:tst:tm.command_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst:tm.health</giapiname>
+    <epicsname>sad:cc:tst:tm.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst:tm.health_msg</giapiname>
+    <epicsname>sad:cc:tst:tm.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.position</giapiname-->
+    <giapiname>sad:cc:tst:tm.position</giapiname>
+    <epicsname>sad:cc:tst:tm.position</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.result.result</giapiname-->
+    <giapiname>sad:cc:tst:tm.result</giapiname>
+    <epicsname>sad:cc:tst:tm.result</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.command_state</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.command_state</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.command_state</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.current</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.current</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.current</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.enabled</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.enabled</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.enabled</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.evStatus</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.evStatus</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.evStatus</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.evStatusStr</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.evStatusStr</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.evStatusStr</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.fault</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.fault</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.fault</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.faultCode</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.faultCode</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.faultCode</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.faultStr</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.faultStr</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.faultStr</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.fwd_limit</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.fwd_limit</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.fwd_limit</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.health_rec.health</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.health</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.health_rec.health_msg</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.health_msg</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.home.enc</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.home_enc</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.home_enc</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.home.user</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.home_user</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.home_user</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.homed</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.homed</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.homed</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.moving</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.moving</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.moving</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.pos.enc</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.pos_enc</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.pos_enc</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.pos.user</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.pos_user</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.pos_user</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.result.result</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.result</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.result</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.flags.rev_limit</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.rev_limit</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.rev_limit</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.simulation</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.simulation</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.simulation</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.temperature</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.temperature</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.temperature</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.vel_enc</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.vel_enc</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.vel_enc</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostTestUnitCC:status.tm.amp.vel_user</giapiname-->
+    <giapiname>sad:cc:tst:tmAmp.vel_user</giapiname>
+    <epicsname>sad:cc:tst:tmAmp.vel_user</epicsname>
+    <type>DOUBLE</type>
+    <initial>0.0</initial>
+  </SimpleChannel>
   <!-- From JSON file cicada_config/ghostRed.json-->
   <SimpleChannel>
     <!--giapiname>ghostRed:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.acq</giapiname-->
@@ -9091,6 +9744,18 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.alarm_health.health</giapiname-->
+    <giapiname>sad:dc:red.alarm_health</giapiname>
+    <epicsname>sad:dc:red.alarm_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.alarm_health.health_msg</giapiname-->
+    <giapiname>sad:dc:red.alarm_health_msg</giapiname>
+    <epicsname>sad:dc:red.alarm_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostRed:Hardware_Status_u.camera_status.rcf</giapiname-->
     <giapiname>sad:dc:red.binx</giapiname>
@@ -9099,9 +9764,23 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.rcfRQ</giapiname-->
+    <giapiname>sad:dc:red.binxRQ</giapiname>
+    <epicsname>sad:dc:red.binxRQ</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostRed:Hardware_Status_u.camera_status.ccf</giapiname-->
     <giapiname>sad:dc:red.biny</giapiname>
     <epicsname>sad:dc:red.biny</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.ccfRQ</giapiname-->
+    <giapiname>sad:dc:red.binyRQ</giapiname>
+    <epicsname>sad:dc:red.binyRQ</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9114,6 +9793,18 @@ Warning: This is a generated file - take care if editing by hand
     <!--giapiname>ghostRed:Hardware_Status_u.camera_status.health_rec.health_msg</giapiname-->
     <giapiname>sad:dc:red.camera_health_msg</giapiname>
     <epicsname>sad:dc:red.camera_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health</giapiname-->
+    <giapiname>sad:dc:red.ccd_health</giapiname>
+    <epicsname>sad:dc:red.ccd_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health_msg</giapiname-->
+    <giapiname>sad:dc:red.ccd_health_msg</giapiname>
+    <epicsname>sad:dc:red.ccd_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
@@ -9149,6 +9840,30 @@ Warning: This is a generated file - take care if editing by hand
     <epicsname>sad:dc:red.control_state</epicsname>
     <type>INT</type>
     <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.dummy.health_rec.health</giapiname-->
+    <giapiname>sad:dc:red.controller_health</giapiname>
+    <epicsname>sad:dc:red.controller_health</epicsname>
+  </HealthChannel>
+  <HealthChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.health_rec.health</giapiname-->
+    <giapiname>sad:dc:red.controller_health</giapiname>
+    <epicsname>sad:dc:red.controller_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.dummy.health_rec.health_msg</giapiname-->
+    <giapiname>sad:dc:red.controller_health_msg</giapiname>
+    <epicsname>sad:dc:red.controller_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.health_rec.health_msg</giapiname-->
+    <giapiname>sad:dc:red.controller_health_msg</giapiname>
+    <epicsname>sad:dc:red.controller_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostRed:Hardware_Status_u.camera_status.dark_time</giapiname-->
@@ -9233,9 +9948,37 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.controller_idling</giapiname-->
+    <giapiname>sad:dc:red.idling</giapiname>
+    <epicsname>sad:dc:red.idling</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_initialised</giapiname-->
+    <giapiname>sad:dc:red.initialised</giapiname>
+    <epicsname>sad:dc:red.initialised</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostRed:iteration</giapiname-->
     <giapiname>sad:dc:red.iteration</giapiname>
     <epicsname>sad:dc:red.iteration</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.last_header</giapiname-->
+    <giapiname>sad:dc:red.last_header</giapiname>
+    <epicsname>sad:dc:red.last_header</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.last_reply</giapiname-->
+    <giapiname>sad:dc:red.last_reply</giapiname>
+    <epicsname>sad:dc:red.last_reply</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9250,6 +9993,13 @@ Warning: This is a generated file - take care if editing by hand
     <epicsname>sad:dc:red.part_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.controller_pon</giapiname-->
+    <giapiname>sad:dc:red.pon</giapiname>
+    <epicsname>sad:dc:red.pon</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostRed:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.prep</giapiname-->
@@ -9287,6 +10037,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.read_modeRQ</giapiname-->
+    <giapiname>sad:dc:red.read_modeRQ</giapiname>
+    <epicsname>sad:dc:red.read_modeRQ</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostRed:readout_target</giapiname-->
     <giapiname>sad:dc:red.readout_target</giapiname>
     <epicsname>sad:dc:red.readout_target</epicsname>
@@ -9304,6 +10061,13 @@ Warning: This is a generated file - take care if editing by hand
     <!--giapiname>ghostRed:repeat</giapiname-->
     <giapiname>sad:dc:red.repeat</giapiname>
     <epicsname>sad:dc:red.repeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.reply_status</giapiname-->
+    <giapiname>sad:dc:red.reply_status</giapiname>
+    <epicsname>sad:dc:red.reply_status</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9362,6 +10126,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostRed:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.controller_swv</giapiname-->
+    <giapiname>sad:dc:red.swv</giapiname>
+    <epicsname>sad:dc:red.swv</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostRed:target</giapiname-->
     <giapiname>sad:dc:red.target</giapiname>
     <epicsname>sad:dc:red.target</epicsname>
@@ -9394,7 +10165,6 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostBlue.json-->
   <SimpleChannel>
     <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.acq</giapiname-->
@@ -9410,6 +10180,18 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.alarm_health.health</giapiname-->
+    <giapiname>sad:dc:blue.alarm_health</giapiname>
+    <epicsname>sad:dc:blue.alarm_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.alarm_health.health_msg</giapiname-->
+    <giapiname>sad:dc:blue.alarm_health_msg</giapiname>
+    <epicsname>sad:dc:blue.alarm_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.rcf</giapiname-->
     <giapiname>sad:dc:blue.binx</giapiname>
@@ -9418,9 +10200,23 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.rcfRQ</giapiname-->
+    <giapiname>sad:dc:blue.binxRQ</giapiname>
+    <epicsname>sad:dc:blue.binxRQ</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.ccf</giapiname-->
     <giapiname>sad:dc:blue.biny</giapiname>
     <epicsname>sad:dc:blue.biny</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.ccfRQ</giapiname-->
+    <giapiname>sad:dc:blue.binyRQ</giapiname>
+    <epicsname>sad:dc:blue.binyRQ</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9433,6 +10229,18 @@ Warning: This is a generated file - take care if editing by hand
     <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.health_rec.health_msg</giapiname-->
     <giapiname>sad:dc:blue.camera_health_msg</giapiname>
     <epicsname>sad:dc:blue.camera_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health</giapiname-->
+    <giapiname>sad:dc:blue.ccd_health</giapiname>
+    <epicsname>sad:dc:blue.ccd_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health_msg</giapiname-->
+    <giapiname>sad:dc:blue.ccd_health_msg</giapiname>
+    <epicsname>sad:dc:blue.ccd_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
@@ -9469,6 +10277,16 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.dummy.health_rec.health</giapiname-->
+    <giapiname>sad:dc:blue.controller_health</giapiname>
+    <epicsname>sad:dc:blue.controller_health</epicsname>
+  </HealthChannel>
+  <HealthChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.health_rec.health</giapiname-->
+    <giapiname>sad:dc:blue.controller_health</giapiname>
+    <epicsname>sad:dc:blue.controller_health</epicsname>
+  </HealthChannel>
   <SimpleChannel>
     <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.dark_time</giapiname-->
     <giapiname>sad:dc:blue.dark_time</giapiname>
@@ -9552,9 +10370,37 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.controller_idling</giapiname-->
+    <giapiname>sad:dc:blue.idling</giapiname>
+    <epicsname>sad:dc:blue.idling</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_initialised</giapiname-->
+    <giapiname>sad:dc:blue.initialised</giapiname>
+    <epicsname>sad:dc:blue.initialised</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostBlue:iteration</giapiname-->
     <giapiname>sad:dc:blue.iteration</giapiname>
     <epicsname>sad:dc:blue.iteration</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.last_header</giapiname-->
+    <giapiname>sad:dc:blue.last_header</giapiname>
+    <epicsname>sad:dc:blue.last_header</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.last_reply</giapiname-->
+    <giapiname>sad:dc:blue.last_reply</giapiname>
+    <epicsname>sad:dc:blue.last_reply</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9569,6 +10415,13 @@ Warning: This is a generated file - take care if editing by hand
     <epicsname>sad:dc:blue.part_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.controller_pon</giapiname-->
+    <giapiname>sad:dc:blue.pon</giapiname>
+    <epicsname>sad:dc:blue.pon</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.prep</giapiname-->
@@ -9606,6 +10459,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.read_modeRQ</giapiname-->
+    <giapiname>sad:dc:blue.read_modeRQ</giapiname>
+    <epicsname>sad:dc:blue.read_modeRQ</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostBlue:readout_target</giapiname-->
     <giapiname>sad:dc:blue.readout_target</giapiname>
     <epicsname>sad:dc:blue.readout_target</epicsname>
@@ -9623,6 +10483,13 @@ Warning: This is a generated file - take care if editing by hand
     <!--giapiname>ghostBlue:repeat</giapiname-->
     <giapiname>sad:dc:blue.repeat</giapiname>
     <epicsname>sad:dc:blue.repeat</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.reply_status</giapiname-->
+    <giapiname>sad:dc:blue.reply_status</giapiname>
+    <epicsname>sad:dc:blue.reply_status</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9681,6 +10548,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostBlue:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.sdsu.controller_swv</giapiname-->
+    <giapiname>sad:dc:blue.swv</giapiname>
+    <epicsname>sad:dc:blue.swv</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostBlue:target</giapiname-->
     <giapiname>sad:dc:blue.target</giapiname>
     <epicsname>sad:dc:blue.target</epicsname>
@@ -9713,7 +10587,6 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostSlitViewer.json-->
   <SimpleChannel>
     <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.acq</giapiname-->
@@ -9729,6 +10602,18 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.alarm_health.health</giapiname-->
+    <giapiname>sad:dc:sv.alarm_health</giapiname>
+    <epicsname>sad:dc:sv.alarm_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.alarm_health.health_msg</giapiname-->
+    <giapiname>sad:dc:sv.alarm_health_msg</giapiname>
+    <epicsname>sad:dc:sv.alarm_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.rcf</giapiname-->
     <giapiname>sad:dc:sv.binx</giapiname>
@@ -9737,9 +10622,23 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.rcfRQ</giapiname-->
+    <giapiname>sad:dc:sv.binxRQ</giapiname>
+    <epicsname>sad:dc:sv.binxRQ</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.ccf</giapiname-->
     <giapiname>sad:dc:sv.biny</giapiname>
     <epicsname>sad:dc:sv.biny</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.ccfRQ</giapiname-->
+    <giapiname>sad:dc:sv.binyRQ</giapiname>
+    <epicsname>sad:dc:sv.binyRQ</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -9752,6 +10651,18 @@ Warning: This is a generated file - take care if editing by hand
     <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.health_rec.health_msg</giapiname-->
     <giapiname>sad:dc:sv.camera_health_msg</giapiname>
     <epicsname>sad:dc:sv.camera_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health</giapiname-->
+    <giapiname>sad:dc:sv.ccd_health</giapiname>
+    <epicsname>sad:dc:sv.ccd_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health_msg</giapiname-->
+    <giapiname>sad:dc:sv.ccd_health_msg</giapiname>
+    <epicsname>sad:dc:sv.ccd_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
@@ -9788,6 +10699,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.avt.health_rec.health</giapiname-->
+    <giapiname>sad:dc:sv.controller_health</giapiname>
+    <epicsname>sad:dc:sv.controller_health</epicsname>
+  </HealthChannel>
   <SimpleChannel>
     <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.dark_time</giapiname-->
     <giapiname>sad:dc:sv.dark_time</giapiname>
@@ -9990,6 +10906,13 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostSlitViewer:Hardware_Status_u.camera_status.controller_initialised</giapiname-->
+    <giapiname>sad:dc:sv.initialised</giapiname>
+    <epicsname>sad:dc:sv.initialised</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostSlitViewer:iteration</giapiname-->
     <giapiname>sad:dc:sv.iteration</giapiname>
     <epicsname>sad:dc:sv.iteration</epicsname>
@@ -10158,7 +11081,6 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
-
   <!-- From JSON file cicada_config/ghostGuider.json-->
   <SimpleChannel>
     <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.acq</giapiname-->
@@ -10180,6 +11102,18 @@ Warning: This is a generated file - take care if editing by hand
     <epicsname>sad:dc:ag.ag_server_port</epicsname>
     <type>INT</type>
     <initial>0</initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.alarm_health.health</giapiname-->
+    <giapiname>sad:dc:ag.alarm_health</giapiname>
+    <epicsname>sad:dc:ag.alarm_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.alarm_health.health_msg</giapiname-->
+    <giapiname>sad:dc:ag.alarm_health_msg</giapiname>
+    <epicsname>sad:dc:ag.alarm_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
   </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.specific.ghost.Ghost_Camera_Status_u.ag.background_taken</giapiname-->
@@ -10203,9 +11137,23 @@ Warning: This is a generated file - take care if editing by hand
     <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.rcfRQ</giapiname-->
+    <giapiname>sad:dc:ag.binxRQ</giapiname>
+    <epicsname>sad:dc:ag.binxRQ</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
     <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.ccf</giapiname-->
     <giapiname>sad:dc:ag.biny</giapiname>
     <epicsname>sad:dc:ag.biny</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.ccfRQ</giapiname-->
+    <giapiname>sad:dc:ag.binyRQ</giapiname>
+    <epicsname>sad:dc:ag.binyRQ</epicsname>
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
@@ -10218,6 +11166,18 @@ Warning: This is a generated file - take care if editing by hand
     <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.health_rec.health_msg</giapiname-->
     <giapiname>sad:dc:ag.camera_health_msg</giapiname>
     <epicsname>sad:dc:ag.camera_health_msg</epicsname>
+    <type>STRING</type>
+    <initial></initial>
+  </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health</giapiname-->
+    <giapiname>sad:dc:ag.ccd_health</giapiname>
+    <epicsname>sad:dc:ag.ccd_health</epicsname>
+  </HealthChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.op_status.Camera_Op_Status_u.ccd.health_rec.health_msg</giapiname-->
+    <giapiname>sad:dc:ag.ccd_health_msg</giapiname>
+    <epicsname>sad:dc:ag.ccd_health_msg</epicsname>
     <type>STRING</type>
     <initial></initial>
   </SimpleChannel>
@@ -10254,6 +11214,11 @@ Warning: This is a generated file - take care if editing by hand
     <type>INT</type>
     <initial>0</initial>
   </SimpleChannel>
+  <HealthChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.controller_status.Controller_Status_u.avt.health_rec.health</giapiname-->
+    <giapiname>sad:dc:ag.controller_health</giapiname>
+    <epicsname>sad:dc:ag.controller_health</epicsname>
+  </HealthChannel>
   <SimpleChannel>
     <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.dark_time</giapiname-->
     <giapiname>sad:dc:ag.dark_time</giapiname>
@@ -10566,6 +11531,13 @@ Warning: This is a generated file - take care if editing by hand
     <epicsname>sad:dc:ag.ifu2_threshold</epicsname>
     <type>DOUBLE</type>
     <initial>0.0</initial>
+  </SimpleChannel>
+  <SimpleChannel>
+    <!--giapiname>ghostGuider:Hardware_Status_u.camera_status.controller_initialised</giapiname-->
+    <giapiname>sad:dc:ag.initialised</giapiname>
+    <epicsname>sad:dc:ag.initialised</epicsname>
+    <type>INT</type>
+    <initial>0</initial>
   </SimpleChannel>
   <SimpleChannel>
     <!--giapiname>ghostGuider:iteration</giapiname-->
