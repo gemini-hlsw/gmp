@@ -12,8 +12,8 @@ At the top level run
    mvn install
 
 This command will go through all the modules and install them in the local
-Maven repository (at ~/.m2/repository). The install process will download
-any required dependencies, compile the code (under src/main/java), compile
+maven repository (at ~/.m2/repository). The install process will download
+any required dependencies, compile the code (under src/main/java), compile 
 and run the tests (under src/test/java), and package the jar file with
 the necessary OSGi headers.
 
@@ -30,7 +30,7 @@ in a single module
 4. How to skip the tests
 ------------------------
 
-During development we often don't want to run the tests all the time
+During development we often don't want to run the tests all the time 
 You can skip them by issuing:
    mvn -Dmaven.test.skip=true install
 
@@ -38,7 +38,7 @@ This can be done at the top level or module level
 
 5. Launching gmp-server
 -----------------------
-To launch gmp-server you can use the Maven pax plugin issuing:
+To launch gmp-server you can use the maven pax plugin issuing:
    mvn pax:provision
 
 This will launch felix with all the required modules
@@ -77,7 +77,7 @@ Idea works best by just importing the pom.xml as a project file definition
 8. Generate application
 -----------------------
 Applications are just other modules that define a list of bundles to
-deploy and configuration. They use the assembly plugin and will produce
+deploy and configuration. They use the assembly plugin and will produce 
 a zip file with all the required bundles and configurations.
 
 As an example go to distribution and check the pom file which defines a generic gmp-server
@@ -111,7 +111,7 @@ The produced tarball and rpm will then include the documentation
 11. Instance specific distribution files
 ----------------------------------------
 The GMP can be built using configuration specific to different instruments.
-This is done using Maven profiles, defined in the distribution module.
+This is done using maven profiles, defined in the distribution module.
 
 profiles have names like gpi, graces, etc which correspond to directories at
 instances/<profile-name>/src/main/config
