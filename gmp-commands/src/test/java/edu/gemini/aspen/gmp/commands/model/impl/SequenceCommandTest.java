@@ -171,7 +171,7 @@ public class SequenceCommandTest {
                 completionListener
         );
 
-        //so the answer should be the final one. 
+        //so the answer should be the final one.
         assertEquals(r1, response);
     }
 

@@ -42,39 +42,43 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
         if (config.isEmpty()) {
             return HandlerResponse.createError(ERROR_MSG);
         } else {
+            List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
+            LOG.fine("Execute action ID " + action.getId() + " got " + applyHandlers.size() + 
+                    " Apply Handlers (" + applyHandlers + ")");         
 
-            int expectedResponses = countExpectedResponses(config, ConfigPath.EMPTY_PATH);
-            LOG.fine("Action " + action + " expects " + expectedResponses + " responses");
+            int expectedResponses = countExpectedResponses(config, ConfigPath.EMPTY_PATH, applyHandlers);
+            LOG.fine("Action action ID " + action.getId() + " expects " + expectedResponses + " responses");
 
-            if (!canBeFullyHandled(config)) {
-              LOG.severe("Action " + action + " cannot be fully handled, there are missing handlers. return NOANSWER");
+            if (!canBeFullyHandled(config, applyHandlers)) {
+              LOG.severe("Action action ID " + action.getId() + " cannot be fully handled, there are missing handlers. return NOANSWER");
               
               return HandlerResponse.NOANSWER;
             }
             for (int i = 0; i < expectedResponses; i++) {
                 _actionManager.increaseRequiredResponses(action);
             }
-
-            return getResponse(action, config, ConfigPath.EMPTY_PATH, sender);
+            
+             return getResponse(action, config, ConfigPath.EMPTY_PATH, sender, applyHandlers);
         }
     }
 
-    protected boolean canBeFullyHandled(Configuration config) {
-       return _canBeFullyHandled(false, config, ConfigPath.EMPTY_PATH);
+    protected boolean canBeFullyHandled(Configuration config, List<ConfigPath> applyHandlers) {
+       return _canBeFullyHandled(false, config, ConfigPath.EMPTY_PATH, applyHandlers);
     }
 
-    private boolean _canBeFullyHandled(boolean current, Configuration config, ConfigPath path) {
+    private boolean _canBeFullyHandled(boolean current, Configuration config, ConfigPath path, List<ConfigPath> applyHandlers) {
 
         ConfigPathNavigator navigator = new ConfigPathNavigator(config);
         Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
         boolean ct = current;
 
         if (configPathSet.isEmpty()) {
+            LOG.warning("Could not find an Apply Handler for " + path);
             return false;
         }
 
         //this analyzer will get the result answer from this part of the configuration
-        List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
+        //List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
         if (applyHandlers.isEmpty()) return false;
 
         for (ConfigPath cp : configPathSet) {
@@ -85,28 +89,29 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
                 current = true;
             } else {
                 // If there are no handlers registered go straight to the sub-handlers
-                return _canBeFullyHandled(current, c, cp);
+                return _canBeFullyHandled(current, c, cp, applyHandlers);
             }
         }
         return current;
     }
 
-    protected int countExpectedResponses(Configuration config, ConfigPath path) {
-       return _countExpectedResponses(0, config, path);
+    protected int countExpectedResponses(Configuration config, ConfigPath path, List<ConfigPath> applyHandlers) {
+       return _countExpectedResponses(0, config, path, applyHandlers);
     }
 
-    private int _countExpectedResponses(int counter, Configuration config, ConfigPath path) {
+    private int _countExpectedResponses(int counter, Configuration config, ConfigPath path, List<ConfigPath> applyHandlers) {
 
         ConfigPathNavigator navigator = new ConfigPathNavigator(config);
         Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
         int ct = counter;
 
         if (configPathSet.isEmpty()) {
+            LOG.warning("Could not find an Apply Handler for " + path);
             return 1;
         }
 
         //this analyzer will get the result answer from this part of the configuration
-        List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
+        //List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
 
         for (ConfigPath cp : configPathSet) {
             //get the sub-configuration
@@ -116,7 +121,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
                 ct = ct + 1;
             } else {
                 // If there are no handlers registered go straight to the sub-handlers
-                ct = _countExpectedResponses(ct, c, cp);
+                ct = _countExpectedResponses(ct, c, cp, applyHandlers);
             }
         }
         return ct;
@@ -131,25 +136,28 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
      * @param path   current path level in the configuration
      * @param sender A Map Sender object that will send this message and will
      *               get an answer.
+     * @param applyHandlers List of handlers that have been registered
+     * 
      * @return a HandlerResponse representing the result of sending the
      *         configuration. If there are no handlers for this configuration,
      *         this call will try to decompose the configuration in smaller units
      *         in an attempt to see if it can be handled by other handlers.
      */
     private HandlerResponse getResponse(Action action, Configuration config,
-                                        ConfigPath path, ActionSender sender) {
+                                        ConfigPath path, ActionSender sender,
+                                        List<ConfigPath> applyHandlers) {
 
         ConfigPathNavigator navigator = new ConfigPathNavigator(config);
         Set<ConfigPath> configPathSet = navigator.getChildPaths(path);
 
         if (configPathSet.isEmpty()) {
-            LOG.info("Action " + action + " has empty path set, respond NOANSWER");
+            LOG.info("Action action ID " + action.getId() + " has empty path set, respond NOANSWER");
             return HandlerResponse.NOANSWER;
         }
 
         //this analyzer will get the result answer from this part of the configuration
         HandlerResponseAnalyzer analyzer = new HandlerResponseAnalyzer();
-        List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
+        //List<ConfigPath> applyHandlers = commandHandlers.getApplyHandlers();
 
         for (ConfigPath cp : configPathSet) {
             //get the sub-configuration
@@ -157,7 +165,8 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
 
             HandlerResponse response = null;
             if (applyHandlers.isEmpty() || applyHandlers.contains(cp)) {
-                LOG.info("Attempt to send apply for configuration " + c + " with id " + action.getId() + " and timeout " + action.getTimeout());
+                LOG.info("Attempt to send apply for configuration " + c + " with action ID " + action.getId() + " and timeout " 
+                        + action.getTimeout());
                 ActionMessage am = _actionMessageBuilder.buildActionMessage(action, cp);
                 Stopwatch s = Stopwatch.createStarted();
                 response = sender.send(am, action.getTimeout());
@@ -165,14 +174,14 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
 
                 // if the response is COMPLETED remove waiting for a response
                 if (response == HandlerResponse.COMPLETED) {
-                    LOG.info("Action immediately completed: " + action.getId());
+                    LOG.info("Action immediately completed action ID " + action.getId());
                     _actionManager.decreaseRequiredResponses(action);
                 }
 
                 //if there are no handlers, recursively decompose this config in
                 //smaller units if possible, and return the answer.
                 if (response == HandlerResponse.NOANSWER) {
-                    response = getResponse(action, c, cp, sender);
+                    response = getResponse(action, c, cp, sender, applyHandlers);
                 }
 
                 //if the answer is still NOANSWER, return immediately, there is no one
@@ -183,7 +192,7 @@ public class ApplySenderExecutor implements SequenceCommandExecutor {
             } else {
                 LOG.finer("No handler for " + cp + " go to next sub-level..");
                 // If there are no handlers registered go straight to the sub-handlers
-                response = getResponse(action, c, cp, sender);
+                response = getResponse(action, c, cp, sender, applyHandlers);
             }
             analyzer.addResponse(response);
         }

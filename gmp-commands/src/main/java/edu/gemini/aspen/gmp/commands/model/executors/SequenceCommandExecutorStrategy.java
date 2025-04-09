@@ -74,7 +74,7 @@ public class SequenceCommandExecutorStrategy implements SequenceCommandExecutor 
             LOG.warning("Exception publishing command status " + e.getMessage());
         }
         lastAction = action;
-        LOG.info("About to execute action " + action);
+        LOG.info("About to execute action ID " + action.getId());
         return findCommandExecutor(command.getSequenceCommand()).execute(action, sender);
     }
 

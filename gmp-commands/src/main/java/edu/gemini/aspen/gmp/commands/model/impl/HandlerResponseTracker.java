@@ -58,6 +58,14 @@ class HandlerResponseTracker {
         }
 
         /**
+         * Return the number of pending responses
+         * @return 
+         */
+        public int getPendingResponses() {
+          return pendingResponses.get();
+        }
+        
+        /**
          * Returns a summary of the results collected.
          * @return Summary of the results collected or an error response in
          * case the required ammount of responses have not been received.
@@ -118,6 +126,16 @@ class HandlerResponseTracker {
         return responseHolder == null || responseHolder.hasNoPendingResponses();
     }
 
+   /**
+    * Return the number of pending responses
+    *
+    * @return
+    */
+    public int getPendingResponses(Action action) {
+       ResponseHolder responseHolder = _actionResponsesMap.get(action);
+       return responseHolder.getPendingResponses();
+    }
+        
 
     /**
      * Get the response for the given action, if it has been completed
@@ -132,7 +150,7 @@ class HandlerResponseTracker {
         if (responseHolder != null) {
             return responseHolder.getResponse();
         }
-        LOG.warning("We are not tracking progress for action " + action);
+        LOG.warning("We are not tracking progress for action ID " + action.getId());
         return null;
     }
 
