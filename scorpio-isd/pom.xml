@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <relativePath>../poms/compiled/</relativePath>
+        <groupId>edu.gemini.aspen.giapi-osgi.build</groupId>
+        <artifactId>compiled-bundle-settings</artifactId>
+        <version>0.2.7-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <bundle.symbolicName>edu.gemini.isd.scorpio</bundle.symbolicName>
+        <bundle.namespace>edu.gemini.isd</bundle.namespace>
+        <javalin.version>4.6.8</javalin.version>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.gemini.isd</groupId>
+    <artifactId>scorpio-isd</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>Scorpio ISD</name>
+    <description>Scorpio ISD service</description>
+
+    <packaging>bundle</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+            <version>${javalin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.cas</groupId>
+            <artifactId>cas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.jms</groupId>
+            <artifactId>jms-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.epics</groupId>
+            <artifactId>epics-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.gemini.aspen</groupId>
+            <artifactId>giapi-jms-util</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

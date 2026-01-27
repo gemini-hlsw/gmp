@@ -1,0 +1,28 @@
+/*!
+ * \page gmp-pcs-updater GMP PCS Updater
+ *
+ * This bundle receives JMS messages sent to the GMP.PCS_UPDATE_DESTINATION destination.
+ * The bundle expects those messages to contain an array of double values
+ * representing zernikes and publishes them to the corresponding TCS EPICS channels
+ * (namely, instrument:oi:aoZernikes)
+ *
+ * \section gmp-pcs-updater_provides_sec Provided Services
+ * The \ref edu.gemini.aspen.gmp.pcs.model.PcsUpdaterComposite "PcsUpdaterComposite" class provides a service
+ * which is not being used directly by other bundles but is used internally instead. The service listens for JMS messages
+ * and writes them to the corresponding EPICS channels
+ *
+ * \section gmp-pcs-updater_requires_sec Required Services
+ * This bundle requires the \ref edu.gemini.cas.ChannelAccessServer "ChannelAccessServer" OSGI service, provided by the
+ * \ref cas bundle.
+ *
+ * \section gmp-pcs-updater_configuration_sec Configuration
+ * This bundle has its main configuration file in \ref edu.gemini.aspen.gmp.pcs.model.PcsUpdaterComponent-default.cfg
+ *
+ * There, you can set two properties:
+ *
+ * - simulation: if true the bundle will run in simulation mode. The default is true. In this case the zernikes values
+ *               are simply logged to the screen.
+ * - epicsChannel: If not in simulation the channel name where the zernikes values are written to. This corresponds
+ *                 to a double array channel containing zernikes according to the Zemax convention
+ * - gains: List of space separated indexes of gains to be applied to the zernikes coefficients
+ */
