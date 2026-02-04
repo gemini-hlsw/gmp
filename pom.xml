@@ -866,7 +866,7 @@
         <module>gds-config-validator</module>
         <module>integration-tests</module>
         <module>distribution</module>
-    <module>scorpio-isd</module>
+    <module>edu.gemini.isd</module>
     </modules>
 
     <distributionManagement>

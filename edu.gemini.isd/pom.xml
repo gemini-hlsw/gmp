@@ -16,7 +16,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.gemini.isd</groupId>
-    <artifactId>scorpio-isd</artifactId>
+    <artifactId>isd</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>Scorpio ISD</name>

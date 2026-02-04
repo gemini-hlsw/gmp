@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 public class Activator implements BundleActivator {
 
     private static final Logger LOG = Logger.getLogger(Activator.class.getName());
-    private static final String STATUS_CONFIG_RELATIVE_PATH = "services/isdStatus.cfg";
+    private static final String STATUS_CONFIG_RELATIVE_PATH = "services/edu.gemini.isd.statusItemsConfiguration.json";
 
     private Javalin app;
     private ServiceRegistration<StatusHandler> statusHandlerRegistration;
