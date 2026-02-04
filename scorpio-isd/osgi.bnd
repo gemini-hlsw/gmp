@@ -7,8 +7,8 @@ Bundle-SymbolicName: ${bundle.symbolicName}
 Bundle-Version: ${project.version}
 Bundle-Activator: edu.gemini.isd.scorpio.osgi.Activator
 
-Export-Package: edu.gemini.isd.scorpio.osgi.*
-Private-Package: edu.gemini.isd.scorpio.osgi.*
+Export-Package: edu.gemini.isd.scorpio.osgi.*,edu.gemini.isd.scorpio.status.*
+Private-Package: edu.gemini.isd.scorpio.osgi.*,edu.gemini.isd.scorpio.status.*
 
 # Embed all compile/runtime deps so the bundle is self-contained.
 Embed-Dependency: *;scope=compile|runtime
@@ -22,6 +22,7 @@ Import-Package: \
  javax.servlet.http,\
  org.slf4j,\
  org.slf4j.spi,\
- org.slf4j.helpers
+ org.slf4j.helpers,\
+ edu.gemini.aspen.giapi.status
 
 # Include any other package exports/privacy rules below.
