@@ -2,18 +2,17 @@ package edu.gemini.isd.scorpio.status;
 
 import edu.gemini.aspen.giapi.status.StatusHandler;
 import edu.gemini.aspen.giapi.status.StatusItem;
+import edu.gemini.isd.scorpio.models.StatusDTO;
+import edu.gemini.isd.scorpio.models.StatusMapper;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class StatusCacheHandler implements StatusHandler {
 
     private final Set<String> subscribedItems;
-    private final ConcurrentMap<String, String> latestValues = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, StatusDTO> latestValues = new ConcurrentHashMap<>();
 
     public StatusCacheHandler(Set<String> subscribedItems) {
         this.subscribedItems = new LinkedHashSet<>(subscribedItems);
@@ -30,14 +29,19 @@ public class StatusCacheHandler implements StatusHandler {
         if (!subscribedItems.contains(name)) {
             return;
         }
+
+        StatusDTO newStatus = StatusMapper.normalizeItem(item);
         T value = item.getValue();
-        latestValues.put(name, value != null ? value.toString() : null);
+        latestValues.put(name, value != null ? newStatus : null);
     }
 
-    public Map<String, String> snapshot() {
-        Map<String, String> snapshot = new LinkedHashMap<>();
+    public  List<StatusDTO> snapshot() {
+        List<StatusDTO> snapshot = new ArrayList<>();
         for (String name : subscribedItems) {
-            snapshot.put(name, latestValues.get(name));
+            if(latestValues.get(name) == null){
+                continue;
+            }
+            snapshot.add(latestValues.get(name));
         }
         return snapshot;
     }

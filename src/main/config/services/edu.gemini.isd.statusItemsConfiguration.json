@@ -1,10 +1,147 @@
 {
-  "instrumentActive": "gpi",
-  "gpi": {
-    "subsystem": [
-      "gpi:status1", "gpi:status2"
-    ]
+  "instrumentActive": "SCO",
+  "SCO": {
+    "CC": {
+      "cover": {
+        "enabled": {
+          "giapi": "SCO:CC:cover.enabled",
+          "front-end": "cover_enabled"
+        },
+        "cover": {
+          "giapi": "SCO:CC:cover.cover",
+          "front-end": "cover_state"
+        }
+      },
+      "ADC": {
+        "enabled": {
+          "giapi": "SCO:CC:ADC.enabled",
+          "front-end": "adc_enabled"
+        },
+        "corrector": {
+          "giapi": "SCO:CC:ADC.corrector",
+          "front-end": "adc_fov"
+        },
+        "prismControl": {
+          "giapi": "SCO:CC:ADC.prismControl",
+          "front-end": "adc_control"
+        },
+        "diffPrismMotorLifetimeDegrees": {
+          "giapi": "SCO:CC:ADC.diffPrism",
+          "front-end": "adc_pos_diff"
+        },
+        "jointPrismMotorLifetimeDegrees": {
+          "giapi": "SCO:CC:ADC.jointPrism",
+          "front-end": "adc_pos_joint"
+        }
+      },
+      "VPH_JY": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_JY.enabled",
+          "front-end": "vph_jy_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_JY.grism",
+          "front-end": "vph_jy_grism"
+        }
+      },
+      "VPH_HK": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_HK.enabled",
+          "front-end": "vph_hk_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_HK.grism",
+          "front-end": "vph_hk_grism"
+        }
+      },
+      "VPH_gr": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_gr.enabled",
+          "front-end": "vph_gr_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_gr.grism",
+          "front-end": "vph_gr_grism"
+        }
+      },
+      "VPH_zi": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_zi.enabled",
+          "front-end": "vph_zi_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_zi.grism",
+          "front-end": "vph_zi_grism"
+        }
+      }
+    },
+    "DC": {
+      "SVC": {
+        "enabled": {
+          "giapi": "SCO:DC:SVC.enabled",
+          "front-end": "svc_enabled"
+        }
+      },
+      "VIS_gr": {
+        "enabled": {
+          "giapi": "SCO:DC:VIS_gr.enabled",
+          "front-end": "detgr_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:VIS_gr.health",
+          "front-end": "dcgr_health"
+        }
+      },
+      "VIS_zi": {
+        "enabled": {
+          "giapi": "SCO:DC:VIS_zi.enabled",
+          "front-end": "detzi_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:VIS_zi.health",
+          "front-end": "dczi_health"
+        }
+      },
+      "NIR_J": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_J.enabled",
+          "front-end": "detj_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_J.health",
+          "front-end": "dcj_health"
+        }
+      },
+      "NIR_Y": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_Y.enabled",
+          "front-end": "dety_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_Y.health",
+          "front-end": "dcy_health"
+        }
+      },
+      "NIR_H": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_H.enabled",
+          "front-end": "deth_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_H.health",
+          "front-end": "dch_health"
+        }
+      },
+      "NIR_K": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_K.enabled",
+          "front-end": "detk_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_K.health",
+          "front-end": "dck_health"
+        }
+      }
+    }
   }
 }
-
-

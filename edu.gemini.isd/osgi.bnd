@@ -8,7 +8,7 @@ Bundle-Version: ${project.version}
 Bundle-Activator: edu.gemini.isd.scorpio.osgi.Activator
 
 Export-Package: edu.gemini.isd.scorpio.osgi.*,edu.gemini.isd.scorpio.status.*
-Private-Package: edu.gemini.isd.scorpio.osgi.*,edu.gemini.isd.scorpio.status.*
+Private-Package: edu.gemini.isd.scorpio.*
 
 # Embed all compile/runtime deps so the bundle is self-contained.
 Embed-Dependency: *;scope=compile|runtime
