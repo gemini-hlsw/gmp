@@ -1,0 +1,70 @@
+@startuml
+
+Activator-->ConfigurationReader: loads
+Activator-->StatusCacheHandler:instance
+WebsocketController-->StatusCacheHandler:calls
+Activator-->WebsocketController:instance
+StatusCacheHandler-->StatusMapper:calls
+StatusMapper..>StatusDTO
+StatusMapper-->StatusNameDictionary:calls
+ConfigurationReader-->StatusNameDictionary:calls
+
+
+class Activator{
+-statusHandlerRegistration: ServiceRegistration<StatusHandler>
+-statusHandler: StatusCacheHandler
+-websocketController: WebsocketController
++start(BundleContext context)
++stop(BundleContext context)
+}
+
+class WebsocketController{
+-app: Javalin
+-activeSessions: Set<WsContext>
+-scheduler: ScheduledExecutorService
+-dataList: List<StatusDTO>
+-statusHandler: StatusCacheHandler
+
++start(StatusCacheHandler sh): void
++stop(): void
+-sendData(): void
+-processLecture(): void
+}
+
+class StatusCacheHandler{
+-subscribedItems: Set<String>
+-latestValues: List<StatusDTO>
+
++getName(): String
++update(StatusItem<T> item)>: <T>
++snapshot(): List<StatusDTO>
+}
+
+class StatusMapper{
++normalizeItem(StatusItem<T> item): StatusDTO
+}
+
+class ConfigurationReader{
+-LOG: Logger
+-STATUS_CONFIG_RELATIVE_PATH: String
++loadStatusItems(): void
+-getString(): string
+-collectItems(): void
+-addArrayItems(): void
+-addToDictionary(): void
+}
+
+class StatusDTO<T>{
+-id: String
+-value: T
+-timestamp: Timestamp
++setters()
+}
+
+class StatusNameDictionary{
+-dictionary: Map<String, String>
++addToDictionary(String giapi, String translated): void
++translate(String nameToTranslate): String
+}
+
+@enduml
