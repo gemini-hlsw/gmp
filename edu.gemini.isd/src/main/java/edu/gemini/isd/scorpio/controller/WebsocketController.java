@@ -9,39 +9,41 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
+/**
+ * This class instances a Javalin websocket to start the transmission of the Scorpio Status.
+ * To establish constant communication with the client uses an ScheduledExecutorService that transmit data every 1 second.
+ */
 public class WebsocketController {
+    private final Logger LOG = Logger.getLogger(WebsocketController.class.getName());
     private Javalin app;
-    static Set<WsContext> activeSessions = new HashSet<>();
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    static List<StatusDTO> dataList = new ArrayList<>();
+    private final Set<WsContext> activeSessions = new HashSet<>();
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private StatusCacheHandler statusHandler;
 
     public void start(StatusCacheHandler sh){
         statusHandler = sh;
 
         try {
-            app = Javalin.create()
-                    .get("/", ctx -> ctx.result("hello world"))
-                    .start(7000);
+            app = Javalin.create().start(7000);
 
             app.ws("/ws/", ws -> {
                 ws.onConnect(ctx -> {
                     activeSessions.add(ctx);
-                    System.out.println("Connection established! - session: " + ctx.getSessionId());
+                    LOG.info("Connection established! - session: " + ctx.getSessionId());
                     ctx.send("Connection established correctly!");
                 });
 
                 ws.onClose(ctx -> {
                     activeSessions.remove(ctx);
-                    System.out.println("scorpio-isd: Connection closed! - session: " + ctx.getSessionId() + " - reason: " + ctx.reason());
+                    LOG.info("scorpio-isd: Connection closed! - session: " + ctx.getSessionId() + " - reason: " + ctx.reason());
                     ctx.send("Connection closed correctly!");
                 });
 
                 ws.onError(ctx -> {
                     activeSessions.remove(ctx);
-
-                    System.out.println("scorpio-isd: An error occurred with the session " + ctx.getSessionId());
+                    LOG.warning("scorpio-isd: An error occurred with the session " + ctx.getSessionId() + "- error:" + ctx.error());
                 });
             });
 
@@ -49,10 +51,10 @@ public class WebsocketController {
                 try {
                     sendData();
                 } catch (Exception e) {
-                    System.err.println("scorpio-isd: There was an error - " + e.getMessage());
+                    LOG.warning("scorpio-isd: There was an error - " + e.getMessage());
                 }
             }, 0, 1, TimeUnit.SECONDS);
-            System.out.println("scorpio-isd: Javalin started on http://localhost:7000/");
+            System.out.println("scorpio-isd: Javalin-websocket started on ws://localhost:7000/ws");
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         } finally {
@@ -64,9 +66,7 @@ public class WebsocketController {
         if (app != null) {
             app.stop();
         }
-        if (scheduler != null) {
-            scheduler.shutdown();
-        }
+        scheduler.shutdown();
     }
 
     /**
@@ -85,19 +85,19 @@ public class WebsocketController {
                 System.out.println("An error occurred while sending a message to " + c.getSessionId() + " - Reason: " + e.getMessage());
                 throw new RuntimeException(e);
             }
-
         }
     }
 
     /**
-     * Returns a String that contains a JSON text with the lecture of the instrument
+     * This method bring the current instrument status and serializes the lecture
+     * @return String that contains a JSON text with the lecture of the instrument
+     * @throws RuntimeException if an error occurs during the lecture
      */
     private String processLecture(){
         Gson gson = new Gson();
         try{
-            dataList.clear();
-            dataList = statusHandler.snapshot();
-            return gson.toJson(dataList);
+            List<StatusDTO<?>> newLecture = statusHandler.snapshot();
+            return gson.toJson(newLecture);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

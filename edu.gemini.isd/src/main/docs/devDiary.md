@@ -1,35 +1,35 @@
 # Development Diary of Scorpio ISD
 This archive is focused to give an overview of the development of Scorpio ISD
 
-> Please ignore the grammatical problems, I still working on that
+> Please ignore the grammatical problems, I'm still working on that
 
 <img src="https://raw.githubusercontent.com/alejandrovillarroel-dev/images-gmp/refs/heads/main/classDiagram4.png" alt="Class Diagram" width="500" height="700">
 
-### Code Workflow (WIP)
-
-Initially the module is started by the root project, so the Activator uses the method start(), here the ConfigurationReaders brings the suscribed Status Items for Scorpio instrument and populate the dictionary Map from StatusNameDictionary, after that the WebsocketController starts the Javalin websocket and the StatusCacheHandler is instanced to start listening the giapi communications. When the StatusCacheHandler receives Status Items, they are filtered to only pass the Status Items related to Scorpio, when we have a Scorpio Status Item, the Websocket calls the method snapshot from StatusCacheHandler, that returns the StatusItems already mapped calls the static method transformItem and create a StatusDTO replacing the original name by the defined in the StatusNameDictionary  
+### Code Workflow
 
 1. Initialization
     + The system starts the module of Scorpio ISD
     + In the activator class the Configuration Reader is called to bring the Status Items related to Scorpio, StatusCacheHandler is instanced and WebsocketController start the Javalin Websocket.
-   + ConfigurationReader filters by the variable ActiveIntrument to bring only the Scorpio Status Items, the config file have the names provided by giapi and its translation to frontend
-2. Webcoket
-   + Every established connection is saved in a set called ActiveSessions and its iteradted everytime its wanted to transmit data.
-   + Its used an ScheduleExceturoService to send every second the StatusItems contained int the StatusCacheHandler
+   + ConfigurationReader filters by the variable ActiveInstrument to bring only the Scorpio Status Items, the config file have the names provided by giapi and its translation to frontend
+2. Websocket
+   + Every established connection is saved in a set called ActiveSessions and its iterated everytime It's wanted to transmit data.
+   + Its used an ScheduleExecutorService to send every second the StatusItems contained int the StatusCacheHandler
 3. Subscription to Giapi Items
     + The StatusCacheHandler its automatically recognized by giapi and filters all the Status Items received to only work with related ones to Scorpio.
-    +
+    + When StatusCacheHandler receives an update of StatusItems before saving the Object its mapped to DTO.
 4. Mapping process and dictionary
-    + mapping and translations things
+    + When the status method TransformItem from StatusMapper is called, it transfers all the values to its equivalent from a object StatusDTO.
+    + The original name of StatusItem its replaced by its translation saved in the dictionary map
 5. Delivery of Items
-    + Webosocket send the json to te port 7000
-### Technical decisions (WIP)
-The module consider the following points to mantain coinsistency, maintanability and clean code:
-- Single Responsability Principle: To keep the code maintable and independent.
-- 
--DTO: To have good trait to te external objects (Status Item from giapi), it was implemented a DTO object to be independent of external objects and replace the original name with a name used only for the frontend
+    + The websocket receives the StatusItems and parses it into JSON format
+    + When everything else is ready the websocket proceed to send JSON to the designated endpoint (ws://localhost:7000/ws)
 
-> TODO: check if the code follows the SOLID principles
+### Technical decisions (WIP)
+The module consider the following points to maintain consistency, maintainability and clean code:
+- SOLID
+- DTO: To have good trait to te external objects (Status Item from giapi), it was implemented a DTO object to be independent of external objects and replace the original name with a name used only for the frontend
+
+> TODO: check if the code follows the SOLID principles and check the possibility to refactor to a better architecture
 ### Build and run the isd
 Considering that all the gmp modules are already built, you can build and run specifically this module with the following commands
 
@@ -38,6 +38,21 @@ mvn install -Dmaven.test.skip=true -rf :isd
 mvn -Dmaven.test.skip=true  pax:run
 ```
 
+### Solution to possible problems
+Trying to move ScorpioISD and gmp to others machines, occurred some problems, 2 possible solutions are:
+
+1. Define a JAVA_HOME path if the java installer didn't make it
+```bash
+echo 'export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home' >> ~/.bash_profile
+source ~/.bash_profile
+```
+You will need to execute the .bash_profile everytime you want to install and build the project
+```bash
+mvn install -Dmaven.test.skip=true -rf :isd
+mvn -Dmaven.test.skip=true  pax:run
+```
+
+2. Use IntelliJ IDEA instead Visual Studio Code (optional, but recommended)
 ### Module tree
 ```
 edu.gemini.isd/
@@ -66,6 +81,7 @@ edu.gemini.isd/
 This module was developed locally using the following software:
 * Amazon Corretto JDK 8 (Due to problems with OpenJDK for AArch64/ARM architecture)
 * Maven 3.9.12
+* IntelliJ IDEA
 
 > In the case of problems with permissions, you could use the binaries and manually add the paths to the terminal.
 
@@ -159,7 +175,7 @@ Import-Package: \
 ```
 ### How to implement a Status Handler in a module
 You will need to implement the Interface StatusHandler and implement the minimal methods and the connection will be automatic.
-```bnd
+```java
 import edu.gemini.aspen.giapi.status.StatusHandler;
 import edu.gemini.aspen.giapi.status.StatusItem;
 

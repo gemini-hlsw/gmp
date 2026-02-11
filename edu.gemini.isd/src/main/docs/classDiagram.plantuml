@@ -22,7 +22,6 @@ class WebsocketController{
 -app: Javalin
 -activeSessions: Set<WsContext>
 -scheduler: ScheduledExecutorService
--dataList: List<StatusDTO>
 -statusHandler: StatusCacheHandler
 
 +start(StatusCacheHandler sh): void
@@ -41,7 +40,7 @@ class StatusCacheHandler{
 }
 
 class StatusMapper{
-+normalizeItem(StatusItem<T> item): StatusDTO
++transformItem(StatusItem<T> item): StatusDTO
 }
 
 class ConfigurationReader{

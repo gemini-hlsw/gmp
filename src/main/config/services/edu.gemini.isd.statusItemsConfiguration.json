@@ -25,11 +25,11 @@
           "giapi": "SCO:CC:ADC.prismControl",
           "front-end": "adc_control"
         },
-        "diffPrismMotorLifetimeDegrees": {
+        "diff_prism": {
           "giapi": "SCO:CC:ADC.diffPrism",
           "front-end": "adc_pos_diff"
         },
-        "jointPrismMotorLifetimeDegrees": {
+        "joint_prism": {
           "giapi": "SCO:CC:ADC.jointPrism",
           "front-end": "adc_pos_joint"
         }

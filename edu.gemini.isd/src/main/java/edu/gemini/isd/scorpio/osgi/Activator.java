@@ -9,9 +9,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import java.util.Set;
 
-/**
- * BundleActivator that starts Javalin websocket and reads the config file
- */
 public class Activator implements BundleActivator {
     private ServiceRegistration<StatusHandler> statusHandlerRegistration;
     private final WebsocketController websocketController = new WebsocketController();

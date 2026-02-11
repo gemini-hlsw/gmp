@@ -19,6 +19,12 @@ public class ConfigurationReader {
     private static final String STATUS_CONFIG_RELATIVE_PATH = "services/edu.gemini.isd.statusItemsConfiguration.json";
     //private static final String ACTIVE_INSTRUMENT = "SCO";
 
+    /**
+     * This method process the configuration file to a Set string.
+     * First looks for the ActiveInstrument value and search inside the key with the same value of ActiveInstrument and collect every defined item
+     * @param context of the bundle
+     * @return the set of Status Items
+     */
     public static Set<String> loadStatusItems(BundleContext context) {
         String confBase = context.getProperty("conf.base");
         if (confBase == null || confBase.trim().isEmpty()) {
@@ -61,6 +67,11 @@ public class ConfigurationReader {
         return element.getAsString();
     }
 
+    /**
+     * This method iterates through the JSON object from the config file
+     * @param instrumentObj the object of the active instrument
+     * @param items list to add the Status Items
+     */
     private static void collectItems(JsonObject instrumentObj, Set<String> items) {
         // 1. Subsystem: CC, DC, IS...
         for (String subsystemKey : instrumentObj.keySet()) {

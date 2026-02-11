@@ -2,10 +2,13 @@ package edu.gemini.isd.scorpio.models;
 
 import java.util.Date;
 
+/**
+ * DTO for transmit the status to the frontend. Contains a generic value for different types of values.
+ * @param <T>
+ */
 public class StatusDTO<T> {
     private String id;
     private T value;
-    private DataStatus status;
     private Date timestamp;
 
     public StatusDTO() {
@@ -18,10 +21,6 @@ public class StatusDTO<T> {
 
     public void setValue(T value) {
         this.value = value;
-    }
-
-    public void setStatus(DataStatus status) {
-        this.status = status;
     }
 
     public void setTimestamp(Date timestamp) {
