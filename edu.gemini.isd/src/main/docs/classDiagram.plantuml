@@ -1,69 +1,93 @@
 @startuml
 
-Activator-->ConfigurationReader: loads
-Activator-->StatusCacheHandler:instance
-WebsocketController-->StatusCacheHandler:calls
-Activator-->WebsocketController:instance
-StatusCacheHandler-->StatusMapper:calls
-StatusMapper..>StatusDTO
-StatusMapper-->StatusNameDictionary:calls
-ConfigurationReader-->StatusNameDictionary:calls
+title Class Diagram - Scorpio ISD
+!theme plain
 
+skinparam packageBackgroundColor lightblue
+skinparam packageFontSize 16
+skinparam packageLineThickness 2
+skinparam packagepadding 100
 
-class Activator{
--statusHandlerRegistration: ServiceRegistration<StatusHandler>
--statusHandler: StatusCacheHandler
--websocketController: WebsocketController
-+start(BundleContext context)
-+stop(BundleContext context)
+skinparam nodesep 100
+package utils {
+    class StatusNameDictionary{
+    - {static} dictionary: Map<String, String>
+    + {static} addToDictionary(String, String): void
+    + {static} translate(String): String
+    }
 }
 
-class WebsocketController{
--app: Javalin
--activeSessions: Set<WsContext>
--scheduler: ScheduledExecutorService
--statusHandler: StatusCacheHandler
-
-+start(StatusCacheHandler sh): void
-+stop(): void
--sendData(): void
--processLecture(): void
+package config {
+    class ConfigurationReader {
+    + {static} loadStatusItems(): void
+    - {static} collectItems(): void
+    - {static} addArrayItems(): void
+    - {static} sendToDictionary(): void
+    }
 }
 
-class StatusCacheHandler{
--subscribedItems: Set<String>
--latestValues: List<StatusDTO>
-
-+getName(): String
-+update(StatusItem<T> item)>: <T>
-+snapshot(): List<StatusDTO>
+package controller {
+    class WebsocketController {
+    -activeSessions: Set<WsContext>
+    -scheduler: ScheduledExecutorService
+    +start(int port): void
+    +stop(): void
+    -sendData(): void
+    -serializeItems(): String
+    }
 }
 
-class StatusMapper{
-+transformItem(StatusItem<T> item): StatusDTO
+package dto{
+    class StatusMapper{
+    + {static} mapToDTO(StatusItem<T>): StatusDTO
+    }
+
+    class StatusDTO<T>{
+    -id: String
+    -value: T
+    -timestamp: Timestamp
+    }
 }
 
-class ConfigurationReader{
--LOG: Logger
--STATUS_CONFIG_RELATIVE_PATH: String
-+loadStatusItems(): void
--getString(): string
--collectItems(): void
--addArrayItems(): void
--addToDictionary(): void
+package handler {
+    class StatusCacheHandler{
+    -subscribedItems: Set<String>
+    -repository: StatusRepository
+
+    +update(StatusDTO)>: <T>
+    +snapshot(): List<StatusDTO>
+    }
+
 }
 
-class StatusDTO<T>{
--id: String
--value: T
--timestamp: Timestamp
-+setters()
+package repository {
+    class StatusRepository{
+    -repository: Map<String, StatusDTO>
+
+    +save(StatusDTO): void
+    +getAllStatus(): List<StatusDTO>
+    }
+
 }
 
-class StatusNameDictionary{
--dictionary: Map<String, String>
-+addToDictionary(String giapi, String translated): void
-+translate(String nameToTranslate): String
+package osgi {
+    class Activator{
+    -websocketController: WebsocketController
+    -statusRepository: StatusRepository
+    +start(BundleContext)
+    +stop(BundleContext)
+    }
 }
+Activator..>ConfigurationReader: <<uses>>
+Activator-->WebsocketController: <<instances>>
+Activator-->StatusCacheHandler: <<instances>>
+
+WebsocketController.>StatusCacheHandler : <<uses>>
+StatusCacheHandler-->StatusRepository: <<stores>>
+StatusCacheHandler..>StatusMapper: <<uses>>
+
+StatusMapper..>StatusDTO: <<create>>
+StatusMapper..>StatusNameDictionary: <<uses>>
+ConfigurationReader -[hidden]left- StatusCacheHandler
 
 @enduml

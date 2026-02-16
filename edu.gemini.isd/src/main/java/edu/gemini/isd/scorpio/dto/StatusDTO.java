@@ -1,4 +1,4 @@
-package edu.gemini.isd.scorpio.models;
+package edu.gemini.isd.scorpio.dto;
 
 import java.util.Date;
 
@@ -27,4 +27,7 @@ public class StatusDTO<T> {
         this.timestamp = timestamp;
     }
 
+    public String getId() {
+        return id;
+    }
 }

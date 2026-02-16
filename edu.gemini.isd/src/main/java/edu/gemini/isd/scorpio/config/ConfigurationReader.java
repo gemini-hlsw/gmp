@@ -1,9 +1,9 @@
-package edu.gemini.isd.scorpio;
+package edu.gemini.isd.scorpio.config;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import edu.gemini.isd.scorpio.models.StatusNameDictionary;
+import edu.gemini.isd.scorpio.utils.StatusNameDictionary;
 import org.osgi.framework.BundleContext;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +20,7 @@ public class ConfigurationReader {
     //private static final String ACTIVE_INSTRUMENT = "SCO";
 
     /**
-     * This method process the configuration file to a Set string.
+     * This method process the configuration file to a string Set.
      * First looks for the ActiveInstrument value and search inside the key with the same value of ActiveInstrument and collect every defined item
      * @param context of the bundle
      * @return the set of Status Items
@@ -68,7 +68,7 @@ public class ConfigurationReader {
     }
 
     /**
-     * This method iterates through the JSON object from the config file
+     * This method iterates through the JSON object of the instrument
      * @param instrumentObj the object of the active instrument
      * @param items list to add the Status Items
      */
@@ -90,7 +90,7 @@ public class ConfigurationReader {
 
                     // 4. names: giapi & front-end
                     addArrayItems(statusObj, items);
-                    addToDictionary(statusObj);
+                    sendToDictionary(statusObj);
                 }
             }
         }
@@ -103,7 +103,7 @@ public class ConfigurationReader {
         }
     }
 
-    private static void addToDictionary(JsonObject obj) {
+    private static void sendToDictionary(JsonObject obj) {
         JsonElement element = obj.get("giapi");
         JsonElement elementTranslated = obj.get("front-end");
 
