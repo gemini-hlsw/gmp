@@ -73,6 +73,40 @@
           "giapi": "SCO:CC:VPH_zi.grism",
           "front-end": "vph_zi_grism"
         }
+      },
+      "DET": {
+        "detector_j": {
+          "giapi": "sco:cc:det:temp_J.detector",
+          "front-end": "detj_temp"
+        },
+        "detector_y": {
+          "giapi": "sco:cc:det:temp_Y.detector",
+          "front-end": "dety_temp"
+        },
+        "detector_h": {
+          "giapi": "sco:cc:det:temp_H.detector",
+          "front-end": "deth_temp"
+        },
+        "detector_k": {
+          "giapi": "sco:cc:det:temp_K.detector",
+          "front-end": "detk_temp"
+        },
+        "detector_g": {
+          "giapi": "sco:cc:det:temp_gr.detector_g",
+          "front-end": "detg_temp"
+        },
+        "detector_r": {
+          "giapi": "sco:cc:det:temp_gr.detector_r",
+          "front-end": "detr_temp"
+        },
+        "detector_i": {
+          "giapi": "sco:cc:det:temp_iz.detector_i",
+          "front-end": "deti_temp"
+        },
+        "detector_z": {
+          "giapi": "sco:cc:det:temp_iz.detector_z",
+          "front-end": "detz_temp"
+        }
       }
     },
     "DC": {
