@@ -90,6 +90,14 @@
         "health": {
           "giapi": "SCO:DC:VIS_gr.health",
           "front-end": "dcgr_health"
+        },
+        "shutterG": {
+          "giapi": "SCO:DC:VIS_gr.shutterG",
+          "front-end": "shutter_g"
+        },
+        "shutterR": {
+          "giapi": "SCO:DC:VIS_gr.shutterR",
+          "front-end": "shutter_r"
         }
       },
       "VIS_zi": {
@@ -98,8 +106,16 @@
           "front-end": "detzi_enabled"
         },
         "health": {
-          "giapi": "SCO:DC:VIS_zi.health",
+          "giapi": "SCO:DC:zc.health",
           "front-end": "dczi_health"
+        },
+        "shutterZ": {
+          "giapi": "SCO:DC:VIS_zi.shutterZ",
+          "front-end": "shutter_z"
+        },
+        "shutterI": {
+          "giapi": "SCO:DC:VIS_zi.shutterI",
+          "front-end": "shutter_i"
         }
       },
       "NIR_J": {
@@ -146,7 +162,7 @@
     "IS": {
       "obsState": {
         "observeTimeLeft": {
-          "giapi": "SCO:IS.obsStateobserveTimeLeft",
+          "giapi": "SCO:IS:obsState.observeTimeLeft",
           "front-end": "obs_time_left"
         }
       }
