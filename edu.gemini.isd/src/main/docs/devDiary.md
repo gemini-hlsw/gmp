@@ -92,6 +92,29 @@ This module was developed locally using the following software:
 
 > In the case of problems with permissions, you could use the binaries and manually add the paths to the terminal (See the first solution of troubleshooting).
 
+### Add StatusItems to the configuration file
+The config file structure is based in the giapi Prefix and contains the received name by the StatusHandler and its translation to the frontend item.
+
+For example to add `SCO:CC:ADC.diffPrism`, the following structure should be added to the cfg:
+```json
+"SCO": {
+  "CC": {
+    "ADC": {
+      "diffPrism": {
+        "giapi": "SCO:CC:ADC.diffPrism",
+        "frontend": "diff_prism"
+      },
+      "jointPrism": {
+        "giapi": "SCO:CC:ADC.jointPrism",
+        "frontend": "joint_prism"
+      }
+    } 
+  }
+}
+```
+
+> In short terms you should take the first 3 sections of the prefix and the Giapi Status Item SCO > CC > ADC > diffPrism. Follow this if the prefix have more sections.
+
 ## How to build a new Module
 This section is a guide of how to implement your own module to the GMP ecosystem in OSGi.
 #### Create a module
