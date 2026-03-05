@@ -198,12 +198,6 @@
           "front-end": "fp_health"
         }
       },
-      "PIC": {
-        "health": {
-          "giapi": "SCO:CC:PIC.health",
-          "front-end": "pic_health"
-        }
-      },
       "CRYO": {
         "enabled": {
           "giapi": "SCO:CC:CRYO.enabled",
@@ -358,6 +352,10 @@
         "enabled": {
           "giapi": "SCO:DC:PIC.enabled",
           "front-end": "pic_enabled"
+        },
+        "health": {
+          "giapi": "SCO:CC:PIC.health",
+          "front-end": "pic_health"
         }
       }
     },
