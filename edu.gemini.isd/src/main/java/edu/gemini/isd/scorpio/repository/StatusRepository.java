@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * This class have a Map to storage the StatusItems in memory.
+ */
 public class StatusRepository {
     private final ConcurrentMap<String, StatusDTO<?>> repository = new ConcurrentHashMap<>();
 

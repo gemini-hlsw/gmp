@@ -84,7 +84,7 @@ public class WebsocketController {
 
     /**
      * This method bring the current instrument status from the StatusHandler.
-     * Sends the stored to every client that has established a session with the WebSocket after a serialization process.
+     * Sends the stored items to every client that has established a session with the WebSocket after a serialization process.
      */
     private void sendData(){
         if (activeSessions.isEmpty()){
@@ -98,7 +98,7 @@ public class WebsocketController {
         for (WsContext c : activeSessions) {
             try{
                 c.send(statusPayload);
-                System.out.println("Data sent to the session: " + c.getSessionId());
+                //System.out.println("Data sent to the session: " + c.getSessionId());
             } catch (RuntimeException e) {
                 LOG.warning("An error occurred while sending a message to " + c.getSessionId() + " - Reason: " + e.getMessage());
             }

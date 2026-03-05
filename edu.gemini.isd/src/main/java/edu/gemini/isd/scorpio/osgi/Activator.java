@@ -17,7 +17,7 @@ public class Activator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        // Bring the configuration and register as a service the handler
+        // Bring the configuration and register it as a service the handler
         Set<String> statusItems = ConfigurationReader.loadStatusItems(context);
         StatusCacheHandler statusHandler = new StatusCacheHandler(statusItems, statusRepository);
         statusHandlerRegistration = context.registerService(StatusHandler.class, statusHandler, null);

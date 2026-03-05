@@ -3,7 +3,7 @@ package edu.gemini.isd.scorpio.dto;
 import java.util.Date;
 
 /**
- * DTO for transmit the status to the frontend. Contains a generic value for different types of values.
+ * DTO to transmit the status to the frontend. Contains a generic value for different types of values.
  * @param <T>
  */
 public class StatusDTO<T> {

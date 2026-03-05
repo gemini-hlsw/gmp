@@ -9,7 +9,7 @@ import edu.gemini.isd.scorpio.repository.StatusRepository;
 import java.util.*;
 
 /**
- * This class implements the interface StatusHandler (giapi-status-service) using a filter to only obtain the StatusItems related to Scorpio and can transmit all the obtained values with the snapshot method.
+ * This class implements the interface StatusHandler (giapi-status-service) using a filter to only obtain the StatusItems related to Scorpio.
  * This handler is automatically registered to the StatusHandlerAggregate.
  */
 public class StatusCacheHandler implements StatusHandler {

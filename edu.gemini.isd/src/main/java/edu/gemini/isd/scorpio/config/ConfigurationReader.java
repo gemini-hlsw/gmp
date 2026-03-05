@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 public class ConfigurationReader {
     private static final Logger LOG = Logger.getLogger(ConfigurationReader.class.getName());
     private static final String STATUS_CONFIG_RELATIVE_PATH = "services/edu.gemini.isd.statusItemsConfiguration.json";
-    //private static final String ACTIVE_INSTRUMENT = "SCO";
 
     /**
      * This method process the configuration file to a string Set.
@@ -107,6 +106,8 @@ public class ConfigurationReader {
         JsonElement element = obj.get("giapi");
         JsonElement elementTranslated = obj.get("front-end");
 
-        StatusNameDictionary.addToDictionary(element.getAsString(), elementTranslated.getAsString());
+        if (element != null && elementTranslated != null && element.isJsonPrimitive() && elementTranslated.isJsonPrimitive()) {
+            StatusNameDictionary.addToDictionary(element.getAsString(), elementTranslated.getAsString());
+        }
     }
 }

@@ -4,7 +4,7 @@ import edu.gemini.aspen.giapi.status.StatusItem;
 import edu.gemini.isd.scorpio.utils.StatusNameDictionary;
 
 /**
- * This class provides a method to transform the external item into a StatusDTO.
+ * This class provides a method to transform the external StatusItem into a StatusDTO.
  * In the mapping process the name is translated to a frontend format.
  */
 public class StatusMapper {
