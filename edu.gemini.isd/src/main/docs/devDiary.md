@@ -1,5 +1,5 @@
 # Development Diary of SCORPIO ISD
-This archive is focused to give an overview of the development of SCORPIO ISD. SCORPIO is an Instrument at Gemini South Observatory that has an 8-channel imager and spectrograph.
+This archive is focused to give an overview of the development of SCORPIO ISD. SCORPIO is an instrument at Gemini South Observatory that has an 8-channel imager and spectrograph.
 
 The SCORPIO ISD was developed to transmit the status of the components of SCORPIO to a web view, implementing it as a bundle of GMP that works like a bridge between the web view and the instrument.
 
@@ -23,7 +23,7 @@ The SCORPIO ISD was developed to transmit the status of the components of SCORPI
     + The original name of StatusItem is replaced by its translation saved in the dictionary map.
 5. **Delivery of Status Items**
     + The websocket receives the StatusItems from the method _getAllItems()_ from StatusRepository and parses it into JSON format.
-    + When everything else is ready the websocket proceed to send JSON to the designated endpoint (ws://localhost:7000/ws).
+    + When everything else is ready the websocket proceeds to send JSON to the designated endpoint (ws://localhost:7000/ws).
 
 ### Technical decisions
 The module consider the following points to maintain consistency, maintainability and better code:
@@ -48,13 +48,14 @@ After cloning ScorpioISD and GMP to a different machine, some build errors may o
 echo 'export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home' >> ~/.bash_profile
 source ~/.bash_profile
 ```
-You will need to execute the .bash_profile everytime you want to install and build the project
+You will need to execute the .bash_profile everytime you want to install and build the project. Ex:
 ```bash
+source ~/.bash_profile
 mvn install -Dmaven.test.skip=true -rf :isd
 mvn -Dmaven.test.skip=true  pax:run
 ```
 
-2. Use IntelliJ IDEA instead Visual Studio Code (recommended for some Maven problems with VS)
+2. Use IntelliJ IDEA instead of Visual Studio Code (recommended for some Maven problems with VS)
 
 ### Module tree
 ```
@@ -86,11 +87,11 @@ edu.gemini.isd/
 ```
 ### Module information
 This module was developed locally using the following software:
-* Amazon Corretto JDK 8 (Due to problems with OpenJDK for AArch64/ARM architecture)
+* Amazon Corretto JDK 8 (Due to problems with OpenJDK8 for AArch64/ARM architecture)
 * Maven 3.9.12
 * IntelliJ IDEA
 
-> In the case of problems with permissions, you could use the binaries and manually add the paths to the terminal (See the first solution of troubleshooting).
+> In the case of problems with permissions, you should use the binaries and manually add the paths to the terminal (See the first solution of troubleshooting).
 
 ### Add StatusItems to the configuration file
 The config file structure is based in the giapi Prefix and contains the received name by the StatusHandler and its translation to the frontend item.
