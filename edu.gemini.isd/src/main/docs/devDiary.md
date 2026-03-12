@@ -116,6 +116,13 @@ For example to add `SCO:CC:ADC.diffPrism`, the following structure should be add
 
 > In short terms you should take the first 3 sections of the prefix and the Giapi Status Item SCO > CC > ADC > diffPrism. Follow this if the prefix have more sections.
 
+### Testing and Scripts
+Some scripts to testing status items can be found in the folder resources. They can be executed with the following command
+```bash
+# valid names: mainGeneralTest, observation, overallStatus, prism and temperatures
+bash name.sh
+```
+The scripts will search giapi-tester.jar automatically, in case of problems, you should ensure giapi-tester.jar its generated (giapi-tester/target/giapi-tester.jar) running gmp.
 ## How to build a new Module
 This section is a guide of how to implement your own module to the GMP ecosystem in OSGi.
 #### Create a module
