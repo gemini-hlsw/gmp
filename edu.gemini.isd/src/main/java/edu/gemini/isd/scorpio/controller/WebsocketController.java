@@ -66,7 +66,9 @@ public class WebsocketController {
             ws.onConnect(ctx -> {
                 activeSessions.add(ctx);
                 LOG.info("Connection established! - session: " + ctx.getSessionId());
-                ctx.send("Connection established correctly!");
+                List<StatusDTO<?>> newItems = statusCacheHandler.snapshot();
+                String statusPayload = serializeItems(newItems);
+                ctx.send(statusPayload);
             });
 
             ws.onClose(ctx -> {
@@ -91,9 +93,13 @@ public class WebsocketController {
             return;
         }
 
-        List<StatusDTO<?>> newItems = statusCacheHandler.snapshot();
+        List<StatusDTO<?>> newItems = statusCacheHandler.getChangedStatus();
         String statusPayload = serializeItems(newItems);
 
+        if (newItems.isEmpty()){
+            return;
+        }
+        
         // Start the delivery of status to every client
         for (WsContext c : activeSessions) {
             try{
