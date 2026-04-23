@@ -26,12 +26,23 @@ if [[ $((grados % 5)) -ne 0 ]]; then
     exit 1
 fi
 
+echo "ADC IN"
+# prism to IN
+java -jar $JAR -set SCO:CC:ADC.corrector -type integer -value  0
+
+sleep 2
+
+echo "Setting tracking mode"
+java -jar $JAR -set SCO:CC:ADC.prismControl -type integer -value 1
+
+sleep 2
+
 valorDiff=0
 valorJoint=0
 
 while [[ $valorDiff -ne $grados || $valorJoint -ne $grados ]]; do
     if [[ $valorDiff -ne $grados ]]; then
-        valorDiff=$((valorDiff + 5))
+        valorDiff=$((valorDiff + 10))
 
         if [[ $valorDiff -gt 360 ]]; then
             valorDiff=0
@@ -42,7 +53,7 @@ while [[ $valorDiff -ne $grados || $valorJoint -ne $grados ]]; do
     fi
 
     if [[ $valorJoint -ne $grados ]]; then
-        valorJoint=$((valorJoint - 5))
+        valorJoint=$((valorJoint - 10))
 
         if [[ $valorJoint -lt 0 ]]; then
             valorJoint=355
