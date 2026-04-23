@@ -1,0 +1,28 @@
+#-----------------------------------------------------------------
+# Use this file to add customized Bnd instructions for the bundle
+#-----------------------------------------------------------------
+
+# Use the actual package path where the Activator lives
+Bundle-SymbolicName: ${bundle.symbolicName}
+Bundle-Version: ${project.version}
+Bundle-Activator: edu.gemini.isd.scorpio.osgi.Activator
+
+Export-Package: edu.gemini.isd.scorpio.osgi.*,edu.gemini.isd.scorpio.status.*
+Private-Package: edu.gemini.isd.scorpio.*
+
+# Embed all compile/runtime deps so the bundle is self-contained.
+Embed-Dependency: *;scope=compile|runtime
+Embed-Transitive: true
+Bundle-ClassPath: ., {maven-dependencies}
+
+# Keep imports minimal; everything else is embedded in the bundle.
+Import-Package: \
+ org.osgi.framework,\
+ javax.servlet,\
+ javax.servlet.http,\
+ org.slf4j,\
+ org.slf4j.spi,\
+ org.slf4j.helpers,\
+ edu.gemini.aspen.giapi.status
+
+# Include any other package exports/privacy rules below.
