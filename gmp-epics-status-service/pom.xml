@@ -21,7 +21,7 @@
     <name>GMP EPICS Status Service</name>
     <description>GMP EPICS Status Service</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

@@ -21,7 +21,7 @@
     <name>GMP Epics Simulator</name>
     <description>Simple simulator of EPICS channels for testing</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

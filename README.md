@@ -74,11 +74,7 @@ At the top level run
 This command will go through all the modules and install them in the local
 Maven repository (at ~/.m2/repository). The install process will download
 any required dependencies, compile the code (under src/main/java), compile
-and run the tests (under src/test/java), and package the jar file with
-the necessary OSGi headers.
-
-The headers are derived from the pom information and those provided in the
-osgi.bnd file
+and run the tests (under src/test/java), and package the jar files.
 
 ### Build a single module
 You can build and deploy locally a single module by issuing a
@@ -96,19 +92,16 @@ You can skip them by issuing:
 This can be done at the top level or module level
 
 ##  Launching gmp-server
-To launch gmp-server you can use the Maven pax plugin issuing:
+GMP is a plain Java application; its composition root lives in the gmp-main
+module. To launch it during development issue:
 ```
-   mvn pax:provision
+   mvn -pl gmp-main exec:java
 ```
-This will launch felix with all the required modules. 
+This starts every configured component in a single JVM.
 
 The configuration is stored at src/main/config folder.
 
-The felix launcher will create a local cache of the feilx framework and installed files in the runner directory
-
-This directory can be freely deleted
-
-The logs are locate under runner/logs/gmp.log
+The logs are located under logs/gmp.log
 
 ##  Integration tests
 Most tests in the project are unit test but there are some integration tests are identified by classes ending with IT unlike unit tests that end in Test.
@@ -121,7 +114,7 @@ mvn install failsafe:integration-test failsafe:verify
 ```
 If you wish to run a single integration test you can add to the command line the system variable it.test with the classname of the test you want to write like
 ```
-mvn -Dit.test=edu.gemini.aspen.integrationtests.GDSEndToEndIT install failsafe:integration-test failsafe:verify
+mvn -Dit.test=<classname> install failsafe:integration-test failsafe:verify
 ```
 For more options check (link) [http://maven.apache.org/plugins/maven-failsafe-plugin/examples/single-test.html]
 

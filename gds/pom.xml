@@ -23,7 +23,7 @@
     <name>GDS</name>
     <description>The module contains the new GDS</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>
@@ -83,10 +83,6 @@
         <dependency>
             <groupId>edu.gemini.aspen.gmp</groupId>
             <artifactId>gmp-services</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.ocs</groupId>
-            <artifactId>edu-gemini-util-osgi_${scala.lib.suffix}</artifactId>
         </dependency>
         <dependency>
             <groupId>edu.gemini.gds</groupId>

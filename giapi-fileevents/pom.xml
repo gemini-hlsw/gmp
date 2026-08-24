@@ -22,7 +22,7 @@
     <description>Monitor service to listen for File Events over JMS and dispatch them to interested clients.
     </description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

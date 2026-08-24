@@ -21,7 +21,7 @@
     <name>Gemini JMS API</name>
     <description>The Gemini Broker JMS-based API</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

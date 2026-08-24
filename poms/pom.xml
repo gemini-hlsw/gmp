@@ -24,21 +24,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!--plugin>
-                    <groupId>org.ops4j</groupId>
-                    <artifactId>maven-pax-plugin</artifactId-->
-                <!--
-                 | enable improved OSGi compilation support for the bundle life-cycle.
-                 | to switch back to the standard bundle life-cycle, move this setting
-                 | down to the maven-bundle-plugin section
-                -->
-                <!--extensions>true</extensions>
-                </plugin-->
-                <plugin>
-                    <groupId>org.ops4j.pax.exam</groupId>
-                    <artifactId>maven-paxexam-plugin</artifactId>
-                    <version>1.2.4</version>
-                </plugin>
                 <plugin>
                     <groupId>com.atlassian.maven.plugins</groupId>
                     <artifactId>maven-clover2-plugin</artifactId>

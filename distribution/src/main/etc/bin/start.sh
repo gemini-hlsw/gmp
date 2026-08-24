@@ -1,41 +1,15 @@
 #!/bin/bash
-#==========================
-# GMP start script
-#==========================
 #
-# Usage:
-#   ./start.sh
+# Starts the GMP server in the foreground.
+#
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+APP_ROOT="${SCRIPT_PATH%/bin}"
 
-# Var setup
-# Don't allow non initialized vars
-set -o nounset
+cd "$APP_ROOT"
 
-# Exit on failure
-set -e
-
-# Verify dependencies
-#====================
-# Check that java is available
-which java > /dev/null || { echo "Need java in PATH to run"; exit 1; }
-
-# Check no other instance is running
-#===================================
-
-# Check if gmp is already running
-RUNNING=`ps ax | grep "org.apache.felix.main.Main" | grep -v "grep" | wc -l`
-
-if ! [ $RUNNING = "0" ]; then
-    echo "GMP is already running"
-    exit 1
-fi
-
-# Find path to script
-#==========================
-ABSPATH=$(cd ${0%/*} && echo $PWD/${0##*/})
-
-# to get the path only - not the script name - add
-SCRIPT_PATH=`dirname "$ABSPATH"`
-
-echo "Starting GMP version: ${gmp.version}"
-# Will start pax-runner reading the configuration from the file bin/runner.args
-exec java -jar $SCRIPT_PATH/pax-runner-${pax-runner.version}.jar --args=file:$SCRIPT_PATH/runner.args
+exec java \
+    -Dconf.base="$APP_ROOT/conf" \
+    -Dlogs.dir="$APP_ROOT/logs" \
+    -Djava.util.logging.config.file="$APP_ROOT/conf/logging.properties" \
+    -cp "$APP_ROOT/lib/*" \
+    edu.gemini.aspen.gmp.main.GmpMain

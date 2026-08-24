@@ -21,7 +21,7 @@
     <name>ActiveMQ JMS Service Provider</name>
     <description>A JMS Service Provider based on the Apache ActiveMQ</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

@@ -21,7 +21,7 @@
     <name>GIAPI Observation Event Monitor</name>
     <description>Monitor service to listen for Observation Events and dispatch it to interested clients.</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

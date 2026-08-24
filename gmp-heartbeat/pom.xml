@@ -21,7 +21,7 @@
     <name>GMP Heartbeat</name>
     <description>GMP Heartbeat</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

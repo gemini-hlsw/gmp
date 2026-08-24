@@ -21,7 +21,7 @@
 
     <name>GIAPI</name>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
     </dependencies>

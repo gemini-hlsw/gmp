@@ -21,7 +21,7 @@
     <name>ActiveMQ Broker Service</name>
     <description>A JMS Broker based on the Apache ActiveMQ</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

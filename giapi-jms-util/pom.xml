@@ -21,7 +21,7 @@
     <name>GIAPI JMS Util</name>
     <description>Utility classes to convert GIAPI data using JMS</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

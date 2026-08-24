@@ -21,7 +21,7 @@
     <name>GMP Status Gateway over JMS</name>
     <description>Allows clients to get status information received by the GMP</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

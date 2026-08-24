@@ -21,7 +21,7 @@
     <name>EPICS Heartbeat</name>
     <description>EPICS Heartbeat</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

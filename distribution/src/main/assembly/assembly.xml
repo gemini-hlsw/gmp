@@ -9,67 +9,15 @@
     </formats>
 
     <dependencySets>
+        <!-- Every runtime jar, flat under lib/, launched with -cp 'lib/*' -->
         <dependencySet>
             <useProjectArtifact>false</useProjectArtifact>
-            <outputDirectory>/bin</outputDirectory>
-            <includes>
-                <include>org.ops4j.pax.runner:*</include>
-            </includes>
-        </dependencySet>
-        <dependencySet>
-            <useProjectArtifact>false</useProjectArtifact>
-            <outputDirectory>/bundles/level4</outputDirectory>
-            <useTransitiveDependencies>false</useTransitiveDependencies>
-            <useTransitiveFiltering>false</useTransitiveFiltering>
-            <includes>
-                <include>*:*</include>
-            </includes>
-            <excludes>
-                <exclude>org.ops4j.pax.runner:pax-runner</exclude>
-                <exclude>org.apache.felix:org.apache.felix.framework</exclude>
-                <exclude>org.apache.felix:org.apache.felix.main</exclude>
-                <exclude>org.apache.felix:org.apache.felix.gogo.*</exclude>
-                <exclude>org.osgi:org.osgi.compendium</exclude>
-            </excludes>
-        </dependencySet>
-        <dependencySet>
-            <useProjectArtifact>false</useProjectArtifact>
-            <scope>provided</scope>
-            <outputDirectory>/bundles/level2</outputDirectory>
+            <outputDirectory>/lib</outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>
-            <useTransitiveFiltering>false</useTransitiveFiltering>
-            <includes>
-                <include>org.ops4j.pax.logging:*</include>
-                <include>org.apache.felix:*</include>
-                <include>org.ops4j.pax.web:*</include>
-            </includes>
         </dependencySet>
     </dependencySets>
 
-    <repositories>
-        <repository>
-            <outputDirectory>felix</outputDirectory>
-            <includeMetadata>false</includeMetadata>
-            <includes>
-                <include>org.apache.felix:org.apache.felix.framework</include>
-                <include>org.apache.felix:org.apache.felix.main</include>
-                <include>org.apache.felix:org.apache.felix.gogo.*</include>
-            </includes>
-            <excludes>
-                <exclude>org.easymock:*</exclude>
-            </excludes>
-        </repository>
-    </repositories>
-
     <fileSets>
-        <fileSet>
-            <directory>src/main/etc/bin</directory>
-            <outputDirectory>/bin</outputDirectory>
-            <includes>
-                <include>runner.args</include>
-            </includes>
-            <filtered>true</filtered>
-        </fileSet>
         <fileSet>
             <directory>target/site/doxygen</directory>
             <outputDirectory>/doc</outputDirectory>
@@ -78,9 +26,9 @@
             <directory>src/main/etc/bin</directory>
             <outputDirectory>/bin</outputDirectory>
             <filtered>true</filtered>
-	          <includes>
+            <includes>
                 <include>start.sh</include>
-		            <include>gmp-server-ctl.sh</include>
+                <include>gmp-server-ctl.sh</include>
                 <include>gmp-server</include>
             </includes>
             <fileMode>0755</fileMode>
@@ -132,22 +80,9 @@
             <directory>../src/main/config</directory>
             <excludes>
                 <exclude>gsaoi.xml</exclude>
-                <exclude>config.properties</exclude>
             </excludes>
             <outputDirectory>/conf</outputDirectory>
             <filtered>true</filtered>
-        </fileSet>
-        <!-- System properties are in the generated config.properties file -->
-        <fileSet>
-            <directory>${project.build.outputDirectory}/</directory>
-            <includes>
-                <include>config.properties</include>
-            </includes>
-            <outputDirectory>/conf</outputDirectory>
-        </fileSet>
-        <fileSet>
-            <directory>src/main/logs</directory>
-            <outputDirectory>/logs</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>src/main/doc</directory>

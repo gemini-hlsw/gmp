@@ -21,7 +21,7 @@
     <name>GMP Health</name>
     <description>GMP Health</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

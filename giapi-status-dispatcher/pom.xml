@@ -21,7 +21,7 @@
     <name>GIAPI Status Dispatcher</name>
     <description>Status Dispatcher</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

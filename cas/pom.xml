@@ -21,7 +21,7 @@
     <name>Channel Access Server</name>
     <description>Channel Access Server</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

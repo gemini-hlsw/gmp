@@ -21,7 +21,7 @@
     <name>GIAPI Clients library</name>
     <description>The module contains common classes and interfaces for giapi clients</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

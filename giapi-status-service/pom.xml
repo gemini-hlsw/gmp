@@ -22,7 +22,7 @@
     <description>The Status Service listen for Status Items via JMS and notifies registered Status Handlers
     </description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

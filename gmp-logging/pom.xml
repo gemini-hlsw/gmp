@@ -21,7 +21,7 @@
     <name>GMP Logging Service</name>
     <description>GMP Logging Service</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

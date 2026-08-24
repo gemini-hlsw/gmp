@@ -21,7 +21,7 @@
     <name>GMP Status Database</name>
     <description>Status Database in the GMP</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

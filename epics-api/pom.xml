@@ -21,7 +21,7 @@
     <name>EPICS API</name>
     <description>EPICS interfaces used by cas and epic-service.</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

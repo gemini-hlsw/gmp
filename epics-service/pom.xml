@@ -21,7 +21,7 @@
     <name>EPICS Service</name>
     <description>Easy interface to watch EPICS values.</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>
