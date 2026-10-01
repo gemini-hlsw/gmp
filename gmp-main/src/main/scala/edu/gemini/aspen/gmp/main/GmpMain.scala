@@ -75,6 +75,7 @@ import edu.gemini.jms.api.{
 import java.nio.file.Paths
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Logger
+import org.slf4j.bridge.SLF4JBridgeHandler
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -476,6 +477,9 @@ final class GmpApp(servicesDir: java.nio.file.Path) {
 object GmpMain {
 
   def main(args: Array[String]): Unit = {
+    SLF4JBridgeHandler.removeHandlersForRootLogger()
+    SLF4JBridgeHandler.install()
+
     val confBase = sys.props.getOrElse("conf.base", "conf")
     val app      = new GmpApp(Paths.get(confBase, "services"))
 

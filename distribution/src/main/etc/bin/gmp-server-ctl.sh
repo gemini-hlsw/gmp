@@ -27,7 +27,7 @@ start() {
     nohup java \
         -Dconf.base="$APP_ROOT/conf" \
         -Dlogs.dir="$LOG_DIR" \
-        -Djava.util.logging.config.file="$APP_ROOT/conf/logging.properties" \
+        -Dlogback.configurationFile="$APP_ROOT/conf/logback.xml" \
         -cp "$APP_ROOT/lib/*" \
         edu.gemini.aspen.gmp.main.GmpMain >> "$OUT_FILE" 2>&1 &
     echo $! > "$PID_FILE"

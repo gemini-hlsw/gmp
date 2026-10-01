@@ -10,6 +10,7 @@ RUN mvn -q -pl gmp-main dependency:copy-dependencies
 CMD ["java", \
      "-Dconf.base=src/main/config", \
      "-Dlogs.dir=logs", \
+     "-Dlogback.configurationFile=src/main/config/logback.xml", \
      "-cp", "gmp-main/target/classes:gmp-main/target/dependency/*", \
      "edu.gemini.aspen.gmp.main.GmpMain"]
 

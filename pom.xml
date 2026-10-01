@@ -34,6 +34,7 @@
         <junit.version>4.13.2</junit.version>
         <scala.xml.version>2.0.0-M2</scala.xml.version>
         <slf4j.api.version>1.7.30</slf4j.api.version>
+        <logback.version>1.2.13</logback.version>
         <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
 
         <gmp.version>${project.version}</gmp.version>
@@ -379,8 +380,14 @@
 
             <dependency>
                 <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jdk14</artifactId>
+                <artifactId>jul-to-slf4j</artifactId>
                 <version>${slf4j.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
             </dependency>
 
             <!-- ActiveMQ -->

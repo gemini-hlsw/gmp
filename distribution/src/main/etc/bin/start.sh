@@ -10,6 +10,6 @@ cd "$APP_ROOT"
 exec java \
     -Dconf.base="$APP_ROOT/conf" \
     -Dlogs.dir="$APP_ROOT/logs" \
-    -Djava.util.logging.config.file="$APP_ROOT/conf/logging.properties" \
+    -Dlogback.configurationFile="$APP_ROOT/conf/logback.xml" \
     -cp "$APP_ROOT/lib/*" \
     edu.gemini.aspen.gmp.main.GmpMain
