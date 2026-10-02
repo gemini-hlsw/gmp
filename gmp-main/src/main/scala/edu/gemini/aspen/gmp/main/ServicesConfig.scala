@@ -2,7 +2,8 @@ package edu.gemini.aspen.gmp.main
 
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
-import java.nio.file.{ Files, Path }
+import java.nio.file.Files
+import java.nio.file.Path
 import java.util.Properties
 import java.util.logging.Logger
 import scala.jdk.CollectionConverters._

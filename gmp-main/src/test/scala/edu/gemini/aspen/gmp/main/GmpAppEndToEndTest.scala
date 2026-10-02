@@ -2,7 +2,8 @@ package edu.gemini.aspen.gmp.main
 
 import edu.gemini.aspen.giapi.status.impl.BasicStatus
 import java.nio.charset.StandardCharsets
-import java.nio.file.{ Files, Path }
+import java.nio.file.Files
+import java.nio.file.Path
 import org.junit.Assert._
 import org.junit.Test
 

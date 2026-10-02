@@ -9,69 +9,58 @@ import edu.gemini.aspen.giapi.data.fileevents.FileEventActionRunner
 import edu.gemini.aspen.giapi.data.fileevents.jms.JmsFileEventsListener
 import edu.gemini.aspen.giapi.status.dispatcher.StatusDispatcher
 import edu.gemini.aspen.giapi.status.setter.StatusSetterService
-import edu.gemini.aspen.giapi.statusservice.{ StatusHandlerAggregate, StatusService }
+import edu.gemini.aspen.giapi.statusservice.StatusHandlerAggregate
+import edu.gemini.aspen.giapi.statusservice.StatusService
 import edu.gemini.aspen.giapi.util.jms.JmsKeys
 import edu.gemini.aspen.gmp.commands.handlers.impl.CommandHandlersImpl
-import edu.gemini.aspen.gmp.commands.jms.clientbridge.{
-  CommandMessagesBridgeImpl,
-  CommandMessagesConsumer
-}
-import edu.gemini.aspen.gmp.commands.jms.instrumentbridge.{
-  ActionMessageActionSender,
-  CompletionInfoListener,
-  JmsActionMessageBuilder
-}
+import edu.gemini.aspen.gmp.commands.jms.clientbridge.CommandMessagesBridgeImpl
+import edu.gemini.aspen.gmp.commands.jms.clientbridge.CommandMessagesConsumer
+import edu.gemini.aspen.gmp.commands.jms.instrumentbridge.ActionMessageActionSender
+import edu.gemini.aspen.gmp.commands.jms.instrumentbridge.CompletionInfoListener
+import edu.gemini.aspen.gmp.commands.jms.instrumentbridge.JmsActionMessageBuilder
 import edu.gemini.aspen.gmp.commands.model.executors.SequenceCommandExecutorStrategy
-import edu.gemini.aspen.gmp.commands.model.impl.{
-  ActionManagerImpl,
-  CommandSenderImpl,
-  CommandUpdaterImpl
-}
-import edu.gemini.aspen.gmp.epics.impl.{
-  ChannelListConfiguration,
-  EpicsMonitor,
-  EpicsRequestHandlerImpl,
-  EpicsUpdaterThread
-}
+import edu.gemini.aspen.gmp.commands.model.impl.ActionManagerImpl
+import edu.gemini.aspen.gmp.commands.model.impl.CommandSenderImpl
+import edu.gemini.aspen.gmp.commands.model.impl.CommandUpdaterImpl
+import edu.gemini.aspen.gmp.epics.impl.ChannelListConfiguration
+import edu.gemini.aspen.gmp.epics.impl.EpicsMonitor
+import edu.gemini.aspen.gmp.epics.impl.EpicsRequestHandlerImpl
+import edu.gemini.aspen.gmp.epics.impl.EpicsUpdaterThread
 import edu.gemini.aspen.gmp.epics.simulator.EpicsSimulatorComponent
 import edu.gemini.aspen.gmp.health.Health
 import edu.gemini.aspen.gmp.heartbeat.Heartbeat
 import edu.gemini.aspen.gmp.logging.LoggingMessageConsumer
 import edu.gemini.aspen.gmp.pcs.model.PcsUpdaterComponent
 import edu.gemini.aspen.gmp.services.jms.RequestConsumer
-import edu.gemini.aspen.gmp.services.properties.{ PropertyService, SimplePropertyHolder }
+import edu.gemini.aspen.gmp.services.properties.PropertyService
+import edu.gemini.aspen.gmp.services.properties.SimplePropertyHolder
 import edu.gemini.aspen.gmp.status.simulator.StatusSimulator
 import edu.gemini.aspen.gmp.statusdb.StatusDatabase
 import edu.gemini.aspen.gmp.statusgw.StatusDatabaseServiceDecorator
-import edu.gemini.aspen.gmp.statusgw.jms.{
-  JmsStatusDispatcher,
-  MultipleStatusItemsRequestListener,
-  StatusItemRequestListener,
-  StatusNamesRequestListener
-}
+import edu.gemini.aspen.gmp.statusgw.jms.JmsStatusDispatcher
+import edu.gemini.aspen.gmp.statusgw.jms.MultipleStatusItemsRequestListener
+import edu.gemini.aspen.gmp.statusgw.jms.StatusItemRequestListener
+import edu.gemini.aspen.gmp.statusgw.jms.StatusNamesRequestListener
 import edu.gemini.aspen.gmp.statusservice.EpicsStatusService
 import edu.gemini.aspen.gmp.tcs.model.TcsContextComponent
 import edu.gemini.aspen.gmp.tcsoffset.model.TcsOffsetComponent
 import edu.gemini.aspen.heartbeatdistributor.HeartbeatDistributor
 import edu.gemini.cas.impl.ChannelAccessServerImpl
 import edu.gemini.epics.EpicsService
-import edu.gemini.epics.impl.{
-  EpicsClientSubscriber,
-  EpicsObserverImpl,
-  EpicsReaderImpl,
-  EpicsWriterImpl
-}
+import edu.gemini.epics.impl.EpicsClientSubscriber
+import edu.gemini.epics.impl.EpicsObserverImpl
+import edu.gemini.epics.impl.EpicsReaderImpl
+import edu.gemini.epics.impl.EpicsWriterImpl
 import edu.gemini.gmp.status.translator.LocalStatusItemTranslator
 import edu.gemini.gmp.top.TopImpl
-import edu.gemini.jms.activemq.broker.{ ActiveMQBrokerComponent, ConfigDefaults }
+import edu.gemini.jms.activemq.broker.ActiveMQBrokerComponent
+import edu.gemini.jms.activemq.broker.ConfigDefaults
 import edu.gemini.jms.activemq.provider.ActiveMQJmsProvider
-import edu.gemini.jms.api.{
-  BaseMessageConsumer,
-  DestinationData,
-  DestinationType,
-  JmsArtifact,
-  JmsSimpleMessageSelector
-}
+import edu.gemini.jms.api.BaseMessageConsumer
+import edu.gemini.jms.api.DestinationData
+import edu.gemini.jms.api.DestinationType
+import edu.gemini.jms.api.JmsArtifact
+import edu.gemini.jms.api.JmsSimpleMessageSelector
 import java.nio.file.Paths
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Logger

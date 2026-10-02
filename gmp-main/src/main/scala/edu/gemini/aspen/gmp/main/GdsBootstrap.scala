@@ -1,13 +1,18 @@
 package edu.gemini.aspen.gmp.main
 
-import cats.effect.{ FiberIO, IO, Ref }
+import cats.effect.FiberIO
+import cats.effect.IO
+import cats.effect.Ref
 import cats.effect.std.Queue
 import cats.effect.unsafe.implicits.global
 import cats.syntax.all._
 import edu.gemini.aspen.gds.{ Main => GdsMain }
-import edu.gemini.aspen.gds.configuration.{ GDSConfigurationServiceFactory, GdsConfiguration }
+import edu.gemini.aspen.gds.configuration.GDSConfigurationServiceFactory
+import edu.gemini.aspen.gds.configuration.GdsConfiguration
 import edu.gemini.aspen.gds.observations.ObservationStateEvent
-import edu.gemini.aspen.giapi.data.{ DataLabel, ObservationEvent, ObservationEventHandler }
+import edu.gemini.aspen.giapi.data.DataLabel
+import edu.gemini.aspen.giapi.data.ObservationEvent
+import edu.gemini.aspen.giapi.data.ObservationEventHandler
 import edu.gemini.aspen.giapi.status.StatusDatabaseService
 import edu.gemini.aspen.gmp.services.PropertyHolder
 import edu.gemini.epics.EpicsReader
