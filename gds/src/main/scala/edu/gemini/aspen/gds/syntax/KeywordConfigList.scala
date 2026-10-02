@@ -19,7 +19,7 @@ class KeywordConfigListOps(val list: List[KeywordConfigurationItem]) extends Any
 }
 
 trait ToKeywordConfigListOps {
-  implicit def ToKeywordConfigListOps(list: List[KeywordConfigurationItem]) =
+  implicit def ToKeywordConfigListOps(list: List[KeywordConfigurationItem]): KeywordConfigListOps =
     new KeywordConfigListOps(list)
 }
 object KeywordConfigList extends ToKeywordConfigListOps

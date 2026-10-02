@@ -25,14 +25,20 @@
         <!-- Component versions -->
         <clover.version>3.1.0</clover.version>
         <org.activemq.core.version>5.6.0</org.activemq.core.version>
-        <scala-lang.version>2.13.9</scala-lang.version>
-        <scalatest.version>3.2.2</scalatest.version>
-        <scalatestplus-junit.version>3.2.4.0-M1</scalatestplus-junit.version>
-        <scalatestplus-mockito.version>3.2.2.0</scalatestplus-mockito.version>
-        <scala-plugin.version>3.3.2</scala-plugin.version>
-        <mockito.version>3.4.6</mockito.version>
+        <fs2.version>3.9.3</fs2.version>
+        <http4s.version>0.23.23</http4s.version>
+        <log4s.version>1.10.0-M6</log4s.version>
+        <jaxb.api.version>4.0.4</jaxb.api.version>
+        <jaxb.runtime.version>4.0.9</jaxb.runtime.version>
+        <jaxb-plugin.version>4.0.16</jaxb-plugin.version>
+        <scala-lang.version>2.13.18</scala-lang.version>
+        <scalatest.version>3.2.20</scalatest.version>
+        <scalatestplus-junit.version>3.2.20.0</scalatestplus-junit.version>
+        <scalatestplus-mockito.version>3.2.20.0</scalatestplus-mockito.version>
+        <scala-plugin.version>4.10.0</scala-plugin.version>
+        <mockito.version>5.23.0</mockito.version>
         <junit.version>4.13.2</junit.version>
-        <scala.xml.version>2.0.0-M2</scala.xml.version>
+        <scala.xml.version>2.4.0</scala.xml.version>
         <slf4j.api.version>1.7.30</slf4j.api.version>
         <logback.version>1.2.13</logback.version>
         <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
@@ -50,7 +56,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.14.1</version>
                 <executions>
                     <execution>
                         <phase>compile</phase>
@@ -60,8 +66,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <release>25</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -84,18 +89,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.7.1</version>
+                <version>3.5.6</version>
                 <configuration>
-                    <forkMode>always</forkMode>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.21.0</version>
-                <configuration>
-                    <argLine>-Xverify:none</argLine>
-                </configuration>
+                <version>3.5.6</version>
             </plugin>
             <!-- Create an assembly -->
             <plugin>
@@ -482,7 +485,7 @@
             </dependency>
             <dependency>
                 <groupId>org.scalatestplus</groupId>
-                <artifactId>mockito-3-4_2.13</artifactId>
+                <artifactId>mockito-5-23_2.13</artifactId>
                 <version>${scalatestplus-mockito.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -566,6 +569,17 @@
                 <artifactId>scala-xml_2.13</artifactId>
                 <version>${scala.xml.version}</version>
             </dependency>
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${jaxb.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${jaxb.runtime.version}</version>
+                <scope>runtime</scope>
+            </dependency>
 
             <dependency>
                 <groupId>edu.gemini.external.osgi.com.jcraft</groupId>
@@ -578,23 +592,29 @@
                 <version>1.0.7</version>
             </dependency>
             <dependency>
-                <groupId>edu.gemini.gds</groupId>
-                <artifactId>gds-fp</artifactId>
-                <version>0.0.9</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>co.fs2</artifactId>
-                        <groupId>fs2-core_2.13</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>co.fs2</artifactId>
-                        <groupId>fs2-io_2.13</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>org.http4s</artifactId>
-                        <groupId>http4s-dsl_2.13</groupId>
-                    </exclusion>
-                </exclusions>
+                <groupId>co.fs2</groupId>
+                <artifactId>fs2-io_2.13</artifactId>
+                <version>${fs2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.http4s</groupId>
+                <artifactId>http4s-ember-server_2.13</artifactId>
+                <version>${http4s.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.http4s</groupId>
+                <artifactId>http4s-dsl_2.13</artifactId>
+                <version>${http4s.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.http4s</groupId>
+                <artifactId>http4s-circe_2.13</artifactId>
+                <version>${http4s.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.log4s</groupId>
+                <artifactId>log4s_2.13</artifactId>
+                <version>${log4s.version}</version>
             </dependency>
 
         </dependencies>
@@ -615,7 +635,7 @@
         </dependency>
         <dependency>
             <groupId>org.scalatestplus</groupId>
-            <artifactId>mockito-3-4_2.13</artifactId>
+            <artifactId>mockito-5-23_2.13</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>

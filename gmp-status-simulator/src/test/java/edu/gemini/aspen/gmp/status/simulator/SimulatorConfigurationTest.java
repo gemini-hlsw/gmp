@@ -3,7 +3,7 @@ package edu.gemini.aspen.gmp.status.simulator;
 import edu.gemini.aspen.gmp.status.simulator.generated.StatusType;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

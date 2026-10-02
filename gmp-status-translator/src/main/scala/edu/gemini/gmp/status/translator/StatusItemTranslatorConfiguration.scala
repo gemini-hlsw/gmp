@@ -1,6 +1,6 @@
 package edu.gemini.gmp.status.translator
 
-import javax.xml.bind.JAXBContext
+import jakarta.xml.bind.JAXBContext
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
 import java.io.InputStream

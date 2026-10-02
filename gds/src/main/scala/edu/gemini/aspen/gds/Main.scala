@@ -3,7 +3,6 @@ package edu.gemini.aspen.gds
 import cats.effect._
 import cats.effect.kernel.RefSource
 import cats.effect.std._
-import cats.syntax.all._
 import fs2.Stream
 import scala.concurrent.duration._
 

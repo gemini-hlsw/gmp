@@ -1,4 +1,4 @@
-FROM maven:3-openjdk-8
+FROM maven:3-eclipse-temurin-25
 
 WORKDIR /home/software/gmp
 

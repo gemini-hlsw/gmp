@@ -26,9 +26,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.sun.tools.xjc.maven2</groupId>
-                <artifactId>maven-jaxb-plugin</artifactId>
-                <version>1.1.1</version>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>${jaxb-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -38,7 +38,6 @@
                 </executions>
                 <configuration>
                     <generatePackage>edu.gemini.aspen.gmp.status.simulator.generated</generatePackage>
-                    <generateDirectory>src/main/java</generateDirectory>
                     <removeOldOutput>true</removeOldOutput>
                 </configuration>
             </plugin>
@@ -46,6 +45,14 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
         <dependency>
             <groupId>edu.gemini.aspen</groupId>
             <artifactId>giapi</artifactId>

@@ -21,9 +21,10 @@ import Decoders._
 object SeqexecServer {
 
   // The http4s entity decoders
-  implicit val kwrEntityDecoder = jsonOf[IO, KeywordRequest]
-  implicit val oorEntityDecoder = jsonOf[IO, OpenObservationRequest]
-  implicit val dlrEntityDecoder = jsonOf[IO, DataLabelRequest]
+  implicit val kwrEntityDecoder: EntityDecoder[IO, KeywordRequest] = jsonOf[IO, KeywordRequest]
+  implicit val oorEntityDecoder: EntityDecoder[IO, OpenObservationRequest] =
+    jsonOf[IO, OpenObservationRequest]
+  implicit val dlrEntityDecoder: EntityDecoder[IO, DataLabelRequest] = jsonOf[IO, DataLabelRequest]
 
   def apply(
     obsStateQ: QueueSink[IO, ObservationStateEvent],

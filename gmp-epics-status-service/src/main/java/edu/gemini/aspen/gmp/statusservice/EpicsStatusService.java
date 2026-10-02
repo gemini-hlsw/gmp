@@ -12,7 +12,7 @@ import gov.aps.jca.dbr.Severity;
 import gov.aps.jca.dbr.Status;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;

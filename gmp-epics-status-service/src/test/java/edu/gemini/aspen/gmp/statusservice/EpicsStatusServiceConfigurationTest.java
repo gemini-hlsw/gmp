@@ -6,7 +6,7 @@ import edu.gemini.aspen.gmp.statusservice.generated.SimpleChannelType;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;

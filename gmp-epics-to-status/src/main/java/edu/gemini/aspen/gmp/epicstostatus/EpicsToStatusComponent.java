@@ -24,7 +24,7 @@ import gov.aps.jca.dbr.Status;
 import org.xml.sax.SAXException;
 
 import javax.jms.JMSException;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

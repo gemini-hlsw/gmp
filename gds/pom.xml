@@ -85,8 +85,24 @@
             <artifactId>gmp-services</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.gemini.gds</groupId>
-            <artifactId>gds-fp</artifactId>
+            <groupId>co.fs2</groupId>
+            <artifactId>fs2-io_2.13</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-ember-server_2.13</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-dsl_2.13</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.http4s</groupId>
+            <artifactId>http4s-circe_2.13</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.log4s</groupId>
+            <artifactId>log4s_2.13</artifactId>
         </dependency>
 
         <!-- for the configuration file -->

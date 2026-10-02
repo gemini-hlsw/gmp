@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import javax.jms.*;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 

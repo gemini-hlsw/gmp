@@ -4,9 +4,9 @@ import edu.gemini.aspen.gmp.status.simulator.generated.ObjectFactory;
 import edu.gemini.aspen.gmp.status.simulator.generated.SimulatedStatusesType;
 import edu.gemini.aspen.gmp.status.simulator.generated.StatusType;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 import java.util.List;

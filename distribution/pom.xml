@@ -119,22 +119,24 @@
             <id>production</id>
             <build>
                 <plugins>
-                    <!-- Use gmaven to extract a version number to be suitable for RPM -->
+                    <!-- Strip the -SNAPSHOT qualifier so the version is suitable for RPM -->
                     <plugin>
-                        <groupId>org.codehaus.gmaven</groupId>
-                        <artifactId>gmaven-plugin</artifactId>
-                        <version>1.4</version>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.6.2</version>
                         <executions>
                             <execution>
-                                <id>setup-groovy</id>
+                                <id>rpm-version</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>execute</goal>
+                                    <goal>regex-property</goal>
                                 </goals>
                                 <configuration>
-                                    <source>
-                                        project.properties["project.rpmversion"] = project.version.replaceAll("-.*", "")
-                                    </source>
+                                    <name>project.rpmversion</name>
+                                    <value>${project.version}</value>
+                                    <regex>-.*</regex>
+                                    <replacement></replacement>
+                                    <failIfNoMatch>false</failIfNoMatch>
                                 </configuration>
                             </execution>
                         </executions>
@@ -143,7 +145,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>buildnumber-maven-plugin</artifactId>
-                        <version>1.0</version>
+                        <version>3.3.1</version>
                         <executions>
                             <execution>
                                 <id>site-buildnumber</id>
@@ -250,7 +252,7 @@
                             <targetOS>linux</targetOS>
                             <targetVendor>redhat</targetVendor>
                             <requires>
-                                <require>java &gt;= 1.8.0</require>
+                                <require>java-25-openjdk-headless</require>
                             </requires>
                             <release>${buildNumber}</release>
                             <mappings>

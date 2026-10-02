@@ -14,11 +14,11 @@ If you want to deploy the system on other platform, you will need to compile the
 
 ## Dependencies 
 The only dependencies we need for GMP and GIAPI-glue are as follows.
-* Java JDK 1.8
+* Java JDK 25
 * GCC greater than 4.8.1.
 
 If you are on Rocky 8, you could use the following commands:
-* dnf -y install java-1.8.0-openjdk-devel
+* dnf -y install java-25-openjdk-devel
 * dnf -y group install "Development Tools"
 
 ## Deployment instructions. 
@@ -63,8 +63,8 @@ When you execute the last command you will see in the any-command standard outpu
 
 # Build GMP from source code and deploy locally
 ## Requirements
-* Java JDK 1.8
-* Maven 3, version 3.0.3 or higher.
+* Java JDK 25
+* Maven 3.9 or higher.
 
 ## Build 
 At the top level run
