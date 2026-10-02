@@ -21,7 +21,7 @@
     <name>GMP Sequence Commands Handlers</name>
     <description>Service giving information about available command handlers</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

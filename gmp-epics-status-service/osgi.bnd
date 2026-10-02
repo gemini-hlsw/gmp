@@ -1,6 +1,0 @@
-#-----------------------------------------------------------------
-# Use this file to add customized Bnd instructions for the bundle
-#-----------------------------------------------------------------
-# No exports for this package
-Export-Package:
-Private-Package: ${bundle.namespace}.*;version="${pom.version}"

@@ -21,7 +21,7 @@
     <name>GMP GIAPI Services</name>
     <description>Services provided by the GMP</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -31,10 +31,6 @@
         <dependency>
             <groupId>edu.gemini.aspen</groupId>
             <artifactId>giapi-jms-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.ocs</groupId>
-            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
         </dependency>
     </dependencies>
 

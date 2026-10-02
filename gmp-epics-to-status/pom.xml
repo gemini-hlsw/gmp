@@ -21,7 +21,7 @@
     <name>GMP EPICS To Status</name>
     <description>GMP EPICS To Status</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -54,10 +54,6 @@
         <dependency>
             <groupId>edu.gemini.aspen.giapi</groupId>
             <artifactId>giapi-status-setter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.ocs</groupId>
-            <artifactId>edu-gemini-util-osgi_2.13</artifactId>
         </dependency>
     </dependencies>
 

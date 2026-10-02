@@ -20,7 +20,7 @@
 
     <name>GMP Commands JMS Client</name>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

@@ -21,7 +21,7 @@
     <name>GMP PCS Updater Service</name>
     <description>PCS Updater service</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

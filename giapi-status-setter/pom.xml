@@ -21,7 +21,7 @@
     <name>GIAPI Status Setter</name>
     <description>Utility classes to set status items using JMS</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

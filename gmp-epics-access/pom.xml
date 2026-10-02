@@ -21,7 +21,7 @@
     <name>GMP Epics Access Service</name>
     <description>Epics Access Interface for Aspen Instruments</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

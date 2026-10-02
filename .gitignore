@@ -2023,3 +2023,8 @@ releases.properties
 .pax/
 
 .bloop/
+
+# de-OSGi runtime artifacts
+/logs
+/activemq-data
+gmp-server.pid

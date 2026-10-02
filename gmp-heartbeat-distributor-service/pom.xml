@@ -21,7 +21,7 @@
     <name>GMP Heartbeat Distributor Service</name>
     <description>GMP Heartbeat Distributor Service</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

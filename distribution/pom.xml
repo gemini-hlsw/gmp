@@ -19,138 +19,21 @@
         <noUpload>false</noUpload>
         <installationroot>/gemsoft/opt/gpi</installationroot>
 
-        <felix.cm.loglevel>0</felix.cm.loglevel>
-        <felix.log.level>0</felix.log.level>
-        <felix.fileinstall.log.level>4</felix.fileinstall.log.level>
-
-        <!-- Configuration dir -->
-        <conf.base>../../conf</conf.base>
-        <logs.dir>../../logs</logs.dir>
+        <!-- Configuration dir; the launcher scripts run from the app root -->
+        <conf.base>conf</conf.base>
+        <logs.dir>logs</logs.dir>
 
         <gmp.version>${project.version}</gmp.version>
 
     </properties>
 
     <dependencies>
-         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
-            <artifactId>pax-logging-service</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen</groupId>
-            <artifactId>giapi-fileevents</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen</groupId>
-            <artifactId>giapi-obsevents</artifactId>
-        </dependency>
+        <!-- The composition root pulls in every runtime module transitively -->
         <dependency>
             <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-commands-jms-bridge</artifactId>
+            <artifactId>gmp-main</artifactId>
         </dependency>
-        <dependency>
-            <groupId>edu.gemini.jms</groupId>
-            <artifactId>jms-activemq-broker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.jms</groupId>
-            <artifactId>jms-activemq-provider</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-annotation_1.0_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-tcs-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-tcs-offset</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-pcs-updater</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-status-gateway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-statusdb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen</groupId>
-            <artifactId>giapi-status-dispatcher</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-status-simulator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.gmp</groupId>
-            <artifactId>gmp-status-translator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-logging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.cas</groupId>
-            <artifactId>cas</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-epics-simulator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-epics-status-service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen</groupId>
-            <artifactId>epics-heartbeat</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-epics-to-status</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gds</groupId>
-            <artifactId>gds</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.gemini.aspen.gmp</groupId>
-            <artifactId>gmp-health</artifactId>
-        </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Export maven properties -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0-alpha-2</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>write-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <outputFile>
-                                ${project.build.outputDirectory}/config.properties
-                            </outputFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
     <profiles>
         <profile>
@@ -225,13 +108,6 @@
             <properties>
                 <gmp.instance>gpi</gmp.instance>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>edu.gemini.gpi</groupId>
-                    <artifactId>gpi-observation-status</artifactId>
-                    <version>0.2.10-SNAPSHOT</version>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <id>igrins2</id>
@@ -241,62 +117,6 @@
         </profile>
         <profile>
             <id>production</id>
-            <dependencies>
-                <!-- Felix core -->
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.framework</artifactId>
-                    <version>${felix.framework.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.main</artifactId>
-                    <version>${felix.framework.version}</version>
-                </dependency>
-                <!-- PAX Runner -->
-                <dependency>
-                    <groupId>org.ops4j.pax.runner</groupId>
-                    <artifactId>pax-runner</artifactId>
-                    <version>${pax-runner.version}</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>*</groupId>
-                            <artifactId>*</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <!-- Felix Shell and GOGO -->
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.gogo.command</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.easymock</groupId>
-                            <artifactId>easymock</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <artifactId>org.apache.felix</artifactId>
-                            <groupId>org.apache.felix.bundlerepository</groupId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.gogo.runtime</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.gogo.shell</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.shell.remote</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>org.apache.felix.eventadmin</artifactId>
-                </dependency>
-            </dependencies>
             <build>
                 <plugins>
                     <!-- Use gmaven to extract a version number to be suitable for RPM -->
@@ -430,35 +250,18 @@
                             <targetOS>linux</targetOS>
                             <targetVendor>redhat</targetVendor>
                             <requires>
-                                <require>java &gt;= 1.6.0</require>
+                                <require>java &gt;= 1.8.0</require>
                             </requires>
                             <release>${buildNumber}</release>
                             <mappings>
                                 <!--jars-->
                                 <mapping>
-                                    <directory>${installationroot}/${project.artifactId}-${gmp.version}/bundles
+                                    <directory>${installationroot}/${project.artifactId}-${gmp.version}/lib
                                     </directory>
                                     <sources>
                                         <source>
                                             <location>
-                                                ${project.build.directory}/${project.artifactId}-${gmp.version}/${project.artifactId}-${gmp.version}/bundles/
-                                            </location>
-                                            <targetArchitecture>noarch</targetArchitecture>
-                                        </source>
-                                    </sources>
-                                    <directoryIncluded>false</directoryIncluded>
-                                    <filemode>644</filemode>
-                                    <username>software</username>
-                                    <groupname>gemini</groupname>
-                                </mapping>
-                                <!-- felix repo bundle-->
-                                <mapping>
-                                    <directory>${installationroot}/${project.artifactId}-${gmp.version}/felix
-                                    </directory>
-                                    <sources>
-                                        <source>
-                                            <location>
-                                                ${project.build.directory}/${project.artifactId}-${gmp.version}/${project.artifactId}-${gmp.version}/felix/
+                                                ${project.build.directory}/${project.artifactId}-${gmp.version}/${project.artifactId}-${gmp.version}/lib/
                                             </location>
                                             <targetArchitecture>noarch</targetArchitecture>
                                         </source>
@@ -529,9 +332,8 @@
                                                 ${project.build.directory}/${project.artifactId}-${gmp.version}/${project.artifactId}-${gmp.version}/bin/
                                             </location>
                                             <includes>
-                                                <include>runner.args</include>
                                                 <include>giapi-tester.jar</include>
-                                                <include>pax-runner-${pax-runner.version}.jar</include>
+                                                <include>gds-config-validator.jar</include>
                                             </includes>
                                         </source>
                                     </sources>
@@ -595,10 +397,9 @@
                                     #delete leftover directories
                                     if [ $1 -eq 0 ]; then
                                         rm -rf ${installationroot}/${project.artifactId}-${project.version}/bin
-                                        rm -rf ${installationroot}/${project.artifactId}-${project.version}/bundles
+                                        rm -rf ${installationroot}/${project.artifactId}-${project.version}/lib
                                         rm -rf ${installationroot}/${project.artifactId}-${project.version}/conf
                                         rm -rf ${installationroot}/${project.artifactId}-${project.version}/docs
-                                        rm -rf ${installationroot}/${project.artifactId}-${project.version}/felix
                                         rm ${installationroot}/${project.artifactId}
                                         rm /gemsoft/bin/${project.artifactId}-ctl.sh
                                         rm /gemsoft/bin/giapi-tester.sh

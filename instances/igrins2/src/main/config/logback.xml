@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logging for GMP. JUL calls are bridged into slf4j by GmpMain and end up here.
+     File naming and line format match the old log4j DailyRollingFileAppender. -->
+<configuration>
+    <!-- Keeps JUL loggers at the levels below so disabled records are never built -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/usr/local/share/gmp-server/gmp.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/usr/local/share/gmp-server/gmp.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %-5p [%t] %40.40c -  %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="edu.gemini.aspen.gds" level="INFO"/>
+    <logger name="edu.gemini.aspen.gmp.tcsoffset" level="DEBUG"/>
+    <!-- Avoids noise when the ODB is not present -->
+    <logger name="net.jini" level="OFF"/>
+    <logger name="org.apache.activemq" level="INFO"/>
+    <logger name="com.cosylab" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="file"/>
+    </root>
+</configuration>

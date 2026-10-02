@@ -8,49 +8,22 @@ import com.comcast.ip4s.Port
 import edu.gemini.aspen.gmp.services.PropertyHolder
 import fs2.io.file.{ Path => Fs2Path }
 import java.nio.file._
-import java.util.{ Dictionary }
 import java.util.logging.Logger
-import org.osgi.service.cm.ManagedServiceFactory
 import scala.concurrent.duration._
-import scala.jdk.CollectionConverters._
 import scala.util.{ Failure, Success, Try }
 
-// Probably an abuse of a ManagedServiceFactory, since it doesn't create any
-// services. But, it makes it possible to use OSGi configuration.
+// Validates the GDS configuration properties (from the .cfg file plus a few
+// PropertyHolder values) and hands the result to configHandler.
 class GDSConfigurationServiceFactory(
   propertyHolder: PropertyHolder,
   configHandler:  Option[GdsConfiguration] => Unit
-) extends ManagedServiceFactory {
-  private val logger         = Logger.getLogger(this.getClass.getName)
-  private var receivedConfig = false
+) {
+  private val logger = Logger.getLogger(this.getClass.getName)
 
   // These values come from the PropertyHolder, not the config file.
   val appendFitsExtKey = "APPEND_FITS_EXTENSION"
   val fitsSrcPathKey   = "DHS_SCIENCE_DATA_PATH"
   val fitsDestPathKey  = "DHS_PERMANENT_SCIENCE_DATA_PATH"
-
-  override def getName = "GDS Configuration Service Factory"
-
-  override def updated(pid: String, properties: Dictionary[String, _]): Unit = {
-    logger.info(s"GDS Config factory received configuration with pid: $pid")
-
-    // This check is not completely thread safe, but
-    // 1. It probably won't happen
-    // 2. It would just result in a second config processing that wouldn't affect the first one.
-    if (receivedConfig)
-      logger.severe(
-        "GDS Received a new configuration. This will have no effect on the running bundle."
-      )
-    else {
-      receivedConfig = true
-      Option(properties) match {
-        case Some(props) => processProperties(props.asScala.toMap)
-        case None        =>
-          logger.severe("GdsConfigurationFactory received a null for properties.")
-          configHandler(none)
-      }
-    }
-  }
 
   def processProperties(props: Map[String, _]): Unit = {
     val keywordConfig: ValidatedNec[String, List[KeywordConfigurationItem]] =
@@ -100,8 +73,6 @@ class GDSConfigurationServiceFactory(
       case Valid(config) => configHandler(config.some)
     }
   }
-
-  override def deleted(pid: String): Unit = ()
 
   private def asString(props: Map[String, _], key: String): ValidatedNec[String, String] =
     props.get(key).map(_.toString).toValidNec(s"Config value missing for `$key`")

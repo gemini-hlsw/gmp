@@ -20,7 +20,7 @@
     <name>GMP Top</name>
     <description>GMP Top</description>
 
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
     </dependencies>
