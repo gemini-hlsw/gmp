@@ -11,6 +11,21 @@ public class StatusDTO<T> {
     private T value;
     private Date timestamp;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof StatusDTO<?>)) return false;
+        StatusDTO<?> other = (StatusDTO<?>) obj;
+        return java.util.Objects.equals(id, other.id)
+                && java.util.Objects.equals(value, other.value)
+                && java.util.Objects.equals(timestamp, other.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, value, timestamp);
+    }
+
     public StatusDTO() {
 
     }
