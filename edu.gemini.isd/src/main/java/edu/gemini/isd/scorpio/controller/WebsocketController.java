@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class WebsocketController {
     private final Logger LOG = Logger.getLogger(WebsocketController.class.getName());
 
-    private final Set<WsContext> activeSessions = new HashSet<>();
+    private final Set<WsContext> activeSessions = java.util.concurrent.ConcurrentHashMap.newKeySet();
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final Gson gson = new Gson();
     private Javalin app;
