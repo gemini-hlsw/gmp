@@ -42,7 +42,7 @@ valorJoint=0
 
 while [[ $valorDiff -ne $grados || $valorJoint -ne $grados ]]; do
     if [[ $valorDiff -ne $grados ]]; then
-        valorDiff=$((valorDiff + 10))
+        valorDiff=$((valorDiff + 5))
 
         if [[ $valorDiff -gt 360 ]]; then
             valorDiff=0
@@ -53,10 +53,10 @@ while [[ $valorDiff -ne $grados || $valorJoint -ne $grados ]]; do
     fi
 
     if [[ $valorJoint -ne $grados ]]; then
-        valorJoint=$((valorJoint - 10))
+        valorJoint=$((valorJoint - 5))
 
         if [[ $valorJoint -lt 0 ]]; then
-            valorJoint=355
+            valorJoint=360
         fi
 
         java -jar "$JAR" -set SCO:CC:ADC.jointPrism -type integer -value $valorJoint
