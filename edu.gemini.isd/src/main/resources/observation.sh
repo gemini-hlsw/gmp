@@ -65,11 +65,14 @@ java -jar $JAR -set SCO:IS:obs.state -type integer -value 2
 java -jar $JAR -set SCO:IS:obs.timeTotal -type integer -value $tiempoTotal
 echo "Total time: $tiempoTotal seconds"
 
+deadline=$((SECONDS + tiempoTotal))
 while [[ $tiempoTotal -gt 0 ]]; do
-	java -jar $JAR -set SCO:IS:obs.timeLeft -type integer -value $tiempoTotal
+	java -jar "$JAR" -set SCO:IS:obs.timeLeft -type integer -value "$tiempoTotal"
 	echo "Time left: $tiempoTotal seconds"
-	tiempoTotal=$((tiempoTotal - 1))
+	sleep 1
+	tiempoTotal=$((deadline - SECONDS))
 done
+tiempoTotal=0
 
 java -jar $JAR -set SCO:IS:obs.timeLeft -type integer -value $tiempoTotal
 echo "Time left $tiempoTotal seconds"
