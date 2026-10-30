@@ -45,8 +45,6 @@ public class WebsocketController {
             System.out.println("scorpio-isd: Javalin-websocket started on ws://localhost:7000/ws");
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            app = null;
         }
     }
 
