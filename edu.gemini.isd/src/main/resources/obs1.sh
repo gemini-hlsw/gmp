@@ -28,7 +28,11 @@ echo -n "Enter the observation time: "
 read tiempoTotal  
 
 echo -n "Enter the observation mode: "
-echo "Imaging = 1, Spectroscopy = 2"
+echo "ImagingFullFoV = 0, ImagingWindow = 1, SpectroscopySlit = 2"
+read modoObservacion
+
+echo -n "Enter the observation strategy: "
+echo "Stare = 0, NodAndRead = 1, NodAndShift = 2"
 read estrategiaObservacion
 
 if [[ tiempoTotal -lt 0 ]]; then
