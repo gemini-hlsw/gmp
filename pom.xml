@@ -17,9 +17,6 @@
 
     <properties>
         <!-- OSGi service properties -->
-        <org.apache.felix.http.jettyEnabled>true</org.apache.felix.http.jettyEnabled>
-        <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
-        <org.osgi.service.http.port>8888</org.osgi.service.http.port>
         <osgi.shell.telnet.ip>0.0.0.0</osgi.shell.telnet.ip>
         <osgi.shell.telnet.port>15001</osgi.shell.telnet.port>
         <org.osgi.framework.system.packages.extra>javax.xml.parsers,com.sun.jini,com.sun.javadoc,sun.io,sun.swing,sun.misc,com.sun,sun.security.action,edu.gemini.rmi.server,sun.rmi.runtime,com.sun.xml.internal.bind</org.osgi.framework.system.packages.extra>
@@ -41,7 +38,6 @@
         <!-- Component versions -->
         <clover.version>3.1.0</clover.version>
         <org.activemq.core.version>5.6.0</org.activemq.core.version>
-        <pax-web.version>6.1.2</pax-web.version>
         <pax-logging.version>1.10.1</pax-logging.version>
         <pax-runner.version>1.9.0</pax-runner.version>
         <scala-lang.version>2.13.9</scala-lang.version>
@@ -496,37 +492,6 @@
                 <version>1.0.5</version>
             </dependency>
 
-            <!-- PAX-WEB -->
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-jetty-bundle</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-api</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-spi</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-extender-war</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-extender-whiteboard-service</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-runtime</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.apache.xbean</groupId>
                 <artifactId>xbean-finder</artifactId>
@@ -542,30 +507,6 @@
                 <groupId>org.apache.xbean</groupId>
                 <artifactId>xbean-bundleutils</artifactId>
                 <version>4.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-descriptor</artifactId>
-                <version>${pax-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-extender-whiteboard</artifactId>
-                <version>${pax-web.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>servlet-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.ops4j.pax.swissbox</groupId>
-                        <artifactId>pax-swissbox-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.ops4j.pax.swissbox</groupId>
-                        <artifactId>pax-swissbox-optional-jc</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>edu.gemini.external.osgi.org.eclipse.jdt.core.compiler</groupId>
@@ -925,6 +866,7 @@
         <module>gds-config-validator</module>
         <module>integration-tests</module>
         <module>distribution</module>
+    <module>edu.gemini.isd</module>
     </modules>
 
     <distributionManagement>

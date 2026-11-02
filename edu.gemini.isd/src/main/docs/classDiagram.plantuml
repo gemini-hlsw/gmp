@@ -1,0 +1,93 @@
+@startuml
+
+title Class Diagram - Scorpio ISD
+!theme plain
+
+skinparam packageBackgroundColor lightblue
+skinparam packageFontSize 16
+skinparam packageLineThickness 2
+skinparam packagepadding 100
+
+skinparam nodesep 100
+package utils {
+    class StatusNameDictionary{
+    - {static} dictionary: Map<String, String>
+    + {static} addToDictionary(String, String): void
+    + {static} translate(String): String
+    }
+}
+
+package config {
+    class ConfigurationReader {
+    + {static} loadStatusItems(): void
+    - {static} collectItems(): void
+    - {static} addArrayItems(): void
+    - {static} sendToDictionary(): void
+    }
+}
+
+package controller {
+    class WebsocketController {
+    -activeSessions: Set<WsContext>
+    -scheduler: ScheduledExecutorService
+    +start(int port): void
+    +stop(): void
+    -sendData(): void
+    -serializeItems(): String
+    }
+}
+
+package dto{
+    class StatusMapper{
+    + {static} mapToDTO(StatusItem<T>): StatusDTO
+    }
+
+    class StatusDTO<T>{
+    -id: String
+    -value: T
+    -timestamp: Timestamp
+    }
+}
+
+package handler {
+    class StatusCacheHandler{
+    -subscribedItems: Set<String>
+    -repository: StatusRepository
+
+    +update(StatusDTO)>: <T>
+    +snapshot(): List<StatusDTO>
+    }
+
+}
+
+package repository {
+    class StatusRepository{
+    -repository: Map<String, StatusDTO>
+
+    +save(StatusDTO): void
+    +getAllStatus(): List<StatusDTO>
+    }
+
+}
+
+package osgi {
+    class Activator{
+    -websocketController: WebsocketController
+    -statusRepository: StatusRepository
+    +start(BundleContext)
+    +stop(BundleContext)
+    }
+}
+Activator..>ConfigurationReader: <<uses>>
+Activator-->WebsocketController: <<instances>>
+Activator-->StatusCacheHandler: <<instances>>
+
+WebsocketController.>StatusCacheHandler : <<uses>>
+StatusCacheHandler-->StatusRepository: <<stores>>
+StatusCacheHandler..>StatusMapper: <<uses>>
+
+StatusMapper..>StatusDTO: <<create>>
+StatusMapper..>StatusNameDictionary: <<uses>>
+ConfigurationReader -[hidden]left- StatusCacheHandler
+
+@enduml

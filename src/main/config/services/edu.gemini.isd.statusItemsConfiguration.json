@@ -1,0 +1,417 @@
+{
+  "instrumentActive": "SCO",
+  "SCO": {
+    "CC": {
+      "cover": {
+        "enabled": {
+          "giapi": "SCO:CC:cover.enabled",
+          "front-end": "cover_enabled"
+        },
+        "cover": {
+          "giapi": "SCO:CC:cover.cover",
+          "front-end": "cover_state"
+        }
+      },
+      "ADC": {
+        "enabled": {
+          "giapi": "SCO:CC:ADC.enabled",
+          "front-end": "adc_enabled"
+        },
+        "corrector": {
+          "giapi": "SCO:CC:ADC.corrector",
+          "front-end": "adc_fov"
+        },
+        "prismControl": {
+          "giapi": "SCO:CC:ADC.prismControl",
+          "front-end": "adc_control"
+        },
+        "diffPrism": {
+          "giapi": "SCO:CC:ADC.diffPrism",
+          "front-end": "adc_pos_diff"
+        },
+        "jointPrism": {
+          "giapi": "SCO:CC:ADC.jointPrism",
+          "front-end": "adc_pos_joint"
+        },
+        "health": {
+          "giapi": "SCO:CC:ADC_CC.health",
+          "front-end": "adc_health"
+        }
+      },
+      "VPH_JY": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_JY.enabled",
+          "front-end": "vph_jy_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_JY.grism",
+          "front-end": "vph_jy_grism"
+        },
+        "health": {
+          "giapi": "SCO:CC:VPH_jy.health",
+          "front-end": "vph_jy_health"
+        }
+      },
+      "VPH_HK": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_HK.enabled",
+          "front-end": "vph_hk_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_HK.grism",
+          "front-end": "vph_hk_grism"
+        },
+        "health": {
+          "giapi": "SCO:CC:VPH_hk.health",
+          "front-end": "vph_hk_health"
+        }
+      },
+      "VPH_gr": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_gr.enabled",
+          "front-end": "vph_gr_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_gr.grism",
+          "front-end": "vph_gr_grism"
+        },
+        "health": {
+          "giapi": "SCO:CC:VPH_gr.health",
+          "front-end": "vph_gr_health"
+        }
+      },
+      "VPH_zi": {
+        "enabled": {
+          "giapi": "SCO:CC:VPH_zi.enabled",
+          "front-end": "vph_zi_enabled"
+        },
+        "grism": {
+          "giapi": "SCO:CC:VPH_zi.grism",
+          "front-end": "vph_zi_grism"
+        },
+        "health": {
+          "giapi": "SCO:CC:VPH_zi.health",
+          "front-end": "vph_zi_health"
+        }
+      },
+      "DET": {
+        "detector_j": {
+          "giapi": "SCO:CC:DET:temp_J.detector",
+          "front-end": "detj_temp"
+        },
+        "detector_y": {
+          "giapi": "SCO:CC:DET:temp_Y.detector",
+          "front-end": "dety_temp"
+        },
+        "detector_h": {
+          "giapi": "SCO:CC:DET:temp_H.detector",
+          "front-end": "deth_temp"
+        },
+        "detector_k": {
+          "giapi": "SCO:CC:DET:temp_K.detector",
+          "front-end": "detk_temp"
+        },
+        "detector_g": {
+          "giapi": "SCO:CC:DET:temp_gr.detector_g",
+          "front-end": "detg_temp"
+        },
+        "detector_r": {
+          "giapi": "SCO:CC:DET:temp_gr.detector_r",
+          "front-end": "detr_temp"
+        },
+        "detector_i": {
+          "giapi": "SCO:CC:DET:temp_iz.detector_i",
+          "front-end": "deti_temp"
+        },
+        "detector_z": {
+          "giapi": "SCO:CC:DET:temp_iz.detector_z",
+          "front-end": "detz_temp"
+        },
+        "bench1": {
+          "giapi": "SCO:CC:DET:temp_vis.bench1",
+          "front-end": "bench_1"
+        },
+        "bench2": {
+          "giapi": "SCO:CC:DET:temp_vis.bench2",
+          "front-end": "bench_2"
+        },
+        "bench3": {
+          "giapi": "SCO:CC:DET:temp_vis.bench3",
+          "front-end": "bench_3"
+        },
+        "bench4": {
+          "giapi": "SCO:CC:DET:temp_vis.bench4",
+          "front-end": "bench_4"
+        },
+        "benchA1": {
+          "giapi": "SCO:CC:DET:temp_nir.benchA1",
+          "front-end": "bench_a1"
+        },
+        "benchA2": {
+          "giapi": "SCO:CC:DET:temp_nir.benchA2",
+          "front-end": "bench_a2"
+        },
+        "benchA3": {
+          "giapi": "SCO:CC:DET:temp_nir.benchA3",
+          "front-end": "bench_a3"
+        },
+        "benchA4": {
+          "giapi": "SCO:CC:DET:temp_nir.benchA4",
+          "front-end": "bench_a4"
+        },
+        "benchB1": {
+          "giapi": "SCO:CC:DET:temp_nir.benchB1",
+          "front-end": "bench_b1"
+        },
+        "benchB2": {
+          "giapi": "SCO:CC:DET:temp_nir.benchB2",
+          "front-end": "bench_b2"
+        },
+        "benchB3": {
+          "giapi": "SCO:CC:DET:temp_nir.benchB3",
+          "front-end": "bench_b3"
+        },
+        "benchB4": {
+          "giapi": "SCO:CC:DET:temp_nir.benchB4",
+          "front-end": "bench_b4"
+        }
+      },
+      "FP": {
+        "maskEnabled": {
+          "giapi": "SCO:CC:FP.maskEnabled",
+          "front-end": "mask_enabled"
+        },
+        "slitStageEnabled": {
+          "giapi": "SCO:CC:FM.slitStageEnabled",
+          "front-end": "slit_enabled"
+        },
+        "mask": {
+          "giapi": "SCO:CC:FP.mask",
+          "front-end": "mask_slit_state"
+        },
+        "slitStage": {
+          "giapi": "SCO:CC:FP.slitStage",
+          "front-end": "slitstage_sel"
+        },
+        "health": {
+          "giapi": "SCO:CC:FP.health",
+          "front-end": "fp_health"
+        }
+      },
+      "CRYO": {
+        "enabled": {
+          "giapi": "SCO:CC:CRYO.enabled",
+          "front-end": "cryo_enabled"
+        }
+      }
+    },
+    "DC": {
+      "SVC": {
+        "enabled": {
+          "giapi": "SCO:DC:SVC.enabled",
+          "front-end": "svc_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:SVC.health",
+          "front-end": "svc_health"
+        }
+      },
+      "VIS_gr": {
+        "enabled": {
+          "giapi": "SCO:DC:VIS_gr.enabled",
+          "front-end": "detgr_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:VIS_gr.health",
+          "front-end": "detgr_health"
+        },
+        "shutterG": {
+          "giapi": "SCO:DC:VIS_gr.shutterG",
+          "front-end": "shutter_g"
+        },
+        "shutterR": {
+          "giapi": "SCO:DC:VIS_gr.shutterR",
+          "front-end": "shutter_r"
+        },
+        "expTime": {
+          "giapi": "SCO:DC:VIS_gr.expTime",
+          "front-end": "visgr_exp_time"
+        },
+        "nodAndShift": {
+          "giapi": "SCO:DC:VIS_gr.nodAndShift",
+          "front-end": "visgr_nas"
+        },
+        "gain": {
+          "giapi": "SCO:DC:VIS_gr.gain",
+          "front-end": "visgr_gain"
+        }
+      },
+      "VIS_zi": {
+        "enabled": {
+          "giapi": "SCO:DC:VIS_zi.enabled",
+          "front-end": "detzi_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:VIS_zi.health",
+          "front-end": "detzi_health"
+        },
+        "shutterZ": {
+          "giapi": "SCO:DC:VIS_zi.shutterZ",
+          "front-end": "shutter_z"
+        },
+        "shutterI": {
+          "giapi": "SCO:DC:VIS_zi.shutterI",
+          "front-end": "shutter_i"
+        },
+        "expTime": {
+          "giapi": "SCO:DC:VIS_zi.expTime",
+          "front-end": "viszi_exp_time"
+        },
+        "nodAndShift": {
+          "giapi": "SCO:DC:VIS_zi.nodAndShift",
+          "front-end": "viszi_nas"
+        },
+        "gain": {
+          "giapi": "SCO:DC:VIS_zi.gain",
+          "front-end": "viszi_gain"
+        }
+      },
+      "NIR_J": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_J.enabled",
+          "front-end": "detj_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_j.health",
+          "front-end": "detj_health"
+        },
+        "expTime": {
+          "giapi": "SCO:DC:NIR_J.expTime",
+          "front-end": "nirj_exp_time"
+        },
+        "gain": {
+          "giapi": "SCO:DC:NIR_J.gain",
+          "front-end": "nirj_gain"
+        }
+      },
+      "NIR_Y": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_Y.enabled",
+          "front-end": "dety_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_y.health",
+          "front-end": "dety_health"
+        },
+        "expTime": {
+          "giapi": "SCO:DC:NIR_Y.expTime",
+          "front-end": "niry_exp_time"
+        },
+        "gain": {
+          "giapi": "SCO:DC:NIR_Y.gain",
+          "front-end": "niry_gain"
+        }
+      },
+      "NIR_H": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_H.enabled",
+          "front-end": "deth_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_h.health",
+          "front-end": "deth_health"
+        },
+        "expTime": {
+          "giapi": "SCO:DC:NIR_H.expTime",
+          "front-end": "nirh_exp_time"
+        },
+        "gain": {
+          "giapi": "SCO:DC:NIR_H.gain",
+          "front-end": "nirh_gain"
+        }
+      },
+      "NIR_K": {
+        "enabled": {
+          "giapi": "SCO:DC:NIR_K.enabled",
+          "front-end": "detk_enabled"
+        },
+        "health": {
+          "giapi": "SCO:DC:NIR_k.health",
+          "front-end": "detk_health"
+        },
+        "expTime": {
+          "giapi": "SCO:DC:NIR_K.expTime",
+          "front-end": "nirk_exp_time"
+        },
+        "gain": {
+          "giapi": "SCO:DC:NIR_K.gain",
+          "front-end": "nirk_gain"
+        }
+      },
+      "PIC": {
+        "enabled": {
+          "giapi": "SCO:DC:PIC.enabled",
+          "front-end": "pic_enabled"
+        },
+        "health": {
+          "giapi": "SCO:CC:PIC.health",
+          "front-end": "pic_health"
+        }
+      }
+    },
+    "DET": {
+      "CRYO": {
+        "health": {
+          "giapi": "SCO:DET:CRYO.health",
+          "front-end": "cryo_health"
+        }
+      }
+    },
+    "IS": {
+      "obs": {
+        "mode": {
+          "giapi": "SCO:IS:obs.mode",
+          "front-end": "obs_mode"
+        },
+        "strategy": {
+          "giapi": "SCO:IS:obs.strategy",
+          "front-end": "obs_strategy"
+        },
+        "timeTotal": {
+          "giapi": "SCO:IS:obs.timeTotal",
+          "front-end": "obs_time_total"
+        },
+        "timeLeft": {
+          "giapi": "SCO:IS:obs.timeLeft",
+          "front-end": "obs_time_left"
+        },
+        "nABBASequences": {
+          "giapi": "SCO:IS:obs.nABBASequences",
+          "front-end": "num_abba_seq"
+        },
+        "nShiftRows": {
+          "giapi": "SCO:IS:obs.nShiftRows",
+          "front-end": "num_shift_rows"
+        },
+        "state": {
+          "giapi": "SCO:IS:obs.state",
+          "front-end": "obs_state"
+        },
+        "dataLabel": {
+          "giapi": "SCO:IS:obs.dataLabel",
+          "front-end": "obs_data_label"
+        },
+        "type": {
+          "giapi": "SCO:IS:obs.type",
+          "front-end": "obs_type"
+        }
+      },
+      "health": {
+        "health":{
+          "giapi": "SCO:IS.health",
+          "front-end": "scorpio_health"
+        }
+      }
+    }
+  }
+}
