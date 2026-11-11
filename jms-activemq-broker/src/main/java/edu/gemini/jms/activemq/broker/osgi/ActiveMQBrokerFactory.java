@@ -35,6 +35,9 @@ public class ActiveMQBrokerFactory implements ManagedServiceFactory {
             boolean useJmx = "true".equalsIgnoreCase(properties.get(ConfigDefaults.BROKER_USE_JMX_PROPERTY).toString());
             String name = properties.get(ConfigDefaults.BROKER_NAME_PROPERTY).toString();
             String url = properties.get(ConfigDefaults.BROKER_URL_PROPERTY).toString();
+            // stompUrl is optional, ActiveMQBrokerComponent uses the default when it is null
+            Object stompUrlProperty = properties.get(ConfigDefaults.BROKER_STOMP_URL_PROPERTY);
+            String stompUrl = stompUrlProperty != null ? stompUrlProperty.toString() : null;
             boolean deleteMessagesOnStartup = "true".equalsIgnoreCase(properties.get(ConfigDefaults.BROKER_DELETE_MESSAGES_ON_STARTUP_PROPERTY).toString());
             boolean useAdvisoryMessages = "true".equalsIgnoreCase(properties.get(ConfigDefaults.BROKER_USE_ADVISORY_MESSAGES_PROPERTY).toString());
             int jmxPort = Integer.parseInt(properties.get(ConfigDefaults.BROKER_JMX_RMI_PORT_PROPERTY).toString());
@@ -43,7 +46,7 @@ public class ActiveMQBrokerFactory implements ManagedServiceFactory {
             int maxStorageMB = Integer.parseInt(properties.get(ConfigDefaults.BROKER_MAX_STORAGE_MB_PROPERTY).toString());
             int maxMessagesLimit = Integer.parseInt(properties.get(ConfigDefaults.BROKER_MAX_MESSAGES_LIMIT_PROPERTY).toString());
             LOG.info("Build " + ActiveMQBroker.class.getName() + " with url " + url);
-            return new ActiveMQBrokerComponent(useJmx, persistent, name, url, deleteMessagesOnStartup, useAdvisoryMessages, jmxPort, jmxConnectorPort, memoryPercentage, maxStorageMB, maxMessagesLimit);
+            return new ActiveMQBrokerComponent(useJmx, persistent, name, url, stompUrl, deleteMessagesOnStartup, useAdvisoryMessages, jmxPort, jmxConnectorPort, memoryPercentage, maxStorageMB, maxMessagesLimit);
         } catch (NumberFormatException e) {
             LOG.severe("Cannot start ActiveMQBroker");
             throw e;

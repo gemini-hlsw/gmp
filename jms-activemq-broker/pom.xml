@@ -40,6 +40,15 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>kahadb</artifactId>
         </dependency>
+        <!-- Needed by the STOMP jms-map-json transformation used by giapi-python, see the root pom -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jettison</groupId>
+            <artifactId>jettison</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

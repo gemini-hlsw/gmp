@@ -7,6 +7,7 @@ public class ConfigDefaults {
 
     public static final String BROKER_NAME_PROPERTY = "brokerName";
     public static final String BROKER_URL_PROPERTY = "brokerUrl";
+    public static final String BROKER_STOMP_URL_PROPERTY = "stompUrl";
     public static final String BROKER_PERSISTENT_PROPERTY = "persistent";
     public static final String BROKER_DELETE_MESSAGES_ON_STARTUP_PROPERTY = "deleteMsgOnStartup";
     public static final String BROKER_USE_ADVISORY_MESSAGES_PROPERTY = "useAdvisoryMessages";
@@ -18,8 +19,10 @@ public class ConfigDefaults {
     public static final String BROKER_MAX_MESSAGES_LIMIT_PROPERTY = "maxMessagesLimit";
 
     private static final int BROKER_PORT = 61616;
+    private static final int BROKER_STOMP_PORT = 61613;
 
     static final String BROKER_URL = "tcp://0.0.0.0:" + BROKER_PORT;
+    static final String BROKER_STOMP_URL = "stomp+nio://0.0.0.0:" + BROKER_STOMP_PORT;
     static final String BROKER_NAME = "gmp";
     // Set to true to enable the broker's JMX usage
     static final boolean BROKER_USE_JMX = true;

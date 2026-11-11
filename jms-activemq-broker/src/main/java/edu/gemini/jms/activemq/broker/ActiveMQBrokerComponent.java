@@ -18,11 +18,13 @@ public class ActiveMQBrokerComponent implements Serializable {
     private final Broker _broker;
 
     private final String url;
+    private final String stompUrl;
 
     public ActiveMQBrokerComponent(boolean useJmx,
                                    boolean persistent,
                                    String brokerName,
                                    String url,
+                                   String stompUrl,
                                    boolean deleteMsgOnStartup,
                                    boolean useAdvisoryMessages,
                                    int jmxRmiServerPort,
@@ -31,10 +33,12 @@ public class ActiveMQBrokerComponent implements Serializable {
                                    int maxMessagesLimit,
                                    int maxStorageMB) {
         this.url = url;
+        this.stompUrl = stompUrl != null ? stompUrl : ConfigDefaults.BROKER_STOMP_URL;
 
         _broker = activemq()
                 .name(brokerName)
                 .url(url)
+                .stompUrl(this.stompUrl)
                 .useJmx(useJmx)
                 .persistent(persistent)
                 .useAdvisoryMessages(useAdvisoryMessages)
@@ -48,7 +52,7 @@ public class ActiveMQBrokerComponent implements Serializable {
     }
 
     public synchronized void startBroker() {
-        LOG.info("Starting ActiveMQBroker broker with URL:" + url);
+        LOG.info("Starting ActiveMQBroker broker with URL:" + url + " and STOMP URL:" + stompUrl);
         // Start in a separate thread, otherwise there is a risk of a race condition
         new Thread(new Runnable() {
             @Override

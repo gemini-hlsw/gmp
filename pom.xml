@@ -38,6 +38,9 @@
         <!-- Component versions -->
         <clover.version>3.1.0</clover.version>
         <org.activemq.core.version>5.6.0</org.activemq.core.version>
+        <!-- xstream/jettison are needed by the STOMP connector for the jms-map-json transformation -->
+        <xstream.version>1.4.21</xstream.version>
+        <jettison.version>1.5.4</jettison.version>
         <pax-logging.version>1.10.1</pax-logging.version>
         <pax-runner.version>1.9.0</pax-runner.version>
         <scala-lang.version>2.13.9</scala-lang.version>
@@ -469,6 +472,27 @@
                 <artifactId>kahadb</artifactId>
                 <version>${org.activemq.core.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+            <!-- xstream and jettison are optional dependencies of activemq-core, used by the STOMP connector
+                 when a client sends the "transformation: jms-map-json" header to exchange GMP MapMessages
+                 as JSON. giapi-python (StompCmdReceiver) relies on it to receive sequence commands and
+                 to send the handler responses, so they must be deployed with the broker. -->
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
+                <exclusions>
+                    <!-- The JSON transformation uses the jettison driver, the XML pull parser is not needed -->
+                    <exclusion>
+                        <groupId>io.github.x-stream</groupId>
+                        <artifactId>mxparser</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jettison</groupId>
+                <artifactId>jettison</artifactId>
+                <version>${jettison.version}</version>
             </dependency>
 
             <!-- OSGI -->
