@@ -56,11 +56,22 @@ public class ActiveMQBroker implements Broker {
             managementContext.setConnectorPort(builder.jmxConnectorPort);
             _broker.setManagementContext(managementContext);
         }
+        // The OpenWire connector is mandatory, GIAPI clients (giapi-tester, C++/Java glue) use it
+        if (builder.url == null || builder.url.isEmpty()) {
+            throw new IllegalArgumentException("brokerUrl is required, the OpenWire connector cannot be disabled");
+        }
+        addConnector(builder.url);
+        if (builder.stompUrl != null && !builder.stompUrl.isEmpty() && !builder.stompUrl.equals(builder.url)) {
+            addConnector(builder.stompUrl);
+        }
+    }
+
+    private void addConnector(String url) {
         try {
-            _broker.addConnector(builder.url);
+            _broker.addConnector(url);
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "URL for ActiveMQ Broker not valid: " + builder.url + " aborting...", e);
-            throw new IllegalArgumentException("Cannot start a broker with a url " + builder.url);
+            LOG.log(Level.SEVERE, "URL for ActiveMQ Broker not valid: " + url + " aborting...", e);
+            throw new IllegalArgumentException("Cannot start a broker with a url " + url);
         }
     }
 
@@ -88,6 +99,8 @@ public class ActiveMQBroker implements Broker {
         private double memoryPercentage = ConfigDefaults.BROKER_MEMORY_PERCENTAGE;
         private int maxStorageMB = ConfigDefaults.BROKER_MAX_STORAGE_MB;
         private int maxMessagesLimit = ConfigDefaults.BROKER_MAX_MESSAGES_LIMIT;
+        // No STOMP connector unless a stompUrl is set
+        private String stompUrl = null;
 
         public Builder useJmx(boolean useJmx) {
             this.useJmx = useJmx;
@@ -140,6 +153,11 @@ public class ActiveMQBroker implements Broker {
 
         public Builder url(String url) {
             this.url = url;
+            return this;
+        }
+
+        public Builder stompUrl(String stompUrl) {
+            this.stompUrl = stompUrl;
             return this;
         }
 

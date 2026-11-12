@@ -6,6 +6,8 @@
             type="String" default="gmp"/>
         <AD name="Broker URL" id="brokerUrl" required="true"
             type="String" default="vm://gmp"/>
+        <AD name="STOMP URL" id="stompUrl" required="false"
+            type="String" default="stomp+nio://0.0.0.0:61613"/>
         <AD name="Delete Messages On Startup" id="deleteMsgOnStartup" required="true"
             type="Boolean" default="true"/>
         <AD name="Persistent" id="persistent" required="true"

@@ -29,39 +29,41 @@ public abstract class JmsMapMessageSenderReply<T> extends JmsMapMessageSender
                                   MapMessageBuilder messageBuilder,
                                   long timeout) throws MessagingException {
         long startTime = System.currentTimeMillis();
-        Message m = sendMapMessageWithReply(destination, messageBuilder);
-        T replyObject = waitForReply(m, timeout);
-        long endTime = System.currentTimeMillis();
-        LOG.fine("Sending/reply on " + destination + " took " + (endTime - startTime) + "   [ms]");
-        return replyObject;
-
-    }
-
-    private MapMessage sendMapMessageWithReply(DestinationData destinationData, MapMessageBuilder messageBuilder) throws MessagingException {
-        MapMessage mm;
         try {
-            Destination destination = createDestination(destinationData);
-            mm = MapMessageCreator.ReplyCreator.createMapMessage(_session);
+            Destination jmsDestination = createDestination(destination);
+            MapMessage requestMessage = MapMessageCreator.ReplyCreator.createMapMessage(_session);
 
-            messageBuilder.constructMessageBody(mm);
+            messageBuilder.constructMessageBody(requestMessage);
 
-            _producer.send(destination, mm);
+            // The reply consumer must exist before sending the request. Fast STOMP clients
+            // can reply immediately to JMSReplyTo; if no consumer exists yet, ActiveMQ may
+            // reject the temporary destination before GMP can receive the initial response.
+            MessageConsumer replyConsumer = createReplyConsumer(requestMessage);
+
+            _producer.send(jmsDestination, requestMessage);
+
+            T replyObject = waitForReply(requestMessage, replyConsumer, timeout);
+            long endTime = System.currentTimeMillis();
+            LOG.fine("Sending/reply on " + destination + " took " + (endTime - startTime) + "   [ms]");
+            return replyObject;
         } catch (JMSException e) {
             throw new MessagingException("Unable to send message", e);
         }
-        return mm;
     }
 
-    private T waitForReply(Message requestMessage, long timeout) {
+    private T waitForReply(Message requestMessage, MessageConsumer replyConsumer, long timeout) {
         try {
-            return waitForReplyMessage(requestMessage, timeout);
+            return waitForReplyMessage(requestMessage, replyConsumer, timeout);
         } catch (JMSException e) {
             throw new MessagingException("Problem receiving reply", e);
         }
     }
 
     protected T waitForReplyMessage(Message requestMessage, long timeout) throws JMSException {
-        MessageConsumer tempConsumer = createReplyConsumer(requestMessage);
+        return waitForReplyMessage(requestMessage, createReplyConsumer(requestMessage), timeout);
+    }
+
+    private T waitForReplyMessage(Message requestMessage, MessageConsumer tempConsumer, long timeout) throws JMSException {
         Message reply = tempConsumer.receive(timeout);
         tempConsumer.close();
 

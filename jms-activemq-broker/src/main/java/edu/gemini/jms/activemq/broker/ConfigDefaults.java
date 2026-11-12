@@ -7,6 +7,7 @@ public class ConfigDefaults {
 
     public static final String BROKER_NAME_PROPERTY = "brokerName";
     public static final String BROKER_URL_PROPERTY = "brokerUrl";
+    public static final String BROKER_STOMP_URL_PROPERTY = "stompUrl";
     public static final String BROKER_PERSISTENT_PROPERTY = "persistent";
     public static final String BROKER_DELETE_MESSAGES_ON_STARTUP_PROPERTY = "deleteMsgOnStartup";
     public static final String BROKER_USE_ADVISORY_MESSAGES_PROPERTY = "useAdvisoryMessages";
