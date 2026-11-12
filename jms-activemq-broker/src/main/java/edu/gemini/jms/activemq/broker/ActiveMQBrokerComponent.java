@@ -33,12 +33,13 @@ public class ActiveMQBrokerComponent implements Serializable {
                                    int maxMessagesLimit,
                                    int maxStorageMB) {
         this.url = url;
-        this.stompUrl = stompUrl != null ? stompUrl : ConfigDefaults.BROKER_STOMP_URL;
+        // A null or empty stompUrl disables the STOMP connector
+        this.stompUrl = stompUrl;
 
         _broker = activemq()
                 .name(brokerName)
                 .url(url)
-                .stompUrl(this.stompUrl)
+                .stompUrl(stompUrl)
                 .useJmx(useJmx)
                 .persistent(persistent)
                 .useAdvisoryMessages(useAdvisoryMessages)
@@ -52,7 +53,11 @@ public class ActiveMQBrokerComponent implements Serializable {
     }
 
     public synchronized void startBroker() {
-        LOG.info("Starting ActiveMQBroker broker with URL:" + url + " and STOMP URL:" + stompUrl);
+        if (stompUrl == null || stompUrl.isEmpty()) {
+            LOG.info("Starting ActiveMQBroker broker with URL:" + url + ", STOMP connector disabled");
+        } else {
+            LOG.info("Starting ActiveMQBroker broker with URL:" + url + " and STOMP URL:" + stompUrl);
+        }
         // Start in a separate thread, otherwise there is a risk of a race condition
         new Thread(new Runnable() {
             @Override

@@ -56,6 +56,10 @@ public class ActiveMQBroker implements Broker {
             managementContext.setConnectorPort(builder.jmxConnectorPort);
             _broker.setManagementContext(managementContext);
         }
+        // The OpenWire connector is mandatory, GIAPI clients (giapi-tester, C++/Java glue) use it
+        if (builder.url == null || builder.url.isEmpty()) {
+            throw new IllegalArgumentException("brokerUrl is required, the OpenWire connector cannot be disabled");
+        }
         addConnector(builder.url);
         if (builder.stompUrl != null && !builder.stompUrl.isEmpty() && !builder.stompUrl.equals(builder.url)) {
             addConnector(builder.stompUrl);
@@ -95,7 +99,8 @@ public class ActiveMQBroker implements Broker {
         private double memoryPercentage = ConfigDefaults.BROKER_MEMORY_PERCENTAGE;
         private int maxStorageMB = ConfigDefaults.BROKER_MAX_STORAGE_MB;
         private int maxMessagesLimit = ConfigDefaults.BROKER_MAX_MESSAGES_LIMIT;
-        private String stompUrl = ConfigDefaults.BROKER_STOMP_URL;
+        // No STOMP connector unless a stompUrl is set
+        private String stompUrl = null;
 
         public Builder useJmx(boolean useJmx) {
             this.useJmx = useJmx;

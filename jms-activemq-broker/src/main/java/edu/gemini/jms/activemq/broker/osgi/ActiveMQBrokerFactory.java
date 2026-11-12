@@ -35,7 +35,7 @@ public class ActiveMQBrokerFactory implements ManagedServiceFactory {
             boolean useJmx = "true".equalsIgnoreCase(properties.get(ConfigDefaults.BROKER_USE_JMX_PROPERTY).toString());
             String name = properties.get(ConfigDefaults.BROKER_NAME_PROPERTY).toString();
             String url = properties.get(ConfigDefaults.BROKER_URL_PROPERTY).toString();
-            // stompUrl is optional, ActiveMQBrokerComponent uses the default when it is null
+            // stompUrl is optional, when it is missing or empty the STOMP connector is not started
             Object stompUrlProperty = properties.get(ConfigDefaults.BROKER_STOMP_URL_PROPERTY);
             String stompUrl = stompUrlProperty != null ? stompUrlProperty.toString() : null;
             boolean deleteMessagesOnStartup = "true".equalsIgnoreCase(properties.get(ConfigDefaults.BROKER_DELETE_MESSAGES_ON_STARTUP_PROPERTY).toString());

@@ -25,9 +25,10 @@ class HandlerResponseSenderReply extends JmsMapMessageSenderReply<HandlerRespons
 
     @Override
     public HandlerResponse buildResponse(Message reply) throws JMSException {
-        // The null check below prevents timed-out APPLY replies from failing with a
-        // NullPointerException. When the instrument does not answer, GMP should return
-        // NOANSWER; otherwise the unresolved gateway command may be reprocessed.
+        // A null reply means the instrument did not answer before the timeout. Return NOANSWER,
+        // as before; without this check the non-MapMessage branch below would throw a
+        // NullPointerException, which escapes CommandMessagesBridgeImpl.onMessage and makes
+        // ActiveMQ redeliver the gateway command, sending it to the instrument again.
         if (reply == null) {
             LOG.warning("Null reply received from instrument handler; returning NOANSWER");
             return HandlerResponse.NOANSWER;
